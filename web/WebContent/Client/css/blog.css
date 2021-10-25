@@ -1,0 +1,403 @@
+/*公共部分*/
+*{
+    margin: 0px;
+    padding: 0px;
+}
+a{
+    text-decoration: none;
+}
+ul{
+    list-style: none;
+}
+/*字体图标*/
+@font-face {
+    font-family: 'iconfont';
+    src: url('../../public/css/iconfont/iconfont.ttf') format('truetype');
+  }
+  .iconfont {
+    font-family: "iconfont" !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  
+/* blog.html body部分*/
+#body{
+    width: 1075px;
+    height: 900px;
+    margin: 0px auto;
+    background-color: #ededef;
+}
+/*blog.html 右边部分*/
+#body .right-body{
+    float: right;
+    height: 800px;
+    width: 401px;
+    background-color: #ededef;
+}
+.right-body .like{
+    width:227px ;
+    height: 141px;
+    border: 1px solid #d7d7d9;
+    box-shadow: 1px 1px 1px  #d7d7d9;
+    margin: 20px 86px;
+    background-color: #f3f3f3;
+}
+.like .like-top{
+    width: 227px;
+    height: 54px;
+    border-bottom: 1px solid #d7d7d9;
+}
+.like .like-top .like-top-right{
+    width: 54px;
+    height: 54px;
+    float: right;
+    border-left: 1px solid #d7d7d9;
+}
+.like .like-top .like-top-left{
+    width: 173px;
+    height: 54px;
+    position: relative;
+    text-align: center;
+}
+.like .like-top .like-top-left p{
+    position: absolute;
+    top: 10px;
+    left: 20px;
+}
+.like-bottom{
+    position: relative;
+    text-align: center;
+}
+.like-bottom .attention{
+    position: absolute;
+    right: 0px;
+    left: 0px;
+    top: 15px;
+    font-size: 14px;
+}
+.like-bottom .number{
+    position: absolute;
+    top: 35px;
+    right: 0px;
+    left: 0px;
+    font-size: 16px;
+    color: #8EB902;
+}
+.creative-center{
+    background-color: #f3f3f3;
+    width: 227px;
+    height: 189px;
+    border: 1px solid #d7d7d9;
+    box-shadow: 1px 1px 1px  #d7d7d9;
+    margin: 20px 86px;
+}
+.creative-center .row1{
+    height: 37px;
+    width: 227px;
+    border-bottom: 1px solid #d7d7d9;
+}
+.creative-center .row1 p{
+    height: 37px;
+   line-height: 37px;
+   font-size: 14px;
+   font-weight: bold;
+   color: #333;
+   margin-left: 25px;
+}
+.creative-center .row2{
+    width: 227px;
+    height: 38px;
+    border-bottom: 1px solid #d7d7d9;
+    position: relative;
+}
+.creative-center .row2:hover{
+    background-color: #fff;
+}
+.creative-center .row2 .iconfont{
+    font-size: 16px;
+    position: absolute;
+    height: 38px;
+    line-height: 38px;
+    left: 17px;
+}
+.creative-center .row2 p{
+   position: absolute;
+   left: 40px;
+   height: 38px;
+   line-height: 38px;
+   font-size: 14px;
+}
+.creative-center .row2 .r{
+    position: absolute;
+    right: 20px;
+    height: 38px;
+    line-height: 38px;
+    color: #d7d7d9;
+}
+/* blog.html 左边部分*/
+#body .left-body{
+    float: left;
+    width: 674px;
+    height: 800px;
+    background-color:#ededef;
+}
+#body .left-body .author{
+    width: 674px;
+    height: 114px;
+    margin-top: 30px;
+    box-shadow: 1px 1px 1px  #d7d7d9;
+    background-color: #ffffff;
+}
+#body .left-body .author li{
+    float: left;
+    height: 110px;
+}
+#body .left-body .author .author-img{
+    width: 110px;
+}
+.author-img img{
+    width: 110px;
+    height: 114px;
+}
+.photo,.video,.article{
+    width: 188px;
+    height: 110px;  
+}
+.author .list div{
+    width: 80px;
+    height: 80px;
+    margin: 15px auto;
+    text-align: center;
+}
+
+.author .list .iconfont{
+    display: inline-block;
+    font-size: 35px;
+    color: #aaaaaa;   
+}
+.author .list .word,.list a{
+    display: block;
+    font-size: 14px;
+    color: #d7d7d9;
+}
+.author .list span:hover{
+    color: #8EB902;
+    cursor: pointer;
+}
+.author .list a:hover{
+    color:#8EB902;
+    cursor: pointer;
+}
+.blog .content{
+    width:564px ;
+    height:327px ;
+    padding-top: 13px;
+    margin: 20px 0px 0px 110px;
+    box-shadow: 1px 1px 1px  #d7d7d9;
+    background-color:#ffffff;
+}
+.blog .content .info{
+    width:500px ;
+    height:300px;
+    margin: 0px 32px 0px 32px;
+    position: relative;
+    background-color: #ffffff;
+}
+.blog .info .title{
+    display: inline-block;
+    width: 500px;
+    height: 19px;
+    border-bottom: 1px dashed #aaaaaa;
+    background-color: #ffffff;
+}
+.blog .info .title span,a{
+    font-size: 14px;
+     color: #aaaaaa;
+     line-height: 19px;
+
+}
+.blog .info .title .date{
+    font-size: 14px;
+    color: #aaaaaa;
+    line-height: 19px;
+    margin-left: 230px;
+}
+.blog .info .info-top{
+    width: 500px;
+    height: 240px;
+    margin-top: 10px;
+    position: relative;
+    background-color: #ffffff;
+}
+.blog .info .info-top img{
+    height: 240px;
+    width: 164px;
+}
+.blog .info .info-top p{
+    width: 300px;
+    height:200px ;
+    float: right;
+    position: absolute;
+    right: 20px;
+    color: #4d3333;
+}
+.blog .info-bottom{
+    border-top: 1px dashed #aaaaaa;
+    width: 294px;
+    min-height: 19px;
+    position: absolute;
+    left: 200px;
+}
+.blog .info-bottom  li{
+    float: left;
+    margin-right: 10px;
+    color: #aaaaaa;
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
+}
+.blog .info-bottom span{
+    font-size: 16px;
+    color: ##aaaaaa;
+}
+.blog .info-bottom span:hover{
+    color: lightpink;
+}
+.blog .info-bottom  li:hover{
+    cursor: pointer;
+    color: #7594b3;
+}
+/*write-blog.html部分*/
+#write-blog{
+    width: 1075px;
+    height: 900px;
+    margin: 0px auto;
+    position: relative;
+    background-color: #ffffff;
+}
+#write-blog .head-title{
+    width: 1075px;
+    height: 60px;
+    margin: 0px;
+    position: relative;
+    background-color: #ffffff;
+    border-bottom: 1px solid #d7d7d9;
+}
+#write-blog .head-title h1{
+    margin: 0px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 26px;
+    font-weight: normal;
+    color: #eee;
+}
+#write-blog .head-title input{
+    position: absolute;
+    right: 150px;
+    top: 17px;
+    width: 80px;
+    height: 30px;
+    border-radius: 15px;
+    color: #fff;
+    background-color:#dddddd;
+    outline: none;
+    border: none;
+}
+#write-blog .head-title input:hover{
+    background-color: #8EB902;
+}
+#write-blog .head-title a{
+    position: absolute;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin-left: 30px;
+    background-color:#dddddd;
+    right: 50px;
+    top: 17px;
+    border-radius: 15px;
+    color: #fff;
+}
+#write-blog .head-title a:hover{
+    background-color: #8EB902;
+}
+#write-blog .write{
+    width:630px;
+    height: 800px;
+    position: relative;
+    border: 1px solid #d7d7d9;
+    border-top: 0px;
+    background-color: #ffffff;
+}
+#write-blog  .description{
+    position: fixed;
+    right: 190px;
+    top: 190px;
+    width: 400px;
+    height: 100px;
+    float: right;
+}
+#write-blog  .description h1{
+    font-size: 26px;
+    font-weight: normal;
+    color: #eee;
+}
+#write-blog .write .file{
+    position: absolute;
+    width:630px ;
+    height: 90px;
+    border: 1px solid #ededef;
+    text-align: center;
+}
+#write-blog .write .file label{
+    position: absolute;
+    top: 30px;
+    left: 260px;
+    font-size: 14px;
+    color: #eee;
+}
+#write-blog .write .file label:hover{
+    color: #aaaaaa;
+}
+#write-blog .write .file:hover{
+    background-color: #eee;
+    border: 1px solid #eee;  
+}
+#write-blog .write h1{
+    margin: 0px;
+    position: absolute;
+    top: 140px;
+    font-size: 28px;
+    color: #999999;
+}
+#write-blog .write .textarea-title{
+    position: absolute;
+    top: 200px;
+    width: 630px;
+    height: 26px;
+    outline: none;
+    border: none;
+    background-color: #ffffff;
+    color:#999999 ;
+    
+}
+#write-blog .write .line{
+    width: 630px;
+    height: 1px;
+    position: absolute;
+    top: 250px;
+    background-color: #ededef;
+}
+#write-blog .write .textarea-article{
+    position: absolute;
+    top: 280px;
+    width: 630px;
+    height: 500px;
+    outline: none;
+    border: none;
+    background-color: #ffffff;
+    color:#999999 ;
+}

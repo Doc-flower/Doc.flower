@@ -1,0 +1,231 @@
+*{
+    margin:0;
+    padding: 0;
+}
+a,a:hover{
+    text-decoration: none;
+}
+ul,ol{
+    list-style-type: none;
+}
+nav{
+}
+/* 别看啦
+要我陪你吗
+mua~
+*/
+.nav_main{
+    margin: 0 auto;
+    height: 70px;
+    box-shadow: black 0 -2px 4px;
+    padding:0 15%;
+}
+
+.nav_main h1{
+    display: inline-block;
+    float: left;
+}
+
+.nav_main_title{
+    height: 100%;
+    width: 50%;
+    float: left;
+    margin-left: 50px;
+
+
+}
+.nav_main img{
+    width: 60px;
+    height: 60px;
+    float: left;
+}
+
+
+.nav_main_title ul li{
+    float: left;
+    max-width: 150px;
+    height: 100%;
+}
+/* 框框怎么出来
+    ·用border
+    大小怎么控制
+    width是宽
+    height是高
+    px是像素
+    爱你哟
+    我也爱你哟
+
+    你刚把代码都差点删了哈哈哈哈哈
+
+*/
+
+.nav_main_title ul li:hover{
+    background: rgb(21, 81, 172);
+
+}
+
+.nav_main_title ul li:hover a{
+    color: #fff;
+}
+.nav_main_title ul li a{
+    font-size: 24px;
+    display: inline-block;
+    text-align: center;
+    width: 130px;
+    height:70px;
+    color: black;
+    font-weight: bold;
+    transition: .2s;
+    line-height: 70px;
+}
+/* 宝宝不会打字了 我爱你
+我也爱你
+
+不丑，好看
+咋出来的☃
+宝宝乖好卡哈哈哈哈哈哈哈哈哈哈哈哈
+好看的我哈哈哈哈哈
+*/
+
+.title_active>a{
+}
+
+.nav_main_title ul li .title_active{
+    background: rgb(29, 93, 189);
+    color: #fff;
+}
+
+.nav_main_user{
+    height: 100%;
+    width: 18%;
+    float: right;
+    margin-top: 10px;
+}
+/* 看啥呢
+    为啥会有下划线
+    有去掉的
+*/
+.nav_main_user img{
+    width: 50px;
+    height: 50px;
+    margin: auto 0;
+}
+
+.nav-item a{
+    font-size: 18px;
+    display: inline-block;
+    text-align: center;
+    height:50px;
+    color: black;
+    transition: .2s;
+    line-height: 40px;
+
+}
+.container{
+    width: 100%;
+    /* float: left; */
+}
+.container-left{
+    /*float: left;*/
+    width:100%;
+    height: 75px;
+    background-color: #f4e2fd;
+    text-align: center;
+    border-radius: 15px;
+}
+.anniu{
+    /* width: 250px; */
+    float: left;
+    text-align: center;
+    margin: 18px auto;
+
+
+}
+.anniu button{
+
+    background-color: #777;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    padding: 7px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    text-align: center;
+    transition: .3s;
+
+}
+.anniu button:hover{
+    background-color: #444;
+
+}
+.container-left-select{
+    width: 200px;
+    height: 30px;
+    float: left;
+    margin: 20px auto;
+    text-align: center;
+
+}
+.container-left-select-select{
+    margin-top:0px;
+    outline:none;
+    border:1px solid #BBBBBB;
+    border-radius:4px;
+    position:relative;
+    width:170px;
+    float: left;
+    width: 250px;
+ }
+ .container-left-select-text{
+    height:40px;
+    -webkit-appearance:none;
+    appearance:none;
+    border:none;
+    font-size:18px;
+    padding:0px 10px;
+    display:block;
+    width: 100px;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    background-color:#FFFFFF;
+    color:#333333;
+    border-radius:4px;
+    float: left;
+    background-color: #eaeaea;
+    text-align: center;
+ }
+
+
+ /*订单*/
+.main{
+    /*width: 100%;*/
+    height: 1000px;
+}
+.main_card{
+    width: 100%;
+    height: 180px;
+    border: #f00 1px solid;
+}
+.flower_img{
+    width: 110px;
+    height: 110px;
+    /*border: #0f0 1px solid;*/
+    padding: 0 !important;
+
+}
+td{
+    vertical-align: middle !important;
+}
+
+.card1{
+    height: 300px;
+}
+
+.main_card .flower_img img{
+    width: 100%;
+    height: 100%;
+}

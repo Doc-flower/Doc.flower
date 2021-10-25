@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../public/css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../public/css/bootstrap-4.6.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/shops.css">
+
+    <link rel="stylesheet" href="../../public/css/animate.min.css">
+    <style>
+        #active{
+            color: #043a58;
+            background: #fff;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        }
+        td{
+            margin: auto auto;
+        }
+        body{
+            background: #E4E9F7;
+
+        }
+
+    </style>
+    <script src="../../public/js/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+<div class="sidebar shadow">
+    <div class="logo_content">
+        <div class="logo">
+            <!--            <img src="../../public/img/logo_white.png" width="50" height="50" alt="">-->
+            <div class="logo_name">花博士</div>
+        </div>
+        <img src="../../public/img/logo_white.png" id="btn" width="50" height="50" alt="">
+    </div>
+    <ul class="nav_list">
+        <li class="active">
+            <a href="../../../index.html" >
+                <i class='fa fa-home fa-3x' ></i>
+                <span class="links_name">首页</span>
+            </a>
+            <span class="tooltip">首页</span>
+        </li>
+        <li>
+            <a href="Orders.html">
+                <i class='fa fa-list-alt' ></i>
+                <span class="links_name">订单管理</span>
+            </a>
+            <span class="tooltip">订单管理</span>
+        </li>
+        <li>
+            <a href="Users.html">
+                <i class='fa fa-users' ></i>
+                <span class="links_name">用户管理</span>
+            </a>
+            <span class="tooltip">用户管理</span>
+        </li>
+        <li>
+            <a href="Flowers.html">
+                <i class='fa fa-database' ></i>
+                <span class="links_name">花库管理</span>
+            </a>
+            <span class="tooltip">花库管理</span>
+        </li>
+        <li>
+            <a href="Shops.html">
+                <i class='fa fa-vcard' ></i>
+                <span class="links_name">店家管理</span>
+            </a>
+            <span class="tooltip">店家管理</span>
+        </li>
+        <li>
+            <a href="#"   id="active" class="shadow">
+                <i class='fa fa-book' ></i>
+                <span class="links_name">文章管理</span>
+            </a>
+            <span class="tooltip">文章管理</span>
+        </li>
+        <li>
+            <a href="Messages.html">
+                <i class='fa fa-envelope' ></i>
+                <span class="links_name">留言管理</span>
+            </a>
+            <span class="tooltip">留言管理</span>
+        </li>
+    </ul>
+    <div class="profile_content">
+        <div class="profile">
+            <div class="profile_details">
+                <img src="profile.jpg" alt="">
+                <div class="name_job">
+                    <div class="name">Prem Shahi</div>
+                    <div class="job">Web Designer</div>
+                </div>
+            </div>
+            <i class='bx bx-log-out' id="log_out" ></i>
+        </div>
+    </div>
+</div>
+
+
+<!--入驻花博士店家信息-->
+<div class="home_content">
+    <div class="row mx-1">
+        <div class="col-md-12">
+
+            <!--            删除警示-->
+            <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="delModalLabel">确认删除</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            请谨慎操作！！！确认删除该店铺？
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-danger"  data-dismiss="modal" id="delConfirm">确认删除</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--            列表-->
+            <div class="my-4 col-12">
+                <div id="sales" class="card mb-4  main_card animated bounceInUp shadow">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="numbers">
+                                    <span class="title mb-0 text-capitalize font-weight-bold">文章管理</span>
+                                    <div class="btn-toolbar mb-2 mb-md-0 float-right">
+                                        <div class="input-group mr-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroup-sizing-default">搜索文章</span>
+                                            </div>
+                                            <input type="text" id="playname_search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" onkeypress="search()">
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <!--                                <hr class="col-11">-->
+                                <div class="shop_list sales_flower my-3">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr class="list_nav">
+                                            <th>文章编号</th>
+                                            <th>文章名称</th>
+                                            <th>用户名</th>
+                                            <th>发布时间</th>
+                                            <th>浏览量</th>
+                                            <th>点赞量</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="table">
+                                        <tr>
+                                            <td>001</td>
+                                            <td>《中秋节适合送什么花给家人或者另一半呢？》</td>
+                                            <td>刘宇阳</td>
+                                            <td>2021-9-24 14:29</td>
+                                            <td>2397</td>
+                                            <td>1521</td>
+                                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除"
+                                                       onclick="del('+json[i].id+')" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>002</td>
+                                            <td>《使用鲜花打扮自己的卧室》</td>
+                                            <td>刘宇阳</td>
+                                            <td>2021-9-24 14:29</td>
+                                            <td>2397</td>
+                                            <td>1521</td>
+                                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除"
+                                                       onclick="del('+json[i].id+')" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>003</td>
+                                            <td>《实用小技巧:如何为家中的鲜花或者绿植松土》</td>
+                                            <td>刘宇阳</td>
+                                            <td>2021-9-24 14:29</td>
+                                            <td>2397</td>
+                                            <td>1521</td>
+                                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除"
+                                                       onclick="del('+json[i].id+')" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>004</td>
+                                            <td>《中秋节适合送什么花给家人或者另一半呢？》</td>
+                                            <td>刘宇阳</td>
+                                            <td>2021-9-24 14:29</td>
+                                            <td>2397</td>
+                                            <td>1521</td>
+                                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除"
+                                                       onclick="del('+json[i].id+')" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>005</td>
+                                            <td>《使用鲜花打扮自己的卧室》</td>
+                                            <td>刘宇阳</td>
+                                            <td>2021-9-24 14:29</td>
+                                            <td>2397</td>
+                                            <td>1521</td>
+                                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除"
+                                                       onclick="del('+json[i].id+')" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>006</td>
+                                            <td>《实用小技巧:如何为家中的鲜花或者绿植松土》</td>
+                                            <td>刘宇阳</td>
+                                            <td>2021-9-24 14:29</td>
+                                            <td>2397</td>
+                                            <td>1521</td>
+                                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除"
+                                                       onclick="del('+json[i].id+')" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>007</td>
+                                            <td>《中秋节适合送什么花给家人或者另一半呢？》</td>
+                                            <td>刘宇阳</td>
+                                            <td>2021-9-24 14:29</td>
+                                            <td>2397</td>
+                                            <td>1521</td>
+                                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除"
+                                                       onclick="del('+json[i].id+')" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>008</td>
+                                            <td>《使用鲜花打扮自己的卧室》</td>
+                                            <td>刘宇阳</td>
+                                            <td>2021-9-24 14:29</td>
+                                            <td>2397</td>
+                                            <td>1521</td>
+                                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除"
+                                                       onclick="del('+json[i].id+')" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>009</td>
+                                            <td>《实用小技巧:如何为家中的鲜花或者绿植松土》</td>
+                                            <td>刘宇阳</td>
+                                            <td>2021-9-24 14:29</td>
+                                            <td>2397</td>
+                                            <td>1521</td>
+                                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除"
+                                                       onclick="del('+json[i].id+')" /></td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="../../public/js/jquery-1.12.4.min.js"></script>
+<script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
+<script src="../../public/js/vue.min.js"></script>
+<script src="../../public/js/axios.min.js"></script>
+<script>
+    let btn = document.querySelector("#btn");
+    let sidebar = document.querySelector(".sidebar");
+    let searchBtn = document.querySelector(".bx-search");
+
+    btn.onclick = function() {
+        sidebar.classList.toggle("active");
+        if(btn.classList.contains("bx-menu")){
+            btn.classList.replace("bx-menu" , "bx-menu-alt-right");
+        }else{
+            btn.classList.replace("bx-menu-alt-right", "bx-menu");
+        }
+    }
+    searchBtn.onclick = function() {
+        sidebar.classList.toggle("active");
+    }
+</script>
+
+</body>
+</html>

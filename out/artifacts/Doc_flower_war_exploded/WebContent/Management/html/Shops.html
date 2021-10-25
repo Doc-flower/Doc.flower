@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../public/css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../public/css/bootstrap-4.6.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/shops.css">
+
+    <link rel="stylesheet" href="../../public/css/animate.min.css">
+    <style>
+        #active{
+            color: #043a58;
+            background: #fff;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        }
+        td{
+            margin: auto auto;
+        }
+        body{
+            background: #E4E9F7;
+        }
+    </style>
+    <script src="../../public/js/jquery-1.12.4.min.js"></script>
+
+
+    <script type="text/javascript">
+
+        function search(){
+            var url = "../../../ShopsServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = searchComplete;
+                req.send("type=search&method=search&name="+document.getElementById("shopname_search").value);
+            }
+        }
+
+        function searchComplete() {
+            if (req.readyState == 4 && req.status == 200) {
+                var theTable = document.getElementById("table");//table的id
+                var num=theTable.rows.length;
+                while(num>0) {
+                    theTable.deleteRow(num-1);
+                    num=theTable.rows.length;
+                }
+                var json =  JSON.parse(req.responseText);//转换为json对象
+                for(i=0; i<json.length; i++) {
+                    var rowCount = theTable.rows.length; //获得当前表格的行数
+                    var row = theTable.insertRow(rowCount);//在tale里动态的增加tr
+                    row.insertCell(0).innerHTML = json[i].id;
+                    row.insertCell(1).innerHTML = json[i].name;
+                    row.insertCell(2).innerHTML = json[i].address;
+                    row.insertCell(3).innerHTML = json[i].tel;
+                    row.insertCell(4).innerHTML = json[i].text;
+
+                    row.insertCell(5).innerHTML = '<input type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#delModal" value="修改" onclick="update('+json[i].id+')" />';
+                    row.insertCell(6).innerHTML = '<input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del('+json[i].id+')" />';
+                }
+            }
+        }
+
+
+
+
+        function modify(a,b,c,d,e){
+            window.location="detail.html?type=update&id="+a+"&name="+encodeURIComponent(b)+"&rowCount="+c+"&colCount="+d+"&introduction="+encodeURIComponent(e);
+        }
+
+        function del(id){
+
+            $("#delConfirm").click(function (){
+
+                var url = "../../../ShopsServlet";
+                if (window.XMLHttpRequest)
+                    req = new XMLHttpRequest();
+                else if (window.ActiveXObject)
+                    req = new ActiveXObject("Microsoft.XMLHTTP");
+                if (req) {
+                    //采用POST方式，异步传输
+                    req.open("post", url, true);
+                    //POST方式，必须加入如下头信息设定
+                    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    req.onreadystatechange = delComplete;
+                    req.send("type=delete&id="+id);
+                }
+            });
+        }
+        function delComplete() {
+            if (req.readyState == 4 && req.status == 200) {
+                if(req.responseText==1)
+                    search();
+            }
+        }
+
+    </script>
+
+</head>
+<body onload="search()">
+<div class="sidebar shadow">
+    <div class="logo_content">
+        <div class="logo">
+            <!--            <img src="../../public/img/logo_white.png" width="50" height="50" alt="">-->
+            <div class="logo_name">花博士</div>
+        </div>
+        <img src="../../public/img/logo_white.png" id="btn" width="50" height="50" alt="">
+    </div>
+    <ul class="nav_list">
+        <li class="active">
+            <a href="../../../index.html" >
+                <i class='fa fa-home fa-3x' ></i>
+                <span class="links_name">首页</span>
+            </a>
+            <span class="tooltip">首页</span>
+        </li>
+        <li>
+            <a href="Orders.html">
+                <i class='fa fa-list-alt' ></i>
+                <span class="links_name">订单管理</span>
+            </a>
+            <span class="tooltip">订单管理</span>
+        </li>
+        <li>
+            <a href="Users.html">
+                <i class='fa fa-users' ></i>
+                <span class="links_name">用户管理</span>
+            </a>
+            <span class="tooltip">用户管理</span>
+        </li>
+        <li>
+            <a href="Flowers.html">
+                <i class='fa fa-database' ></i>
+                <span class="links_name">花库管理</span>
+            </a>
+            <span class="tooltip">花库管理</span>
+        </li>
+        <li>
+            <a href="#" id="active" class="shadow">
+                <i class='fa fa-vcard' ></i>
+                <span class="links_name">店家管理</span>
+            </a>
+            <span class="tooltip">店家管理</span>
+        </li>
+        <li>
+            <a href="Blogs.html">
+                <i class='fa fa-book' ></i>
+                <span class="links_name">文章管理</span>
+            </a>
+            <span class="tooltip">文章管理</span>
+        </li>
+        <li>
+            <a href="Messages.html">
+                <i class='fa fa-envelope' ></i>
+                <span class="links_name">留言管理</span>
+            </a>
+            <span class="tooltip">留言管理</span>
+        </li>
+    </ul>
+    <div class="profile_content">
+        <div class="profile">
+            <div class="profile_details">
+                <img src="profile.jpg" alt="">
+                <div class="name_job">
+                    <div class="name">Prem Shahi</div>
+                    <div class="job">Web Designer</div>
+                </div>
+            </div>
+            <i class='bx bx-log-out' id="log_out" ></i>
+        </div>
+    </div>
+</div>
+
+
+    <!--入驻花博士店家信息-->
+<div class="home_content">
+    <div class="row mx-1">
+        <div class="col-md-12">
+            <!--添加影厅_模态框-->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" >
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">新店加盟</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body col-md-12">
+                            <form id="myform" method="post" action="#">
+                                <input type="hidden" id="type" name="type" value="add">
+
+                                <div class="input-group col-md-4 mb-3 float-left">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">店铺名称</span>
+                                    </div>
+                                    <input type="text" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+
+                                <div class=" input-group col-md-4 mb-3 float-left">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon2">店铺地址</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group col-md-4 mb-3 float-left">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text">联系方式</label>
+                                    </div>
+                                    <input type="text" class="form-control" id="kind" name="colcount">
+
+                                </div>
+                                <div class="input-group col-lg-12 mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">备注</span>
+                                    </div>
+                                    <textarea id="intro" name="intro" class="form-control" aria-label="With textarea"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#addSuccessModal" onclick="check()">确认添加</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!--添加成功-->
+            <div class="modal fade" id="addSuccessModal" tabindex="-1" aria-labelledby="addSuccessModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addSuccessModalLabel">添加成功</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            新店添加成功！
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal">确定</button>                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--            删除警示-->
+            <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="delModalLabel">确认删除</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            请谨慎操作！！！确认删除该店铺？
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-danger"  data-dismiss="modal" id="delConfirm">确认删除</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                <!--            列表-->
+            <div class="my-4 col-12">
+                <div id="sales" class="card mb-4  main_card animated bounceInUp shadow">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="numbers">
+                                    <span class="title mb-0 text-capitalize font-weight-bold">店铺管理</span>
+
+                                    <div class="btn-toolbar mb-2 mb-md-0 float-right">
+                                        <div class="input-group mr-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroup-sizing-default">搜索店铺</span>
+                                            </div>
+                                            <input type="text" id="shopname_search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" onkeypress="search()">
+                                        </div>
+                                        <div class="btn-group mr-2">
+                                            <button id="add" type="button" class="btn btn-sm btn-outline-secondary"  data-toggle="modal" data-target="#exampleModal">新店加盟</button>   <!--模态框-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--                                <hr class="col-11">-->
+                                <div class="shop_list sales_flower my-3">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr class="list_nav">
+                                            <th>店铺编号</th>
+                                            <th>店铺名称</th>
+                                            <th>店铺地址</th>
+                                            <th>联系方式</th>
+                                            <th>备注</th>
+                                            <th>修改</th>
+                                            <th>删除</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody id="table">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<script src="../../public/js/jquery-1.12.4.min.js"></script>
+<script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
+<script src="../../public/js/vue.min.js"></script>
+<script src="../../public/js/axios.min.js"></script>
+<script>
+    let btn = document.querySelector("#btn");
+    let sidebar = document.querySelector(".sidebar");
+    let searchBtn = document.querySelector(".bx-search");
+
+    btn.onclick = function() {
+        sidebar.classList.toggle("active");
+        if(btn.classList.contains("bx-menu")){
+            btn.classList.replace("bx-menu" , "bx-menu-alt-right");
+        }else{
+            btn.classList.replace("bx-menu-alt-right", "bx-menu");
+        }
+    }
+    searchBtn.onclick = function() {
+        sidebar.classList.toggle("active");
+    }
+</script>
+
+</body>
+</html>

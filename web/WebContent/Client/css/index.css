@@ -1,0 +1,348 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+a,a:hover{
+    text-decoration: none;
+}
+ul,ol{
+    list-style-type: none;
+}
+nav{
+
+}
+body{
+    margin: 0 !important;
+}
+/* 别看啦
+要我陪你吗
+mua~
+*/
+.nav_main{
+    margin: 0 auto;
+    height: 60px;
+    box-shadow: black 0 -2px 4px;
+    padding:0 15%;
+}
+
+.nav_main h1{
+    display: inline-block;
+    float: left;
+}
+
+.nav_main_title{
+    height: 100%;
+    width: 50%;
+    float: left;
+    margin-left: 50px;
+    
+    
+}
+.nav_main img{
+    width: 60px;
+    height: 60px;
+    float: left;
+}
+
+
+.nav_main_title ul li{
+    float: left;
+    max-width: 150px;
+    height: 100%;
+    transition: .2s;
+
+}
+/* 框框怎么出来
+    ·用border
+    大小怎么控制
+    width是宽
+    height是高
+    px是像素
+    爱你哟
+    我也爱你哟
+
+    你刚把代码都差点删了哈哈哈哈哈
+
+*/
+
+.nav_main_title ul li:hover{
+    background: rgb(29, 93, 189);
+
+}
+
+.nav_main_title ul li:hover a{
+    color: #fff;
+}
+.nav_main_title ul li a{
+    font-size: 21px;
+    display: inline-block;
+    text-align: center;
+    width: 130px;
+    height:60px;
+    color: black;
+    font-weight: bold;
+    transition: .2s;
+    line-height: 60px;
+}
+/* 宝宝不会打字了 我爱你
+我也爱你
+
+不丑，好看
+咋出来的☃
+宝宝乖好卡哈哈哈哈哈哈哈哈哈哈哈哈
+好看的我哈哈哈哈哈
+*/
+
+.title_active>a{
+}
+
+.nav_main_title ul li .title_active{
+    background: rgb(29, 93, 189);
+    color: #fff;
+}
+
+.nav_main_user{
+    height: 100%;
+    width: 18%;
+    float: right;
+    margin-top: 5px;
+}
+/* 看啥呢
+    为啥会有下划线
+    有去掉的
+*/
+.nav_main_user img{
+    width: 40px;
+    height: 40px;
+    margin: auto 0;
+}
+
+.nav-item a{
+    font-size: 18px;
+    display: inline-block;
+    text-align: center;
+    height:50px;
+    color: black;
+    transition: .2s;
+    line-height: 40px;
+
+}
+
+.row{
+    margin: 10px auto;
+}
+
+/* 快想文案 */
+
+
+
+.home{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 91vh;
+    background-size: cover;
+    background-position: center;
+    padding: 0 6%;
+    background: #fff1f2;
+}
+
+.home .content{
+    max-width: 50rem;
+}
+
+.home .content h3{
+    font-size: 5rem;
+    color:#333;
+}
+
+.home .content span{
+    font-size: 3.5rem;
+    color:var(--pink) !important;
+    padding:1rem 0;
+    line-height: 1.5;
+}
+
+.home .content p{
+    font-size: 1.5rem;
+    color:#999;
+    padding:1rem 0;
+    line-height: 1.5;
+}
+
+.home img{
+    width: 550px;
+    height: 550px;
+}
+
+/*公司简介*/
+
+.inter_every_intro{
+    border-bottom: 7px solid #d4237a;
+}
+
+.contact_us{
+    border-bottom: 7px solid #1b1e21;
+
+}
+
+
+.func_card{
+    float: right;
+    border-radius: 8px;
+    transition: .3s;
+
+}
+
+.func_card img{
+    width: 200px;
+    height: 200px;
+}
+
+.func_card:hover{
+    box-shadow:
+            0 2.3px 2.2px rgba(0, 0, 0, 0.006),
+            0 6.9px 5.3px rgba(0, 0, 0, 0.016),
+            0 12.5px 10px rgba(0, 0, 0, 0.026),
+            0 18.1px 17.9px rgba(0, 0, 0, 0.035),
+            0 23.3px 33.4px rgba(0, 0, 0, 0.042),
+            0 26px 80px rgba(0, 0, 0, 0.04);
+    transform: translate3d(0,-20px,135px);
+}
+
+.why_choose{
+    text-align: center;
+    font-size: 32px;
+    font-weight: bolder;
+    color: #d4237a;
+}
+
+
+.flower_admire{
+    border-radius: 30px;
+    /*border: 1px #000 solid;*/
+    transition: .4s;
+}
+.flower_admire:hover{
+    transform: translate3d(0,-7px,135px);
+
+}
+
+
+
+
+.flower_recommend{
+    height: 275px;
+    width: 380px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.flower_recommend img{
+    position: absolute;
+    /*width: 100%;*/
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+
+.flower_reco{
+    transition: .3s;
+}
+
+.flower_reco:hover{
+    box-shadow:
+            0 2.3px 2.2px rgba(0, 0, 0, 0.006),
+            0 6.9px 5.3px rgba(0, 0, 0, 0.016),
+            0 12.5px 10px rgba(0, 0, 0, 0.026),
+            0 18.1px 17.9px rgba(0, 0, 0, 0.035),
+            0 23.3px 33.4px rgba(0, 0, 0, 0.042),
+            0 26px 80px rgba(0, 0, 0, 0.04);
+    transform: translate3d(0,-5px,135px);
+    background: #efefef;
+
+}
+
+.new_flower{
+    width: 100%;
+}
+
+
+.send_message{
+    font-size: 22px;
+    font-weight: bolder;
+    color:#1b1e21;
+    border-bottom: 5px #007bff solid;
+}
+
+/*联系我们*/
+
+
+.contact_us_card{
+    height: 220px;
+    border-radius: 10px;
+    background: #fff;
+    margin: 0 auto;
+}
+
+.icon-background{
+    width: 65px;
+    background: #fdeef8;
+}
+
+
+
+
+
+.join_us{
+    font-size: 22px;
+    font-weight: bolder;
+    color:#1b1e21;
+    border-bottom: 5px #dc3545 solid;
+}
+
+.contact .row1{
+    display: flex;
+    flex-wrap: wrap-reverse;
+    /*gap:1.5rem;*/
+    align-items: center;
+}
+
+.contact .row1 .form{
+    flex:1 1 40rem;
+    padding:2rem 2.5rem;
+    box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1);
+    border:.1rem solid rgba(0,0,0,.1);
+    background: #fff;
+    border-radius: .5rem;
+}
+
+
+.contact .row1 .image{
+    flex:1 1 40rem;
+}
+
+.contact .row1 .image img{
+    width: 100%;
+}
+
+.contact .row1 .form .box{
+    padding:.55rem;
+    font-size: 1.05rem;
+    color:#333;
+    text-transform: none;
+    border:.1rem solid rgba(0,0,0,.1);
+    border-radius: .5rem;
+    margin:.5rem 0;
+    width: 100%;
+}
+
+.contact .row1 .form .box:focus{
+    border-color: var(--pink);
+}
+
+.contact .row1 .form textarea{
+    height: 15rem;
+    resize: none;
+}

@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Doc.flower:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Doc_flower_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Doc.flower/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Doc.flower" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
