@@ -6,7 +6,7 @@ public class DAOFactory
 {
     private static iShopsDAO stuDao;
 
-    private static iPlayDAO playDao;
+    private static iBlogsDAO playDao;
 
     private static iOrdersDAO empDao;
 
@@ -24,10 +24,10 @@ public class DAOFactory
         return stuDao;
     }
 
-    public static synchronized iPlayDAO creatPlayDAO()
+    public static synchronized iBlogsDAO creatPlayDAO()
     {
         if(null == playDao)
-            playDao=new PlayDAO();
+            playDao=new BlogsDAO();
         return playDao;
     }
 

@@ -1,33 +1,32 @@
 package main.java.com.example.docflower.docflower.dao;
 
-import main.java.com.example.docflower.docflower.idao.iPlayDAO;
-import main.java.com.example.docflower.docflower.model.Play;
+import main.java.com.example.docflower.docflower.idao.iBlogsDAO;
+import main.java.com.example.docflower.docflower.model.Blogs;
 import main.java.com.example.docflower.util.DBUtil;
 
 import java.sql.ResultSet;
 import java.util.LinkedList;
 import java.util.List;
 
-public class PlayDAO  implements iPlayDAO
+public class BlogsDAO implements iBlogsDAO
 {
     @SuppressWarnings("finally")
     @Override
-    public int insert(Play play)
+    public int insert(Blogs blogs)
     {
         int resultPlay=0;
         try
         {
-            String sql="insert into play(play_name, play_kind , play_introduction , play_image, play_length, play_ticket_price )"
-                        + " values('" + play.getName() + "', '" + play.getKind()
-                        + "', '" + play.getIntro() + "', '" + play.getImg()
-                        + "', " + play.getLength() + ", "
-                        + play.getTicketPrice() + " )";
+            String sql="insert into blogs(blog_name, blog_owner, blog_time, blog_views, blog_likes) VALUES"
+                        + "('" + blogs.getName() + "', '" + blogs.getOwner()
+                        + "', '" + blogs.getTime() + "', " + blogs.getViews()
+                        + ", " + blogs.getLikes() + " )";
             DBUtil db=new DBUtil();
             db.openConnection();
             ResultSet rst=db.getInsertObjectIDs(sql);
             if(rst != null && rst.first())
             {
-                play.setID(rst.getInt(1));
+                blogs.setID(rst.getInt(1));
             }
             db.close(rst);
             db.close();
@@ -45,15 +44,15 @@ public class PlayDAO  implements iPlayDAO
 
     @SuppressWarnings("finally")
     @Override
-    public int update(Play play)
+    public int update(Blogs blogs)
     {
         int result=0;
         try
         {
-            String sql="update play set " + " play_name  ='" + play.getName() + "', " + " play_kind  = "
-                    + play.getKind() + ", " + " play_length  = " + play.getLength() + ", "
-                    + " play_ticket_price  = '" + play.getTicketPrice() + "' ";
-            sql+=" where play_id = " + play.getID();
+            String sql="update blogs set " + " play_name  ='" + blogs.getName() + "', " + " play_kind  = "
+                    + blogs.getOwner() + ", " + " play_length  = " + blogs.getTime() + ", "
+                    + " play_ticket_price  = '" + blogs.getViews() + "' ";
+            sql+=" where play_id = " + blogs.getID();
             DBUtil db=new DBUtil();
             db.openConnection();
             result=db.execCommand(sql);
@@ -75,7 +74,7 @@ public class PlayDAO  implements iPlayDAO
         int result=0;
         try
         {
-            String sql="delete from play where play_id = " + ID;
+            String sql="delete from blogs where blog_id = " + ID;
             DBUtil db=new DBUtil();
             db.openConnection();
             result=db.execCommand(sql);
@@ -95,7 +94,7 @@ public class PlayDAO  implements iPlayDAO
         String result="";
         try
         {
-            String sql="select play_name from play  where play_id= " + condt;
+            String sql="select blog_name from blogs  where play_id= " + condt;
             db=new DBUtil();
             if(!db.openConnection())
             {
@@ -125,19 +124,19 @@ public class PlayDAO  implements iPlayDAO
 
     @SuppressWarnings("finally")
     @Override
-    public List<Play> select(String playName)
+    public List<Blogs> select(String blogName)
     {
         DBUtil db=null;
-        List<Play> playList=null;
-        playList=new LinkedList<Play>();
+        List<Blogs> blogsList =null;
+        blogsList =new LinkedList<Blogs>();
         try
         {
-            playName.trim();
-            String sql="select * from play where play_name like '%" + playName + "%'";
+            blogName.trim();
+            String sql="select * from blogs where blog_name like '%" + blogName + "%'";
             db=new DBUtil();
             if(!db.openConnection())
             {
-                System.out.print("fail to connect database table play");
+                System.out.print("fail to connect database table blogs");
                 return null;
             }
             ResultSet rst=db.execQuery(sql);
@@ -145,16 +144,14 @@ public class PlayDAO  implements iPlayDAO
             {
                 while(rst.next())
                 {
-                    Play play=new Play();
-                    play.setID(rst.getInt("play_id"));
-                    play.setName(rst.getString("play_name"));
-                    play.setKind(rst.getString("play_kind"));
-                    play.setIntro(rst.getString("play_introduction"));
-                    play.setImg(rst.getString("play_image"));
-                    play.setImgbg(rst.getString("play_image_bg"));
-                    play.setLength(rst.getInt("play_length"));
-                    play.setTicketPrice(rst.getInt("play_ticket_price"));
-                    playList.add(play);
+                    Blogs blogs =new Blogs();
+                    blogs.setID(rst.getInt("blog_id"));
+                    blogs.setName(rst.getString("blog_name"));
+                    blogs.setOwner(rst.getString("blog_owner"));
+                    blogs.setTime(rst.getString("blog_time"));
+                    blogs.setViews(rst.getInt("blog_views"));
+                    blogs.setLikes(rst.getInt("blog_likes"));
+                    blogsList.add(blogs);
                 }
             }
             db.close(rst);
@@ -166,7 +163,7 @@ public class PlayDAO  implements iPlayDAO
         }
         finally
         {
-            return playList;
+            return blogsList;
         }
     }
 

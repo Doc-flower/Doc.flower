@@ -1,7 +1,7 @@
 package main.java.com.example.docflower.docflower.controller;
 
-import main.java.com.example.docflower.docflower.model.Play;
-import main.java.com.example.docflower.docflower.service.PlaySrv;
+import main.java.com.example.docflower.docflower.model.Blogs;
+import main.java.com.example.docflower.docflower.service.BlogsSrv;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,8 +15,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet("/PlayServlet")
-public class PlayServlet extends HttpServlet
+@WebServlet("/BlogsServlet")
+public class BlogsServlet extends HttpServlet
 {
     private static final long serialVersionUID=1L;
 
@@ -42,22 +42,20 @@ public class PlayServlet extends HttpServlet
 
     private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        Play play=null;
+        Blogs blogs =null;
         int id=0;
         try
         {
-            String name=request.getParameter("playname");
-            String kind=request.getParameter("kind");
-            String intro=request.getParameter("intro");
-            String img=request.getParameter("img");
-            String imgbg=request.getParameter("imgbg");
-            int length=Integer.valueOf(request.getParameter("length"));
-            int ticketprice=Integer.valueOf(request.getParameter("ticketprice"));
-            play=new Play(id, name, kind,intro,img,imgbg, length, ticketprice);
+            String name=request.getParameter("name");
+            String owner=request.getParameter("owner");
+            String time=request.getParameter("time");
+            int views=Integer.valueOf(request.getParameter("views"));
+            int likes=Integer.valueOf(request.getParameter("likes"));
+            blogs =new Blogs(id, name, owner,time,views,likes);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
 
-            if(new PlaySrv().add(play) == 1)
+            if(new BlogsSrv().add(blogs) == 1)
                 out.write("数据添加成功");
             else
                 out.write("数据添加失败，请重试");
@@ -79,7 +77,7 @@ public class PlayServlet extends HttpServlet
             int id=Integer.valueOf(request.getParameter("id"));
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
-            out.write("" + new PlaySrv().delete(id));
+            out.write("" + new BlogsSrv().delete(id));
             out.close();
         }
         catch(Exception e)
@@ -92,22 +90,20 @@ public class PlayServlet extends HttpServlet
 
     private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        Play play=null;
+        Blogs blogs =null;
         int id=0;
         try
         {
-            String name=request.getParameter("playname");
-            String kind=request.getParameter("kind");
-            String intro=request.getParameter("intro");
-            String img=request.getParameter("img");
-            String imgbg=request.getParameter("imgbg");
-            int length=Integer.valueOf(request.getParameter("length"));
-            int ticketprice=Integer.valueOf(request.getParameter("ticketprice"));
-            play=new Play(id, name, kind,intro,img,imgbg, length, ticketprice);
+            String name=request.getParameter("name");
+            String owner=request.getParameter("owner");
+            String time=request.getParameter("time");
+            int views=Integer.valueOf(request.getParameter("views"));
+            int likes=Integer.valueOf(request.getParameter("likes"));
+            blogs =new Blogs(id, name, owner,time,views,likes);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
 
-            if(new PlaySrv().modify(play) == 1)
+            if(new BlogsSrv().modify(blogs) == 1)
                 out.write("数据修改成功");
             else
                 out.write("数据修改失败，请重试");
@@ -127,27 +123,25 @@ public class PlayServlet extends HttpServlet
         response.setCharacterEncoding("UTF-8");
         PrintWriter out=response.getWriter();
         String name=request.getParameter("name");
-        List<Play> result=null;
+        List<Blogs> result=null;
         if(name != null && name.length() > 0)
-            result=new PlaySrv().Fetch(name);
+            result=new BlogsSrv().Fetch(name);
         else
-            result=new PlaySrv().FetchAll();
+            result=new BlogsSrv().FetchAll();
         String jsonStr="";
         try
         {
             JSONArray array=new JSONArray();
             JSONObject json;
-            for(Play s : result)
+            for(Blogs s : result)
             {
                 json=new JSONObject();
                 json.put("id", s.getID());
                 json.put("name", s.getName());
-                json.put("kind", s.getKind());
-                json.put("intro", s.getIntro());
-                json.put("img", s.getImg());
-                json.put("imgbg", s.getImgbg());
-                json.put("length", s.getLength());
-                json.put("ticketprice", s.getTicketPrice());
+                json.put("owner", s.getOwner());
+                json.put("time", s.getTime());
+                json.put("views", s.getViews());
+                json.put("likes", s.getLikes());
                 array.put(json);
             }
             jsonStr=array.toString();

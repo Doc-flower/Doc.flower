@@ -39,7 +39,13 @@
     </script>
     <link rel="stylesheet" href="WebContent/Client/css/footer.css">
     <link rel="stylesheet" href="WebContent/Management/css/jquery.circliful.css">
+    <script src="WebContent/Management/js/index.js"></script>
+    <script>
 
+        window.onload = function (){
+            searchMessages();
+        }
+    </script>
 </head>
 <body>
 <div class="sidebar shadow ">
@@ -112,10 +118,10 @@
                             <div class="col-9">
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">浏览总量</p>
-                                    <h5 class="font-weight-bolder mb-0">
+                                    <h3 class="font-weight-bolder mb-0">
                                         23859
                                         <span class="text-success text-sm font-weight-bolder">+55%</span>
-                                    </h5>
+                                    </h3>
                                 </div>
                             </div>
                             <div class="col-3 text-end ">
@@ -133,10 +139,10 @@
                             <div class="col-9">
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">用户总量</p>
-                                    <h4 class="font-weight-bolder mb-0" id="user_num">
+                                    <h3 class="font-weight-bolder mb-0" id="user_num">
                                         {{UserNum}}
                                         <span class="text-success text-sm font-weight-bolder">+25%</span>
-                                    </h4>
+                                    </h3>
                                 </div>
                             </div>
                             <div class="col-3 text-end ">
@@ -157,10 +163,10 @@
                             <div class="col-9">
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">订单总量</p>
-                                    <h4 class="font-weight-bolder mb-0">
+                                    <h3 class="font-weight-bolder mb-0">
                                         {{OrdersNum}}
                                         <span class="text-success text-sm mt-2 font-weight-bolder">+5%</span>
-                                    </h4>
+                                    </h3>
                                 </div>
                             </div>
                             <div class="col-3 text-end ">
@@ -178,10 +184,10 @@
                             <div class="col-9">
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">文章总量</p>
-                                    <h5 class="font-weight-bolder mb-0">
-                                        1369
+                                    <h3 class="font-weight-bolder mb-0">
+                                        {{BlogsNum}}
                                         <span class="text-success text-sm font-weight-bolder">+8%</span>
-                                    </h5>
+                                    </h3>
                                 </div>
                             </div>
                             <div class="col-3 text-end ">
@@ -286,85 +292,8 @@
 
                                 </div>
                                 <hr class="col-11">
-                                <div class="comment col-md-12 animated flipInX">
-                                    <div class="comment_name ">
-                                        <img src="WebContent/Client/img/用户.png" height="30" width="30"/>
-                                        <span class="user_name">
-                                            文文
-                                        </span>
-                                        <span class="comment_time mx-3">
-                                            57分钟前
-                                        </span>
-                                    </div>
-                                    <div class="comment_content" >
-                                        <p class="my-1">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这家花城里面花种类真多，赞赞赞！！！
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="comment col-md-12 animated flipInX">
-                                    <div class="comment_name ">
-                                        <img src="WebContent/Client/img/用户.png" height="30" width="30"/>
-                                        <span class="user_name">
-                                            刘小阳
-                                        </span>
-                                        <span class="comment_time mx-3">
-                                            57分钟前
-                                        </span>
-                                    </div>
-                                    <div class="comment_content" >
-                                        <p class="my-1">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;女朋友可喜欢了，赞赞赞！！！
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="comment col-md-12 animated flipInX">
-                                    <div class="comment_name ">
-                                        <img src="WebContent/Client/img/用户.png" height="30" width="30"/>
-                                        <span class="user_name">
-                                            刘小璇
-                                        </span>
-                                        <span class="comment_time mx-3">
-                                            57分钟前
-                                        </span>
-                                    </div>
-                                    <div class="comment_content" >
-                                        <p class="my-1">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;男朋友可喜欢了，赞赞赞！！！
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="comment col-md-12 animated flipInX">
-                                    <div class="comment_name ">
-                                        <img src="WebContent/Client/img/用户.png" height="30" width="30"/>
-                                        <span class="user_name">
-                                            润迎
-                                        </span>
-                                        <span class="comment_time mx-3">
-                                            57分钟前
-                                        </span>
-                                    </div>
-                                    <div class="comment_content" >
-                                        <p class="my-1">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;苗总可喜欢了，赞赞赞！！！
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="comment col-md-12 animated flipInX">
-                                    <div class="comment_name ">
-                                        <img src="WebContent/Client/img/用户.png" height="30" width="30"/>
-                                        <span class="user_name">
-                                            徐卓龙
-                                        </span>
-                                        <span class="comment_time mx-3">
-                                            57分钟前
-                                        </span>
-                                    </div>
-                                    <div class="comment_content" >
-                                        <p class="my-1">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;隔壁润迎可喜欢了，赞赞赞！！！
-                                        </p>
-                                    </div>
+                                <div id="messages">
+
                                 </div>
 
                             </div>
@@ -595,15 +524,16 @@
         el:'#root',
         data:{
             UserNum:"",
-            OrdersNum:""
+            OrdersNum:"",
+            BlogsNum:""
         },
         mounted(){
             this.searchUserNum()
             this.searchOrdersNum()
+            this.searchBlogsNum()
         },
         methods:{
             searchUserNum:function () {
-                console.log("用户数量");
                 var that = this;        //保存this
                 axios.post('../../../CustomerServlet?type=search&method=search&name=' + "")
                     .then(function (response) {
@@ -614,12 +544,21 @@
                     })
             },
             searchOrdersNum:function () {
-                console.log("订单数量");
                 var that = this;        //保存this
                 axios.post('../../../OrdersServlet?type=search&method=search&name=' + "")
                     .then(function (response) {
                         console.log(response);
                         that.OrdersNum = response.data.length
+                    })
+                    .catch(function (err) {
+                    })
+            },
+            searchBlogsNum:function () {
+                var that = this;        //保存this
+                axios.post('../../../BlogsServlet?type=search&method=search&name=' + "")
+                    .then(function (response) {
+                        console.log(response);
+                        that.BlogsNum = response.data.length
                     })
                     .catch(function (err) {
                     })

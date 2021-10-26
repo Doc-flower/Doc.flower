@@ -17,7 +17,7 @@ public class MessagesDAO implements iMessagesDAO {
         try
         {
             String sql="INSERT INTO messages(message_name,message_title,message_email,message_time,message_text)"
-                    + " values('" + messages.getName() + "', '" + messages.getTitle() + "', '" + messages.getEmail() + "', '" + messages.getTitle() + "', '" + messages.getText() + "' )";
+                    + " values('" + messages.getName() + "', '" + messages.getTitle() + "', '" + messages.getEmail() + "', '" + messages.getTime() + "', '" + messages.getText() + "' )";
             DBUtil db=new DBUtil();
             db.openConnection();
             ResultSet rst=db.getInsertObjectIDs(sql);

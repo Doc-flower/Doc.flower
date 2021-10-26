@@ -44,21 +44,20 @@ public class MessagesServlet extends HttpServlet
 
     private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        Customer customer=null;
+        Messages customer=null;
         int id=0;
         try
         {
-            String name=request.getParameter("cusname");
-            String tel=request.getParameter("custel");
-            String email=request.getParameter("cusemail");
-            String pwd=request.getParameter("customerpwd");
-            String paypwd=request.getParameter("customerpaypwd");
-            String address=request.getParameter("customeraddress");
-            customer=new Customer(id,tel, name, email, pwd,paypwd,address);
+            String name=request.getParameter("messagename");
+            String title=request.getParameter("messagetitle");
+            String email=request.getParameter("messageemail");
+            String time=request.getParameter("messagetime");
+            String text=request.getParameter("messagetext");
+            customer=new Messages(id,name, title, email,time,text);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
 
-            if(new CustomerSrv().add(customer) == 1)
+            if(new MessagesSrv().add(customer) == 1)
                 out.write("数据添加成功");
             else
                 out.write("数据添加失败，请重试");
