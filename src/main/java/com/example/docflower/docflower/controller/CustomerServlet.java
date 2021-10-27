@@ -2,6 +2,7 @@ package main.java.com.example.docflower.docflower.controller;
 
 import main.java.com.example.docflower.docflower.model.Customer;
 import main.java.com.example.docflower.docflower.service.CustomerSrv;
+import main.java.com.example.docflower.util.MD5Utils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,8 +35,8 @@ public class CustomerServlet  extends HttpServlet
             add(request, response);
         else if(type.equalsIgnoreCase("delete"))
             delete(request, response);
-//        else if(type.equalsIgnoreCase("update"))
-//            update(request, response);
+        else if(type.equalsIgnoreCase("login"))
+            login(request, response);
         else if(type.equalsIgnoreCase("search"))
             search(request, response);
     }
@@ -49,7 +50,8 @@ public class CustomerServlet  extends HttpServlet
             String name=request.getParameter("cusname");
             String tel=request.getParameter("custel");
             String email=request.getParameter("cusemail");
-            String pwd=request.getParameter("customerpwd");
+            String pwd1=request.getParameter("customerpwd");
+            String pwd = MD5Utils.code(pwd1);
             String paypwd=request.getParameter("customerpaypwd");
             String address=request.getParameter("customeraddress");
             customer=new Customer(id,tel, name, email, pwd,paypwd,address);
@@ -132,6 +134,45 @@ public class CustomerServlet  extends HttpServlet
             out.close();
         }
         // System.out.print(jsonStr);
+    }
+
+
+    private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out=response.getWriter();
+        String method=request.getParameter("method");
+        String email=request.getParameter("email");
+        String pwd1=request.getParameter("pwd");
+        String pwd=MD5Utils.code(pwd1);
+        List<Customer> result=null;
+        result=new CustomerSrv().Fetch(email,method);
+        String pwd_MD5="";
+        try
+        {
+            for(Customer s : result)
+            {
+                pwd_MD5 = s.getPwd();
+            }
+            System.out.println("------------>pwd:" + pwd);
+
+            System.out.println("------------>MD5:" + pwd_MD5);
+            if(pwd_MD5.equals(pwd))
+            {
+                out.write("1");
+            }else {
+                out.write("0");
+
+            }
+
+            out.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            response.setContentType("text/html;charset=utf-8");
+            response.getWriter().write("操作错误，请重试");
+        }
     }
 
 }
