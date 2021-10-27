@@ -12,8 +12,8 @@
     <link rel="stylesheet" type="text/css" href="../../public/css/style.css"/>
     <link href="../../public/css/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" type="text/css" href="../../public/css/animate.css"/>
-    <link rel="stylesheet" type="text/css"  href=".././css/story.css" />
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/flower.css" type="text/css">
 
 </head>
 <body>
@@ -24,7 +24,7 @@
         <div class="nav_main_title">
             <ul>
                 <li><a href="./index.html">首页</a></li>
-                <li><a href="#"  class="title_active">花小科</a></li>
+                <li><a href="./HuaXiaoShi.html"  class="title_active">花小科</a></li>
                 <li><a href="./HuaXiaoShi.html">花小市</a></li>
                 <li><a href="./HuaXiaoQuan.html">花小圈</a></li>
 
@@ -48,6 +48,14 @@
     <div class="top_tit">
         <span class="span1"><a href="court-travel.html" style="color: #8EB902;">鲜花走廊</a></span><br />
         <span class="span2">FLOWER CORRIDOR</span>
+    </div>
+    <div class="top_qie">
+        <a href="">菊花类</a>
+        <a href="" class="active">玫瑰类</a>
+        <a href="" >睡莲类</a>
+        <a href="">百合类</a>
+        <a href="">康乃馨</a>
+        <a href="">满天星</a>
     </div>
     <ul class="clearfix">
         <li class="wow bounceIn">
@@ -103,5 +111,12 @@
 <script src="../../public/js/jquery-1.12.4.min.js"></script>
 <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.bundle.js"></script>
 <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
+<script>
+       /*点击more字体查看更多花种类，并且more字体消失*/
+        var baike = document.getElementsByClassName("baike");
+        baike[0].onclick=function(){
+            this.style.display="none";
+        }
+</script>
 </body>
 </html>

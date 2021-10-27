@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href="../../public/css/style.css"/>
     <link href="../../public/css/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" type="text/css" href="../../public/css/animate.css"/>
-    <link rel="stylesheet" type="text/css"  href=".././css/story.css" />
     <link rel="stylesheet" href="../css/footer.css">
 
 </head>
@@ -47,11 +46,11 @@
     </nav>
     <!--banner  start-->
 <section class="banner_zi">
-    <div><img src="img/长安之行.jpg" alt=""></div>	   
+    <div><img src="img/长安之行.jpg" alt=""></div>
 </section>
 <!--banner end-->
 <div class="head_bar">
-    <span>位置：</span><a href="index.html">首页 </a> > <span class="active">鲜花百科</span>
+    <span>位置：</span><a href="./HuaXiaoKe.html">花小科 </a> > <span class="active">鲜花百科</span>
 </div>
 <div class="travel_show">
     <div class="tra_con">
@@ -68,7 +67,7 @@
 
             </div>
             <div class="right">
-                <ul>
+                <ul class="ul_img">
                     <li>
                         <div class="pic_li">
                             <img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg" alt="" class="vcenter" style="width:187px ;height:141px ;background-position:0px 0px ;"/>
@@ -100,7 +99,7 @@
         </p>
         <p>
             &nbsp;&nbsp; &nbsp;&nbsp;介绍：卡罗拉（Carola），切花月季的一个品种，具有鲜红色，高芯卷边大花型等特点。切花月季。鲜红色，高芯卷边大花型，花
-            瓣40-45枚，切枝长度70-90㎝，年产量8枝/株，瓶插期8-10&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;天，叶较小，革质，多刺，抗病性强。
+            瓣40-45枚，切枝长度70-90㎝，年产量8枝/株，瓶插期8-10天，叶较小，革质，多刺，抗病性强。
         </p>
         <p>
             &nbsp;&nbsp; &nbsp;&nbsp;赠送理由：卡罗拉玫瑰是属于玫瑰中的精品，它的花色十分经典，花朵饱满丰富，并且
@@ -160,4 +159,19 @@
         </div>
     </footer>
 </body>
+<script>
+       /*鼠标进入小图，大图更换为对应的图片*/
+       var pic=document.getElementsByClassName("pic");
+       var big_img= pic[0].getElementsByTagName("img");
+       var ul_img = document.getElementsByClassName("ul_img");
+       var small_img=ul_img[0].getElementsByTagName("img");
+       var i;
+       for(i=0;i<4;i++){
+           small_img[i].onmouseover=function () {
+                big_img[0].src=this.src;
+           }
+       }
+
+
+</script>
 </html>
