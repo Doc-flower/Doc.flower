@@ -1,7 +1,7 @@
 package main.java.com.example.docflower.docflower.controller;
 
-import main.java.com.example.docflower.docflower.model.Schedule;
-import main.java.com.example.docflower.docflower.service.ScheduleSrv;
+import main.java.com.example.docflower.docflower.model.Plants;
+import main.java.com.example.docflower.docflower.service.PlantsSrv;
 import main.java.com.example.docflower.docflower.service.ShopsSrv;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,8 +16,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet("/ScheduleServlet")
-public class ScheduleServlet extends HttpServlet
+@WebServlet("/PlantsServlet")
+public class PlantsServlet extends HttpServlet
 {
     private static final long serialVersionUID=2L;
 
@@ -47,20 +47,20 @@ public class ScheduleServlet extends HttpServlet
 
     private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        Schedule stu=null;
+        Plants stu=null;
         int id=0;
         try
         {
-            int studioId=Integer.valueOf(request.getParameter("studioid"));
-            int playId=Integer.valueOf(request.getParameter("playid"));
-            String playname=request.getParameter("playname");
-            String schedTime=request.getParameter("schedtime");
+            String name=request.getParameter("name");
+            String intro=request.getParameter("intro");
+            String img1=request.getParameter("playname");
+            String img2=request.getParameter("schedtime");
             int price=Integer.valueOf(request.getParameter("price"));
-            stu=new Schedule(id, studioId, playId,playname, schedTime,price);
+            stu=new Plants(id, name, intro,img1, img2,price);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
 
-            if(new ScheduleSrv().add(stu) == 1)
+            if(new PlantsSrv().add(stu) == 1)
                 out.write("数据添加成功");
             else
                 out.write("数据添加失败，请重试");
@@ -94,20 +94,20 @@ public class ScheduleServlet extends HttpServlet
 
     private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        Schedule stu=null;
+        Plants stu=null;
         int id=0;
         try
         {
-            int studioId=Integer.valueOf(request.getParameter("studioid"));
-            int playId=Integer.valueOf(request.getParameter("playname"));
-            String playname=request.getParameter("playname");
-            String schedTime=request.getParameter("schedtime");
+            String name=request.getParameter("name");
+            String intro=request.getParameter("intro");
+            String img1=request.getParameter("playname");
+            String img2=request.getParameter("schedtime");
             int price=Integer.valueOf(request.getParameter("price"));
-            stu=new Schedule(id, studioId, playId,playname, schedTime,price);
+            stu=new Plants(id, name, intro,img1, img2,price);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
 
-            if(new ScheduleSrv().modify(stu) == 1)
+            if(new PlantsSrv().modify(stu) == 1)
                 out.write("数据修改成功");
             else
                 out.write("数据修改失败，请重试");
@@ -126,21 +126,21 @@ public class ScheduleServlet extends HttpServlet
         response.setCharacterEncoding("UTF-8");
         PrintWriter out=response.getWriter();
         int name=Integer.valueOf(request.getParameter("playid"));
-        List<Schedule> result=null;
-        result=new ScheduleSrv().Fetch(name);
+        List<Plants> result=null;
+        result=new PlantsSrv().Fetch(name);
         String jsonStr="";
         try
         {
             JSONArray array=new JSONArray();
             JSONObject json;
-            for(Schedule s : result)
+            for(Plants s : result)
             {
                 json=new JSONObject();
-                json.put("schedid", s.getID());
-                json.put("studioid", s.getStudioid());
-                json.put("playid", s.getPlayid());
-                json.put("playname", s.getPlayname());
-                json.put("schedtime", s.getSchedtime());
+                json.put("plantid", s.getID());
+                json.put("plantname", s.getName());
+                json.put("plantintro", s.getIntro());
+                json.put("plantimg1", s.getImg1());
+                json.put("plantimg2", s.getImg2());
                 json.put("price", s.getPrice());
                 array.put(json);
             }
@@ -164,21 +164,21 @@ public class ScheduleServlet extends HttpServlet
         response.setCharacterEncoding("UTF-8");
         PrintWriter out=response.getWriter();
         int name=Integer.valueOf(request.getParameter("schedid"));
-        List<Schedule> result=null;
-        result=new ScheduleSrv().FetchSchedid(name);
+        List<Plants> result=null;
+        result=new PlantsSrv().FetchSchedid(name);
         String jsonStr="";
         try
         {
             JSONArray array=new JSONArray();
             JSONObject json;
-            for(Schedule s : result)
+            for(Plants s : result)
             {
                 json=new JSONObject();
-                json.put("schedid", s.getID());
-                json.put("studioid", s.getStudioid());
-                json.put("playid", s.getPlayid());
-                json.put("playname", s.getPlayname());
-                json.put("schedtime", s.getSchedtime());
+                json.put("plantid", s.getID());
+                json.put("plantname", s.getName());
+                json.put("plantintro", s.getIntro());
+                json.put("plantimg1", s.getImg1());
+                json.put("plantimg2", s.getImg2());
                 json.put("price", s.getPrice());
                 array.put(json);
             }
@@ -204,21 +204,21 @@ public class ScheduleServlet extends HttpServlet
         response.setCharacterEncoding("UTF-8");
         PrintWriter out=response.getWriter();
         String name=request.getParameter("name");
-        List<Schedule> result=null;
-        result=new ScheduleSrv().FetchName(name);
+        List<Plants> result=null;
+        result=new PlantsSrv().FetchName(name);
         String jsonStr="";
         try
         {
             JSONArray array=new JSONArray();
             JSONObject json;
-            for(Schedule s : result)
+            for(Plants s : result)
             {
                 json=new JSONObject();
-                json.put("schedid", s.getID());
-                json.put("studioid", s.getStudioid());
-                json.put("playid", s.getPlayid());
-                json.put("playname", s.getPlayname());
-                json.put("schedtime", s.getSchedtime());
+                json.put("plantid", s.getID());
+                json.put("plantname", s.getName());
+                json.put("plantintro", s.getIntro());
+                json.put("plantimg1", s.getImg1());
+                json.put("plantimg2", s.getImg2());
                 json.put("price", s.getPrice());
                 array.put(json);
             }

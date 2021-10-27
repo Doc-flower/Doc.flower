@@ -1,24 +1,24 @@
 package main.java.com.example.docflower.docflower.dao;
 
-import main.java.com.example.docflower.docflower.idao.iScheduleDAO;
-import main.java.com.example.docflower.docflower.model.Schedule;
+import main.java.com.example.docflower.docflower.idao.iPlantsDAO;
+import main.java.com.example.docflower.docflower.model.Plants;
 import main.java.com.example.docflower.util.DBUtil;
 
 import java.sql.ResultSet;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ScheduleDAO implements iScheduleDAO
+public class PlantsDAO implements iPlantsDAO
 {
     @SuppressWarnings("finally")
     @Override
-    public int insert(Schedule stu)
+    public int insert(Plants stu)
     {
         int result=0;
         try
         {
-            String sql="insert into schedule (studio_id,play_id,play_name,sched_time,sched_ticket_price)"
-                    + " values(" + stu.getStudioid() + ", " + stu.getPlayid() + ", '" + stu.getPlayname() + "', '" + stu.getSchedtime() + "', "
+            String sql="insert into plants(plant_name, plant_introduction, plant_image1, plant_image2, plant_price) VALUES"
+                    + " ('" + stu.getName() + "', '" + stu.getIntro() + "', '" + stu.getImg1() + "', '" + stu.getImg2() + "', "
                     + stu.getPrice() + ")";
             DBUtil db=new DBUtil();
             db.openConnection();
@@ -43,14 +43,14 @@ public class ScheduleDAO implements iScheduleDAO
 
     @SuppressWarnings("finally")
     @Override
-    public int update(Schedule stu)
+    public int update(Plants stu)
     {
         int result=0;
         try
         {
-            String sql="update schedule set " + " studio_id ='" + stu.getStudioid() + "', " + " play_id = "
-                    + stu.getPlayid() + ", " + " sched_time = '" + stu.getSchedtime() + "', "
-                    + " sched_ticket_price = '" + stu.getPrice() + "' ";
+            String sql="update plants set " + " plant_name ='" + stu.getName() + "', " + " plant_introduction = '"
+                    + stu.getIntro() + "', "
+                    + " plant_price = '" + stu.getPrice() + "' ";
             sql+=" where studio_id = " + stu.getID();
             DBUtil db=new DBUtil();
             db.openConnection();
@@ -123,14 +123,14 @@ public class ScheduleDAO implements iScheduleDAO
 
     @SuppressWarnings("finally")
     @Override
-    public List<Schedule> select(int playid)
+    public List<Plants> select(int plantid)
     {
         DBUtil db=null;
-        List<Schedule> stuList=null;
-        stuList=new LinkedList<Schedule>();
+        List<Plants> stuList=null;
+        stuList=new LinkedList<Plants>();
         try
         {
-            String sql="select * from schedule where play_id = '" + playid + "'";
+            String sql="select * from plants where plant_id = '" + plantid + "'";
             db=new DBUtil();
             if(!db.openConnection())
             {
@@ -142,13 +142,13 @@ public class ScheduleDAO implements iScheduleDAO
             {
                 while(rst.next())
                 {
-                    Schedule stu=new Schedule();
-                    stu.setID(rst.getInt("sched_id"));
-                    stu.setStudioid(rst.getInt("studio_id"));
-                    stu.setPlayid(rst.getInt("play_id"));
-                    stu.setPlayname(rst.getString("play_name"));
-                    stu.setSchedtime(rst.getString("sched_time"));
-                    stu.setPrice(rst.getInt("sched_ticket_price"));
+                    Plants stu=new Plants();
+                    stu.setID(rst.getInt("plant_id"));
+                    stu.setName(rst.getString("plant_name"));
+                    stu.setIntro(rst.getString("plant_introduction"));
+                    stu.setImg1(rst.getString("plant_image1"));
+                    stu.setImg2(rst.getString("plant_image2"));
+                    stu.setPrice(rst.getInt("plant_price"));
                     stuList.add(stu);
                 }
             }
@@ -166,10 +166,10 @@ public class ScheduleDAO implements iScheduleDAO
     }
 
     @Override
-    public List<Schedule> selectSchedid(int schedid) {
+    public List<Plants> selectSchedid(int schedid) {
         DBUtil db=null;
-        List<Schedule> stuList=null;
-        stuList=new LinkedList<Schedule>();
+        List<Plants> stuList=null;
+        stuList=new LinkedList<Plants>();
         try
         {
             String sql="select * from schedule where sched_id = '" + schedid + "'";
@@ -184,13 +184,13 @@ public class ScheduleDAO implements iScheduleDAO
             {
                 while(rst.next())
                 {
-                    Schedule stu=new Schedule();
-                    stu.setID(rst.getInt("sched_id"));
-                    stu.setStudioid(rst.getInt("studio_id"));
-                    stu.setPlayid(rst.getInt("play_id"));
-                    stu.setPlayname(rst.getString("play_name"));
-                    stu.setSchedtime(rst.getString("sched_time"));
-                    stu.setPrice(rst.getInt("sched_ticket_price"));
+                    Plants stu=new Plants();
+                    stu.setID(rst.getInt("plant_id"));
+                    stu.setName(rst.getString("plant_name"));
+                    stu.setIntro(rst.getString("plant_introduction"));
+                    stu.setImg1(rst.getString("plant_image1"));
+                    stu.setImg2(rst.getString("plant_image2"));
+                    stu.setPrice(rst.getInt("plant_price"));
                     stuList.add(stu);
                 }
             }
@@ -210,11 +210,11 @@ public class ScheduleDAO implements iScheduleDAO
 
     @SuppressWarnings("finally")
     @Override
-    public List<Schedule> selectName(String playname)
+    public List<Plants> selectName(String playname)
     {
         DBUtil db=null;
-        List<Schedule> stuList=null;
-        stuList=new LinkedList<Schedule>();
+        List<Plants> stuList=null;
+        stuList=new LinkedList<Plants>();
         try
         {
             String sql="select * from schedule where play_name like '%" + playname + "%'";
@@ -229,13 +229,13 @@ public class ScheduleDAO implements iScheduleDAO
             {
                 while(rst.next())
                 {
-                    Schedule stu=new Schedule();
-                    stu.setID(rst.getInt("sched_id"));
-                    stu.setStudioid(rst.getInt("studio_id"));
-                    stu.setPlayid(rst.getInt("play_id"));
-                    stu.setPlayname(rst.getString("play_name"));
-                    stu.setSchedtime(rst.getString("sched_time"));
-                    stu.setPrice(rst.getInt("sched_ticket_price"));
+                    Plants stu=new Plants();
+                    stu.setID(rst.getInt("plant_id"));
+                    stu.setName(rst.getString("plant_name"));
+                    stu.setIntro(rst.getString("plant_introduction"));
+                    stu.setImg1(rst.getString("plant_image1"));
+                    stu.setImg2(rst.getString("plant_image2"));
+                    stu.setPrice(rst.getInt("plant_price"));
                     stuList.add(stu);
                 }
             }

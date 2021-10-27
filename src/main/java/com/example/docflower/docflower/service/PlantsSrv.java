@@ -1,19 +1,19 @@
 package main.java.com.example.docflower.docflower.service;
 
 import main.java.com.example.docflower.docflower.idao.DAOFactory;
-import main.java.com.example.docflower.docflower.idao.iScheduleDAO;
-import main.java.com.example.docflower.docflower.model.Schedule;
+import main.java.com.example.docflower.docflower.idao.iPlantsDAO;
+import main.java.com.example.docflower.docflower.model.Plants;
 
 import java.util.List;
 
-public class ScheduleSrv {
-    private iScheduleDAO scheDAO= DAOFactory.creatScheduleDAO();
+public class PlantsSrv {
+    private iPlantsDAO scheDAO= DAOFactory.creatScheduleDAO();
 
-    public int add(Schedule stu){
+    public int add(Plants stu){
         return scheDAO.insert(stu);
     }
 
-    public int modify(Schedule stu){
+    public int modify(Plants stu){
         return scheDAO.update(stu);
     }
 
@@ -21,15 +21,15 @@ public class ScheduleSrv {
         return scheDAO.delete(ID);
     }
 
-    public List<Schedule> Fetch(int playid){
+    public List<Plants> Fetch(int playid){
         return scheDAO.select(playid);
     }
 
-    public List<Schedule> FetchSchedid(int schedid){
+    public List<Plants> FetchSchedid(int schedid){
         return scheDAO.selectSchedid(schedid);
     }
 
-    public List<Schedule> FetchName(String playname){
+    public List<Plants> FetchName(String playname){
         return scheDAO.selectName(playname);
     }
 }

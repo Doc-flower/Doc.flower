@@ -12,7 +12,7 @@ public class DAOFactory
 
     private static iCustomerDAO cusDao;
 
-    private static iScheduleDAO scheDao;
+    private static iPlantsDAO scheDao;
 
     private static iMessagesDAO messDao;
 
@@ -45,10 +45,10 @@ public class DAOFactory
         return cusDao;
     }
 
-    public static synchronized iScheduleDAO creatScheduleDAO()
+    public static synchronized iPlantsDAO creatScheduleDAO()
     {
         if(null == scheDao)
-            scheDao=new ScheduleDAO();
+            scheDao=new PlantsDAO();
         return scheDao;
     }
 
