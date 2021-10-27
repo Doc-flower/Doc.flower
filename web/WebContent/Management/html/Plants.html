@@ -180,15 +180,15 @@
 
         function check() {
             var form = document.getElementById("myform");
-            if(form.playname.value=="" || form.kind.value=="" || form.length.value=="" || form.ticketprice.value=="") {
+            if(form.plants_name.value=="" || form.plants_price.value=="") {
                 alert("请填写完整信息");
                 return;
             }
-            if(isNaN(form.length.value) || isNaN(form.ticketprice.value)){
-                alert("时长和票价不是数字");
+            if(isNaN(form.plants_price.value)){
+                alert("价格不是数字");
                 return;
             }
-            var url = "PlayServlet";
+            var url = "../../../PlantsServlet";
             if (window.XMLHttpRequest)
                 req = new XMLHttpRequest();
             else if (window.ActiveXObject)
@@ -198,12 +198,10 @@
                 req.open("post", url, true);
                 req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 req.onreadystatechange = checkComplete;
-                var data = "type=" + form.type.value + "&playid="
-                    + form.playid.value + "&playname="
-                    + encodeURIComponent(form.playname.value) + "&kind="
-                    + encodeURIComponent(form.kind.value) + "&length=" + form.length.value
-                    + "&ticketprice=" + form.ticketprice.value + "&intro="
-                    + encodeURIComponent(form.intro.value) ;
+                var data = "type=add" + "&plants_name="
+                    + encodeURIComponent(form.plants_name.value) + "&plants_price="
+                    + form.plants_price.value + "&intro="
+                    + encodeURIComponent(form.intro.value);
                 req.send(data);
             }
         }
@@ -298,7 +296,7 @@
                 <div class="modal-dialog modal-lg" >
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">添加库存</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">添加绿植</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -307,29 +305,23 @@
                             <form id="myform" method="post" action="#">
                                 <input type="hidden" id="type" name="type" value="add">
 
-                                <div class="input-group col-md-4 mb-3 float-left">
+                                <div class="input-group col-md-6 mb-3 float-left">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">店铺名称</span>
+                                        <span class="input-group-text" id="basic-addon1">绿植名称</span>
                                     </div>
-                                    <input type="text" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input id="plants_name" name="plants_name" type="text" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
 
-                                <div class=" input-group col-md-4 mb-3 float-left">
+                                <div class=" input-group col-md-6 mb-3 float-left">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon2">店铺地址</span>
+                                        <span class="input-group-text" id="basic-addon2">绿植价格</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input id="plants_price" name="plants_price" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
-                                <div class="input-group col-md-4 mb-3 float-left">
-                                    <div class="input-group-prepend">
-                                        <label class="input-group-text">联系方式</label>
-                                    </div>
-                                    <input type="text" class="form-control" id="kind" name="colcount">
 
-                                </div>
                                 <div class="input-group col-lg-12 mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">备注</span>
+                                        <span class="input-group-text">绿植介绍</span>
                                     </div>
                                     <textarea id="intro" name="intro" class="form-control" aria-label="With textarea"></textarea>
                                 </div>
@@ -355,7 +347,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            新店添加成功！
+                            绿植添加成功！
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" data-dismiss="modal">确定</button>                        </div>
@@ -411,12 +403,12 @@
                                     <table class="table table-hover">
                                         <thead>
                                         <tr class="list_nav">
-                                            <th>绿植编号</th>
-                                            <th>绿植名称</th>
-                                            <th>绿植介绍</th>
-                                            <th>价格</th>
-                                            <th>修改</th>
-                                            <th>删除</th>
+                                            <th class="text-center">编号</th>
+                                            <th class="text-center">名称</th>
+                                            <th class="text-center align-middle">介绍</th>
+                                            <th class="text-center">价格</th>
+                                            <th class="text-center">修改</th>
+                                            <th class="text-center">删除</th>
 
                                         </tr>
                                         </thead>

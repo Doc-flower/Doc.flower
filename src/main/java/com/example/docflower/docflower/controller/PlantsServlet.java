@@ -39,7 +39,6 @@ public class PlantsServlet extends HttpServlet
             update(request, response);
         else if(type.equalsIgnoreCase("search"))
             search(request, response);
-
         else if(type.equalsIgnoreCase("schedid"))
             searchSchedId(request, response);
     }
@@ -50,11 +49,11 @@ public class PlantsServlet extends HttpServlet
         int id=0;
         try
         {
-            String name=request.getParameter("name");
+            String name=request.getParameter("plants_name");
             String intro=request.getParameter("intro");
-            String img1=request.getParameter("playname");
-            String img2=request.getParameter("schedtime");
-            int price=Integer.valueOf(request.getParameter("price"));
+            String img1="";
+            String img2="";
+            int price=Integer.valueOf(request.getParameter("plants_price"));
             stu=new Plants(id, name, intro,img1, img2,price);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
@@ -97,11 +96,11 @@ public class PlantsServlet extends HttpServlet
         int id=0;
         try
         {
-            String name=request.getParameter("name");
+            String name=request.getParameter("plants_name");
             String intro=request.getParameter("intro");
-            String img1=request.getParameter("playname");
-            String img2=request.getParameter("schedtime");
-            int price=Integer.valueOf(request.getParameter("price"));
+            String img1="";
+            String img2="";
+            int price=Integer.valueOf(request.getParameter("plants_price"));
             stu=new Plants(id, name, intro,img1, img2,price);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
