@@ -73,7 +73,8 @@ public class PlantsDAO implements iPlantsDAO
         int result=0;
         try
         {
-            String sql="delete from  schedule where sched_id = " + ID;
+            System.out.println("------------->ID:" +ID);
+            String sql="delete from plants where plant_id = " + ID;
             DBUtil db=new DBUtil();
             db.openConnection();
             result=db.execCommand(sql);
@@ -217,7 +218,7 @@ public class PlantsDAO implements iPlantsDAO
         stuList=new LinkedList<Plants>();
         try
         {
-            String sql="select * from schedule where play_name like '%" + playname + "%'";
+            String sql="select * from plants where plant_name like '%" + playname + "%'";
             db=new DBUtil();
             if(!db.openConnection())
             {

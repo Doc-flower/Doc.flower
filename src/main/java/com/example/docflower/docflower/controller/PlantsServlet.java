@@ -39,8 +39,7 @@ public class PlantsServlet extends HttpServlet
             update(request, response);
         else if(type.equalsIgnoreCase("search"))
             search(request, response);
-        else if(type.equalsIgnoreCase("searchname"))
-            searchName(request, response);
+
         else if(type.equalsIgnoreCase("schedid"))
             searchSchedId(request, response);
     }
@@ -81,7 +80,7 @@ public class PlantsServlet extends HttpServlet
             int id=Integer.valueOf(request.getParameter("id"));
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
-            out.write("" + new ShopsSrv().delete(id));
+            out.write("" + new PlantsSrv().delete(id));
             out.close();
         }
         catch(Exception e)
@@ -121,43 +120,6 @@ public class PlantsServlet extends HttpServlet
         }
     }
 
-    private void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter out=response.getWriter();
-        int name=Integer.valueOf(request.getParameter("playid"));
-        List<Plants> result=null;
-        result=new PlantsSrv().Fetch(name);
-        String jsonStr="";
-        try
-        {
-            JSONArray array=new JSONArray();
-            JSONObject json;
-            for(Plants s : result)
-            {
-                json=new JSONObject();
-                json.put("plantid", s.getID());
-                json.put("plantname", s.getName());
-                json.put("plantintro", s.getIntro());
-                json.put("plantimg1", s.getImg1());
-                json.put("plantimg2", s.getImg2());
-                json.put("price", s.getPrice());
-                array.put(json);
-            }
-            jsonStr=array.toString();
-        }
-        catch(JSONException e)
-        {
-            e.printStackTrace();
-        }
-        finally
-        {
-            out.println(jsonStr);
-            out.flush();
-            out.close();
-        }
-        // System.out.print(jsonStr);
-    }
 
     private void searchSchedId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
@@ -199,7 +161,7 @@ public class PlantsServlet extends HttpServlet
 
 
 
-    private void searchName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    private void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out=response.getWriter();
