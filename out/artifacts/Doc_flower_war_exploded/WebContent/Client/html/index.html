@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../../public/css/font-awesome-4.7.0/css/font-awesome.min.css">
-    <script src="../js/index_join_us.js"></script>
+    <script src="../js/index.js"></script>
 
 </head>
 <body>
@@ -283,15 +283,35 @@
 
                 <div class="row1">
                     <div class="col-md-6 mb-3">
-                        <div class="form clearfix">
+                        <form class="form clearfix"  id="form_message">
                             <p class="send_message">
-                                发送意见
+                                发送留言
                             </p>
-                            <input type="text" placeholder="主题" class="box">
-                            <input type="email" placeholder="邮箱" class="box">
-                            <input type="text" placeholder="电话号码" class="box">
-                            <textarea name="" class="box" placeholder="内容，请输入..."  cols="30" rows="10"></textarea>
-                            <input type="submit" value="发送意见" class="btn btn-primary rounded-pill float-right font-weight-bold">
+                            <input type="text" placeholder="主题" class="box" name="message_name">
+                            <input type="email" placeholder="邮箱" class="box" name="message_email">
+                            <input type="text" placeholder="电话" class="box" name="message_tel">
+                            <textarea name="message_text" class="box" placeholder="内容，请输入..."  cols="30" rows="10"></textarea>
+                            <input type="button" value="发送留言" class="btn btn-primary rounded-pill float-right font-weight-bold"  data-toggle="modal" data-target="#sendSuccessModal" onclick="check_message()">
+                        </form>
+                    </div>
+
+                    <!--发送成功-->
+                    <div class="modal fade" id="sendSuccessModal" tabindex="-1" aria-labelledby="addSuccessModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="sendSuccessModalLabel">发送成功</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    留言发送成功！
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success"  data-dismiss="modal">确定</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -327,9 +347,7 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </section>
 
 

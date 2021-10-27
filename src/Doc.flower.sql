@@ -199,7 +199,7 @@ CREATE TABLE `blogs`  (
   `blog_id` int(11) NOT NULL AUTO_INCREMENT,
   `blog_owner` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `blog_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `blog_text` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `blog_text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `blog_image` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `blog_time` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `blog_views` int(10) DEFAULT NULL,

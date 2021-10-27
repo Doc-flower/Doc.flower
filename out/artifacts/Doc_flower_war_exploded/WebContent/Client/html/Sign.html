@@ -26,27 +26,22 @@
                 //POST方式，必须加入如下头信息设定
                 req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 req.onreadystatechange = searchComplete;
-                req.send("type=search&method=login&name="+document.getElementById("email").value);
+                req.send("type=login&method=login&email="+document.getElementById("email").value+"&pwd="+document.getElementById("password").value);
             }
         }
 
         function searchComplete() {
             if (req.readyState == 4 && req.status == 200) {
-                var inputPwd = document.getElementById("password").value;//输入框中的密码
-                var json = JSON.parse(req.responseText);//转换为json对象
-                if(json.length == 0){
+
+                if(req.responseText == 1){
+                    setTimeout(SignInSuccess,100);
+                }else {
                     setTimeout(failSignIn, 100);
-                }else{
-                    if (inputPwd == json[0].pwd) {
-                        setTimeout(SignInSuccess,100);
-                    } else {
-                        setTimeout(failSignIn, 100);
-                    }
                 }
-                console.log(json);
 
             }
         }
+
 
         var card = document.getElementsByClassName("container");
         var bg = document.getElementsByTagName("section");
