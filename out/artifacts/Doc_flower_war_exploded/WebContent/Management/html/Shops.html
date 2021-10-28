@@ -61,7 +61,7 @@
                     row.insertCell(3).innerHTML = json[i].tel;
                     row.insertCell(4).innerHTML = json[i].text;
 
-                    row.insertCell(5).innerHTML = '<input type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#delModal" value="修改" onclick="update('+json[i].id+')" />';
+                    row.insertCell(5).innerHTML = '<input type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal" value="修改" onclick="update('+json[i].id+')" />';
                     row.insertCell(6).innerHTML = '<input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del('+json[i].id+')" />';
                 }
             }
@@ -97,6 +97,63 @@
             if (req.readyState == 4 && req.status == 200) {
                 if(req.responseText==1)
                     search();
+            }
+        }
+
+
+        function update(id) {
+            var url = "../../../ShopsServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = updateComplete;
+                req.send("type=search_id&id="+id);
+            }
+        }
+
+        function updateComplete(){
+            if (req.readyState == 4 && req.status == 200) {
+                var json =  JSON.parse(req.responseText);//转换为json对象
+                document.getElementById("shop_id").value = json[0].id;
+                document.getElementById("shop_name").value = json[0].name;
+                document.getElementById("shop_address").value = json[0].address;
+                document.getElementById("shop_tel").value = json[0].tel;
+                document.getElementById("shop_text").value = json[0].text;
+            }
+        }
+
+        function checkUpdate(){
+            var form = document.getElementById("myform");
+            var url = "../../../ShopsServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = checkComplete;
+                var data = "type=update" +"&shopid=" + form.shop_id.value + "&shopname="
+                    + encodeURIComponent(form.shop_name.value) + "&shopaddress="
+                    + encodeURIComponent(form.shop_address.value) + "&shoptel="
+                    + encodeURIComponent(form.shop_tel.value) + "&shoptext="
+                    + encodeURIComponent(form.shop_text.value);
+                req.send(data);
+            }
+        }
+
+
+        function checkComplete() {
+            if (req.readyState == 4 && req.status == 200) {
+                document.getElementById("myform").reset();
+                search();
             }
         }
 
@@ -189,49 +246,48 @@
 <div class="home_content">
     <div class="row mx-1">
         <div class="col-md-12">
-            <!--添加影厅_模态框-->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" >
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">新店加盟</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">信息修改</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body col-md-12">
                             <form id="myform" method="post" action="#">
-                                <input type="hidden" id="type" name="type" value="add">
+                                <input type="hidden" id="shop_id" name="shop_id" value="">
 
                                 <div class="input-group col-md-4 mb-3 float-left">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">店铺名称</span>
                                     </div>
-                                    <input type="text" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input name="shop_name" id="shop_name" type="text" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
 
                                 <div class=" input-group col-md-4 mb-3 float-left">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon2">店铺地址</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input name="shop_address" id="shop_address" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group col-md-4 mb-3 float-left">
                                     <div class="input-group-prepend">
                                         <label class="input-group-text">联系方式</label>
                                     </div>
-                                    <input type="text" class="form-control" id="kind" name="colcount">
+                                    <input type="text" class="form-control" id="shop_tel" name="shop_tel">
 
                                 </div>
                                 <div class="input-group col-lg-12 mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">备注</span>
                                     </div>
-                                    <textarea id="intro" name="intro" class="form-control" aria-label="With textarea"></textarea>
+                                    <textarea id="shop_text" name="shop_text" class="form-control" aria-label="With textarea"></textarea>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#addSuccessModal" onclick="check()">确认添加</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#addSuccessModal" onclick="checkUpdate()">确认修改</button>
                                 </div>
                             </form>
                         </div>
@@ -240,18 +296,18 @@
                 </div>
             </div>
 
-            <!--添加成功-->
+            <!--修改成功-->
             <div class="modal fade" id="addSuccessModal" tabindex="-1" aria-labelledby="addSuccessModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="addSuccessModalLabel">添加成功</h5>
+                            <h5 class="modal-title" id="addSuccessModalLabel">修改成功</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            新店添加成功！
+                            信息修改成功！
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" data-dismiss="modal">确定</button>                        </div>

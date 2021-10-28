@@ -63,8 +63,7 @@
                     row.insertCell(3).innerHTML = json[i].order_owner_tel;
                     row.insertCell(4).innerHTML = json[i].order_owner_address;
                     row.insertCell(5).innerHTML = json[i].order_owner_text;
-                    row.insertCell(6).innerHTML = '<input type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#delModal" value="修改" onclick="update('+json[i].order_id+')" />';
-                    row.insertCell(7).innerHTML = '<input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del('+json[i].order_id+')" />';
+                    row.insertCell(6).innerHTML = '<input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del('+json[i].order_id+')" />';
                 }
             }
         }
@@ -102,6 +101,7 @@
             }
         }
 
+
     </script>
 
 </head>
@@ -137,14 +137,14 @@
             <span class="tooltip">用户管理</span>
         </li>
         <li>
-            <a href="Flowers.html"  class="shadow">
+            <a href="Flowers.html">
                 <i class='fa fa-empire' ></i>
                 <span class="links_name">花库管理</span>
             </a>
             <span class="tooltip">花库管理</span>
         </li>
         <li>
-            <a href="Plants.html" class="shadow">
+            <a href="Plants.html">
                 <i class='fa fa-deviantart' ></i>
                 <span class="links_name">绿植管理</span>
             </a>
@@ -242,7 +242,6 @@
                                             <th>电话</th>
                                             <th>地址</th>
                                             <th>备注</th>
-                                            <th>修改</th>
                                             <th>删除</th>
                                         </tr>
                                         </thead>
