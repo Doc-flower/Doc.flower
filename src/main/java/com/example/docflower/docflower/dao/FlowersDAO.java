@@ -1,32 +1,31 @@
 package main.java.com.example.docflower.docflower.dao;
 
-import main.java.com.example.docflower.docflower.idao.iFlowerDAO;
-import main.java.com.example.docflower.docflower.model.Flower;
+import main.java.com.example.docflower.docflower.idao.iFlowersDAO;
+import main.java.com.example.docflower.docflower.model.Flowers;
 import main.java.com.example.docflower.util.DBUtil;
 
 import java.sql.ResultSet;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FlowerDAO implements iFlowerDAO{
+public class FlowersDAO implements iFlowersDAO {
     @SuppressWarnings("finally")
     @Override
-    public int insert(Flower flower)
+    public int insert(Flowers flowers)
     {
         int result=0;
         try
         {
             String sql="insert into flowers(flower_name, flower_kind, flower_introduction, flower_image1, flower_image2,flower_image3.flower_image4,flower_price)"
-                    + " values('" + flower.getFlower_name() + "', '" + flower.getFlower_kind() + "', '" + flower.getFlower_introduction() + "', '"
-                    + flower.getFlower_image1() + "', '"+ flower.getFlower_image2()+"','"+flower.getFlower_image3()+"','"+flower.getFlower_image4()+
-                    "',"+flower.getFlower_price()+" )";
+                    + " values('" + flowers.getFlower_name() + "', '" + flowers.getFlower_kind() + "', '" + flowers.getFlower_introduction() + "', '"
+                    + flowers.getFlower_image1() + "', '"+ flowers.getFlower_image2()+"','"+ flowers.getFlower_image3()+"','"+ flowers.getFlower_image4()+
+                    "',"+ flowers.getFlower_price()+" )";
             DBUtil db=new DBUtil();
             db.openConnection();
             ResultSet rst=db.getInsertObjectIDs(sql);
             if(rst != null && rst.first())
             {
-                flower.setFlower_id(rst.getInt(1));
-
+                flowers.setFlower_id(rst.getInt(1));
             }
             db.close(rst);
             db.close();
@@ -44,16 +43,16 @@ public class FlowerDAO implements iFlowerDAO{
 
     @SuppressWarnings("finally")
     @Override
-    public int update(Flower flower)
+    public int update(Flowers flowers)
     {
         int result=0;
         try
         {
-            String sql="update flowers set " + " flower_name  ='" + flower.getFlower_name()+ "', " + " flower_kind  = '"
-                    + flower.getFlower_kind() + "', " + " flower_introduction  = '" + flower.getFlower_introduction() + "', "
-                    + " flower_image1 = '" + flower.getFlower_image1()+"'," + " flower_image2  = '" + flower.getFlower_image2() + "' , "
-                    +" flower_image3='"+flower.getFlower_image3()+"',"+" flower_image4='"+flower.getFlower_image4()+"',"+"flower_price ="+flower.getFlower_price();
-            sql+=" where flower_id = " + flower.getFlower_id();
+            String sql="update flowers set " + " flower_name  ='" + flowers.getFlower_name()+ "', " + " flower_kind  = '"
+                    + flowers.getFlower_kind() + "', " + " flower_introduction  = '" + flowers.getFlower_introduction() + "', "
+                    + " flower_image1 = '" + flowers.getFlower_image1()+"'," + " flower_image2  = '" + flowers.getFlower_image2() + "' , "
+                    +" flower_image3='"+ flowers.getFlower_image3()+"',"+" flower_image4='"+ flowers.getFlower_image4()+"',"+"flower_price ="+ flowers.getFlower_price();
+            sql+=" where flower_id = " + flowers.getFlower_id();
             DBUtil db=new DBUtil();
             db.openConnection();
             result=db.execCommand(sql);
@@ -124,11 +123,11 @@ public class FlowerDAO implements iFlowerDAO{
 
     @SuppressWarnings("finally")
     @Override
-    public List<Flower> select(String flowerinformation)
+    public List<Flowers> select(String flowerinformation)
     {
         DBUtil db=null;
-        List<Flower>  flowerList =null;
-        flowerList =new LinkedList<Flower>();
+        List<Flowers> flowersList =null;
+        flowersList =new LinkedList<Flowers>();
         try
         {
             flowerinformation.trim();
@@ -152,18 +151,18 @@ public class FlowerDAO implements iFlowerDAO{
             {
                 while(rst.next())
                 {
-                    Flower flower = new Flower();
-                    flower.setFlower_id(rst.getInt("flower_id"));
-                    flower.setFlower_name(rst.getString("flower_name"));
-                    flower.setFlower_kind(rst.getString("flower_kind"));
-                    flower.setFlower_introduction(rst.getString("flower_introduction"));
-                    flower.setFlower_image1(rst.getString("flower_image1"));
-                    flower.setFlower_image2(rst.getString("flower_image2"));
-                    flower.setFlower_image3(rst.getString("flower_image3"));
-                    flower.setFlower_image4(rst.getString("flower_image4"));
-                    flower.setFlower_price(rst.getInt("flower_price"));
+                    Flowers flowers = new Flowers();
+                    flowers.setFlower_id(rst.getInt("flower_id"));
+                    flowers.setFlower_name(rst.getString("flower_name"));
+                    flowers.setFlower_kind(rst.getString("flower_kind"));
+                    flowers.setFlower_introduction(rst.getString("flower_introduction"));
+                    flowers.setFlower_image1(rst.getString("flower_image1"));
+                    flowers.setFlower_image2(rst.getString("flower_image2"));
+                    flowers.setFlower_image3(rst.getString("flower_image3"));
+                    flowers.setFlower_image4(rst.getString("flower_image4"));
+                    flowers.setFlower_price(rst.getInt("flower_price"));
 
-                    flowerList.add(flower);
+                    flowersList.add(flowers);
                 }
             }
             db.close(rst);
@@ -175,7 +174,7 @@ public class FlowerDAO implements iFlowerDAO{
         }
         finally
         {
-            return flowerList;
+            return flowersList;
         }
     }
 }

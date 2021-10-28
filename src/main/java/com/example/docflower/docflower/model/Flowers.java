@@ -1,6 +1,6 @@
 package main.java.com.example.docflower.docflower.model;
 
-public class Flower {
+public class Flowers {
     private int flower_id=0;
     private String flower_name="";
     private String flower_kind="";
@@ -11,11 +11,11 @@ public class Flower {
     private String flower_image4="";
     private int flower_price=0;
 
-    public Flower(){
+    public Flowers(){
         flower_id=0;
     }
 
-    public Flower(int flower_id, String flower_name, String flower_kind, String flower_introduction, String flower_image1, String flower_image2, String flower_image3, String flower_image4, int flower_price) {
+    public Flowers(int flower_id, String flower_name, String flower_kind, String flower_introduction, String flower_image1, String flower_image2, String flower_image3, String flower_image4, int flower_price) {
         this.flower_id = flower_id;
         this.flower_name = flower_name;
         this.flower_kind = flower_kind;

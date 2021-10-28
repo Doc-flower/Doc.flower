@@ -1,6 +1,6 @@
 package main.java.com.example.docflower.docflower.controller;
 
-import main.java.com.example.docflower.docflower.model.Flower;
+import main.java.com.example.docflower.docflower.model.Flowers;
 import main.java.com.example.docflower.docflower.service.FlowersSrv;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,23 +43,22 @@ public class FlowersServlet extends HttpServlet{
 
     private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        Flower flower=null;
+        Flowers flowers =null;
         int id=0;
         try
         {
             String flower_name=request.getParameter("flower_name");
             String flower_kind=request.getParameter("flower_kind");
             String flower_introduction=request.getParameter("flower_introduction");
-            String flower_image1=request.getParameter("flower_image1");
-            String flower_image2=request.getParameter("flower_image2");
-            String flower_image3=request.getParameter("flower_image3");
-            String flower_image4=request.getParameter("flower_image4");
+            String flower_image1="";
+            String flower_image2="";
+            String flower_image3="";
+            String flower_image4="";
             int flower_price=Integer.valueOf(request.getParameter("flower_price"));
-            flower=new Flower(id, flower_name, flower_kind,flower_introduction,flower_image1,flower_image2,flower_image3,flower_image4,flower_price);
+            flowers =new Flowers(id, flower_name, flower_kind,flower_introduction,flower_image1,flower_image2,flower_image3,flower_image4,flower_price);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
-
-            if(new FlowersSrv().add(flower) == 1)
+            if(new FlowersSrv().add(flowers) == 1)
                 out.write("数据添加成功");
             else
                 out.write("数据添加失败，请重试");
@@ -93,22 +92,22 @@ public class FlowersServlet extends HttpServlet{
 
     private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        Flower flower=null;
+        Flowers flowers =null;
         int id=0;
         try
         {
             String flower_name=request.getParameter("flower_name");
             String flower_kind=request.getParameter("flower_kind");
             String flower_introduction=request.getParameter("flower_introduction");
-            String flower_image1=request.getParameter("flower_image1");
-            String flower_image2=request.getParameter("flower_image2");
-            String flower_image3=request.getParameter("flower_image3");
-            String flower_image4=request.getParameter("flower_image4");
+            String flower_image1="";
+            String flower_image2="";
+            String flower_image3="";
+            String flower_image4="";
             int flower_price=Integer.valueOf(request.getParameter("flower_price"));
-            flower=new Flower(id, flower_name, flower_kind,flower_introduction,flower_image1,flower_image2,flower_image3,flower_image4,flower_price);
+            flowers =new Flowers(id, flower_name, flower_kind,flower_introduction,flower_image1,flower_image2,flower_image3,flower_image4,flower_price);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
-            if(new FlowersSrv().modify(flower) == 1)
+            if(new FlowersSrv().modify(flowers) == 1)
                 out.write("数据修改成功");
             else
                 out.write("数据修改失败，请重试");
@@ -128,14 +127,14 @@ public class FlowersServlet extends HttpServlet{
         response.setCharacterEncoding("UTF-8");
         PrintWriter out=response.getWriter();
         String flowerinformation=request.getParameter("flower_name");
-        List<Flower> result=null;
+        List<Flowers> result=null;
         result=new FlowersSrv().Fetch(flowerinformation);
         String jsonStr="";
         try
         {
             JSONArray array=new JSONArray();
             JSONObject json;
-            for(Flower s : result)
+            for(Flowers s : result)
             {
                 json=new JSONObject();
                 json.put("flower_id", s.getFlower_id());
@@ -169,7 +168,7 @@ public class FlowersServlet extends HttpServlet{
         response.setCharacterEncoding("UTF-8");
         PrintWriter out=response.getWriter();
         String flowerinformation=request.getParameter("flower_image1");
-        List<Flower> result=null;
+        List<Flowers> result=null;
         result=new FlowersSrv().Fetch(flowerinformation);
 
         String jsonStr="";
@@ -177,7 +176,7 @@ public class FlowersServlet extends HttpServlet{
         {
             JSONArray array=new JSONArray();
             JSONObject json;
-            for(Flower s : result)
+            for(Flowers s : result)
             {
                 json=new JSONObject();
                 json.put("flower_id", s.getFlower_id());

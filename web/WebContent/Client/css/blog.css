@@ -26,14 +26,14 @@ ul{
     color: #fae3f3;
 }
   
-/* blog.html body部分*/
+/* HuaXiaoQuan_blog.html body部分*/
 #body{
     width: 1075px;
     height: 900px;
     margin: 0px auto;
     background-color: #ededef;
 }
-/*blog.html 右边部分*/
+/*HuaXiaoQuan_blog.html 右边部分*/
 #body .right-body{
     float: right;
     height: 800px;
@@ -140,7 +140,7 @@ ul{
     line-height: 38px;
     color: #d7d7d9;
 }
-/* blog.html 左边部分*/
+/* HuaXiaoQuan_blog.html 左边部分*/
 #body .left-body{
     float: left;
     width: 674px;

@@ -1,22 +1,22 @@
 package main.java.com.example.docflower.docflower.service;
 
 import main.java.com.example.docflower.docflower.idao.DAOFactory;
-import main.java.com.example.docflower.docflower.idao.iFlowerDAO;
-import main.java.com.example.docflower.docflower.model.Flower;
+import main.java.com.example.docflower.docflower.idao.iFlowersDAO;
+import main.java.com.example.docflower.docflower.model.Flowers;
 
 import java.util.List;
 public class FlowersSrv {
 
-    private iFlowerDAO flowerDAO= DAOFactory.creatflowerDAO();
+    private iFlowersDAO flowerDAO= DAOFactory.creatflowerDAO();
 
-    public int add(Flower flower){
+    public int add(Flowers flowers){
 
-        return flowerDAO.insert(flower);
+        return flowerDAO.insert(flowers);
     }
 
-    public int modify(Flower flower){
+    public int modify(Flowers flowers){
 
-        return flowerDAO.update(flower);
+        return flowerDAO.update(flowers);
     }
 
     public int delete(int ID){
@@ -24,7 +24,7 @@ public class FlowersSrv {
         return flowerDAO.delete(ID);
     }
 
-    public List<Flower> Fetch(String flowerinformation){
+    public List<Flowers> Fetch(String flowerinformation){
 
         return flowerDAO.select(flowerinformation);
     }

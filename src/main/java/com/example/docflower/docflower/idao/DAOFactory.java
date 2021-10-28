@@ -16,7 +16,7 @@ public class DAOFactory
 
     private static iMessagesDAO messDao;
 
-    private  static  iFlowerDAO flowerDAO;
+    private  static iFlowersDAO flowerDAO;
 
     public static synchronized iShopsDAO creatStudioDAO()
     {
@@ -60,10 +60,10 @@ public class DAOFactory
         return messDao;
     }
 
-    public static synchronized iFlowerDAO creatflowerDAO()
+    public static synchronized iFlowersDAO creatflowerDAO()
     {
         if(null == flowerDAO)
-            flowerDAO=new FlowerDAO();
+            flowerDAO=new FlowersDAO();
         return flowerDAO;
     }
 }
