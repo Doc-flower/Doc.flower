@@ -47,8 +47,10 @@ public class ShopsDAO implements iShopsDAO
         int result=0;
         try
         {
-            String sql="update shops set " + " shop_name ='" + stu.getName() + "', " + " shop_address = "
-                    + stu.getAddress() + ", " + " shop_tel = '" + stu.getTel() + "' ";
+            System.out.println("---------->stu_name:" + stu.getName());
+            System.out.println("---------->stu_ID:" + stu.getID());
+            String sql="update shops set " + " shop_name ='" + stu.getName() + "', " + " shop_address = '"
+                    + stu.getAddress() + "', " + " shop_tel = '" + stu.getTel() + "', shop_text = '" + stu.getText() + "' ";
             sql+=" where shop_id = " + stu.getID();
             DBUtil db=new DBUtil();
             db.openConnection();
@@ -85,17 +87,20 @@ public class ShopsDAO implements iShopsDAO
     }
 
     @SuppressWarnings("finally")
-    public String selectshopid(int condt)
+    @Override
+    public List<Shops> select(String shop_name)
     {
         DBUtil db=null;
-        String result="";
+        List<Shops> stuList=null;
+        stuList=new LinkedList<Shops>();
         try
         {
-            String sql="select shop_name from shops  where shop_id= " + condt;
+            shop_name.trim();
+            String sql="select * from shops where shop_name like '%" + shop_name + "%'";
             db=new DBUtil();
             if(!db.openConnection())
             {
-                System.out.print("fail to connect database");
+                System.out.print("fail to connect database table studio");
                 return null;
             }
             ResultSet rst=db.execQuery(sql);
@@ -103,7 +108,14 @@ public class ShopsDAO implements iShopsDAO
             {
                 while(rst.next())
                 {
-                    result=rst.getString("studio_name");
+                    Shops stu=new Shops();
+                    stu.setID(rst.getInt("shop_id"));
+                    stu.setName(rst.getString("shop_name"));
+                    stu.setAddress(rst.getString("shop_address"));
+                    stu.setTel(rst.getString("shop_tel"));
+                    stu.setText(rst.getString("shop_text"));
+
+                    stuList.add(stu);
                 }
             }
             db.close(rst);
@@ -115,21 +127,21 @@ public class ShopsDAO implements iShopsDAO
         }
         finally
         {
-            return result;
+            return stuList;
         }
     }
 
+
     @SuppressWarnings("finally")
     @Override
-    public List<Shops> select(String shop_name)
+    public List<Shops> selectId(int shop_id)
     {
         DBUtil db=null;
         List<Shops> stuList=null;
         stuList=new LinkedList<Shops>();
         try
         {
-            shop_name.trim();
-            String sql="select * from shops where shop_name like '%" + shop_name + "%'";
+            String sql="select * from shops where shop_id = '" + shop_id + "'";
             db=new DBUtil();
             if(!db.openConnection())
             {

@@ -38,6 +38,8 @@ public class ShopsServlet extends HttpServlet
             update(request, response);
         else if(type.equalsIgnoreCase("search"))
             search(request, response);
+        else if(type.equalsIgnoreCase("search_id"))
+            searchId(request, response);
     }
 
     private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -89,10 +91,9 @@ public class ShopsServlet extends HttpServlet
     private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         Shops stu=null;
-        int id=0;
+        int id=Integer.valueOf(request.getParameter("shopid"));
         try
         {
-            id=Integer.valueOf(request.getParameter("studioid"));
             String name=request.getParameter("shopname");
             String address=request.getParameter("shopaddress");
             String tel=request.getParameter("shoptel");
@@ -121,10 +122,46 @@ public class ShopsServlet extends HttpServlet
         PrintWriter out=response.getWriter();
         String name=request.getParameter("name");
         List<Shops> result=null;
-        if(name != null && name.length() > 0)
-            result=new ShopsSrv().Fetch(name);
-        else
-            result=new ShopsSrv().FetchAll();
+        result=new ShopsSrv().Fetch(name);
+        String jsonStr="";
+        try
+        {
+            JSONArray array=new JSONArray();
+            JSONObject json;
+            for(Shops s : result)
+            {
+                json=new JSONObject();
+                json.put("id", s.getID());
+                json.put("name", s.getName());
+                json.put("address", s.getAddress());
+                json.put("tel", s.getTel());
+                json.put("text", s.getText());
+
+                array.put(json);
+            }
+            jsonStr=array.toString();
+        }
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            out.println(jsonStr);
+            out.flush();
+            out.close();
+        }
+        // System.out.print(jsonStr);
+    }
+
+
+    private void searchId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out=response.getWriter();
+        int id=Integer.valueOf(request.getParameter("id"));
+        List<Shops> result=null;
+            result=new ShopsSrv().FetchId(id);
         String jsonStr="";
         try
         {

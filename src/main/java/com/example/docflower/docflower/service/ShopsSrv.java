@@ -25,7 +25,7 @@ public class ShopsSrv {
 		return stuDAO.select(condt);		
 	}
 	
-	public List<Shops> FetchAll(){
-		return stuDAO.select("");		
+	public List<Shops> FetchId(int id){
+		return stuDAO.selectId(id);
 	}
 }

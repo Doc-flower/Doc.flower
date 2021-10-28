@@ -16,4 +16,6 @@ public interface iShopsDAO
     public int delete(int ID);
 
     public List<Shops> select(String studioName);
+
+    public List<Shops> selectId(int shopId);
 }

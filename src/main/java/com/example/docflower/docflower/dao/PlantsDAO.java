@@ -48,6 +48,7 @@ public class PlantsDAO implements iPlantsDAO
         int result=0;
         try
         {
+
             String sql="update plants set " + " plant_name ='" + stu.getName() + "', " + " plant_introduction = '"
                     + stu.getIntro() + "', "
                     + " plant_price = '" + stu.getPrice() + "' ";

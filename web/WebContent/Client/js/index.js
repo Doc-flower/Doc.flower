@@ -74,3 +74,5 @@ function checkMessageComplete() {
         document.getElementById("form_message").reset();
     }
 }
+
+
