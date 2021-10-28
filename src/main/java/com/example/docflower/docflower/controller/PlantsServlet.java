@@ -39,8 +39,8 @@ public class PlantsServlet extends HttpServlet
             update(request, response);
         else if(type.equalsIgnoreCase("search"))
             search(request, response);
-        else if(type.equalsIgnoreCase("schedid"))
-            searchSchedId(request, response);
+        else if(type.equalsIgnoreCase("search_id"))
+            searchId(request, response);
     }
 
     private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -93,7 +93,7 @@ public class PlantsServlet extends HttpServlet
     private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         Plants stu=null;
-        int id=0;
+        int id=Integer.valueOf(request.getParameter("plants_id"));
         try
         {
             String name=request.getParameter("plants_name");
@@ -120,13 +120,13 @@ public class PlantsServlet extends HttpServlet
     }
 
 
-    private void searchSchedId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    private void searchId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out=response.getWriter();
-        int name=Integer.valueOf(request.getParameter("schedid"));
+        int name=Integer.valueOf(request.getParameter("id"));
         List<Plants> result=null;
-        result=new PlantsSrv().FetchSchedid(name);
+        result=new PlantsSrv().Fetch(name);
         String jsonStr="";
         try
         {

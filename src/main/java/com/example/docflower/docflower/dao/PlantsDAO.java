@@ -51,7 +51,7 @@ public class PlantsDAO implements iPlantsDAO
             String sql="update plants set " + " plant_name ='" + stu.getName() + "', " + " plant_introduction = '"
                     + stu.getIntro() + "', "
                     + " plant_price = '" + stu.getPrice() + "' ";
-            sql+=" where studio_id = " + stu.getID();
+            sql+=" where plant_id = " + stu.getID();
             DBUtil db=new DBUtil();
             db.openConnection();
             result=db.execCommand(sql);
@@ -173,7 +173,7 @@ public class PlantsDAO implements iPlantsDAO
         stuList=new LinkedList<Plants>();
         try
         {
-            String sql="select * from schedule where sched_id = '" + schedid + "'";
+            String sql="select * from plants where sched_id = '" + schedid + "'";
             db=new DBUtil();
             if(!db.openConnection())
             {

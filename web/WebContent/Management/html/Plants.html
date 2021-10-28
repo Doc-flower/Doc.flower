@@ -54,7 +54,7 @@
                 }
                 var json =  JSON.parse(req.responseText);//转换为json对象
                 for(i=0; i<json.length; i++) {
-                    theTable.innerHTML += '<tr><td>'+ json[i].plantid +'</td><td>'+ json[i].plantname +'</td><td class="">'+ json[i].plantintro +'</td><td>' + json[i].price + '</td><td><input type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#updateModal" value="修改" onclick="init(undefined)"></td><td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del('+ json[i].plantid +')"></td></tr>'
+                    theTable.innerHTML += '<tr><td>'+ json[i].plantid +'</td><td>'+ json[i].plantname +'</td><td class="">'+ json[i].plantintro +'</td><td>' + json[i].price + '</td><td><input type="button" class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#exampleModal" value="修改" onclick="update(' + json[i].plantid + ')"></td><td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del('+ json[i].plantid +')"></td></tr>'
                 }
 
 
@@ -62,9 +62,6 @@
         }
 
 
-        function modify(a,b,c,d,e){
-            window.location="detail.html?type=update&id="+a+"&name="+encodeURIComponent(b)+"&rowCount="+c+"&colCount="+d+"&introduction="+encodeURIComponent(e);
-        }
 
         function del(id){
 
@@ -160,21 +157,51 @@
             }
         }();
 
-        function init() {
-            var type = UrlParm.parm("type");
-            //alert(type);
-            document.getElementById("type").value = type;
-            if(type=="update"){
-                var playid = UrlParm.parm("id");
-                var playname = UrlParm.parm("name");
-                var kind = UrlParm.parm("kind");
-                var length = UrlParm.parm("length");
-                var ticketprice = UrlParm.parm("ticketprice");
-                document.getElementById("studioid").value = playid;
-                document.getElementById("playname").value = playname;
-                document.getElementById("kind").value = kind;
-                document.getElementById("length").value = length;
-                document.getElementById("ticketprice").value = ticketprice;
+        function update(id) {
+            var url = "../../../PlantsServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = updateComplete;
+                req.send("type=search_id&id="+id);
+            }
+        }
+
+        function updateComplete(){
+            if (req.readyState == 4 && req.status == 200) {
+                var json =  JSON.parse(req.responseText);//转换为json对象
+                document.getElementById("plant_id").value = json[0].plantid;
+                document.getElementById("plants_name").value = json[0].plantname;
+                document.getElementById("plants_price").value = json[0].price;
+                document.getElementById("intro").value = json[0].plantintro;
+
+
+            }
+        }
+
+        function checkUpdate(){
+            var form = document.getElementById("myform");
+            var url = "../../../PlantsServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = checkComplete;
+                var data = "type=update" +"&plants_id=" + form.plant_id.value + "&plants_name="
+                    + encodeURIComponent(form.plants_name.value) + "&plants_price="
+                    + form.plants_price.value + "&intro="
+                    + encodeURIComponent(form.intro.value);
+                req.send(data);
             }
         }
 
@@ -303,7 +330,7 @@
                         </div>
                         <div class="modal-body col-md-12">
                             <form id="myform" method="post" action="#">
-                                <input type="hidden" id="type" name="type" value="add">
+                                <input type="hidden" id="plant_id" name="plant_id" value="0">
 
                                 <div class="input-group col-md-6 mb-3 float-left">
                                     <div class="input-group-prepend">
@@ -327,11 +354,31 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#addSuccessModal" onclick="check()">确认添加</button>
+                                    <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#updateSuccessModal" onclick="checkUpdate()">确认修改</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#addSuccessModal" onclick="check()">添加绿植</button>
                                 </div>
                             </form>
                         </div>
 
+                    </div>
+                </div>
+            </div>
+
+            <!--修改成功-->
+            <div class="modal fade" id="updateSuccessModal" tabindex="-1" aria-labelledby="updateSuccessModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="updateSuccessModalLabel">修改成功</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            绿植修改成功！
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal">确定</button>                        </div>
                     </div>
                 </div>
             </div>
