@@ -25,8 +25,161 @@
 
     </style>
     <script src="../../public/js/jquery-1.12.4.min.js"></script>
+
+    <script type="text/javascript">
+
+        function search(){
+            var url = "../../../FlowersServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = searchComplete;
+                req.send("type=searchByName&flower_name="+document.getElementById("Flower_Seach").value);
+            }
+        }
+
+        function searchComplete() {
+            if (req.readyState == 4 && req.status == 200) {
+                var theTable = document.getElementById("table");//table的id
+                var num=theTable.rows.length;
+                while(num>0) {
+                    theTable.deleteRow(num-1);
+                    num=theTable.rows.length;
+                }
+                var json =  JSON.parse(req.responseText);//转换为json对象
+                for(i=0; i<json.length; i++) {
+                    theTable.innerHTML += '<tr><td>'+ json[i].flower_id +'</td><td>'+ json[i].flower_name +'</td><td>'+json[i].flower_kind+'</td><td class="">'+ json[i].flower_introduction +'</td><td>' + json[i].flower_price+ '</td><td><input type="button" class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#exampleModal" value="修改" onclick="update(' + json[i].flower_id + ')"></td><td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del('+ json[i].flower_id +')"></td></tr>'
+                }
+
+
+            }
+        }
+
+
+
+        function del(flower_id){
+
+            $("#delConfirm").click(function (){
+
+                var url = "../../../FlowersServlet";
+                if (window.XMLHttpRequest)
+                    req = new XMLHttpRequest();
+                else if (window.ActiveXObject)
+                    req = new ActiveXObject("Microsoft.XMLHTTP");
+                if (req) {
+                    //采用POST方式，异步传输
+                    req.open("post", url, true);
+                    //POST方式，必须加入如下头信息设定
+                    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    req.onreadystatechange = delComplete;
+                    req.send("type=delete&flower_id="+flower_id);
+                }
+            });
+        }
+        function delComplete() {
+            if (req.readyState == 4 && req.status == 200) {
+                if(req.responseText==1)
+                    search();
+                else
+                    alert("数据删除失败，请重试");
+            }
+        }
+
+
+        function update(flower_id) {
+            var url = "../../../FlowersServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = updateComplete;
+                req.send("type=update&flower_id="+flower_id);
+            }
+        }
+
+        function updateComplete(){
+            if (req.readyState == 4 && req.status == 200) {
+                var json =  JSON.parse(req.responseText);//转换为json对象
+                document.getElementById("flower_id").value = json[0].flower_id;
+                document.getElementById("flower_name").value = json[0].flower_name;
+               // document.getElementById("flower_kind").value = json[0].flower_kind;
+                document.getElementById("flower_introduction").value = json[0].flower_introduction;
+                document.getElementById("flower_price").value = json[0].flower_price;
+            }
+        }
+
+        function checkUpdate(){
+            var form = document.getElementById("myform");
+            var url = "../../../FlowersServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = checkComplete;
+                var data = "type=update" +"&flower_id=" + form.flower_id.value + "&flower_name="
+                    + encodeURIComponent(form.flower_name.value) + "&flower_kind="
+                    + encodeURIComponent(form.flower_kind.value) +"&flower_price="
+                    + form.flower_price.value + "&flower_introduction="
+                    + encodeURIComponent(form.flower_introduction.value);
+                req.send(data);
+            }
+        }
+
+        function check() {
+            var form = document.getElementById("myform");
+            if(form.flower_name.value=="" || form.flower_price.value=="") {
+                alert("请填写完整信息");
+                return;
+            }
+            if(isNaN(form.flower_price.value)){
+                alert("价格不是数字");
+                return;
+            }
+            var url = "../../../FlowersServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = checkComplete;
+                var data = "type=add" + "&flower_name="
+                    + encodeURIComponent(form.flower_name.value) + "&flower_price="
+                    + form.flower_price.value + "&flower_introduction="
+                    + encodeURIComponent(form.flower_introduction.value);
+                req.send(data);
+            }
+        }
+
+        function checkComplete() {
+            if (req.readyState == 4 && req.status == 200) {
+                document.getElementById("myform").reset();
+                search();
+            }
+        }
+
+
+    </script>
+
 </head>
-<body>
+<body onload="search()">
 <div class="sidebar shadow">
     <div class="logo_content">
         <div class="logo">
@@ -58,14 +211,14 @@
             <span class="tooltip">用户管理</span>
         </li>
         <li>
-            <a href="#" id="active"  class="shadow">
+            <a href="Flowers.html"  class="shadow">
                 <i class='fa fa-empire' ></i>
                 <span class="links_name">花库管理</span>
             </a>
             <span class="tooltip">花库管理</span>
         </li>
         <li>
-            <a href="Plants.html">
+            <a href="#"  id="active" class="shadow">
                 <i class='fa fa-deviantart' ></i>
                 <span class="links_name">绿植管理</span>
             </a>
@@ -105,48 +258,67 @@
                 <div class="modal-dialog modal-lg" >
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">添加库存</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">添加花卉</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body col-md-12">
                             <form id="myform" method="post" action="#">
-                                <input type="hidden" id="type" name="type" value="add">
+                                <input type="hidden" id="flower_id" name="flower_id" value="0">
 
-                                <div class="input-group col-md-4 mb-3 float-left">
+                                <div class="input-group col-md-6 mb-3 float-left">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">店铺名称</span>
+                                        <span class="input-group-text" id="basic-addon1">花卉名称</span>
                                     </div>
-                                    <input type="text" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input id="flower_name" name="flower_name" type="text" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group col-md-6 mb-3 float-left">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon2">花卉种类</span>
+                                    </div>
+                                    <input id="flower_kind" name="flower_name" type="text" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                                <div class=" input-group col-md-6 mb-3 float-left">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon3">花卉价格</span>
+                                    </div>
+                                    <input id="flower_price" name="flower_price" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
 
-                                <div class=" input-group col-md-4 mb-3 float-left">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon2">店铺地址</span>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
-                                </div>
-                                <div class="input-group col-md-4 mb-3 float-left">
-                                    <div class="input-group-prepend">
-                                        <label class="input-group-text">联系方式</label>
-                                    </div>
-                                    <input type="text" class="form-control" id="kind" name="colcount">
-
-                                </div>
                                 <div class="input-group col-lg-12 mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">备注</span>
+                                        <span class="input-group-text">花卉介绍</span>
                                     </div>
-                                    <textarea id="intro" name="intro" class="form-control" aria-label="With textarea"></textarea>
+                                    <textarea id="flower_introduction" name="flower_introduction" class="form-control" aria-label="With textarea"></textarea>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#addSuccessModal" onclick="check()">确认添加</button>
+                                    <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#updateSuccessModal" onclick="checkUpdate()">确认修改</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#addSuccessModal" onclick="check()">添加花卉</button>
                                 </div>
                             </form>
                         </div>
 
+                    </div>
+                </div>
+            </div>
+
+            <!--修改成功-->
+            <div class="modal fade" id="updateSuccessModal" tabindex="-1" aria-labelledby="updateSuccessModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="updateSuccessModalLabel">修改成功</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            花卉修改成功！
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal">确定</button>                        </div>
                     </div>
                 </div>
             </div>
@@ -162,7 +334,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            新店添加成功！
+                            花卉添加成功！
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" data-dismiss="modal">确定</button>                        </div>
@@ -182,7 +354,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            请谨慎操作！！！确认删除该店铺？
+                            请谨慎操作！！！确认删除该花卉？
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
@@ -199,17 +371,17 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="numbers">
-                                    <span class="title mb-0 text-capitalize font-weight-bold">库存管理</span>
+                                    <span class="title mb-0 text-capitalize font-weight-bold">花卉管理</span>
 
                                     <div class="btn-toolbar mb-2 mb-md-0 float-right">
                                         <div class="input-group mr-2">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text" id="inputGroup-sizing-default">搜索库存</span>
+                                                <span class="input-group-text" id="inputGroup-sizing-default">搜索花卉</span>
                                             </div>
-                                            <input type="text" id="playname_search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" onkeypress="search()">
+                                            <input type="text" id="Flower_Seach" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" onkeypress="search()">
                                         </div>
                                         <div class="btn-group mr-2">
-                                            <button id="add" type="button" class="btn btn-sm btn-outline-secondary"  data-toggle="modal" data-target="#exampleModal">新店加盟</button>   <!--模态框-->
+                                            <button id="add" type="button" class="btn btn-sm btn-outline-secondary"  data-toggle="modal" data-target="#exampleModal">添加花卉</button>   <!--模态框-->
                                         </div>
                                     </div>
                                 </div>
@@ -218,70 +390,16 @@
                                     <table class="table table-hover">
                                         <thead>
                                         <tr class="list_nav">
-                                            <th>店铺编号</th>
-                                            <th>店铺名称</th>
-                                            <th>店铺地址</th>
-                                            <th>联系方式</th>
-                                            <th>备注</th>
-                                            <th>操作</th>
+                                            <th class="text-center">编号</th>
+                                            <th class="text-center">名称</th>
+                                            <th class="text-center align-middle">介绍</th>
+                                            <th class="text-center">价格</th>
+                                            <th class="text-center">修改</th>
+                                            <th class="text-center">删除</th>
 
                                         </tr>
                                         </thead>
                                         <tbody id="table">
-                                        <tr>
-                                            <td>001</td>
-                                            <td>范佳伟</td>
-                                            <td>西安邮电大学</td>
-                                            <td>15830599166</td>
-                                            <td>备注</td>
-                                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除"
-                                                       onclick="del('+json[i].id+')" /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>002</td>
-                                            <td>刘宇阳</td>
-                                            <td>西安邮电大学</td>
-                                            <td>17792379816</td>
-                                            <td>备注</td>
-                                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除"
-                                                       onclick="del('+json[i].id+')" /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>003</td>
-                                            <td>徐卓龙</td>
-                                            <td>西安邮电大学</td>
-                                            <td>17764753450</td>
-                                            <td>备注</td>
-                                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除"
-                                                       onclick="del('+json[i].id+')" /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>004</td>
-                                            <td>徐卓龙</td>
-                                            <td>西安邮电大学</td>
-                                            <td>17764753450</td>
-                                            <td>备注</td>
-                                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除"
-                                                       onclick="del('+json[i].id+')" /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>005</td>
-                                            <td>徐卓龙</td>
-                                            <td>西安邮电大学</td>
-                                            <td>17764753450</td>
-                                            <td>备注</td>
-                                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除"
-                                                       onclick="del('+json[i].id+')" /></td>
-                                        </tr>
-                                        <tr>
-                                            <td>006</td>
-                                            <td>徐卓龙</td>
-                                            <td>西安邮电大学</td>
-                                            <td>17764753450</td>
-                                            <td>备注</td>
-                                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除"
-                                                       onclick="del('+json[i].id+')" /></td>
-                                        </tr>
 
                                         </tbody>
                                     </table>
