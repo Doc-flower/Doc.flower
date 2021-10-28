@@ -45,7 +45,7 @@ mua~
 
 .nav_main_title{
     height: 100%;
-    width: 50%;
+    width: 70%;
     float: left;
     margin-left: 50px;
 
@@ -87,7 +87,7 @@ mua~
     color: #fff;
 }
 .nav_main_title ul li a{
-    font-size: 22px;
+    font-size: 21px;
     display: inline-block;
     text-align: center;
     width: 130px;

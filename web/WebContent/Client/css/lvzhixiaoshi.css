@@ -8,8 +8,25 @@ a,a:hover{
 ul,ol{
     list-style-type: none;
 }
-nav{
+nav{}
+
+
+.sale_hover{
+    position: absolute;
+    width: 130px;
+    height: 50px;
+    z-index: 1;
+    border: 1px #000 solid;
+    /*display: ;*/
 }
+.sale_hover a{
+    display: inline-block;
+    font-size: 18px !important;
+    width: 100%;
+    height: 30px !important;
+}
+
+
 /* 别看啦
 要我陪你吗
 mua~
@@ -45,19 +62,9 @@ mua~
     float: left;
     max-width: 150px;
     height: 100%;
+    transition: .2s;
+
 }
-/* 框框怎么出来
-    ·用border
-    大小怎么控制
-    width是宽
-    height是高
-    px是像素
-    爱你哟
-    我也爱你哟
-
-    你刚把代码都差点删了哈哈哈哈哈
-
-*/
 
 .nav_main_title ul li:hover{
     background: rgb(29, 93, 189);
@@ -68,14 +75,14 @@ mua~
     color: #fff;
 }
 .nav_main_title ul li a{
-    font-size: 24px;
+    font-size: 21px;
     display: inline-block;
     text-align: center;
     width: 130px;
     height:60px;
     color: black;
     font-weight: bold;
-    transition: .3s;
+    transition: .2s;
     line-height: 60px;
 }
 /* 宝宝不会打字了 我爱你
@@ -106,8 +113,8 @@ mua~
     有去掉的
 */
 .nav_main_user img{
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     margin: auto 0;
 }
 
@@ -115,33 +122,68 @@ mua~
     font-size: 18px;
     display: inline-block;
     text-align: center;
-    height:50px;
+    height:20px;
+    color: black;
+    transition: .2s;
+    line-height: 20px;
+
+}
+.container{
+    width: 100%;
+    /* background-color: rgb(218, 31, 31); */
+    /*border: black 2px solid;*/
+    margin-top: 20px;
+}
+
+.con-main{
+    height: 40px;
+    width: 100%;
+    background-color: rgb(8, 98, 150);
+}
+.con_main_title ul li{
+    float: left;
+    max-width: 100px;
+    height: 40px;
+    background-color: rgb(156, 214, 248);
+}
+.con_main_title ul li:hover{
+    background:rgb(8, 98, 150);;
+
+}
+
+.con_main_title ul li a{
+    font-size: 16px;
+    display: inline-block;
+    text-align: center;
+    width: 100px;
+    height:40px;
     color: black;
     transition: .3s;
     line-height: 40px;
-
+    font-weight: bold;
 }
 
+.con_main_title ul li:hover a{
+    color: #fff;
+}
 
-.person_icon{
-    height: 350px;
+.nav_main_title ul li .title_active{
+    background: rgb(29, 93, 189);
+    color: #fff;
+}
+.sale_title{
+    font-size: 30px;
+    font-weight: bold;
+    border-bottom: #d4237a 5px solid;
+}
+.sale_title_plants{
+    font-size: 30px;
+    font-weight: bold;
+    border-bottom: #157f22 5px solid;
+
+}
+.row border{
     width: 100%;
-    background: #0e7478;
-    text-align: center;
-    padding-top: 30px;
-}
-
-.person_icon img{
-    width: 200px;
-    height: 200px;
-    /*margin-left: 435px;*/
-}
-.person_name{
-    font-size: 35px;
-    font-weight: bolder;
-}
-.person_email{
-    font-family: "Poppins" , sans-serif;
-    font-size: 18px;
-    color: #4e555b;
+    height: 100px;
+    border: #1b1e21 solid 2px;
 }
