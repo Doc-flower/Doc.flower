@@ -17,14 +17,14 @@ public class FlowersDAO implements iFlowersDAO {
         int result=0;
         try
         {
-           /* System.out.println("---------->flowers.getFlower_name:" + flowers.getFlower_name());
-            System.out.println("---------->flowers.getFlower_kind:" + flowers.getFlower_kind());
-            System.out.println("---------->flowers.getFlower_introduction:" + flowers.getFlower_introduction());
-            System.out.println("---------->flowers.getFlower_image1:" + flowers.getFlower_image1());
-            System.out.println("---------->flowers.getFlower_image2:" + flowers.getFlower_image2());
-            System.out.println("---------->flowers.getFlower_image3:" + flowers.getFlower_image3());
-            System.out.println("---------->flowers.getFlower_image4:" + flowers.getFlower_image4());
-            System.out.println("---------->flowers.getFlower_price:" + flowers.getFlower_price());*/
+//            System.out.println("---------->flowers.getFlower_name:" + flowers.getFlower_name());
+//            System.out.println("---------->flowers.getFlower_kind:" + flowers.getFlower_kind());
+//            System.out.println("---------->flowers.getFlower_introduction:" + flowers.getFlower_introduction());
+//            System.out.println("---------->flowers.getFlower_image1:" + flowers.getFlower_image1());
+//            System.out.println("---------->flowers.getFlower_image2:" + flowers.getFlower_image2());
+//            System.out.println("---------->flowers.getFlower_image3:" + flowers.getFlower_image3());
+//            System.out.println("---------->flowers.getFlower_image4:" + flowers.getFlower_image4());
+//            System.out.println("---------->flowers.getFlower_price:" + flowers.getFlower_price());
             String sql="insert into flowers(flower_name, flower_kind, flower_introduction, flower_image1, flower_image2,flower_image3,flower_image4,flower_price)"
                     + " values('" + flowers.getFlower_name() + "', '" + flowers.getFlower_kind() + "', '" + flowers.getFlower_introduction() + "', '"
                     + flowers.getFlower_image1() + "', '"+ flowers.getFlower_image2()+"','"+ flowers.getFlower_image3()+"','"+ flowers.getFlower_image4()+
