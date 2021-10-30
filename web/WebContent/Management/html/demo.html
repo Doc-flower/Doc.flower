@@ -15,31 +15,23 @@
         }
     </style>
     <script>
-
-        window.onload = function (){
-            alert(getCurrentDate())
+        var myEditor = null;
+        window.onload = function(){
+            ClassicEditor
+                .create(document.querySelector("#editor"))
+                .then(editor => {
+                    myEditor = editor;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         }
 
-        function getCurrentDate() {
-            var now = new Date();
-            var year = now.getFullYear(); //得到年份
-            var month = now.getMonth();//得到月份
-            var date = now.getDate();//得到日期
-            var day = now.getDay();//得到周几
-            var hour = now.getHours();//得到小时
-            var minu = now.getMinutes();//得到分钟
-            var sec = now.getSeconds();//得到秒
-            month = month + 1;
-            if (month < 10) month = "0" + month;
-            if (date < 10) date = "0" + date;
-            if (hour < 10) hour = "0" + hour;
-            if (minu < 10) minu = "0" + minu;
-            if (sec < 10) sec = "0" + sec;
-            var time = "";
-            time = year + "-" + month + "-" + date+ " " + hour + ":" + minu + ":" + sec;
-            return time;
+        function gettext(){
+            console.log(myEditor.getData());
         }
     </script>
+    <script src="../../public/js/ckeditor5-build-classic/ckeditor.js"></script>
 </head>
 <body>
 <div class="sidebar shadow">
@@ -73,18 +65,18 @@
             <span class="tooltip">用户管理</span>
         </li>
         <li>
-            <a href="Flowers.html"  class="shadow">
+            <a href="Flowers.html">
                 <i class='fa fa-empire' ></i>
                 <span class="links_name">花库管理</span>
             </a>
             <span class="tooltip">花库管理</span>
         </li>
         <li>
-            <a href="Plants.html" class="shadow">
+            <a href="Plants.html">
                 <i class='fa fa-deviantart' ></i>
-                <span class="links_name">花库管理</span>
+                <span class="links_name">绿植管理</span>
             </a>
-            <span class="tooltip">花库管理</span>
+            <span class="tooltip">绿植管理</span>
         </li>
         <li>
             <a href="#">
@@ -116,8 +108,12 @@
 </div>
 <div class="home_content">
     <div class="text">
-
+        <textarea name="content" id="editor">
+<h2><strong>&nbsp; &nbsp;花博士线上花城</strong></h2><p>&nbsp; &nbsp;花小圈写博客文章</p><p>&nbsp; &nbsp;CKEditor 5 提供可以想象到的各类 WYSIWYG 编辑解决方案。从类似于<strong>谷歌文档</strong>和<strong>媒体</strong>的编辑，到<strong>Slack</strong>或<strong>Twitter</strong>等应用程序，一切都有可能在一个单一的编辑框架内。</p><p><strong>构建</strong>是满足常见编辑需求<strong>的即用</strong>解决方案。每个构建都可以定制，以包括一套完全自定义的功能。功能是<strong>灵活</strong>的。您可以编写一次自定义功能，并在任何地方重复使用它！</p>
+        </textarea>
     </div>
+
+    <input type="button" value="获取" onclick="gettext()">
 </div>
 
 <script src="../../public/js/jquery-1.12.4.min.js"></script>
