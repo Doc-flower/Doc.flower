@@ -5,6 +5,7 @@ public class Blogs {
     private int id=0      ;
     private String name="" ;
     private String owner="";
+    private String text="";
     private String time="" ;
     private int views=0;
     private int likes=0; //���
@@ -12,10 +13,11 @@ public class Blogs {
     public Blogs(){
         id = 0;
     }
-    public Blogs(int ID, String name, String owner, String time, int views, int likes){
+    public Blogs(int ID, String name, String owner,String text, String time, int views, int likes){
         this.id = ID;
         this.name=name;
         this.owner = owner;
+        this.text = text;
         this.time=time;
         this.views = views;
         this.likes = likes;
@@ -49,6 +51,14 @@ public class Blogs {
 
     public String getOwner(){
         return owner;
+    }
+
+    public void setText(String intro){
+        this.text=intro;
+    }
+
+    public String getText(){
+        return text;
     }
 
     public void setTime(String img){

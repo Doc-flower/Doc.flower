@@ -88,41 +88,6 @@ public class BlogsDAO implements iBlogsDAO
     }
 
     @SuppressWarnings("finally")
-    public String selectplayid(int condt)
-    {
-        DBUtil db=null;
-        String result="";
-        try
-        {
-            String sql="select blog_name from blogs  where play_id= " + condt;
-            db=new DBUtil();
-            if(!db.openConnection())
-            {
-                System.out.print("fail to connect database");
-                return null;
-            }
-            ResultSet rst=db.execQuery(sql);
-            if(rst != null)
-            {
-                while(rst.next())
-                {
-                    result=rst.getString("play_name");
-                }
-            }
-            db.close(rst);
-            db.close();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-        finally
-        {
-            return result;
-        }
-    }
-
-    @SuppressWarnings("finally")
     @Override
     public List<Blogs> select(String blogName)
     {
@@ -148,6 +113,53 @@ public class BlogsDAO implements iBlogsDAO
                     blogs.setID(rst.getInt("blog_id"));
                     blogs.setName(rst.getString("blog_name"));
                     blogs.setOwner(rst.getString("blog_owner"));
+                    blogs.setText(rst.getString("blog_text"));
+                    blogs.setTime(rst.getString("blog_time"));
+                    blogs.setViews(rst.getInt("blog_views"));
+                    blogs.setLikes(rst.getInt("blog_likes"));
+                    blogsList.add(blogs);
+                }
+            }
+            db.close(rst);
+            db.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            return blogsList;
+        }
+    }
+
+
+    @SuppressWarnings("finally")
+    @Override
+    public List<Blogs> selectId(int id)
+    {
+        DBUtil db=null;
+        List<Blogs> blogsList =null;
+        blogsList =new LinkedList<Blogs>();
+        try
+        {
+            String sql="select * from blogs where blog_id = '" + id + "'";
+            db=new DBUtil();
+            if(!db.openConnection())
+            {
+                System.out.print("fail to connect database table blogs");
+                return null;
+            }
+            ResultSet rst=db.execQuery(sql);
+            if(rst != null)
+            {
+                while(rst.next())
+                {
+                    Blogs blogs =new Blogs();
+                    blogs.setID(rst.getInt("blog_id"));
+                    blogs.setName(rst.getString("blog_name"));
+                    blogs.setOwner(rst.getString("blog_owner"));
+                    blogs.setText(rst.getString("blog_text"));
                     blogs.setTime(rst.getString("blog_time"));
                     blogs.setViews(rst.getInt("blog_views"));
                     blogs.setLikes(rst.getInt("blog_likes"));

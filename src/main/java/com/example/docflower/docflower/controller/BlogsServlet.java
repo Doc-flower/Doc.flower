@@ -38,6 +38,8 @@ public class BlogsServlet extends HttpServlet
             update(request, response);
         else if(type.equalsIgnoreCase("search"))
             search(request, response);
+        else if(type.equalsIgnoreCase("searchId"))
+            searchId(request, response);
     }
 
     private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -48,10 +50,11 @@ public class BlogsServlet extends HttpServlet
         {
             String name=request.getParameter("name");
             String owner=request.getParameter("owner");
+            String text=request.getParameter("text");
             String time=request.getParameter("time");
             int views=Integer.valueOf(request.getParameter("views"));
             int likes=Integer.valueOf(request.getParameter("likes"));
-            blogs =new Blogs(id, name, owner,time,views,likes);
+            blogs =new Blogs(id, name, owner,text,time,views,likes);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
 
@@ -96,10 +99,11 @@ public class BlogsServlet extends HttpServlet
         {
             String name=request.getParameter("name");
             String owner=request.getParameter("owner");
+            String text=request.getParameter("text");
             String time=request.getParameter("time");
             int views=Integer.valueOf(request.getParameter("views"));
             int likes=Integer.valueOf(request.getParameter("likes"));
-            blogs =new Blogs(id, name, owner,time,views,likes);
+            blogs =new Blogs(id, name, owner,text,time,views,likes);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
 
@@ -124,10 +128,7 @@ public class BlogsServlet extends HttpServlet
         PrintWriter out=response.getWriter();
         String name=request.getParameter("name");
         List<Blogs> result=null;
-        if(name != null && name.length() > 0)
-            result=new BlogsSrv().Fetch(name);
-        else
-            result=new BlogsSrv().FetchAll();
+        result=new BlogsSrv().Fetch(name);
         String jsonStr="";
         try
         {
@@ -139,6 +140,47 @@ public class BlogsServlet extends HttpServlet
                 json.put("id", s.getID());
                 json.put("name", s.getName());
                 json.put("owner", s.getOwner());
+                json.put("text", s.getText());
+                json.put("time", s.getTime());
+                json.put("views", s.getViews());
+                json.put("likes", s.getLikes());
+                array.put(json);
+            }
+            jsonStr=array.toString();
+        }
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            out.println(jsonStr);
+            out.flush();
+            out.close();
+        }
+        // System.out.print(jsonStr);
+    }
+
+
+    private void searchId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out=response.getWriter();
+        int name=Integer.valueOf(request.getParameter("id"));
+        List<Blogs> result=null;
+        result=new BlogsSrv().FetchId(name);
+        String jsonStr="";
+        try
+        {
+            JSONArray array=new JSONArray();
+            JSONObject json;
+            for(Blogs s : result)
+            {
+                json=new JSONObject();
+                json.put("id", s.getID());
+                json.put("name", s.getName());
+                json.put("owner", s.getOwner());
+                json.put("text", s.getText());
                 json.put("time", s.getTime());
                 json.put("views", s.getViews());
                 json.put("likes", s.getLikes());

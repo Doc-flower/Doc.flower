@@ -26,7 +26,7 @@ public class BlogsSrv {
         return playDAO.select(condt);
     }
 
-    public List<Blogs> FetchAll(){
-        return playDAO.select("");
+    public List<Blogs> FetchId(int id){
+        return playDAO.selectId(id);
     }
 }

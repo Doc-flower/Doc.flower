@@ -12,4 +12,6 @@ public interface iBlogsDAO {
     public int delete(int ID);
 
     public List<Blogs> select(String playName);
+
+    public List<Blogs> selectId(int id);
 }
