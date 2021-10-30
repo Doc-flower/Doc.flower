@@ -1,7 +1,9 @@
 package main.java.com.example.docflower.docflower.controller;
 
 import main.java.com.example.docflower.docflower.model.Flowers;
+import main.java.com.example.docflower.docflower.model.Plants;
 import main.java.com.example.docflower.docflower.service.FlowersSrv;
+import main.java.com.example.docflower.docflower.service.PlantsSrv;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +41,8 @@ public class FlowersServlet extends HttpServlet{
             searchByName(request, response);
         else if(type.equalsIgnoreCase("searchByImg"))
             searchByImg(request,response);
+        else if(type.equalsIgnoreCase("searchId"))
+            searchId(request, response);
     }
 
     private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -93,9 +97,10 @@ public class FlowersServlet extends HttpServlet{
     private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         Flowers flowers =null;
-        int id=0;
+        int id=Integer.valueOf(request.getParameter("flower_id"));
         try
         {
+
             String flower_name=request.getParameter("flower_name");
             String flower_kind=request.getParameter("flower_kind");
             String flower_introduction=request.getParameter("flower_introduction");
@@ -119,6 +124,49 @@ public class FlowersServlet extends HttpServlet{
             response.setContentType("text/html;charset=utf-8");
             response.getWriter().write("操作错误，请重试");
         }
+    }
+
+    private void searchId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out=response.getWriter();
+        int id=Integer.valueOf(request.getParameter("flower_id"));
+        List<Flowers> result=null;
+        result=new FlowersSrv().Fetch(id);
+
+        String jsonStr="";
+        try
+        {
+            JSONArray array=new JSONArray();
+            JSONObject json;
+            for(Flowers s : result)
+            {
+                json=new JSONObject();
+                json.put("flower_id", s.getFlower_id());
+                json.put("flower_name", s.getFlower_name());
+                json.put("flower_kind", s.getFlower_kind());
+                json.put("flower_introduction", s.getFlower_introduction());
+                json.put("flower_image1", s.getFlower_image1());
+                json.put("flower_image2", s.getFlower_image2());
+                json.put("flower_image3", s.getFlower_image3());
+                json.put("flower_image4", s.getFlower_image4());
+                json.put("flower_price", s.getFlower_price());
+                array.put(json);
+            }
+            jsonStr=array.toString();
+        }
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            out.println(jsonStr);
+            out.flush();
+            out.close();
+        }
+        // System.out.print(jsonStr);
     }
 
 

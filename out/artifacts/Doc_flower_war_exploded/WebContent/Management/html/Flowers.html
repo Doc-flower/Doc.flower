@@ -92,7 +92,8 @@
         }
 
 
-        function update(flower_id) {
+        function update(id) {
+
             var url = "../../../FlowersServlet";
             if (window.XMLHttpRequest)
                 req = new XMLHttpRequest();
@@ -104,7 +105,7 @@
                 //POST方式，必须加入如下头信息设定
                 req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 req.onreadystatechange = updateComplete;
-                req.send("type=update&flower_id="+flower_id);
+                req.send("type=searchId&flower_id="+id);
             }
         }
 
@@ -113,7 +114,7 @@
                 var json =  JSON.parse(req.responseText);//转换为json对象
                 document.getElementById("flower_id").value = json[0].flower_id;
                 document.getElementById("flower_name").value = json[0].flower_name;
-                // document.getElementById("flower_kind").value = json[0].flower_kind;
+                document.getElementById("flower_kind").value = json[0].flower_kind;
                 document.getElementById("flower_introduction").value = json[0].flower_introduction;
                 document.getElementById("flower_price").value = json[0].flower_price;
             }
@@ -394,6 +395,7 @@
                                         <tr class="list_nav">
                                             <th class="text-center">编号</th>
                                             <th class="text-center">名称</th>
+                                            <th class="text-center">种类</th>
                                             <th class="text-center align-middle">介绍</th>
                                             <th class="text-center">价格</th>
                                             <th class="text-center">修改</th>

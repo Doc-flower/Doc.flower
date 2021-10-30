@@ -2,6 +2,7 @@ package main.java.com.example.docflower.docflower.dao;
 
 import main.java.com.example.docflower.docflower.idao.iFlowersDAO;
 import main.java.com.example.docflower.docflower.model.Flowers;
+import main.java.com.example.docflower.docflower.model.Plants;
 import main.java.com.example.docflower.util.DBUtil;
 
 import java.sql.ResultSet;
@@ -61,7 +62,7 @@ public class FlowersDAO implements iFlowersDAO {
                     + flowers.getFlower_kind() + "', " + " flower_introduction  = '" + flowers.getFlower_introduction() + "', "
                     + " flower_image1 = '" + flowers.getFlower_image1()+"'," + " flower_image2  = '" + flowers.getFlower_image2() + "' , "
                     +" flower_image3='"+ flowers.getFlower_image3()+"',"+" flower_image4='"+ flowers.getFlower_image4()+"',"+"flower_price ="+ flowers.getFlower_price();
-            sql+=" where flower_name = '" + flowers.getFlower_name()+"'";
+            sql+=" where flower_id = " + flowers.getFlower_id();
             DBUtil db=new DBUtil();
             db.openConnection();
             result=db.execCommand(sql);
@@ -96,39 +97,55 @@ public class FlowersDAO implements iFlowersDAO {
         return result;
     }
 
-   /* @SuppressWarnings("finally")
-   public String selectplayid(int condt)
-    {
-        DBUtil db=null;
-        String result="";
-        try
-        {
-            String sql="select play_name from play  where play_id= " + condt;
-            db=new DBUtil();
-            if(!db.openConnection())
-            {
-                System.out.print("fail to connect database");
-                return null;
-            }
-            ResultSet rst=db.execQuery(sql);
-            if(rst != null)
-            {while(rst.next())
-                {
-                    result=rst.getString("play_name");
-                } }
-            db.close(rst);
-            db.close();
-        }
-        catch(Exception e)
-        {
-          e.printStackTrace();
-        }
-        finally
-        {
-            return result;
-        }
-    }
-*/
+
+   @SuppressWarnings("finally")
+   @Override
+   public List<Flowers> selectbyID(int flower_id)
+   {
+       System.out.println("hello");
+       DBUtil db=null;
+       List<Flowers> stuList=null;
+       stuList=new LinkedList<Flowers>();
+       try
+       {
+           String sql="select * from flowers where flower_id= " + flower_id;
+           db=new DBUtil();
+           if(!db.openConnection())
+           {
+               System.out.print("fail to connect database table flowers");
+               return null;
+           }
+           ResultSet rst=db.execQuery(sql);
+           if(rst != null)
+           {
+               while(rst.next())
+               {
+                   Flowers flowers = new Flowers();
+                   flowers.setFlower_id(rst.getInt("flower_id"));
+                   flowers.setFlower_name(rst.getString("flower_name"));
+                   flowers.setFlower_kind(rst.getString("flower_kind"));
+                   flowers.setFlower_introduction(rst.getString("flower_introduction"));
+                   flowers.setFlower_image1(rst.getString("flower_image1"));
+                   flowers.setFlower_image2(rst.getString("flower_image2"));
+                   flowers.setFlower_image3(rst.getString("flower_image3"));
+                   flowers.setFlower_image4(rst.getString("flower_image4"));
+                   flowers.setFlower_price(rst.getInt("flower_price"));
+
+                   stuList.add(flowers);
+               }
+           }
+           db.close(rst);
+           db.close();
+       }
+       catch(Exception e)
+       {
+           e.printStackTrace();
+       }
+       finally
+       {
+           return stuList;
+       }
+   }
 
     @SuppressWarnings("finally")
     @Override
