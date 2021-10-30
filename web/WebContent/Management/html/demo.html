@@ -28,7 +28,7 @@
         }
 
         function gettext(){
-            console.log(myEditor.getData());
+            document.getElementById("text").innerHTML = myEditor.getData();
         }
     </script>
     <script src="../../public/js/ckeditor5-build-classic/ckeditor.js"></script>
@@ -114,6 +114,10 @@
     </div>
 
     <input type="button" value="获取" onclick="gettext()">
+    <div id="text" class="alert alert-primary">
+        <h2><strong>&nbsp; &nbsp;花博士线上花城</strong></h2><p>&nbsp; &nbsp;花小圈写博客文章</p><p>&nbsp; &nbsp;CKEditor 5 提供可以想象到的各类 WYSIWYG 编辑解决方案。从类似于<strong>谷歌文档</strong>和<strong>媒体</strong>的编辑，到<strong>Slack</strong>或<strong>Twitter</strong>等应用程序，一切都有可能在一个单一的编辑框架内。</p><p><strong>构建</strong>是满足常见编辑需求<strong>的即用</strong>解决方案。每个构建都可以定制，以包括一套完全自定义的功能。功能是<strong>灵活</strong>的。您可以编写一次自定义功能，并在任何地方重复使用它！</p>
+
+    </div>
 </div>
 
 <script src="../../public/js/jquery-1.12.4.min.js"></script>
