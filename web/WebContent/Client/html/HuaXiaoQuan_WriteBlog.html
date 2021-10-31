@@ -16,6 +16,10 @@
     <link rel="stylesheet" type="text/css"  href=".././css/blog.css" />
     <link rel="stylesheet" href="../css/footer.css">
 
+
+    <script src="../../public/js/jquery-1.12.4.min.js"></script>
+    <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
+
     <script>
         var myEditor = null;
         window.onload = function(){
@@ -58,14 +62,21 @@
 
         function checkBlogComplete() {
             if (req.readyState == 4 && req.status == 200) {
-                document.getElementById("blog_title").reset();
-                myEditor.setData("");
-
+                reset();
             }
         }
 
-        function clear(){
+        function reset(){
+
+            document.getElementById("blog_title").value = "";
             myEditor.setData("");
+        }
+
+        function clear(){
+            $("#blog_clear").click(function (){
+                reset();
+            })
+
         }
 
 
@@ -98,8 +109,6 @@
             border-bottom: #1b1e21 solid 5px;
         }
     </style>
-    <script src="../../public/js/jquery-1.12.4.min.js"></script>
-    <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
 <input type="hidden" id="owner" value="liuyuyang">
@@ -154,26 +163,6 @@
         </div>
 
 
-        <!--            清空警示-->
-        <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="delModalLabel">确认清空</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        请谨慎操作！！！确认清空？
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-danger"  onclick="clear()">确认清空</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
         <div class="message my-3">
@@ -193,8 +182,6 @@
             </div>
         </div>
         <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#addSuccessModal" onclick="check_blog()">发表博客</button>
-        <button type="button" class="btn btn-outline-danger my-3" data-toggle="modal" data-target="#delModal">清空内容</button>
-
     </main>
 
 
