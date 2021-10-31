@@ -35,12 +35,15 @@
 
                 if(req.responseText == 1){
                     setTimeout(SignInSuccess,100);
+                    document.cookie = "name=" + document.getElementById("email").value;
+                    console.log(document.cookie);
                 }else {
                     setTimeout(failSignIn, 100);
                 }
 
             }
         }
+
 
 
         var card = document.getElementsByClassName("container");

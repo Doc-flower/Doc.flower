@@ -1,3 +1,108 @@
+window.onload = function (){
+    cookie_email_search();
+}
+
+function quit(){
+    document.cookie = "name=???";
+    window.location = "Sign.html";
+}
+
+
+function cookie_email_search(){
+    var url = "../../../CustomerServlet";
+    if (window.XMLHttpRequest)
+        req = new XMLHttpRequest();
+    else if (window.ActiveXObject)
+        req = new ActiveXObject("Microsoft.XMLHTTP");
+    if (req) {
+        //采用POST方式，异步传输
+        req.open("post", url, true);
+        req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        req.onreadystatechange = cookie_email_searchComplete;
+        req.send("type=search&method=byEmail&" + document.cookie);
+    }
+}
+
+function cookie_email_searchComplete(){
+    if (req.readyState == 4 && req.status == 200) {
+        var json =  JSON.parse(req.responseText);//转换为json对象
+        console.log(json);
+        // document.cookie =
+        //     "user_id=" + json[0].id +
+        //     ";user_name=" + json[0].name +
+        //     ";user_tel=" + json[0].tel +
+        //     ";user_email=" + json[0].email +
+        //     ";user_pwd=" + json[0].pwd +
+        //     ";user_address=" + json[0].address +
+        //     ";user_orders=" + json[0].orders +
+        //     ";user_friends=" + json[0].friends;
+
+        document.getElementById("user_name").value = json[0].name;
+        console.log(document.cookie);
+    }
+}
+
+
+UrlParm = function() { // url参数
+    var data, index;
+    (function init() {
+        data = [];
+        index = {};
+        var u = window.location.search.substr(1);
+        if (u != '') {
+            var parms = decodeURIComponent(u).split('&');
+            for (var i = 0, len = parms.length; i < len; i++) {
+                if (parms[i] != '') {
+                    var p = parms[i].split("=");
+                    if (p.length == 1 || (p.length == 2 && p[1] == '')) {// p | p=
+                        data.push([ '' ]);
+                        index[p[0]] = data.length - 1;
+                    } else if (typeof (p[0]) == 'undefined' || p[0] == '') { // =c | =
+                        data[0] = [ p[1] ];
+                    } else if (typeof (index[p[0]]) == 'undefined') { // c=aaa
+                        data.push([ p[1] ]);
+                        index[p[0]] = data.length - 1;
+                    } else {// c=aaa
+                        data[index[p[0]]].push(p[1]);
+                    }
+                }
+            }
+        }
+    })();
+    return {
+        // 获得参数
+        parm : function(o) { // o: 参数名或者参数次序
+            try {
+                return (typeof (o) == 'number' ? data[o][0] : data[index[o]][0]);
+            } catch (e) {
+            }
+        },
+        //获得参数组, 类似request.getParameterValues()
+        parmValues : function(o) { //  o: 参数名或者参数次序
+            try {
+                return (typeof (o) == 'number' ? data[o] : data[index[o]]);
+            } catch (e) {
+            }
+        },
+        //是否含有parmName参数
+        hasParm : function(parmName) {
+            return typeof (parmName) == 'string' ? typeof (index[parmName]) != 'undefined' : false;
+        },
+        // 获得参数Map ,类似request.getParameterMap()
+        parmMap : function() {
+            var map = {};
+            try {
+                for ( var p in index) {
+                    map[p] = data[index[p]];
+                }
+            } catch (e) {
+            }
+            return map;
+        }
+    }
+}();
+
+
 
 function check_join_us() {
     var form = document.getElementById("form_join_us");
@@ -39,8 +144,8 @@ function check_message() {
         req.open("post", url, true);
         req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         req.onreadystatechange = checkMessageComplete;
-        var data = "type=add" + "&messagename=" + "未登录用户"
-            + "&messagetitle="
+        var data = "type=add" + "&messagename="
+            + encodeURIComponent(form.user_name.value) + "&messagetitle="
             + encodeURIComponent(form.message_name.value) + "&messageemail="
             + encodeURIComponent(form.message_email.value) + "&messagetime="
             + getCurrentDate() + "&messagetext="

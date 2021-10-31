@@ -98,8 +98,7 @@ public class CustomerServlet  extends HttpServlet
         String name=request.getParameter("name");
         String method=request.getParameter("method");
         List<Customer> result=null;
-//        if(name != null && name.length() > 0)
-            result=new CustomerSrv().Fetch(name,method);
+        result=new CustomerSrv().Fetch(name,method);
         String jsonStr="";
         try
         {
@@ -152,6 +151,7 @@ public class CustomerServlet  extends HttpServlet
         {
             for(Customer s : result)
             {
+
                 pwd_MD5 = s.getPwd();
             }
             System.out.println("------------>pwd:" + pwd);

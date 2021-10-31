@@ -76,6 +76,9 @@ public class CustomerDAO  implements iCustomerDAO {
             }else if(method.equalsIgnoreCase("login")){
                 sql="select * from customer where cus_email like '" + customerEmail + "'";
             }
+            else if(method.equalsIgnoreCase("byEmail")){
+                sql="select * from customer where cus_email like '" + customerEmail + "'";
+            }
             db=new DBUtil();
             if(!db.openConnection())
             {
