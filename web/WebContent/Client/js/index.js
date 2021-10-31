@@ -1,5 +1,6 @@
 window.onload = function (){
     cookie_email_search();
+    IfUserSginIn();
 }
 
 function quit(){
@@ -38,7 +39,14 @@ function cookie_email_searchComplete(){
         //     ";user_friends=" + json[0].friends;
 
         document.getElementById("user_name").value = json[0].name;
+        document.getElementById("dropdown04").innerText = json[0].name;
         console.log(document.cookie);
+        document.getElementById("IfUserSginIn").innerHTML = '';
+        console.log(123);
+    } else{
+        document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
+        document.getElementById("dropdown04").innerText = "个人中心";
+        console.log(456);
     }
 }
 
