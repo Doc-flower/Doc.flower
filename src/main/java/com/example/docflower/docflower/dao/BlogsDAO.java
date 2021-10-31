@@ -17,10 +17,10 @@ public class BlogsDAO implements iBlogsDAO
         int resultPlay=0;
         try
         {
-            String sql="insert into blogs(blog_name, blog_owner, blog_time, blog_views, blog_likes) VALUES"
-                        + "('" + blogs.getName() + "', '" + blogs.getOwner()
-                        + "', '" + blogs.getTime() + "', " + blogs.getViews()
-                        + ", " + blogs.getLikes() + " )";
+            String sql="insert into blogs(blog_name, blog_owner,blog_text, blog_time, blog_views, blog_likes) VALUES"
+                        + "('" + blogs.getName() + "', '" + blogs.getOwner() + "', '"
+                        + blogs.getText() + "', '" + blogs.getTime()
+                        + "', " + blogs.getViews() + ", " + blogs.getLikes() + " )";
             DBUtil db=new DBUtil();
             db.openConnection();
             ResultSet rst=db.getInsertObjectIDs(sql);

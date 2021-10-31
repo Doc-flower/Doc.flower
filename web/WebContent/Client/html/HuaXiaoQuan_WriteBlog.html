@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发表博客</title>
+    <link rel="stylesheet" href="../../public/css/bootstrap-4.6.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <!-- include main css -->
+    <link rel="stylesheet" type="text/css" href="../../public/css/slick.css"/>
+
+    <link rel="stylesheet" type="text/css" href="../../public/css/juery.mmenu.all.css"/>
+    <link rel="stylesheet" type="text/css" href="../../public/css/style.css"/>
+    <link href="../../public/css/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../../public/css/animate.css"/>
+    <!--<link rel="stylesheet" type="text/css"  href=".././css/story.css" />-->
+    <link rel="stylesheet" type="text/css"  href=".././css/blog.css" />
+    <link rel="stylesheet" href="../css/footer.css">
+
+    <script>
+        var myEditor = null;
+        window.onload = function(){
+            ClassicEditor
+                .create(document.querySelector("#editor"))
+                .then(editor => {
+                    myEditor = editor;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
+
+
+
+        function check_blog() {
+            var form = document.getElementById("form_join_us");
+            var url = "../../../BlogsServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = checkBlogComplete;
+                var data = "type=add"
+                    + "&name="
+                    + encodeURIComponent(document.getElementById("blog_title").value)
+                    + "&owner="
+                    + encodeURIComponent(document.getElementById("owner").value)
+                    + "&text="
+                    + encodeURIComponent(myEditor.getData())
+                    + "&time="
+                    + encodeURIComponent(getCurrentDate());
+                req.send(data);
+            }
+        }
+
+        function checkBlogComplete() {
+            if (req.readyState == 4 && req.status == 200) {
+                document.getElementById("blog_title").reset();
+                myEditor.setData("");
+
+            }
+        }
+
+        function clear(){
+            myEditor.setData("");
+        }
+
+
+
+        function getCurrentDate() {
+            var now = new Date();
+            var year = now.getFullYear(); //得到年份
+            var month = now.getMonth();//得到月份
+            var date = now.getDate();//得到日期
+            var day = now.getDay();//得到周几
+            var hour = now.getHours();//得到小时
+            var minu = now.getMinutes();//得到分钟
+            var sec = now.getSeconds();//得到秒
+            month = month + 1;
+            if (month < 10) month = "0" + month;
+            if (date < 10) date = "0" + date;
+            if (hour < 10) hour = "0" + hour;
+            if (minu < 10) minu = "0" + minu;
+            if (sec < 10) sec = "0" + sec;
+            var time = "";
+            time = year + "-" + month + "-" + date+ " " + hour + ":" + minu + ":" + sec;
+            return time;
+        }
+
+
+    </script>
+    <script src="../../public/js/ckeditor5-build-classic/ckeditor.js"></script>
+    <style>
+        #write{
+            border-bottom: #1b1e21 solid 5px;
+        }
+    </style>
+    <script src="../../public/js/jquery-1.12.4.min.js"></script>
+    <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+<input type="hidden" id="owner" value="liuyuyang">
+    <nav>
+        <div class="nav_main">
+    
+            <img src="../../public/img/logo.png" height="30" width="30" alt="."/>
+            <div class="nav_main_title">
+                <ul>
+                    <li> <a href="./index.html" >首页</a> </li>
+                    <li><a href="./HuaXiaoKe.html">花小科</a></li>
+                    <li><a href="HuahuaXiaoShi.html">花花小市</a></li>
+                    <li><a href="LvzhiXiaoShi.html">绿植小市</a></li>
+                    <li><a href="./HuaXiaoQuan.html" class="title_active">花小圈</a></li>
+    
+                </ul>
+            </div>
+            <div class="nav_main_user">
+                <a href="Sign.html" style="display: inline-block"><img src="../img/用户.png" alt=""></a>
+                <div class="nav-item dropdown float-right">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-expanded="false">个人中心</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown04">
+                        <a class="dropdown-item" href="person.html" target="_blank">个人信息</a>
+                        <a class="dropdown-item" href="Person_Order.html" target="_blank">订单管理</a>
+                        <a class="dropdown-item" href="#">退出登录</a>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    
+    </nav>
+    <main class="container">
+
+        <!--发表成功-->
+        <div class="modal fade" id="addSuccessModal" tabindex="-1" aria-labelledby="addSuccessModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addSuccessModalLabel">😊发表成功</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        博客发表成功！
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">确定</button>                        </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--            清空警示-->
+        <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="delModalLabel">确认清空</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        请谨慎操作！！！确认清空？
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-danger"  onclick="clear()">确认清空</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="message my-3">
+            <div id="write" class="centered py-1">
+                <h1 class="">发表博客</h1>
+            </div>
+        </div>
+        <div class="input-group my-2">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-lg">博客标题</span>
+            </div>
+            <input type="text" id="blog_title" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+        </div>
+        <div class="centered">
+            <div id="editor">
+                <h1>在这里编辑你的博客...</h1>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#addSuccessModal" onclick="check_blog()">发表博客</button>
+        <button type="button" class="btn btn-outline-danger my-3" data-toggle="modal" data-target="#delModal">清空内容</button>
+
+    </main>
+
+
+</body>
+</html>

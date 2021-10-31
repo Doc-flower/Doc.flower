@@ -52,8 +52,8 @@ public class BlogsServlet extends HttpServlet
             String owner=request.getParameter("owner");
             String text=request.getParameter("text");
             String time=request.getParameter("time");
-            int views=Integer.valueOf(request.getParameter("views"));
-            int likes=Integer.valueOf(request.getParameter("likes"));
+            int views=0;
+            int likes=0;
             blogs =new Blogs(id, name, owner,text,time,views,likes);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();

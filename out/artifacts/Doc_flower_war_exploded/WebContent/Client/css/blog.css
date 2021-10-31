@@ -31,13 +31,13 @@ ul{
     width: 1075px;
     height: 900px;
     margin: 0px auto;
-    background-color: #ededef;
+    /*background-color: #ededef;*/
 }
 /*HuaXiaoQuan_blog.html 右边部分*/
 #body .right-body{
     float: right;
     height: 800px;
-    width: 401px;
+    width: 301px;
     background-color: #ededef;
 }
 .right-body .like{
@@ -45,7 +45,7 @@ ul{
     height: 141px;
     border: 1px solid #d7d7d9;
     box-shadow: 1px 1px 1px  #d7d7d9;
-    margin: 20px 86px;
+    margin: 20px 46px;
     background-color: #f3f3f3;
 }
 .like .like-top{
@@ -95,7 +95,7 @@ ul{
     height: 189px;
     border: 1px solid #d7d7d9;
     box-shadow: 1px 1px 1px  #d7d7d9;
-    margin: 20px 86px;
+    margin: 20px 46px;
 }
 .creative-center .row1{
     height: 37px;
@@ -143,24 +143,48 @@ ul{
 /* HuaXiaoQuan_blog.html 左边部分*/
 #body .left-body{
     float: left;
-    width: 674px;
+    width: 604px;
     height: 800px;
-    background-color:#ededef;
+    /*background-color:#ededef;*/
 }
-#body .left-body .author{
-    width: 674px;
+#body .author{
+    /*width: 800px;*/
     height: 114px;
-    margin-top: 30px;
-    box-shadow: 1px 1px 1px  #d7d7d9;
-    background-color: #ffffff;
+    margin-top: 20px;
+    border-bottom: #d4237a solid 5px;
 }
-#body .left-body .author li{
-    float: left;
-    height: 110px;
+
+.author i{
+    font-size: 35px;
+    font-weight: 400;
+    margin-top: 10px;
+    /*height: 25px;*/
+    min-width: 50px;
+    border-radius: 12px;
+    line-height: 30px;
+    text-align: center;
 }
-#body .left-body .author .author-img{
-    width: 110px;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .author-img img{
     width: 110px;
     height: 114px;
@@ -168,6 +192,9 @@ ul{
 .photo,.video,.article{
     width: 188px;
     height: 110px;  
+}
+.author .list{
+    line-height: 20px;
 }
 .author .list div{
     width: 80px;
