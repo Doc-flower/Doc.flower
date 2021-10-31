@@ -258,7 +258,7 @@ body{
 
 /*页面主题部分*/
 .main_card{
-    height: 120px;
+    /*height: 120px;*/
     border-radius: 20px;
 }
 .main_sta{
