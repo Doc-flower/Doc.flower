@@ -14,10 +14,7 @@ nav{
 body{
     margin: 0 !important;
 }
-/* 别看啦
-要我陪你吗
-mua~
-*/
+
 .nav_main{
     margin: 0 auto;
     height: 60px;
@@ -52,18 +49,7 @@ mua~
     transition: .2s;
 
 }
-/* 框框怎么出来
-    ·用border
-    大小怎么控制
-    width是宽
-    height是高
-    px是像素
-    爱你哟
-    我也爱你哟
 
-    你刚把代码都差点删了哈哈哈哈哈
-
-*/
 
 .nav_main_title ul li:hover{
     background: rgb(29, 93, 189);
@@ -99,10 +85,7 @@ mua~
     float: right;
     margin-top: 5px;
 }
-/* 看啥呢
-    为啥会有下划线
-    有去掉的
-*/
+
 .nav_main_user img{
     width: 40px;
     height: 40px;
@@ -123,8 +106,6 @@ mua~
 .row{
     margin: 10px auto;
 }
-
-/* 快想文案 */
 
 
 
