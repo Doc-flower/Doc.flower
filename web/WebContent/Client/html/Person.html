@@ -46,7 +46,7 @@
 
                 document.getElementById("person_name").innerText = json[0].name;
                 document.getElementById("person_email").innerText = json[0].email;
-                document.getElementById("container").setAttribute("class","");
+                document.getElementById("container").setAttribute("style","");
 
             } else{
                 document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
@@ -101,7 +101,7 @@
     </p>
 </div>
 
-<div id="container" class="fade">
+<div id="container" style="display: none">
 
 <div class="container">
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">

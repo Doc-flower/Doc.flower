@@ -29,6 +29,7 @@ function cookie_email_searchComplete(){
         console.log(json);
 
         document.getElementById("dropdown04").innerText = json[0].name;
+        document.getElementById("user_name").value = json[0].name;
         console.log("---------->成功:" + document.cookie);
         document.getElementById("IfUserSginIn").innerHTML = '';
     } else{
