@@ -1,6 +1,5 @@
 window.onload = function (){
     cookie_email_search();
-    IfUserSginIn();
 }
 
 function quit(){
@@ -28,25 +27,14 @@ function cookie_email_searchComplete(){
     if (req.readyState == 4 && req.status == 200) {
         var json =  JSON.parse(req.responseText);//转换为json对象
         console.log(json);
-        // document.cookie =
-        //     "user_id=" + json[0].id +
-        //     ";user_name=" + json[0].name +
-        //     ";user_tel=" + json[0].tel +
-        //     ";user_email=" + json[0].email +
-        //     ";user_pwd=" + json[0].pwd +
-        //     ";user_address=" + json[0].address +
-        //     ";user_orders=" + json[0].orders +
-        //     ";user_friends=" + json[0].friends;
 
-        document.getElementById("user_name").value = json[0].name;
         document.getElementById("dropdown04").innerText = json[0].name;
-        console.log(document.cookie);
+        console.log("---------->成功:" + document.cookie);
         document.getElementById("IfUserSginIn").innerHTML = '';
-        console.log(123);
     } else{
         document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
         document.getElementById("dropdown04").innerText = "个人中心";
-        console.log(456);
+        console.log("---------->失败:" + document.cookie);
     }
 }
 
