@@ -126,16 +126,15 @@
                         <div class="row">
                             <div class="col-9">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">浏览总量</p>
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">留言总量</p>
                                     <h3 class="font-weight-bolder mb-0">
-                                        23
-                                        <span class="text-success text-sm font-weight-bolder">+55%</span>
+                                        {{MessagesNum}}
                                     </h3>
                                 </div>
                             </div>
                             <div class="col-3 text-end ">
                                 <div class="icon icon-shape bg-gradient-primary text-center shadow text-center border-radius-md align-content-center card-icon">
-                                    <i class=' fa fa-eye fa-lg' ></i>
+                                    <i class=' fa fa-envelope fa-lg' ></i>
 
                                 </div>
                             </div>
@@ -155,7 +154,7 @@
                             </div>
                             <div class="col-3 text-end ">
                                 <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md align-content-center card-icon">
-                                    <i class='fa fa-users' ></i>
+                                    <i class='fa fa-users fa-lg' ></i>
 
                                 </div>
                             </div>
@@ -178,7 +177,7 @@
                             </div>
                             <div class="col-3 text-end ">
                                 <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md align-content-center card-icon">
-                                    <i class='fa fa-list-alt' ></i>
+                                    <i class='fa fa-list-alt fa-lg' ></i>
 
                                 </div>
                             </div>
@@ -198,7 +197,7 @@
                             </div>
                             <div class="col-3 text-end ">
                                 <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md align-content-center card-icon">
-                                    <i class='fa fa-book' ></i>
+                                    <i class='fa fa-book fa-lg' ></i>
 
                                 </div>
                             </div>
@@ -531,12 +530,14 @@
         data:{
             UserNum:"",
             OrdersNum:"",
-            BlogsNum:""
+            BlogsNum:"",
+            MessagesNum:""
         },
         mounted(){
             this.searchUserNum()
             this.searchOrdersNum()
             this.searchBlogsNum()
+            this.searchMessagesNum()
         },
         methods:{
             searchUserNum:function () {
@@ -565,6 +566,16 @@
                     .then(function (response) {
                         console.log(response);
                         that.BlogsNum = response.data.length
+                    })
+                    .catch(function (err) {
+                    })
+            },
+            searchMessagesNum:function () {
+                var that = this;        //保存this
+                axios.post('../../../MessagesServlet?type=search&method=search&name=' + "")
+                    .then(function (response) {
+                        console.log(response);
+                        that.MessagesNum = response.data.length
                     })
                     .catch(function (err) {
                     })
