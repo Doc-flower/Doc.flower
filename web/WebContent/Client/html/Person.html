@@ -7,6 +7,58 @@
     <link rel="stylesheet" href="../../public/css/bootstrap-4.6.0-dist/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="../css/person.css">
+
+    <script>
+        window.onload = function (){
+            cookie_email_search();
+        }
+
+        function quit(){
+            document.cookie = "name=???";
+            window.location = "Sign.html";
+        }
+
+        function cookie_email_search(){
+            var url = "../../../CustomerServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = cookie_email_searchComplete;
+                req.send("type=search&method=byEmail&" + document.cookie);
+            }
+        }
+
+        function cookie_email_searchComplete(){
+            if (req.readyState == 4 && req.status == 200) {
+                console.log(req.responseText);
+
+                var json =  JSON.parse(req.responseText);//转换为json对象
+                console.log(json);
+
+                console.log("---------->成功:" + document.cookie);
+                document.getElementById("dropdown04").innerText = json[0].name;
+                document.getElementById("IfUserSginIn").innerHTML = '';
+
+                document.getElementById("person_name").innerText = json[0].name;
+                document.getElementById("person_email").innerText = json[0].email;
+                document.getElementById("container").setAttribute("class","");
+
+            } else{
+                document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
+                document.getElementById("dropdown04").innerText = "个人中心";
+                document.getElementById("person_name").innerText = "请先登录";
+
+                console.log("---------->失败:" + document.cookie);
+            }
+        }
+    </script>
+
+
 </head>
 <body>
 <nav>
@@ -24,15 +76,16 @@
             </ul>
         </div>
         <div class="nav_main_user">
-            <a href="Sign.html" style="display: inline-block"><img src="../img/用户.png" alt=""></a>
-            <div class="nav-item dropdown float-right">
+            <div class="col-md-5 float-left" id="IfUserSginIn" >
+
+            </div>
+            <div class="nav-item dropdown col-md-6 float-right">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-expanded="false">个人中心</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown04">
-                    <a class="dropdown-item" href="person.html" target="_blank">个人信息</a>
-                    <a class="dropdown-item" href="order.html"  target="_blank">订单管理</a>
-                    <a class="dropdown-item" href="#">退出登录</a>
+                    <a class="dropdown-item" href="Person.html" target="_blank">个人信息</a>
+                    <a class="dropdown-item" href="Person_Order.html" target="_blank">订单管理</a>
+                    <a class="dropdown-item" href="javascript:;" onclick="quit()">退出登录</a>
                 </div>
-                <div></div>
             </div>
         </div>
     </div>
@@ -41,14 +94,14 @@
 
 <div class="person_icon ">
     <img src="../img/QQ图片20210925114618.jpg" class="rounded-circle " alt="">
-    <p class="person_name my-1">
-        刘宇阳
+    <p id="person_name" class="person_name my-1">
+
     </p>
-    <p class="person_email">
-        2193560021@qq.com
-        <a href="./change-personal-information.html">更改/补全个人信息</a>
+    <p id="person_email" class="person_email">
     </p>
 </div>
+
+<div id="container" class="fade">
 
 <div class="container">
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
@@ -179,6 +232,10 @@
                     </div>
                 </div>
             </div>
+
+        </div>
+</div>
+</div>
 <script src="../../public/js/jquery-1.12.4.min.js"></script>
 <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.bundle.js"></script>
 
