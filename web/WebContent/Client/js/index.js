@@ -28,10 +28,10 @@ function cookie_email_searchComplete(){
         var json =  JSON.parse(req.responseText);//转换为json对象
         console.log(json);
 
+        document.getElementById("IfUserSginIn").innerHTML = '';
         document.getElementById("dropdown04").innerText = json[0].name;
         document.getElementById("user_name").value = json[0].name;
         console.log("---------->成功:" + document.cookie);
-        document.getElementById("IfUserSginIn").innerHTML = '';
     } else{
         document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
         document.getElementById("dropdown04").innerText = "个人中心";
