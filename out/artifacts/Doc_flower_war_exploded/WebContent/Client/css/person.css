@@ -126,7 +126,6 @@ mua~
 .person_icon{
     height: 350px;
     width: 100%;
-    background: #0e7478;
     text-align: center;
     padding-top: 30px;
 }
@@ -136,6 +135,26 @@ mua~
     height: 200px;
     /*margin-left: 435px;*/
 }
+
+.person_img_bg{
+    background: #fff;
+
+}
+
+.person_img_div{
+    height: 220px;
+    width: 100%;
+    text-align: center;
+    padding-top: 30px;
+}
+
+.person_img{
+    margin-top: 15px;
+    width: 100px;
+    height: 100px;
+}
+
+
 .person_name{
     font-size: 35px;
     font-weight: bolder;
@@ -143,5 +162,133 @@ mua~
 .person_email{
     font-family: "Poppins" , sans-serif;
     font-size: 18px;
-    color: #bbc7d0;
+    color: #eaeff3;
+}
+
+
+
+/*取色器*/
+
+.wrapper {
+    /*width: 100vw;*/
+    /*height: 100vh;*/
+    position: absolute;
+    bottom: 120px;
+    left: -35px;
+    -webkit-transition: background .3s;
+    transition: background .3s;
+}
+
+.palette {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+.palette .palette_item_wrapper {
+    -webkit-transition: -webkit-transform .4s;
+    transition: -webkit-transform .4s;
+    transition: transform .4s;
+    transition: transform .4s, -webkit-transform .4s;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    -webkit-transform: translateX(100px);
+    transform: translateX(100px);
+    -webkit-transition-delay: .4s;
+    transition-delay: .4s;
+}
+.palette.palette__opened .palette_item_wrapper {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+}
+.palette.palette__opened .palette_color {
+    -webkit-transition-delay: .2s;
+    transition-delay: .2s;
+}
+.palette.palette__opened .palette_color:nth-child(1) {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+.palette.palette__opened .palette_color:nth-child(2) {
+    -webkit-transform: rotate(36deg);
+    transform: rotate(36deg);
+}
+.palette.palette__opened .palette_color:nth-child(3) {
+    -webkit-transform: rotate(72deg);
+    transform: rotate(72deg);
+}
+.palette.palette__opened .palette_color:nth-child(4) {
+    -webkit-transform: rotate(108deg);
+    transform: rotate(108deg);
+}
+.palette.palette__opened .palette_color:nth-child(5) {
+    -webkit-transform: rotate(144deg);
+    transform: rotate(144deg);
+}
+.palette.palette__opened .palette_color:nth-child(6) {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.palette.palette__opened .palette_color:nth-child(7) {
+    -webkit-transform: rotate(216deg);
+    transform: rotate(216deg);
+}
+.palette.palette__opened .palette_color:nth-child(8) {
+    -webkit-transform: rotate(252deg);
+    transform: rotate(252deg);
+}
+.palette.palette__opened .palette_color:nth-child(9) {
+    -webkit-transform: rotate(288deg);
+    transform: rotate(288deg);
+}
+.palette.palette__opened .palette_color:nth-child(10) {
+    -webkit-transform: rotate(324deg);
+    transform: rotate(324deg);
+}
+.palette .palette_color, .palette .palette_color__main {
+    position: absolute;
+    border-radius: 50%;
+    cursor: pointer;
+    border-style: solid;
+    border-color: #ffffff;
+    -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+}
+.palette .palette_color__main {
+    background-color: #fff;
+    width: 100px;
+    height: 100px;
+    -webkit-transition: background .3s;
+    transition: background .3s;
+    border-width: 6px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+.palette .palette_color {
+    width: 50px;
+    height: 50px;
+    display: block;
+    -webkit-transform-origin: 250% 50%;
+    transform-origin: 250% 50%;
+    -webkit-transition: -webkit-transform .5s;
+    transition: -webkit-transform .5s;
+    transition: transform .5s;
+    transition: transform .5s, -webkit-transform .5s;
+    border-width: 3px;
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+    left: 12px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
 }

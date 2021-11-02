@@ -9,7 +9,7 @@ public interface iCustomerDAO {
 //
     public int insert(Customer customer);
 //
-//    public int update(Play play);
+    public int update(Customer customer);
 //
     public int delete(int ID);
 //

@@ -1,7 +1,9 @@
 package main.java.com.example.docflower.docflower.controller;
 
 import main.java.com.example.docflower.docflower.model.Customer;
+import main.java.com.example.docflower.docflower.model.Flowers;
 import main.java.com.example.docflower.docflower.service.CustomerSrv;
+import main.java.com.example.docflower.docflower.service.FlowersSrv;
 import main.java.com.example.docflower.util.MD5Utils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +41,8 @@ public class CustomerServlet  extends HttpServlet
             login(request, response);
         else if(type.equalsIgnoreCase("search"))
             search(request, response);
+        else if(type.equalsIgnoreCase("update"))
+            update(request, response);
     }
 
     private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -53,16 +57,96 @@ public class CustomerServlet  extends HttpServlet
             String pwd1=request.getParameter("customerpwd");
             String pwd = MD5Utils.code(pwd1);
             String paypwd=request.getParameter("customerpaypwd");
-            String address=request.getParameter("customeraddress");
-            customer=new Customer(id,tel, name, email, pwd,paypwd,address);
+            String img_bg="";
+
+            String address="";
+            customer=new Customer(id,tel, name, email, pwd,paypwd,img_bg,address);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
 
+            String method = "login";
+
+            List<Customer> result=null;
+            result=new CustomerSrv().Fetch(email,method);
+
+            JSONArray array=new JSONArray();
+            JSONObject json;
+
+            for(Customer s : result)
+            {
+                json=new JSONObject();
+                json.put("email", s.getEmail());
+                array.put(json);
+            }
+//            System.out.println("------------>pwd:" + pwd);
+//
+//            System.out.println("------------>MD5:" + pwd_MD5);
+            System.out.println("---------->arry:" + array);
+            System.out.println("---------->arry.length():" + array.length());
+            if(array.length() >= 1){
+                out.write("3");     //邮箱不唯一
+                return;
+            }
             if(new CustomerSrv().add(customer) == 1)
                 out.write("数据添加成功");
             else
                 out.write("数据添加失败，请重试");
 
+            out.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            response.setContentType("text/html;charset=utf-8");
+            response.getWriter().write("操作错误，请重试");
+        }
+    }
+
+    private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        Customer customer =null;
+        int id=Integer.parseInt(request.getParameter("cusid"));
+        try
+        {
+
+            String name=request.getParameter("cusname");
+            String tel=request.getParameter("custel");
+            String email=request.getParameter("cusemail");
+            String img_bg=request.getParameter("customerimg_bg");
+            String address=request.getParameter("customeraddress");
+            customer=new Customer(id,tel, name, email,null,null,img_bg,address);
+            response.setContentType("text/html;charset=utf-8");
+            PrintWriter out=response.getWriter();
+
+            String method = "login";
+
+            List<Customer> result=null;
+            result=new CustomerSrv().Fetch(email,method);
+
+            JSONArray array=new JSONArray();
+            JSONObject json;
+
+            for(Customer s : result)
+            {
+                json=new JSONObject();
+                json.put("email", s.getEmail());
+                array.put(json);
+            }
+//            System.out.println("------------>pwd:" + pwd);
+//
+//            System.out.println("------------>MD5:" + pwd_MD5);
+            System.out.println("---------->arry:" + array);
+            System.out.println("---------->arry.length():" + array.length());
+            if(array.length() >= 2){
+                out.write("3");     //邮箱不唯一
+                return;
+            }
+
+
+            if(new CustomerSrv().modify(customer) == 1)
+                out.write("数据修改成功");
+            else
+                out.write("数据修改失败，请重试");
             out.close();
         }
         catch(Exception e)
@@ -113,12 +197,11 @@ public class CustomerServlet  extends HttpServlet
                 json.put("email", s.getEmail());
                 json.put("pwd", s.getPwd());
                 json.put("paypwd", s.getPayPwd());
+                json.put("imgbg", s.getImg_bg());
                 json.put("address", s.getAddress());
                 json.put("orders", s.getOrders());
                 json.put("friends", s.getFriends());
-
                 array.put(json);
-
             }
             jsonStr=array.toString();
         }
@@ -149,20 +232,23 @@ public class CustomerServlet  extends HttpServlet
         String pwd_MD5="";
         try
         {
+
+
             for(Customer s : result)
             {
+
 
                 pwd_MD5 = s.getPwd();
             }
             System.out.println("------------>pwd:" + pwd);
 
             System.out.println("------------>MD5:" + pwd_MD5);
+
             if(pwd_MD5.equals(pwd))
             {
-                out.write("1");
+                out.write("1");     //登陆成功
             }else {
-                out.write("0");
-
+                out.write("0");     //登陆失败
             }
 
             out.close();

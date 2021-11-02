@@ -39,6 +39,35 @@ public class CustomerDAO  implements iCustomerDAO {
         }
     }
 
+
+    @SuppressWarnings("finally")
+    @Override
+    public int update(Customer customer)
+    {
+        int result=0;
+        try
+        {
+
+            String sql="update customer set " + " cus_name  ='" + customer.getName()+ "', " + " cus_email  = '"
+                    + customer.getEmail() + "', " + " cus_telnum  = '" + customer.getTel() + "', "
+                    + " cus_img = '" + customer.getImg()+"'," + " cus_img_bg  = '" + customer.getImg_bg() + "' , "
+                    +"cus_address = '"+ customer.getAddress() + "'";
+            sql+=" where cus_id = " + customer.getID();
+            DBUtil db=new DBUtil();
+            db.openConnection();
+            result=db.execCommand(sql);
+            db.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            return result;
+        }
+    }
+
     @Override
     public int delete(int ID)
     {
@@ -68,7 +97,7 @@ public class CustomerDAO  implements iCustomerDAO {
         customerList=new LinkedList<Customer>();
         try
         {
-            customerEmail.trim();
+
             method.trim();
             String sql = null;
             if(method.equalsIgnoreCase("search")) {
@@ -97,6 +126,8 @@ public class CustomerDAO  implements iCustomerDAO {
                     customer.setEmail(rst.getString("cus_email"));
                     customer.setPwd(rst.getString("cus_pwd"));
                     customer.setPayPwd(rst.getString("cus_paypwd"));
+                    customer.setImg(rst.getString("cus_img"));
+                    customer.setImg_bg(rst.getString("cus_img_bg"));
                     customer.setAddress(rst.getString("cus_address"));
                     customer.setOrders(rst.getString("cus_orders"));
                     customer.setFriends(rst.getString("cus_friends"));

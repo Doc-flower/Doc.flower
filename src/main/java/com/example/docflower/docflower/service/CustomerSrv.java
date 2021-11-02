@@ -13,11 +13,11 @@ public class CustomerSrv {
     public int add(Customer customer){
         return customerDAO.insert(customer);
     }
-//
-//    public int modify(Play play){
-//        return employeeDAO.update(play);
-//    }
-//
+
+    public int modify(Customer customer){
+        return customerDAO.update(customer);
+    }
+
     public int delete(int ID){
         return customerDAO.delete(ID);
     }

@@ -2,12 +2,14 @@ package main.java.com.example.docflower.docflower.model;
 
 public class Customer {
 
-    private int id=0      ;
+    private int id=0;
     private String name="" ;
     private String tel="" ;
     private String Email="";
     private String Pwd="";
     private String PayPwd="";
+    private String img="";
+    private String img_bg="";
     private String address="";
     private String orders="";
     private String friends="";
@@ -15,17 +17,17 @@ public class Customer {
     public Customer(){
         id = 0;
     }
-    public Customer(int ID,String tel,String name, String email, String pwd,String PayPwd,String address){
+    public Customer(int ID,String tel,String name, String email, String pwd,String PayPwd,String img_bg,String address){
         this.id = ID;
         this.tel = tel;
         this.name=name;
         this.Email = email;
         this.Pwd = pwd;
         this.PayPwd = PayPwd;
+        this.img_bg = img_bg;
         this.address = address;
-
-
     }
+
 
     public int getId() {
         return id;
@@ -79,6 +81,23 @@ public class Customer {
     public String getPayPwd(){
         return PayPwd;
     }
+
+    public void setImg(String pwd){
+        this.img=pwd;
+    }
+
+    public String getImg(){
+        return img;
+    }
+
+    public void setImg_bg(String pwd){
+        this.img_bg=pwd;
+    }
+
+    public String getImg_bg(){
+        return img_bg;
+    }
+
     public void setAddress(String pwd){
         this.address=pwd;
     }

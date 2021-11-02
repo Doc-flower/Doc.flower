@@ -32,12 +32,11 @@
 
         function searchComplete() {
             if (req.readyState == 4 && req.status == 200) {
-
                 if(req.responseText == 1){
                     setTimeout(SignInSuccess,100);
                     document.cookie = "name=" + document.getElementById("email").value;
                     console.log(document.cookie);
-                }else {
+                } else {
                     setTimeout(failSignIn, 100);
                 }
 
@@ -221,7 +220,14 @@
 
         function checkComplete() {
             if (req.readyState == 4 && req.status == 200) {
-                setTimeout(SignUpSuccess,100);
+                if(req.responseText == 3){
+                    setTimeout(failSignIn, 100);
+                    document.getElementById("customeremail").style.background = "#ffb0b0";
+                    document.getElementById("customeremail").value = "";
+                    document.getElementById("customeremail").setAttribute("placeholder","邮箱重复了,祖银换一个吧");
+                } else {
+                    setTimeout(SignUpSuccess,100);
+                }
             }
         }
 

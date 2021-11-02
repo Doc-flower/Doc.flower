@@ -47,6 +47,16 @@
                 document.getElementById("person_name").innerText = json[0].name;
                 document.getElementById("person_email").innerText = json[0].email;
                 document.getElementById("container").setAttribute("style","");
+                document.getElementsByClassName("person_img_bg")[0].style.background = json[0].imgbg;
+                document.getElementsByClassName("person_img_bg")[1].style.background = json[0].imgbg;
+
+
+                //    修改资料
+                document.getElementById("owner_id").value = json[0].id;
+                document.getElementById("owner_name").value = json[0].name;
+                document.getElementById("owner_email").value = json[0].email;
+                document.getElementById("owner_tel").value = json[0].tel;
+                document.getElementById("owner_address").value = json[0].address;
 
             } else{
                 document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
@@ -56,7 +66,55 @@
                 console.log("---------->失败:" + document.cookie);
             }
         }
+
+
+
+        function checkUpdate(){
+            console.log(document.getElementsByClassName("person_img_bg")[0].style.background);
+            var form = document.getElementById("myform");
+            var url = "../../../CustomerServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = checkComplete;
+                var data = "type=update"
+                    + "&cusid="
+                    + form.owner_id.value
+                    + "&cusname="
+                    + encodeURIComponent(form.owner_name.value)
+                    + "&custel="
+                    + encodeURIComponent(form.owner_tel.value)
+                    + "&cusemail="
+                    + encodeURIComponent(form.owner_email.value)
+                    + "&customerimg_bg="
+                    + encodeURIComponent(document.getElementsByClassName("person_img_bg")[0].style.background)
+                    + "&customeraddress="
+                    + encodeURIComponent(form.owner_address.value);
+                req.send(data);
+            }
+        }
+
+        function checkComplete() {
+            if (req.readyState == 4 && req.status == 200) {
+                if(req.responseText == 3){
+                    setTimeout(failSignIn, 100);
+                    document.getElementById("owner_email").style.background = "#ffb0b0";
+                    document.getElementById("owner_email").value = "";
+                    document.getElementById("owner_email").setAttribute("placeholder","邮箱重复了,祖银换一个吧");
+                } else {
+                    cookie_email_search();
+                }
+            }
+        }
+
+
     </script>
+    <link rel="stylesheet" href="../css/normalize.min.css">
 
 
 </head>
@@ -92,18 +150,99 @@
 
 </nav>
 
-<div class="person_icon ">
+<div class="person_icon person_img_bg">
     <img src="../img/QQ图片20210925114618.jpg" class="rounded-circle " alt="">
     <p id="person_name" class="person_name my-1">
 
     </p>
     <p id="person_email" class="person_email">
+
     </p>
 </div>
 
-<div id="container" style="display: none">
+<div id="container" style="display: none">   <!--style="display: none"-->
 
 <div class="container">
+    <button type="button" class="btn btn-secondary btn-lg btn-block my-3"   data-toggle="modal" data-target="#exampleModal">编辑资料</button>
+
+
+
+    <!--编辑资料_模态框-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-xl" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">编辑资料</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body col-md-12">
+                    <form id="myform" method="post" action="#" class="clearfix">
+                        <input type="hidden" id="owner_id" name="owner_id" value="0">
+
+                        <div  class="person_img_div person_img_bg col-md-6 float-left">
+                            <img src="../img/QQ图片20210925114618.jpg" id="person_img" class="rounded-circle person_img"  alt="">
+
+                            <div class="wrapper ">
+                                <div class="palette">
+                                    <div class="palette_item_wrapper">
+                                        <div data-color="#e169c3" class="palette_color"></div>
+                                        <div data-color="#b569e1" class="palette_color"></div>
+                                        <div data-color="#7169e1" class="palette_color"></div>
+                                        <div data-color="#69b8e1" class="palette_color"></div>
+                                        <div data-color="#69e1d4" class="palette_color"></div>
+                                        <div data-color="#6ce169" class="palette_color"></div>
+                                        <div data-color="#bee169" class="palette_color"></div>
+                                        <div data-color="#e1a169" class="palette_color"></div>
+                                        <div data-color="#83091d" class="palette_color"></div>
+                                        <div data-color="#83091d" class="palette_color"></div>
+                                    </div>
+                                    <div class="palette_color__main"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 float-right">
+                            <div class="input-group  mb-3 float-left">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">用户名</span>
+                                </div>
+                                <input id="owner_name" name="owner_name" type="text" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group  mb-3 float-left">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon2">邮箱</span>
+                                </div>
+                                <input id="owner_email" name="owner_email" type="text" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <div class=" input-group  mb-3 float-left">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">电话</span>
+                                </div>
+                                <input id="owner_tel" name="owner_tel" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <div class=" input-group  mb-3 float-left">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon6">地址</span>
+                                </div>
+                                <input id="owner_address" name="owner_address" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#updateSuccessModal" onclick="checkUpdate()">确认修改</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <h1 class="display-4">账单</h1>
 <!--        <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>-->
@@ -240,5 +379,7 @@
 <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.bundle.js"></script>
 
 <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
+<script src="../js/Person_color_select.js"></script>
+
 </body>
 </html>
