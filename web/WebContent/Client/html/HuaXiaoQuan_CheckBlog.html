@@ -97,7 +97,7 @@
     <div class="card-header">
         《中秋节 是我们当今中国比较传统的团圆节日之一》
     </div>
-    <textarea class="card-body my_card-body">
+    <p class="card-body my_card-body">
          中秋节 是我们当今中国比较传统的团圆节日之一，在每年的农历八月十五。中秋当天，人们都会赏月亮、吃月饼。当然很多人都会选择在中秋佳节的时候与朋友、与情人团聚。那么，大家知不知道中秋节送什么花比较合适呢？
 　　接下来，就让我们一起来寻找答案吧！
 　　自古以来，中秋佳节同饮桂花酒，共吃各种秋月饼，水果瓜子，谈论美好的未来；因此它是离散亲属、海外游子、思亲念乡、喜具团聚地千古不变的佳节，一直流传到现在，而且是经久不衰。亲朋好友在中秋佳节时，不仅漫游在自家庭院或社区或公园或野外的花海中，也有的采摘或购买上百合、萱草、石榴、莲花等插瓶装饰，为节日更增添了一番团结欢乐的情趣。
@@ -125,9 +125,72 @@
 　　橙子＋苹果＋红提
 　　特别的日子，要有所表示；特别美好的节日，要送上祝福。把寓意美好的鲜花和水果满满的装起来送给对方，就是最“温馨的祝福”。
 　　花语：满满的水果、盛开的花朵，带来温馨的祝福。让微笑，在这一刻绽放。欣喜的心情，如花儿般盛开！
-    </textarea>
-</div>
+    </p>
 
+</div>
+       <!--评论区 -->
+<div id="comment_area">
+    <div id="header">
+        <span class="font">网友评论</span>
+        <span class="sort_quality">质量排序</span>
+        <span class="sort_time">时间排序</span>
+    </div>
+    <div id="comment">
+        <div id="comment_ul">
+            <ul id="comment_li_list">
+                <li>
+                    <div class="other">
+                        <span class="date">2021年10月20日</span>
+                        <span class="iconfont c">&#xec8c;</span>
+                        <span class="like">赞</span>
+                    </div>
+                    <div class="user">
+                        <div class="user_img">
+                            <img src="../img/user_img.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="body">
+                        <div class="user_name">134523</div>
+                        <div class="text">很好吃！</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="other">
+                        <span class="date">2021年10月20日</span>
+                        <span class="iconfont c">&#xec8c;</span>
+                        <span class="like">赞</span>
+                    </div>
+                    <div class="user">
+                        <div class="user_img">
+                            <img src="../img/user_img.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="body">
+                        <div class="user_name">fdhjgg</div>
+                        <div class="text">难吃......</div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+        <div id="comment_input">
+            <div class="input_user">
+                <div class="input_user_img">
+                    <img src="../img/user_img.jpg" alt="">
+                </div>
+            </div>
+            <div class="input_body">
+                <div class="input_title">我要评论</div>
+                <div class="input_text">
+                    <form name="my_form" action="#" method="post" onsubmit="return func4()">
+                        <textarea name="textarea" id="textarea"></textarea>
+                        <button class="submit">提交评论</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <footer class="mt-5 pt-3">
     <div class="footer_main mx-auto col-md-6 clearfix">
         <div class="footer_main_icon text-center py-2">
@@ -155,4 +218,62 @@
 
 <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
 </body>
+<script>
+    /*点击提交按钮，按钮发生变化，并将输入数据(文本)及日期读取下来，生成一个新评论*/
+    var btn=document.getElementsByClassName("submit")[0];
+    btn.onmousedown=function(){
+        btn.style.backgroundColor="#ffffff";
+        btn.style.color="#f29f39";
+        btn.style.border="1px solid #f29f39";
+    }
+    btn.onmouseup=function(){
+        btn.style.backgroundColor="#f29f39";
+        btn.style.color="#ffffff";
+        btn.style.border="1px solid #f29f39";
+    }
+    var comment_height=620;
+    var comment_area_height=720;
+    function func4(){
+        //获取当前时间
+        var d=new Date();
+        var year=d.getFullYear();
+        var month=d.getMonth()+1;
+        var day=d.getDate();
+        var time=year+"年"+month+"月"+day+"日";
+        //获取文本内容
+        var text=document.my_form.textarea.value;
+        //创建一个新的li
+        var comment_li_list=document.getElementById("comment_li_list");
+        var li_node=document.createElement("li");
+        var other_node=document.createElement("div");
+        other_node.setAttribute("class","other");
+        other_node.innerHTML='<span class="date">'+time+'</span>\
+                            <span class="iconfont c">&#xec8c;</span>\
+                            <span class="like">赞</span>';
+        var user_node=document.createElement("div");
+        user_node.setAttribute("class","user");
+        user_node.innerHTML='<div class="user_img">\
+                                <img src="../img/user_img.jpg" alt="">\
+                            </div>';
+        var body_node=document.createElement("div");
+        body_node.setAttribute("class","body");
+        body_node.innerHTML='<div class="user_name">匿名用户</div>\
+                             <div class="text">'+text+'</div>';
+        li_node.appendChild(other_node);
+        li_node.appendChild(user_node);
+        li_node.appendChild(body_node);
+        //增加一个评论，对应的地方也要变长
+        comment_height+=180;
+        comment_area_height+=180;
+        var temp1=comment_height+"px";
+        var temp2=comment_area_height+"px";
+        document.getElementById("comment").style.height=temp1;
+        document.getElementById("comment_area").style.height=temp2;
+
+        comment_li_list.insertBefore(li_node,comment_li_list.firstChild);
+        /*对输入框清空*/
+        document.my_form.reset();
+        return false;
+    }
+</script>
 </html>

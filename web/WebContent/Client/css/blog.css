@@ -606,4 +606,237 @@ ul{
     border: none;
     outline: none;
 }
+/*评论区部分*/
+#comment_area{
+    margin: 20px auto;
+    width: 1064px;
+    height: 720px;
+    border: 1px solid #d8d8d8;
+    background-color: #f8f8f8;
+}
+#header{
+    position: relative;
+    width:1064px;
+    height: 60px;
+    line-height: 60px;
+}
+#header .font{
+    position: absolute;
+    left: 15px;
+    font-size: 18px;
+}
+#header .sort_quality{
+    position: absolute;
+    left:880px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #c5c5c5;
+}
+#header .sort_quality:hover{
+    color: #92cbc3;
+}
+#header .sort_time{
+    position: absolute;
+    left: 960px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #c5c5c5;
+}
+#header .sort_time:hover{
+    color: #92cbc3;
+}
+#comment{
+    position: relative;
+    margin-bottom: 10px;
+    width: 1040px;
+    height: 620px;
+    left: 10px;
+    border: 1px solid #eeeeee;
+    border-radius: 10px;
+    background-color: #ffffff;
 
+}
+#comment_ul li{
+    width: 1040px;
+    height: 180px;
+    border: 1px solid #eeeeee;
+    border-bottom: none;
+    border-top: none;
+
+}
+#comment_ul li:first-child{
+    border-radius: 10px 10px 0px 0px;
+}
+#comment_ul .user{
+    position: absolute;
+    width: 80px;
+    height:180px;
+    left: 10px;
+}
+#comment_ul .user .user_img{
+    position: absolute;
+    left: 15px;
+    top: 25px;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 25px;
+}
+#comment_ul .user .user_img img{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+}
+#comment_ul .body{
+    position: absolute;
+    left: 80px;
+    width: 840px;
+    height: 179px;
+    border-bottom: 1px solid #efefef;
+}
+#comment_ul .body .user_name{
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    font-size: 14px;
+}
+#comment_ul .body .star{
+    position: absolute;
+    top: 43px;
+    left: 10px;
+}
+#comment_ul .body .star .s{
+    color: #f89e37;
+}
+#comment_ul .body .text{
+    position: absolute;
+    top: 70px;
+    left: 10px;
+    width: 650px;
+    height: 80px;
+    font-size: 13px;
+    color: #a0a0a0;
+}
+#comment_ul .other{
+    position: absolute;
+    left: 905px;
+    float: right;
+    width: 130px;
+    height: 179px;
+    border-bottom: 1px solid #efefef;
+}
+#comment_ul .other .date{
+    position: absolute;
+    top: 35px;
+    left: 27px;
+    font-size: 12px;
+    color: #c3c3c3;
+}
+#comment_ul .other .c{
+    position: absolute;
+    top: 136px;
+    left: 76px;
+    cursor: pointer;
+    color: #e4e4e4;
+}
+#comment_ul .other .like{
+    position: absolute;
+    top: 138px;
+    left: 100px;
+    font-size: 14px;
+    color: #c0c0c0;
+}
+#comment_input{
+
+    width: 1038px;
+    height: 240px;
+    border-radius: 0px 0px 10px 10px;
+
+}
+#comment_input .input_user{
+    position: absolute;
+    width: 80px;
+    height:240px;
+}
+#comment_input .input_user .input_user_img{
+    position: absolute;
+    left: 15px;
+    top: 25px;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 25px;
+}
+#comment_input .input_user .input_user_img img{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+}
+#comment_input .input_body{
+    position: absolute;
+    left: 80px;
+    width: 800px;
+    height: 240px;
+}
+#comment_input .input_body .input_title{
+    position: absolute;
+    top: 10px;
+}
+#comment_input .input_body .input_star{
+    position: absolute;
+    top: 40px;
+    font-size: 13px;
+    color: #a0a0a0;
+}
+#comment_input .input_body .input_star .iconfont{
+    font-size: 13px;
+    color: #c2c2c2;
+    cursor: pointer;
+}
+#comment_input .input_body .input_text{
+    position: absolute;
+    top: 70px;
+    width: 940px;
+    height: 100px;
+    border: 2px solid #d5d5d5;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+#comment_input .input_body .input_text textarea{
+    position: absolute;
+    top: 5px;
+    left: 3px;
+    width: 775px;
+    height: 90px;
+    max-width: 775px;
+    max-height: 90px;
+    border: none;
+    outline: none;
+    text-indent: 2em;
+    font-size: 13px;
+    color: #a0a0a0;
+    resize: none;
+}
+#comment_input .input_body .submit{
+    position: absolute;
+    left: 830px;
+    top: 120px;
+    width: 90px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 13px;
+    background-color: #f29f39;
+    color: #ffffff;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+#footer{
+    position: relative;
+    left: -10px;
+    top: 30px;
+    width: 898px;
+    height: 28px;
+    background-color: #ffffff;
+}
