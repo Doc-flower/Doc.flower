@@ -595,3 +595,15 @@ ul{
     top: 250px;
     left: 370px;
 }
+/*CheckBlog.html部分*/
+.my_card{
+    margin: 10px auto;
+    width: 1064px;
+}
+.my_card-body{
+    height: 530px;
+    resize: none;
+    border: none;
+    outline: none;
+}
+

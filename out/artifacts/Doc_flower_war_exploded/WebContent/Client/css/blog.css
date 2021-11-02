@@ -595,3 +595,8 @@ ul{
     top: 250px;
     left: 370px;
 }
+/*CheckBlog.html部分*/
+.my_card{
+    margin: 100px auto;
+    width: 1064px;
+}
