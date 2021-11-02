@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查看全文</title>
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../../public/css/bootstrap-4.6.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/person.css">
+    <link rel="stylesheet" href="../css/blog.css" type="text/css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <script>
+        window.onload = function (){
+            cookie_email_search();
+        }
+
+        function quit(){
+            document.cookie = "name=???";
+            window.location = "Sign.html";
+        }
+
+        function cookie_email_search(){
+            var url = "../../../CustomerServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = cookie_email_searchComplete;
+                req.send("type=search&method=byEmail&" + document.cookie);
+            }
+        }
+
+        function cookie_email_searchComplete(){
+            if (req.readyState == 4 && req.status == 200) {
+                console.log(req.responseText);
+
+                var json =  JSON.parse(req.responseText);//转换为json对象
+                console.log(json);
+
+                console.log("---------->成功:" + document.cookie);
+                document.getElementById("dropdown04").innerText = json[0].name;
+                document.getElementById("IfUserSginIn").innerHTML = '';
+
+                document.getElementById("person_name").innerText = json[0].name;
+                document.getElementById("person_email").innerText = json[0].email;
+                document.getElementById("container").setAttribute("style","");
+
+            } else{
+                document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
+                document.getElementById("dropdown04").innerText = "个人中心";
+                document.getElementById("person_name").innerText = "请先登录";
+
+                console.log("---------->失败:" + document.cookie);
+            }
+        }
+    </script>
+
+
+</head>
+<body>
+<nav>
+    <div class="nav_main">
+
+        <img src="../../public/img/logo.png" height="30" width="30" alt="."/>
+        <div class="nav_main_title">
+            <ul>
+                <li><a href="./index.html">首页</a> </li>
+                <li><a href="./HuaXiaoKe.html">花小科</a></li>
+                <li><a href="HuahuaXiaoShi.html">花花小市</a></li>
+                <li><a href="LvzhiXiaoShi.html">绿植小市</a></li>
+                <li><a href="./HuaXiaoQuan.html">花小圈</a></li>
+
+            </ul>
+        </div>
+        <div class="nav_main_user">
+            <div class="col-md-5 float-left" id="IfUserSginIn" >
+
+            </div>
+            <div class="nav-item dropdown col-md-6 float-right">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-expanded="false">个人中心</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                    <a class="dropdown-item" href="Person.html" target="_blank">个人信息</a>
+                    <a class="dropdown-item" href="Person_Order.html" target="_blank">订单管理</a>
+                    <a class="dropdown-item" href="javascript:;" onclick="quit()">退出登录</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</nav>
+
+
+<div class="card my_card">
+    <div class="card-header">
+        《中秋节 是我们当今中国比较传统的团圆节日之一》
+    </div>
+    <p class="card-body my_card-body">
+         中秋节 是我们当今中国比较传统的团圆节日之一，在每年的农历八月十五。中秋当天，人们都会赏月亮、吃月饼。当然很多人都会选择在中秋佳节的时候与朋友、与情人团聚。那么，大家知不知道中秋节送什么花比较合适呢？
+　　接下来，就让我们一起来寻找答案吧！
+　　自古以来，中秋佳节同饮桂花酒，共吃各种秋月饼，水果瓜子，谈论美好的未来；因此它是离散亲属、海外游子、思亲念乡、喜具团聚地千古不变的佳节，一直流传到现在，而且是经久不衰。亲朋好友在中秋佳节时，不仅漫游在自家庭院或社区或公园或野外的花海中，也有的采摘或购买上百合、萱草、石榴、莲花等插瓶装饰，为节日更增添了一番团结欢乐的情趣。
+　　走亲访友的们，此时此刻如能带上束鲜花，或送去一个满带祝福的花篮，那比携带任何糕点礼品都更显友情珍贵、品位高雅。
+　　同样，远渡重洋、身居异国他乡的海外游子们，或旅居不自禁地“举头望明月，低头思故乡”，思念故乡的亲人们。
+　　这些人常用电传邮购方式，为父母或亲朋好友一个个蕴满深情的礼仪花篮中花束，以表达他们思亲念乡情。在国内与父母身居两地儿女们，在中秋佳节到来之际，首先是打电话问候祝福。也可以送礼送祝福，对亲人的思恋。
+　　鲜花／感激
+　　29枝红色康乃馨＋2枝多头粉香水百合＋水晶草＋黄莺
+　　每一个人，都会有想要“感激”的人。中秋节来了，正好把最美好的祝福送给对方。
+　　花语：常怀感恩之心的人是最幸福的，常怀感激之情的生活是最甜美的。
+　　学会感激——感激我的父母，因为他们给了我宝贵的生命；
+　　学会感激——感激我的老师，因为他们给了我无穷的知识；
+　　学会感激——感激我的朋友，因为他们给了我克服困难的力量；
+　　学会感激——感激我周围的一切，因为他们给了我和谐健康的成长空间。
+　　鲜花／想着你
+　　16枝香槟玫瑰＋2枝白香水百合＋红色小康乃馨＋黄莺
+　　因为各种原因，在中秋这个团圆的节日，有的人不能和家人团聚，不能陪着最亲密的人。一定要把那份盼团圆的心思传达给对方：“想着你”！
+　　花语：想着你，空气里满是花的蜜香！
+　　想着你，透过厚厚的玻璃，看到了太阳柔和的光芒！
+　　想着你，就象水波荡漾，就象花儿绽放满是自由和幸福的晕光！
+　　想着你，数着时钟的嘀哒，仿佛聆听快乐的音符！
+　　想着你，想对所有人说在想你中快乐闯进了我的心房！
+　　水果花篮／温馨祝福
+　　粉香水百合＋粉玫瑰＋康乃馨＋巴西叶＋绿叶
+　　橙子＋苹果＋红提
+　　特别的日子，要有所表示；特别美好的节日，要送上祝福。把寓意美好的鲜花和水果满满的装起来送给对方，就是最“温馨的祝福”。
+　　花语：满满的水果、盛开的花朵，带来温馨的祝福。让微笑，在这一刻绽放。欣喜的心情，如花儿般盛开！
+    </p>
+
+</div>
+       <!--评论区 -->
+<div id="comment_area">
+    <div id="header">
+        <span class="font">网友评论</span>
+        <span class="sort_quality">质量排序</span>
+        <span class="sort_time">时间排序</span>
+    </div>
+    <div id="comment">
+        <div id="comment_ul">
+            <ul id="comment_li_list">
+                <li>
+                    <div class="other">
+                        <span class="date">2021年10月20日</span>
+                        <span class="iconfont c">&#xec8c;</span>
+                        <span class="like">赞</span>
+                    </div>
+                    <div class="user">
+                        <div class="user_img">
+                            <img src="../img/user_img.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="body">
+                        <div class="user_name">134523</div>
+                        <div class="text">很好吃！</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="other">
+                        <span class="date">2021年10月20日</span>
+                        <span class="iconfont c">&#xec8c;</span>
+                        <span class="like">赞</span>
+                    </div>
+                    <div class="user">
+                        <div class="user_img">
+                            <img src="../img/user_img.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="body">
+                        <div class="user_name">fdhjgg</div>
+                        <div class="text">难吃......</div>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+        <div id="comment_input">
+            <div class="input_user">
+                <div class="input_user_img">
+                    <img src="../img/user_img.jpg" alt="">
+                </div>
+            </div>
+            <div class="input_body">
+                <div class="input_title">我要评论</div>
+                <div class="input_text">
+                    <form name="my_form" action="#" method="post" onsubmit="return func4()">
+                        <textarea name="textarea" id="textarea"></textarea>
+                        <button class="submit">提交评论</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="mt-5 pt-3">
+    <div class="footer_main mx-auto col-md-6 clearfix">
+        <div class="footer_main_icon text-center py-2">
+            <img src="../../public/img/logo_white.png" height="90" width="90" alt="."/>
+            <div class="footer_main_text col-md-8 text-center py-2 float-right">
+                    <span class="footer_main_text_name">
+                        花博士线上花城
+                    </span>
+                <br>
+                <span class="footer_main_text_email">
+                        https://github.com/Doc-flowers/Doc.flowers.Web.git
+                    </span>
+                <br>
+                <span class="footer_main_text_company">
+                        @2021 花悦文化有限公司
+                    </span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="../../public/js/jquery-1.12.4.min.js"></script>
+<script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.bundle.js"></script>
+
+<script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
+</body>
+<script>
+    /*点击提交按钮，按钮发生变化，并将输入数据(文本)及日期读取下来，生成一个新评论*/
+    var btn=document.getElementsByClassName("submit")[0];
+    btn.onmousedown=function(){
+        btn.style.backgroundColor="#ffffff";
+        btn.style.color="#f29f39";
+        btn.style.border="1px solid #f29f39";
+    }
+    btn.onmouseup=function(){
+        btn.style.backgroundColor="#f29f39";
+        btn.style.color="#ffffff";
+        btn.style.border="1px solid #f29f39";
+    }
+    var comment_height=620;
+    var comment_area_height=720;
+    function func4(){
+        //获取当前时间
+        var d=new Date();
+        var year=d.getFullYear();
+        var month=d.getMonth()+1;
+        var day=d.getDate();
+        var time=year+"年"+month+"月"+day+"日";
+        //获取文本内容
+        var text=document.my_form.textarea.value;
+        //创建一个新的li
+        var comment_li_list=document.getElementById("comment_li_list");
+        var li_node=document.createElement("li");
+        var other_node=document.createElement("div");
+        other_node.setAttribute("class","other");
+        other_node.innerHTML='<span class="date">'+time+'</span>\
+                            <span class="iconfont c">&#xec8c;</span>\
+                            <span class="like">赞</span>';
+        var user_node=document.createElement("div");
+        user_node.setAttribute("class","user");
+        user_node.innerHTML='<div class="user_img">\
+                                <img src="../img/user_img.jpg" alt="">\
+                            </div>';
+        var body_node=document.createElement("div");
+        body_node.setAttribute("class","body");
+        body_node.innerHTML='<div class="user_name">匿名用户</div>\
+                             <div class="text">'+text+'</div>';
+        li_node.appendChild(other_node);
+        li_node.appendChild(user_node);
+        li_node.appendChild(body_node);
+        //增加一个评论，对应的地方也要变长
+        comment_height+=180;
+        comment_area_height+=180;
+        var temp1=comment_height+"px";
+        var temp2=comment_area_height+"px";
+        document.getElementById("comment").style.height=temp1;
+        document.getElementById("comment_area").style.height=temp2;
+
+        comment_li_list.insertBefore(li_node,comment_li_list.firstChild);
+        /*对输入框清空*/
+        document.my_form.reset();
+        return false;
+    }
+</script>
+</html>
