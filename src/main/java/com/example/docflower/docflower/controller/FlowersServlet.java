@@ -104,12 +104,8 @@ public class FlowersServlet extends HttpServlet{
             String flower_name=request.getParameter("flower_name");
             String flower_kind=request.getParameter("flower_kind");
             String flower_introduction=request.getParameter("flower_introduction");
-            String flower_image1="";
-            String flower_image2="";
-            String flower_image3="";
-            String flower_image4="";
             int flower_price=Integer.valueOf(request.getParameter("flower_price"));
-            flowers =new Flowers(id, flower_name, flower_kind,flower_introduction,flower_image1,flower_image2,flower_image3,flower_image4,flower_price);
+            flowers =new Flowers(id, flower_name, flower_kind,flower_introduction,null,null,null,null,flower_price);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
             if(new FlowersSrv().modify(flowers) == 1)

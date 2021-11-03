@@ -60,8 +60,7 @@ public class FlowersDAO implements iFlowersDAO {
 
             String sql="update flowers set " + " flower_name  ='" + flowers.getFlower_name()+ "', " + " flower_kind  = '"
                     + flowers.getFlower_kind() + "', " + " flower_introduction  = '" + flowers.getFlower_introduction() + "', "
-                    + " flower_image1 = '" + flowers.getFlower_image1()+"'," + " flower_image2  = '" + flowers.getFlower_image2() + "' , "
-                    +" flower_image3='"+ flowers.getFlower_image3()+"',"+" flower_image4='"+ flowers.getFlower_image4()+"',"+"flower_price ="+ flowers.getFlower_price();
+                    +""+"flower_price ="+ flowers.getFlower_price();
             sql+=" where flower_id = " + flowers.getFlower_id();
             DBUtil db=new DBUtil();
             db.openConnection();
