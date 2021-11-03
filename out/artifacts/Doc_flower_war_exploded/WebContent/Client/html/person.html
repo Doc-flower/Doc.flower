@@ -57,7 +57,6 @@
                 document.getElementById("owner_email").value = json[0].email;
                 document.getElementById("owner_tel").value = json[0].tel;
                 document.getElementById("owner_address").value = json[0].address;
-
             } else{
                 document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
                 document.getElementById("dropdown04").innerText = "个人中心";
@@ -66,7 +65,6 @@
                 console.log("---------->失败:" + document.cookie);
             }
         }
-
 
 
         function checkUpdate(){

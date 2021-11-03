@@ -8,8 +8,71 @@
     <link rel="stylesheet" href="../css/lvzhixiaoshi.css">
     <link rel="stylesheet" href="../css/footer.css">
 
+    <script>
+
+        function init(){
+            var a = "";
+            search(a);
+            console.log("页面重新加载啦")
+        }
+
+        function keypress(){
+            var name = document.getElementById("Plant_Seach").value;
+            console.log("搜索");
+            search(name);
+        }
+
+        function search(name){
+            var url = "../../../PlantsServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = searchComplete;
+                req.send("type=search&name="+name);
+            }
+        }
+
+        function searchComplete() {
+            if (req.readyState == 4 && req.status == 200) {
+                var json =  JSON.parse(req.responseText);//转换为json对象
+                console.log("长度：" + json.length);
+                document.getElementById("plant_list").innerHTML = "";
+                for(i=0; i<json.length; i++) {
+                    document.getElementById("plant_list").innerHTML +=
+                        '<div class="col-md-3">\n' +
+                        '            <a href="LvzhiXiaoShi_Buy.html.html">\n' +
+                        '                <div class="card mb-4 shadow-sm">\n' +
+                        '                    <img src="'+ json[i].plantimg1 + '" width="253.4px" height="253.4px"/>\n' +
+                        '                    <div class="card-body">\n' +
+                        '                        <p class="card-text">'+ json[i].plantname +'</p>\n' +
+                        '                        <div class="d-flex justify-content-between align-items-center">\n' +
+                        '                        <span class="text-danger">\n' +
+                        '                            ￥'+ json[i].price +'\n' +
+                        '                        </span>\n' +
+                        '                            <div class="btn-group">\n' +
+                        '                                <button type="button" class="btn btn-sm btn-outline-success">收藏</button>\n' +
+                        '                                <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>\n' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+                        '                    </div>\n' +
+                        '                </div>\n' +
+                        '            </a>\n' +
+                        '        </div>';
+                }
+
+
+            }
+        }
+    </script>
+
 </head>
-<body>
+<body onload="init()">
 <nav>
     <div class="nav_main">
 
@@ -46,237 +109,237 @@
 
 
 <div class="container">
-    <div class="row">
-        <div class="input-group col-9 mx-auto mb-3 mt-3 order-search">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">搜索鲜花或绿植</span>
-            </div>
-            <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+    <div class="input-group col-9 mx-auto mb-3 mt-3 order-search">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">搜索绿植</span>
         </div>
+        <input type="text" id="Plant_Seach" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" onkeypress="keypress()">
+    </div>
 
-        <p class=" col-12  sale_title_plants">
-            绿植
-        </p>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
+    <p class=" col-12  sale_title_plants">
+        绿植
+    </p>
+    <div class="row" id="plant_list">
+<!--        <div class="col-md-3">-->
+<!--            <div class="card mb-4 shadow-sm">-->
 
-                <img src="../img/绿植/空气凤梨/img/空气凤梨1.jpg"/>
-                <div class="card-body">
-                    <p class="card-text">空气凤梨</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥18.88
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
+<!--                <img src="../img/绿植/空气凤梨/img/空气凤梨1.jpg"/>-->
+<!--                <div class="card-body">-->
+<!--                    <p class="card-text">空气凤梨</p>-->
+<!--                    <div class="d-flex justify-content-between align-items-center">-->
+<!--                        <span class="text-danger">-->
+<!--                            ￥18.88-->
+<!--                        </span>-->
+<!--                        <div class="btn-group">-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-md-3">-->
+<!--            <div class="card mb-4 shadow-sm">-->
 
-                <img src="../img/绿植/绿萝/img/绿萝1.jpg"/>
-                <div class="card-body">
-                    <p class="card-text">绿萝</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥20.20
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
+<!--                <img src="../img/绿植/绿萝/img/绿萝1.jpg"/>-->
+<!--                <div class="card-body">-->
+<!--                    <p class="card-text">绿萝</p>-->
+<!--                    <div class="d-flex justify-content-between align-items-center">-->
+<!--                        <span class="text-danger">-->
+<!--                            ￥20.20-->
+<!--                        </span>-->
+<!--                        <div class="btn-group">-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-md-3">-->
+<!--            <div class="card mb-4 shadow-sm">-->
 
-                <img src="../img/绿植/铜钱草/img/铜钱草1.jpg"/>
-                <div class="card-body">
-                    <p class="card-text">铜钱草</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥21.21
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
+<!--                <img src="../img/绿植/铜钱草/img/铜钱草1.jpg"/>-->
+<!--                <div class="card-body">-->
+<!--                    <p class="card-text">铜钱草</p>-->
+<!--                    <div class="d-flex justify-content-between align-items-center">-->
+<!--                        <span class="text-danger">-->
+<!--                            ￥21.21-->
+<!--                        </span>-->
+<!--                        <div class="btn-group">-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-md-3">-->
+<!--            <div class="card mb-4 shadow-sm">-->
 
-                <img src="../img/绿植/龙血树/img/龙血树1.jpg"/>
-                <div class="card-body">
-                    <p class="card-text">龙血树</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥52.21
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-                <img src="../img/绿植/芦荟/img/芦荟1.jpg" />
-                <div class="card-body">
-                    <p class="card-text">芦荟</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥55.55
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-
-
-                <img src="../img/绿植/人参榕/img/人参榕1.jpg"/>
-                <div class="card-body">
-                    <p class="card-text">人参榕</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥77.77
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
+<!--                <img src="../img/绿植/龙血树/img/龙血树1.jpg"/>-->
+<!--                <div class="card-body">-->
+<!--                    <p class="card-text">龙血树</p>-->
+<!--                    <div class="d-flex justify-content-between align-items-center">-->
+<!--                        <span class="text-danger">-->
+<!--                            ￥52.21-->
+<!--                        </span>-->
+<!--                        <div class="btn-group">-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-md-3">-->
+<!--            <div class="card mb-4 shadow-sm">-->
+<!--                <img src="../img/绿植/芦荟/img/芦荟1.jpg" />-->
+<!--                <div class="card-body">-->
+<!--                    <p class="card-text">芦荟</p>-->
+<!--                    <div class="d-flex justify-content-between align-items-center">-->
+<!--                        <span class="text-danger">-->
+<!--                            ￥55.55-->
+<!--                        </span>-->
+<!--                        <div class="btn-group">-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-md-3">-->
+<!--            <div class="card mb-4 shadow-sm">-->
 
 
-                <img src="../img/绿植/光瓜栗/img/发财树1.jpg"/>
-                <div class="card-body">
-                    <p class="card-text">发财树</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥99.66
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-
-                <img src="../img/绿植/合果芋/img/合果芋1.jpg" />
-                <div class="card-body">
-                    <p class="card-text">合果芋</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥52.0
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-
-                <img src="../img/绿植/吊兰/img/吊兰1.jpg"/>
-                <div class="card-body">
-                    <p class="card-text">吊兰</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥9.9
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
+<!--                <img src="../img/绿植/人参榕/img/人参榕1.jpg"/>-->
+<!--                <div class="card-body">-->
+<!--                    <p class="card-text">人参榕</p>-->
+<!--                    <div class="d-flex justify-content-between align-items-center">-->
+<!--                        <span class="text-danger">-->
+<!--                            ￥77.77-->
+<!--                        </span>-->
+<!--                        <div class="btn-group">-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-md-3">-->
+<!--            <div class="card mb-4 shadow-sm">-->
 
 
-                <img src="../img/绿植/君子兰/img/君子兰1.jpg"/>
-                <div class="card-body">
-                    <p class="card-text">君子兰</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥12.21
-                        </span>
-                        <div class="btn-group">
-<!--                            <img src="../img/购物车空.png" height="20" width="20"/>-->
-                            <button type="button" class="btn btn-sm btn-outline-success"> 收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
+<!--                <img src="../img/绿植/光瓜栗/img/发财树1.jpg"/>-->
+<!--                <div class="card-body">-->
+<!--                    <p class="card-text">发财树</p>-->
+<!--                    <div class="d-flex justify-content-between align-items-center">-->
+<!--                        <span class="text-danger">-->
+<!--                            ￥99.66-->
+<!--                        </span>-->
+<!--                        <div class="btn-group">-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-md-3">-->
+<!--            <div class="card mb-4 shadow-sm">-->
+
+<!--                <img src="../img/绿植/合果芋/img/合果芋1.jpg" />-->
+<!--                <div class="card-body">-->
+<!--                    <p class="card-text">合果芋</p>-->
+<!--                    <div class="d-flex justify-content-between align-items-center">-->
+<!--                        <span class="text-danger">-->
+<!--                            ￥52.0-->
+<!--                        </span>-->
+<!--                        <div class="btn-group">-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-md-3">-->
+<!--            <div class="card mb-4 shadow-sm">-->
+
+<!--                <img src="../img/绿植/吊兰/img/吊兰1.jpg"/>-->
+<!--                <div class="card-body">-->
+<!--                    <p class="card-text">吊兰</p>-->
+<!--                    <div class="d-flex justify-content-between align-items-center">-->
+<!--                        <span class="text-danger">-->
+<!--                            ￥9.9-->
+<!--                        </span>-->
+<!--                        <div class="btn-group">-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-md-3">-->
+<!--            <div class="card mb-4 shadow-sm">-->
 
 
-                <img src="../img/绿植/富贵竹/img/富贵竹1.jpg" />
-                <div class="card-body">
-                    <p class="card-text">富贵竹</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥5.21
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
+<!--                <img src="../img/绿植/君子兰/img/君子兰1.jpg"/>-->
+<!--                <div class="card-body">-->
+<!--                    <p class="card-text">君子兰</p>-->
+<!--                    <div class="d-flex justify-content-between align-items-center">-->
+<!--                        <span class="text-danger">-->
+<!--                            ￥12.21-->
+<!--                        </span>-->
+<!--                        <div class="btn-group">-->
+<!--&lt;!&ndash;                            <img src="../img/购物车空.png" height="20" width="20"/>&ndash;&gt;-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-success"> 收藏</button>-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-md-3">-->
+<!--            <div class="card mb-4 shadow-sm">-->
 
-                <img src="../img/绿植/常春藤/img/常春藤1.jpg" />
-                <div class="card-body">
-                    <p class="card-text">常春藤</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥88.88
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+<!--                <img src="../img/绿植/富贵竹/img/富贵竹1.jpg" />-->
+<!--                <div class="card-body">-->
+<!--                    <p class="card-text">富贵竹</p>-->
+<!--                    <div class="d-flex justify-content-between align-items-center">-->
+<!--                        <span class="text-danger">-->
+<!--                            ￥5.21-->
+<!--                        </span>-->
+<!--                        <div class="btn-group">-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-md-3">-->
+<!--            <div class="card mb-4 shadow-sm">-->
+
+<!--                <img src="../img/绿植/常春藤/img/常春藤1.jpg" />-->
+<!--                <div class="card-body">-->
+<!--                    <p class="card-text">常春藤</p>-->
+<!--                    <div class="d-flex justify-content-between align-items-center">-->
+<!--                        <span class="text-danger">-->
+<!--                            ￥88.88-->
+<!--                        </span>-->
+<!--                        <div class="btn-group">-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>-->
+<!--                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
     </div>
 </div>
