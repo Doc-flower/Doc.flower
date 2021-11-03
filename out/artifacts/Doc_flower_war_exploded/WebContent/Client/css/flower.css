@@ -1,0 +1,125 @@
+/*HuaXiaoKe部分*/
+.baike{
+    cursor: pointer;
+}
+.nav_main{
+    margin: 0 auto;
+    height: 60px;
+    box-shadow: black 0 -2px 4px;
+    padding:0 15%;
+}
+
+.nav_main h1{
+    display: inline-block;
+    float: left;
+}
+
+.nav_main_title{
+    height: 100%;
+    width: 70%;
+    float: left;
+    margin-left: 50px;
+
+
+}
+.nav_main img{
+    width: 60px;
+    height: 60px;
+    float: left;
+}
+
+
+.nav_main_title ul li{
+    float: left;
+    max-width: 150px;
+    height: 100%;
+    transition: .2s;
+
+}
+/* 框框怎么出来
+    ·用border
+    大小怎么控制
+    width是宽
+    height是高
+    px是像素
+    爱你哟
+    我也爱你哟
+
+    你刚把代码都差点删了哈哈哈哈哈
+
+*/
+
+.nav_main_title ul li:hover{
+    background: rgb(29, 93, 189);
+
+}
+
+.nav_main_title ul li:hover a{
+    color: #fff;
+}
+.nav_main_title ul li a{
+    font-size: 21px;
+    display: inline-block;
+    text-align: center;
+    width: 130px;
+    height:60px;
+    color: black;
+    font-weight: bold;
+    transition: .2s;
+    line-height: 60px;
+}
+/* 宝宝不会打字了 我爱你
+我也爱你
+
+不丑，好看
+咋出来的☃
+宝宝乖好卡哈哈哈哈哈哈哈哈哈哈哈哈
+好看的我哈哈哈哈哈
+*/
+
+.title_active>a{
+}
+
+.nav_main_title ul li .title_active{
+    background: rgb(29, 93, 189);
+    color: #fff;
+}
+
+.nav_main_user{
+    height: 100%;
+    width: 18%;
+    float: right;
+    margin-top: 10px;
+}
+/* 看啥呢
+    为啥会有下划线
+    有去掉的
+*/
+.nav_main_user img{
+    width: 50px;
+    height: 50px;
+    margin: auto 0;
+}
+
+.nav-item a{
+    font-size: 18px;
+    display: inline-block;
+    text-align: center;
+    height:20px;
+    color: black;
+    transition: .2s;
+    line-height: 20px;
+
+}
+.top_qie a{
+    color:#b2b2b2;
+}
+.top_qie a:hover{
+    color: #8EB902;
+}
+/*flower.html部分*/
+.flower_head_bar{
+    position: absolute;
+    top: 100px;
+    left: 330px;
+}

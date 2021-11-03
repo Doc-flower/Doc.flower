@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../../public/css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../public/css/bootstrap-4.6.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/FlowersPlants.css">
+    <title>花博士管理系统-绿植管理</title>
+    <link rel="stylesheet" href="../../public/css/animate.min.css">
+    <style>
+        #active{
+            color: #043a58;
+            background: #fff;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        }
+        td{
+            margin: auto auto;
+        }
+        body{
+            background: #E4E9F7;
+
+        }
+
+    </style>
+    <script src="../../public/js/jquery-1.12.4.min.js"></script>
+
+    <script type="text/javascript">
+
+        function search(){
+            var url = "../../../PlantsServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = searchComplete;
+                req.send("type=search&name="+document.getElementById("Plant_Seach").value);
+            }
+        }
+
+        function searchComplete() {
+            if (req.readyState == 4 && req.status == 200) {
+                var theTable = document.getElementById("table");//table的id
+                var num=theTable.rows.length;
+                while(num>0) {
+                    theTable.deleteRow(num-1);
+                    num=theTable.rows.length;
+                }
+                var json =  JSON.parse(req.responseText);//转换为json对象
+                for(i=0; i<json.length; i++) {
+                    theTable.innerHTML += '<tr><td>'+ json[i].plantid +'</td><td>'+ json[i].plantname +'</td><td class="">'+ json[i].plantintro +'</td><td>' + json[i].price + '</td><td><input type="button" class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#exampleModal" value="修改" onclick="update(' + json[i].plantid + ')"></td><td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del('+ json[i].plantid +')"></td></tr>'
+                }
+
+
+            }
+        }
+
+
+
+        function del(id){
+
+            $("#delConfirm").click(function (){
+
+                var url = "../../../PlantsServlet";
+                if (window.XMLHttpRequest)
+                    req = new XMLHttpRequest();
+                else if (window.ActiveXObject)
+                    req = new ActiveXObject("Microsoft.XMLHTTP");
+                if (req) {
+                    //采用POST方式，异步传输
+                    req.open("post", url, true);
+                    //POST方式，必须加入如下头信息设定
+                    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    req.onreadystatechange = delComplete;
+                    req.send("type=delete&id="+id);
+                }
+            });
+        }
+        function delComplete() {
+            if (req.readyState == 4 && req.status == 200) {
+                if(req.responseText==1)
+                    search();
+                else
+                    alert("数据删除失败，请重试");
+            }
+        }
+
+
+        function update(id) {
+            var url = "../../../PlantsServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = updateComplete;
+                req.send("type=search_id&id="+id);
+            }
+        }
+
+        function updateComplete(){
+            if (req.readyState == 4 && req.status == 200) {
+                var json =  JSON.parse(req.responseText);//转换为json对象
+                document.getElementById("plant_id").value = json[0].plantid;
+                document.getElementById("plants_name").value = json[0].plantname;
+                document.getElementById("plants_price").value = json[0].price;
+                document.getElementById("intro").value = json[0].plantintro;
+            }
+        }
+
+        function checkUpdate(){
+            var form = document.getElementById("myform");
+            var url = "../../../PlantsServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = checkComplete;
+                var data = "type=update" +"&plants_id=" + form.plant_id.value + "&plants_name="
+                    + encodeURIComponent(form.plants_name.value) + "&plants_price="
+                    + form.plants_price.value + "&intro="
+                    + encodeURIComponent(form.intro.value);
+                req.send(data);
+            }
+        }
+
+        function check() {
+            var form = document.getElementById("myform");
+            if(form.plants_name.value=="" || form.plants_price.value=="") {
+                alert("请填写完整信息");
+                return;
+            }
+            if(isNaN(form.plants_price.value)){
+                alert("价格不是数字");
+                return;
+            }
+            var url = "../../../PlantsServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = checkComplete;
+                var data = "type=add" + "&plants_name="
+                    + encodeURIComponent(form.plants_name.value) + "&plants_price="
+                    + form.plants_price.value + "&intro="
+                    + encodeURIComponent(form.intro.value);
+                req.send(data);
+            }
+        }
+
+        function checkComplete() {
+            if (req.readyState == 4 && req.status == 200) {
+                document.getElementById("myform").reset();
+                search();
+            }
+        }
+
+
+    </script>
+
+</head>
+<body onload="search()">
+<div class="sidebar shadow">
+    <div class="logo_content">
+        <div class="logo">
+            <!--            <img src="../../public/img/logo_white.png" width="50" height="50" alt="">-->
+            <div class="logo_name">花博士</div>
+        </div>
+        <img src="../../public/img/logo_white.png" id="btn" width="50" height="50" alt="">
+    </div>
+    <ul class="nav_list">
+        <li class="active">
+            <a href="../../../index.html" >
+                <i class='fa fa-home fa-3x' ></i>
+                <span class="links_name">首页</span>
+            </a>
+            <span class="tooltip">首页</span>
+        </li>
+        <li>
+            <a href="Orders.html">
+                <i class='fa fa-list-alt' ></i>
+                <span class="links_name">订单管理</span>
+            </a>
+            <span class="tooltip">订单管理</span>
+        </li>
+        <li>
+            <a href="Users.html">
+                <i class='fa fa-users' ></i>
+                <span class="links_name">用户管理</span>
+            </a>
+            <span class="tooltip">用户管理</span>
+        </li>
+        <li>
+            <a href="Flowers.html">
+                <i class='fa fa-empire' ></i>
+                <span class="links_name">花库管理</span>
+            </a>
+            <span class="tooltip">花库管理</span>
+        </li>
+        <li>
+            <a href="#"  id="active" class="shadow">
+                <i class='fa fa-deviantart' ></i>
+                <span class="links_name">绿植管理</span>
+            </a>
+            <span class="tooltip">绿植管理</span>
+        </li>
+        <li>
+            <a href="Shops.html">
+                <i class='fa fa-vcard' ></i>
+                <span class="links_name">店家管理</span>
+            </a>
+            <span class="tooltip">店家管理</span>
+        </li>
+        <li>
+            <a href="Blogs.html">
+                <i class='fa fa-book' ></i>
+                <span class="links_name">文章管理</span>
+            </a>
+            <span class="tooltip">文章管理</span>
+        </li>
+        <li>
+            <a href="Messages.html">
+                <i class='fa fa-envelope' ></i>
+                <span class="links_name">留言管理</span>
+            </a>
+            <span class="tooltip">留言管理</span>
+        </li>
+    </ul>
+</div>
+
+
+<!--入驻花博士店家信息-->
+<div class="home_content">
+    <div class="row mx-1">
+        <div class="col-md-12">
+            <!--添加影厅_模态框-->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" >
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">添加绿植</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body col-md-12">
+                            <form id="myform" method="post" action="#">
+                                <input type="hidden" id="plant_id" name="plant_id" value="0">
+
+                                <div class="input-group col-md-6 mb-3 float-left">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">绿植名称</span>
+                                    </div>
+                                    <input id="plants_name" name="plants_name" type="text" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+
+                                <div class=" input-group col-md-6 mb-3 float-left">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon2">绿植价格</span>
+                                    </div>
+                                    <input id="plants_price" name="plants_price" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+
+                                <div class="input-group col-lg-12 mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">绿植介绍</span>
+                                    </div>
+                                    <textarea id="intro" name="intro" class="form-control" style="height: 200px" aria-label="With textarea"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                    <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#updateSuccessModal" onclick="checkUpdate()">确认修改</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#addSuccessModal" onclick="check()">添加绿植</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!--修改成功-->
+            <div class="modal fade" id="updateSuccessModal" tabindex="-1" aria-labelledby="updateSuccessModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="updateSuccessModalLabel">修改成功</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            绿植修改成功！
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal">确定</button>                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--添加成功-->
+            <div class="modal fade" id="addSuccessModal" tabindex="-1" aria-labelledby="addSuccessModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addSuccessModalLabel">添加成功</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            绿植添加成功！
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal">确定</button>                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--            删除警示-->
+            <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="delModalLabel">确认删除</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            请谨慎操作！！！确认删除该绿植？
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-danger"  data-dismiss="modal" id="delConfirm">确认删除</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--            列表-->
+            <div class="my-4 col-12">
+                <div class="card mb-4  main_card animated bounceInUp shadow">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="numbers">
+                                    <span class="title mb-0 text-capitalize font-weight-bold">绿植管理</span>
+
+                                    <div class="btn-toolbar mb-2 mb-md-0 float-right">
+                                        <div class="input-group mr-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroup-sizing-default">搜索绿植</span>
+                                            </div>
+                                            <input type="text" id="Plant_Seach" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" onkeypress="search()">
+                                        </div>
+                                        <div class="btn-group mr-2">
+                                            <button id="add" type="button" class="btn btn-sm btn-outline-secondary"  data-toggle="modal" data-target="#exampleModal">添加绿植</button>   <!--模态框-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--                                <hr class="col-11">-->
+                                <div class="shop_list sales_flower my-3">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr class="list_nav">
+                                            <th class="text-center">ID</th>
+                                            <th class="text-center">名称</th>
+                                            <th class="text-center align-middle">介绍</th>
+                                            <th class="text-center">价格</th>
+                                            <th class="text-center">修改</th>
+                                            <th class="text-center">删除</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody id="table">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="../../public/js/jquery-1.12.4.min.js"></script>
+<script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
+<script src="../../public/js/vue.min.js"></script>
+<script src="../../public/js/axios.min.js"></script>
+<script>
+    let btn = document.querySelector("#btn");
+    let sidebar = document.querySelector(".sidebar");
+    let searchBtn = document.querySelector(".bx-search");
+
+    btn.onclick = function() {
+        sidebar.classList.toggle("active");
+        if(btn.classList.contains("bx-menu")){
+            btn.classList.replace("bx-menu" , "bx-menu-alt-right");
+        }else{
+            btn.classList.replace("bx-menu-alt-right", "bx-menu");
+        }
+    }
+    searchBtn.onclick = function() {
+        sidebar.classList.toggle("active");
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>花小市</title>
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../../public/css/bootstrap-4.6.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/huahuaxiaoshi.css">
+    <link rel="stylesheet" href="../css/footer.css">
+
+    <script>
+
+        function init(){
+            var a = "";
+            search(a);
+            console.log("页面重新加载啦")
+        }
+
+        function keypress(){
+            var name = document.getElementById("Flower_Seach").value;
+            console.log("搜索");
+            search(name);
+        }
+
+        function search(name){
+            var url = "../../../FlowersServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = searchComplete;
+                req.send("type=searchByName&flower_name="+name);
+            }
+        }
+
+        function searchComplete() {
+            if (req.readyState == 4 && req.status == 200) {
+                var json =  JSON.parse(req.responseText);//转换为json对象
+                console.log("长度：" + json.length);
+                document.getElementById("flower_list").innerHTML = "";
+                for(i=0; i<json.length; i++) {
+                    document.getElementById("flower_list").innerHTML +=
+                        '<div class="col-md-3">\n' +
+                        '            <a href="HuahuaXiaoShi_Buy.html">\n' +
+                        '                <div class="card mb-4 shadow-sm">\n' +
+                        '                    <img src="'+ json[i].flower_image1 + '" width="253.4px" height="253.4px"/>\n' +
+                        '                    <div class="card-body">\n' +
+                        '                        <p class="card-text">'+ json[i].flower_name +'</p>\n' +
+                        '                        <div class="d-flex justify-content-between align-items-center">\n' +
+                        '                        <span class="text-danger">\n' +
+                        '                            ￥'+ json[i].flower_price +'\n' +
+                        '                        </span>\n' +
+                        '                            <div class="btn-group">\n' +
+                        '                                <button type="button" class="btn btn-sm btn-outline-success">收藏</button>\n' +
+                        '                                <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>\n' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+                        '                    </div>\n' +
+                        '                </div>\n' +
+                        '            </a>\n' +
+                        '        </div>';
+                }
+
+
+            }
+        }
+    </script>
+
+</head>
+<body onload="init()">
+<nav>
+    <div class="nav_main">
+
+        <img src="../../public/img/logo.png" height="30" width="30" alt="."/>
+        <div class="nav_main_title">
+            <ul>
+                <li> <a href="./index.html" >首页</a> </li>
+                <li><a href="./HuaXiaoKe.html">花小科</a></li>
+                <li>
+                    <a href="./HuahuaXiaoShi.html" class="title_active">花花小市</a>
+                </li>
+                <li><a href="LvzhiXiaoShi.html">绿植小市</a></li>
+
+                <li><a href="./HuaXiaoQuan.html">花小圈</a></li>
+
+            </ul>
+        </div>
+        <div class="nav_main_user">
+            <a href="Sign.html" style="display: inline-block"><img src="../img/用户.png" alt=""></a>
+            <div class="nav-item dropdown float-right">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-expanded="false">个人中心</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                    <a class="dropdown-item" href="Person.html" target="_blank">个人信息</a>
+                    <a class="dropdown-item" href="order.html"  target="_blank">订单管理</a>
+                    <a class="dropdown-item" href="#">退出登录</a>
+                </div>
+                <div></div>
+            </div>
+        </div>
+        
+    </div>
+
+</nav>
+
+
+<div class="container">
+    <div class="input-group col-9 mx-auto mb-3 mt-3 order-search">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">搜索花卉</span>
+        </div>
+        <input type="text" id="Flower_Seach" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" onkeypress="keypress()">
+    </div>
+    <p class=" col-12  sale_title">
+        鲜花
+    </p>
+    <div class="row" id="flower_list">
+
+    </div>
+</div>
+
+<footer class="mt-5 pt-3">
+    <div class="footer_main mx-auto col-md-6 clearfix">
+        <div class="footer_main_icon text-center py-2">
+            <img src="../../public/img/logo_white.png" height="90" width="90" alt="."/>
+            <div class="footer_main_text col-md-8 text-center py-2 float-right">
+                    <span class="footer_main_text_name">
+                        花博士线上花城
+                    </span>
+                <br>
+                <span class="footer_main_text_email">
+                        https://github.com/Doc-flower/Doc.flower.Web.git
+                    </span>
+                <br>
+                <span class="footer_main_text_company">
+                        @2021 花悦文化有限公司
+                    </span>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="../../public/js/jquery-1.12.4.min.js"></script>
+<script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.bundle.js"></script>
+
+<script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
+</body>
+</html>
