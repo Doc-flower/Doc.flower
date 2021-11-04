@@ -9,12 +9,13 @@ ul,ol{
     list-style-type: none;
 }
 
-
-
 .person_order{
+
+    border-bottom: #1b1e21 5px solid;
+}
+.person_order .order_manage{
     font-size: 30px;
     font-weight: bold;
-    border-bottom: #1b1e21 5px solid;
 }
 
 nav{

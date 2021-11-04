@@ -42,7 +42,7 @@
                 //POST方式，必须加入如下头信息设定
                 req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 req.onreadystatechange = searchComplete;
-                req.send("type=search&method=search&name="+document.getElementById("order_search").value);
+                req.send("type=search&method=search&tel="+document.getElementById("order_search").value);
             }
         }
 
@@ -60,12 +60,15 @@
                     var rowCount = theTable.rows.length; //获得当前表格的行数
                     var row = theTable.insertRow(rowCount);//在tale里动态的增加tr
                     row.insertCell(0).innerHTML = json[i].order_id;
-                    row.insertCell(1).innerHTML = json[i].order_owner_name;
-                    row.insertCell(2).innerHTML = json[i].order_flower_name;
-                    row.insertCell(3).innerHTML = json[i].order_owner_tel;
-                    row.insertCell(4).innerHTML = json[i].order_owner_address;
-                    row.insertCell(5).innerHTML = json[i].order_owner_text;
-                    row.insertCell(6).innerHTML = '<input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del('+json[i].order_id+')" />';
+                    row.insertCell(1).innerHTML = json[i].order_time;
+                    row.insertCell(2).innerHTML = json[i].order_commodity_name;
+                    row.insertCell(3).innerHTML = '<img src="../../Client/html/'+ json[i].order_commodity_img + '" width="80" height="80" class="flower_img"/>' ;
+                    row.insertCell(4).innerHTML = json[i].order_owner_name;
+                    row.insertCell(5).innerHTML = json[i].order_owner_tel;
+                    row.insertCell(6).innerHTML = json[i].order_address;
+                    row.insertCell(7).innerHTML = json[i].order_pay;
+                    row.insertCell(8).innerHTML = json[i].order_status;
+                    row.insertCell(9).innerHTML = '<input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del('+json[i].order_id+')" />';
                 }
             }
         }
@@ -226,7 +229,7 @@
                                     <div class="btn-toolbar mb-2 mb-md-0 float-right">
                                         <div class="input-group mr-2">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text" id="inputGroup-sizing-default">搜索订单</span>
+                                                <span class="input-group-text" id="inputGroup-sizing-default">电话搜索</span>
                                             </div>
                                             <input type="text" id="order_search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" onkeypress="search()">
                                         </div>

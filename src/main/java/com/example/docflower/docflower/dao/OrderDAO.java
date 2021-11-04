@@ -124,15 +124,15 @@ public class OrderDAO implements iOrdersDAO {
 
     @SuppressWarnings("finally")
     @Override
-    public List<Orders> select(String employeeEmail)
+    public List<Orders> select(String tel)
     {
         DBUtil db=null;
         List<Orders> orderList =null;
         orderList =new LinkedList<Orders>();
         try
         {
-            employeeEmail.trim();
-            String sql="select * from `order` where order_owner_tel like '" + employeeEmail + "' ";
+            tel.trim();
+            String sql="select * from `order` where order_owner_tel like '%" + tel + "%' ";
 
             db=new DBUtil();
             if(!db.openConnection())

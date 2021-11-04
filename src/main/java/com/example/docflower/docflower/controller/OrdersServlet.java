@@ -130,10 +130,10 @@ public class OrdersServlet extends HttpServlet
     {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out=response.getWriter();
-        String name=request.getParameter("name");
+        String tel=request.getParameter("tel");
         List<Orders> result=null;
 //        if(name != null && name.length() > 0)
-            result=new OrdersSrv().Fetch(name);
+            result=new OrdersSrv().Fetch(tel);
         String jsonStr="";
         try
         {

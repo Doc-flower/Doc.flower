@@ -21,8 +21,8 @@ public class OrdersSrv {
         return employeeDAO.delete(ID);
     }
 
-    public List<Orders> Fetch(String email){
-        return employeeDAO.select(email);
+    public List<Orders> Fetch(String tel){
+        return employeeDAO.select(tel);
     }
 
 }

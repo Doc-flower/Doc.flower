@@ -12,9 +12,8 @@
     <script>
 
         function init(){
-            var a = "";
-            // search(a);
             cookie_email_search();
+            setTimeout(search,50);
             console.log("页面重新加载啦")
         }
 
@@ -39,6 +38,7 @@
             }
         }
 
+
         function cookie_email_searchComplete(){
             console.log("cus" + req1.readyState);
             if (req1.readyState == 4 && req1.status == 200 ) {
@@ -47,6 +47,8 @@
                 {
                     var json1 =  JSON.parse(req1.responseText);//转换为json对象
                     console.log(json1.length);
+                    document.getElementById("cus_tel").value = json1[0].tel;
+                    console.log(document.getElementById("cus_tel").value);
                     document.getElementById("IfUserSginIn").innerHTML = '';
                     document.getElementById("dropdown04").innerText = json1[0].name;
                     document.getElementById("user_name").value = json1[0].name;
@@ -65,6 +67,50 @@
 
 
         // 搜索订单
+
+
+        function search(){
+            var url = "../../../OrdersServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = searchComplete;
+                req.send("type=search&method=search&tel="+document.getElementById("cus_tel").value);
+            }
+        }
+
+        function searchComplete() {
+            if (req.readyState == 4 && req.status == 200) {
+                var theTable = document.getElementById("table");//table的id
+                var num=theTable.rows.length;
+                while(num>0) {
+                    theTable.deleteRow(num-1);
+                    num=theTable.rows.length;
+                }
+                console.log(req.responseText);
+                var json =  JSON.parse(req.responseText);//转换为json对象
+                for(i=0; i<json.length; i++) {
+                    var rowCount = theTable.rows.length; //获得当前表格的行数
+                    var row = theTable.insertRow(rowCount);//在tale里动态的增加tr
+                    row.insertCell(0).innerHTML = json[i].order_id;
+                    row.insertCell(1).innerHTML = json[i].order_time;
+                    row.insertCell(2).innerHTML = json[i].order_commodity_name;
+                    row.insertCell(3).innerHTML = '<img src="../../Client/html/'+ json[i].order_commodity_img + '" width="80" height="80" class="flower_img"/>' ;
+                    row.insertCell(4).innerHTML = json[i].order_owner_name;
+                    row.insertCell(5).innerHTML = json[i].order_owner_tel;
+                    row.insertCell(6).innerHTML = json[i].order_address;
+                    row.insertCell(7).innerHTML = json[i].order_pay;
+                    row.insertCell(8).innerHTML = json[i].order_status;
+                    row.insertCell(9).innerHTML = '<input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del('+json[i].order_id+')" />';
+                }
+            }
+        }
 
 
 
@@ -103,49 +149,18 @@
 </nav>
 
 <div class="row-cols-1 w-100 px-2">
-
-    <p class=" col-12 my-3 person_order">
-        订单管理
-    </p>
-
-
-
-
-    <div class="container-left">
-<!--        <div class = "container-left-select" >-->
-<!--            <select>-->
-<!--                <option >全部状态</option >-->
-<!--                <option >已支付</option >-->
-<!--                <option >未支付</option >-->
-<!--                <option >退款中</option >-->
-<!--                <option >已退款</option >-->
-<!--             </select >-->
-<!--        </div >-->
-        <div class="form-group container-left-select mx-3">
-<!--            <label for="exampleFormControlSelect1">Example select</label>-->
-            <select class="form-control" id="exampleFormControlSelect1">
-                <option>全部状态</option>
-                <option>已支付</option>
-                <option>未支付</option>
-                <option>退款中</option>
-                <option>已退款</option>
-            </select>
-        </div>
-
-        <div class="anniu">
-            <button >导出数据</button>
-            <button >批量打印</button>
-            <button >删除</button>
-            <button >筛选</button>
-        </div>
-
-        <div class="input-group col-4 mb-3 mt-3 float-right order-search">
+    <input type="hidden" id="cus_tel" value="?_?_?">
+    <div class=" col-12 my-3 person_order">
+        <span class="order_manage">订单管理</span>
+        <div class="input-group col-4 float-right order-search">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">搜索订单</span>
+                <span class="input-group-text" id="basic-addon1">搜索商品名称</span>
             </div>
-            <input type="text" class="form-control" placeholder="订单号、电话号码或商品名" aria-label="Username" aria-describedby="basic-addon1">
+            <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
         </div>
     </div>
+
+
 
     <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -190,64 +205,7 @@
                     </tr>
                     </thead>
                     <tbody id="table">
-                        <tr>
-                            <td>1001</td>
-                            <td>2021-11-4 15:00</td>
-                            <td>玫瑰</td>
-                            <td>
-                                <img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg" class="flower_img"/>
-                            </td>
-                            <td>刘宇阳</td>
-                            <td>13279505680</td>
-                            <td>西安邮电大学长安校区东区</td>
-                            <td>￥12.99</td>
-                            <td>运输中</td>
-                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="退款"
-                                       onclick="del('+json[i].id+')" /></td>
-                        </tr>
-                        <tr>
-                            <td>1001</td>
-                            <td>2021-11-4 15:00</td>
-                            <td>玫瑰</td>
-                            <td>
-                                <img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg" class="flower_img"/>
-                            </td>
-                            <td>刘宇阳</td>
-                            <td>13279505680</td>
-                            <td>西安邮电大学长安校区东区</td>
-                            <td>￥12.99</td>
-                            <td>运输中</td>
-                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="退款"
-                                       onclick="del('+json[i].id+')" /></td>
-                        </tr><tr>
-                            <td>1001</td>
-                            <td>2021-11-4 15:00</td>
-                            <td>玫瑰</td>
-                            <td>
-                                <img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg" class="flower_img"/>
-                            </td>
-                            <td>刘宇阳</td>
-                            <td>13279505680</td>
-                            <td>西安邮电大学长安校区东区</td>
-                            <td>￥12.99</td>
-                            <td>运输中</td>
-                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="退款"
-                                       onclick="del('+json[i].id+')" /></td>
-                        </tr><tr>
-                            <td>1001</td>
-                            <td>2021-11-4 15:00</td>
-                            <td>玫瑰</td>
-                            <td>
-                                <img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg" class="flower_img"/>
-                            </td>
-                            <td>刘宇阳</td>
-                            <td>13279505680</td>
-                            <td>西安邮电大学长安校区东区</td>
-                            <td>￥12.99</td>
-                            <td>运输中</td>
-                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="退款"
-                                       onclick="del('+json[i].id+')" /></td>
-                        </tr>
+
                     </tbody>
                 </table>
             </div>

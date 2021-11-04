@@ -123,7 +123,7 @@ insert into plants(plant_name, plant_introduction, plant_image1, plant_image2, p
 insert into plants(plant_name, plant_introduction, plant_image1, plant_image2, plant_price) VALUES
     ('光瓜栗','主要价值光瓜栗株型美观，耐荫性强，为优良的室内盆栽观叶植物。生长环境光瓜栗喜高温高湿气候，耐寒力差，幼苗忌霜冻。喜肥沃疏松、透气保水的沙壤土，喜酸性土，忌碱性土或黏重土壤，较耐水湿，也稍耐旱。生长适温为20-30℃。忌冷湿，在过于潮湿的环境下，叶片很容易出现渍状冻斑','../img/绿植/光瓜栗/img/发财树1.jpg','../img/绿植/光瓜栗/img/发财树2.jpg','69.9');
 insert into plants(plant_name, plant_introduction, plant_image1, plant_image2, plant_price) VALUES
-    ('合果芋','合果芋属天南星科的植物，大部分天南星科的植物都是有一定毒性的，合果芋的毒性主要是表现在合果芋的根茎还有汁液中。但是毒性不强，一般误食合果芋之后，会导致身体中喉咙有灼热感，还会导致口舌发麻，口腔黏膜溃疡感，严重的还会水肿，流口水，嘴巴不易张开','../img/绿植/发财树/img/合果芋1.jpg','../img/绿植/合果芋2/img/人参榕1.jpg','69.9');
+    ('合果芋','合果芋属天南星科的植物，大部分天南星科的植物都是有一定毒性的，合果芋的毒性主要是表现在合果芋的根茎还有汁液中。但是毒性不强，一般误食合果芋之后，会导致身体中喉咙有灼热感，还会导致口舌发麻，口腔黏膜溃疡感，严重的还会水肿，流口水，嘴巴不易张开','../img/绿植/合果芋/img/合果芋1.jpg','../img/绿植/合果芋/img/合果芋2.jpg','69.9');
 insert into plants(plant_name, plant_introduction, plant_image1, plant_image2, plant_price) VALUES
     ('吊兰','观赏：吊兰是多年生草本植物，枝条细长下垂，夏季或其他季节温度高时开小白花，花集中于垂下来的枝条的末端，花蕊呈黄色，内部小嫩叶有时呈紫色，可供盆栽观赏。净化环境：吊兰养殖容易，适应性强，最为传统的居室垂挂植物之一。它叶片细长柔软，从叶腋中抽生出小植株，由盆沿向下垂，舒展散垂，似花朵，四季常绿。植物文化：吊兰的花语是“无奈而又给人希望”。','../img/绿植/吊兰/img/吊兰1.jpg','../img/绿植/吊兰/img/吊兰2.jpg','69.9');
 insert into plants(plant_name, plant_introduction, plant_image1, plant_image2, plant_price) VALUES
@@ -238,7 +238,7 @@ CREATE TABLE `order`  (
   `order_status` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
 
   PRIMARY KEY (`order_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1000 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 1001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for shops
@@ -290,11 +290,11 @@ INSERT INTO customer(cus_name,cus_email,cus_telnum,cus_pwd,cus_paypwd,cus_addres
 INSERT INTO `order`(order_time, order_commodity_name, order_commodity_img, order_owner_name, order_owner_tel, order_address, order_pay,order_status) values
 ('2021-11-4 15:00','卡罗拉','../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg','刘宇阳','13279505680','西安邮电大学长安校区东区','19.9','运输中');
 INSERT INTO `order`(order_time, order_commodity_name, order_commodity_img, order_owner_name, order_owner_tel, order_address, order_pay,order_status) values
-('2021-10-4 15:00','白牡丹','../img/花/菊花类/2.白牡丹图集/白牡丹1.jpg','刘璇','159290068966','西安邮电大学长安校区东区安美公寓','19.9','运输中');
+('2021-10-4 15:00','白牡丹','../img/花/菊花类/2.白牡丹图集/白牡丹1.jpg','刘璇','15929068966','西安邮电大学长安校区东区安美公寓','19.9','已签收');
 INSERT INTO `order`(order_time, order_commodity_name, order_commodity_img, order_owner_name, order_owner_tel, order_address, order_pay,order_status) values
-('2021-11-26 15:00','玫瑰','../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg','刘宇阳','13279505680','西安邮电大学长安校区东区','19.9','运输中');
+('2021-11-26 15:00','郁金香','../img/花/百合类/2.郁金香图集/郁金香1.png','苗欢','13279505680','西安邮电大学长安校区东区','19.9','运输中');
 INSERT INTO `order`(order_time, order_commodity_name, order_commodity_img, order_owner_name, order_owner_tel, order_address, order_pay,order_status) values
-('2021-11-4 15:00','玫瑰','../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg','刘宇阳','13279505680','西安邮电大学长安校区东区','19.9','运输中');
+('2021-11-4 15:00','向日葵','../img/花/向日葵/1.向日葵(未包装)图集/向日葵2.jpg','范佳伟','15830599166','西安邮电大学长安校区东区','19.9','未发货');
 INSERT INTO `order`(order_time, order_commodity_name, order_commodity_img, order_owner_name, order_owner_tel, order_address, order_pay,order_status) values
 ('2021-11-4 15:00','玫瑰','../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg','刘宇阳','13279505680','西安邮电大学长安校区东区','19.9','运输中');
 
