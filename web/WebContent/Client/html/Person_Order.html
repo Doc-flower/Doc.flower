@@ -7,9 +7,71 @@
     <link rel="stylesheet" href="../../public/css/bootstrap-4.6.0-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/order.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../../public/css/font-awesome-4.7.0/css/font-awesome.min.css">
+
+    <script>
+
+        function init(){
+            var a = "";
+            // search(a);
+            cookie_email_search();
+            console.log("页面重新加载啦")
+        }
+
+        function quit(){
+            document.cookie = "name=???";
+            window.location = "Sign.html";
+        }
+
+        // 登陆检测
+        function cookie_email_search(){
+            var url = "../../../CustomerServlet";
+            if (window.XMLHttpRequest)
+                req1 = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req1 = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req1) {
+                //采用POST方式，异步传输
+                req1.open("post", url, true);
+                req1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req1.onreadystatechange = cookie_email_searchComplete;
+                req1.send("type=search&method=byEmail&" + document.cookie);
+            }
+        }
+
+        function cookie_email_searchComplete(){
+            console.log("cus" + req1.readyState);
+            if (req1.readyState == 4 && req1.status == 200 ) {
+                console.log(JSON.parse(req1.responseText).length);
+                if(JSON.parse(req1.responseText).length != 0)
+                {
+                    var json1 =  JSON.parse(req1.responseText);//转换为json对象
+                    console.log(json1.length);
+                    document.getElementById("IfUserSginIn").innerHTML = '';
+                    document.getElementById("dropdown04").innerText = json1[0].name;
+                    document.getElementById("user_name").value = json1[0].name;
+                    console.log("---------->成功:" + document.cookie);
+                }else if(JSON.parse(req1.responseText).length == 0){
+                    document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
+                    document.getElementById("dropdown04").innerText = "个人中心";
+                    console.log("---------->失败:" + document.cookie);
+                }
+            } else{
+                document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
+                document.getElementById("dropdown04").innerText = "个人中心";
+                console.log("---------->失败:" + document.cookie);
+            }
+        }
+
+
+        // 搜索订单
+
+
+
+    </script>
 
 </head>
-<body>
+<body onload="init()">
 <nav>
     <div class="nav_main">
 
@@ -25,21 +87,30 @@
             </ul>
         </div>
         <div class="nav_main_user">
-            <a href="Sign.html" style="display: inline-block"><img src="../img/用户.png" alt=""></a>
-            <div class="nav-item dropdown float-right">
+            <div class="col-md-5 float-left" id="IfUserSginIn" >
+
+            </div>
+            <div class="nav-item dropdown col-md-6 float-right">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-expanded="false">个人中心</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown04">
                     <a class="dropdown-item" href="Person.html" target="_blank">个人信息</a>
                     <a class="dropdown-item" href="Person_Order.html" target="_blank">订单管理</a>
-                    <a class="dropdown-item" href="#">退出登录</a>
+                    <a class="dropdown-item" href="javascript:;" onclick="quit()">退出登录</a>
                 </div>
-                <div></div>
             </div>
         </div>
     </div>
 </nav>
 
-<div class="container">
+<div class="row-cols-1 w-100 px-2">
+
+    <p class=" col-12 my-3 person_order">
+        订单管理
+    </p>
+
+
+
+
     <div class="container-left">
 <!--        <div class = "container-left-select" >-->
 <!--            <select>-->
@@ -98,8 +169,8 @@
 
 
 
-    <div class="row main my-1">
-        <div class="container">
+    <div class="row-cols-1 main my-1">
+        <div class="row-cols-1">
 
 
             <div class="shop_list sales_flower my-3">
@@ -107,81 +178,76 @@
                     <thead>
                     <tr class="list_nav">
                         <th>订单编号</th>
-                        <th>商品图片</th>
+                        <th>下单时间</th>
                         <th>商品名称</th>
-                        <th>商品价格</th>
-                        <th>送货地址</th>
+                        <th>商品图片</th>
+                        <th>收件人</th>
                         <th>联系电话</th>
-                        <th>是否包邮</th>
+                        <th>送货地址</th>
+                        <th>实付款</th>
+                        <th>状态</th>
                         <th>操作</th>
                     </tr>
                     </thead>
                     <tbody id="table">
-                    <tr>
-                        <td>20210924001</td>
-                        <td>
-                            <img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg" class="flower_img"/>
-                        </td>
-                        <td>玫瑰</td>
-                        <td>￥12.99</td>
-                        <td>西安邮电大学长安校区东区</td>
-                        <td>13279505680</td>
-                        <td>是</td>
-                        <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="退款"
-                                   onclick="del('+json[i].id+')" /></td>
-                    </tr>
-                    <tr>
-                        <td>20210924002</td>
-                        <td>
-                            <img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg" class="flower_img"/>
-                        </td>
-                        <td>玫瑰</td>
-                        <td>￥12.99</td>
-                        <td>西安邮电大学长安校区东区</td>
-                        <td>13279505680</td>
-                        <td>是</td>
-                        <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="退款"
-                                   onclick="del('+json[i].id+')" /></td>
-                    </tr>
-                    <tr>
-                        <td>20210924003</td>
-                        <td>
-                            <img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg" class="flower_img"/>
-                        </td>
-                        <td>玫瑰</td>
-                        <td>￥12.99</td>
-                        <td>西安邮电大学长安校区东区</td>
-                        <td>13279505680</td>
-                        <td>是</td>
-                        <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="退款"
-                                   onclick="del('+json[i].id+')" /></td>
-                    </tr>
-                    <tr>
-                        <td>20210924004</td>
-                        <td>
-                            <img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg" class="flower_img"/>
-                        </td>
-                        <td>玫瑰</td>
-                        <td>￥12.99</td>
-                        <td>西安邮电大学长安校区东区</td>
-                        <td>13279505680</td>
-                        <td>是</td>
-                        <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="退款"
-                                   onclick="del('+json[i].id+')" /></td>
-                    </tr>
-                    <tr>
-                        <td>20210924005</td>
-                        <td>
-                            <img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg" class="flower_img"/>
-                        </td>
-                        <td>玫瑰</td>
-                        <td>￥12.99</td>
-                        <td>西安邮电大学长安校区东区</td>
-                        <td>13279505680</td>
-                        <td>是</td>
-                        <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="退款"
-                                   onclick="del('+json[i].id+')" /></td>
-                    </tr>
+                        <tr>
+                            <td>1001</td>
+                            <td>2021-11-4 15:00</td>
+                            <td>玫瑰</td>
+                            <td>
+                                <img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg" class="flower_img"/>
+                            </td>
+                            <td>刘宇阳</td>
+                            <td>13279505680</td>
+                            <td>西安邮电大学长安校区东区</td>
+                            <td>￥12.99</td>
+                            <td>运输中</td>
+                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="退款"
+                                       onclick="del('+json[i].id+')" /></td>
+                        </tr>
+                        <tr>
+                            <td>1001</td>
+                            <td>2021-11-4 15:00</td>
+                            <td>玫瑰</td>
+                            <td>
+                                <img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg" class="flower_img"/>
+                            </td>
+                            <td>刘宇阳</td>
+                            <td>13279505680</td>
+                            <td>西安邮电大学长安校区东区</td>
+                            <td>￥12.99</td>
+                            <td>运输中</td>
+                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="退款"
+                                       onclick="del('+json[i].id+')" /></td>
+                        </tr><tr>
+                            <td>1001</td>
+                            <td>2021-11-4 15:00</td>
+                            <td>玫瑰</td>
+                            <td>
+                                <img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg" class="flower_img"/>
+                            </td>
+                            <td>刘宇阳</td>
+                            <td>13279505680</td>
+                            <td>西安邮电大学长安校区东区</td>
+                            <td>￥12.99</td>
+                            <td>运输中</td>
+                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="退款"
+                                       onclick="del('+json[i].id+')" /></td>
+                        </tr><tr>
+                            <td>1001</td>
+                            <td>2021-11-4 15:00</td>
+                            <td>玫瑰</td>
+                            <td>
+                                <img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg" class="flower_img"/>
+                            </td>
+                            <td>刘宇阳</td>
+                            <td>13279505680</td>
+                            <td>西安邮电大学长安校区东区</td>
+                            <td>￥12.99</td>
+                            <td>运输中</td>
+                            <td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="退款"
+                                       onclick="del('+json[i].id+')" /></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

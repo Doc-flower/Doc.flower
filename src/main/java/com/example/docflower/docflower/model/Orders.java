@@ -2,23 +2,29 @@ package main.java.com.example.docflower.docflower.model;
 
 public class Orders {
 
-    private int id=0      ;
+    private int id=0;
+    private String time="" ;
+    private String commodityname="";
+    private String commodityimg="";
     private String ownername="" ;
-    private String flowername="";
     private String tel="";
     private String address="";
-    private String text="";
+    private String pay="";
+    private String status="";
 
     public Orders(){
         id = 0;
     }
-    public Orders(int ID, String ownername,String flowername, String tel, String address,String text){
+    public Orders(int ID, String time,String commodityname, String commodityimg, String ownername, String tel, String address,String pay,String status){
         this.id = ID;
+        this.time=time;
+        this.commodityname=commodityname;
+        this.commodityimg=commodityimg;
         this.ownername=ownername;
-        this.flowername=flowername;
         this.tel = tel;
         this.address = address;
-        this.text = text;
+        this.pay = pay;
+        this.status=status;
 
     }
 
@@ -36,20 +42,36 @@ public class Orders {
         return id;
     }
 
-    public void setOwnername(String ownername){
-        this.ownername=ownername;
+    public void setTime(String ownername){
+        this.time=ownername;
+    }
+
+    public String getTime(){
+        return time;
+    }
+
+    public void setCommodityname(String ownername){
+        this.commodityname=ownername;
+    }
+
+    public String getCommodityname(){
+        return commodityname;
+    }
+
+    public void setCommodityimg(String flowername){
+        this.commodityimg=flowername;
+    }
+
+    public String getCommodityimg(){
+        return commodityimg;
+    }
+
+    public void setOwnername(String flowername){
+        this.ownername=flowername;
     }
 
     public String getOwnername(){
         return ownername;
-    }
-
-    public void setFlowername(String flowername){
-        this.flowername=flowername;
-    }
-
-    public String getFlowername(){
-        return flowername;
     }
 
     public void setTel(String tel){
@@ -66,12 +88,20 @@ public class Orders {
         return address;
     }
 
-    public void setText(String text){
-        this.text=text;
+    public void setPay(String text){
+        this.pay=text;
     }
 
-    public String getText(){
-        return text;
+    public String getPay(){
+        return pay;
+    }
+
+    public void setStatus(String text){
+        this.status=text;
+    }
+
+    public String getStatus(){
+        return status;
     }
 
 

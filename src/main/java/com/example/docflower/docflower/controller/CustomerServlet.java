@@ -69,22 +69,37 @@ public class CustomerServlet  extends HttpServlet
             List<Customer> result=null;
             result=new CustomerSrv().Fetch(email,method);
 
-            JSONArray array=new JSONArray();
-            JSONObject json;
+            JSONArray array_email=new JSONArray();
+            JSONArray array_tel=new JSONArray();
+            JSONObject json_email;
+            JSONObject json_tel;
 
             for(Customer s : result)
             {
-                json=new JSONObject();
-                json.put("email", s.getEmail());
-                array.put(json);
+                json_email=new JSONObject();
+                json_tel=new JSONObject();
+
+                json_email.put("email", s.getEmail());
+                json_tel.put("tel", s.getEmail());
+
+                array_email.put(json_email);
+                array_tel.put(json_tel);
+
             }
 //            System.out.println("------------>pwd:" + pwd);
 //
 //            System.out.println("------------>MD5:" + pwd_MD5);
-            System.out.println("---------->arry:" + array);
-            System.out.println("---------->arry.length():" + array.length());
-            if(array.length() >= 1){
+            System.out.println("---------->arry_email:" + array_email);
+            System.out.println("---------->arry_email.length():" + array_email.length());
+
+            System.out.println("---------->arry_tel:" + array_tel);
+            System.out.println("---------->arry_tel.length():" + array_tel.length());
+            if(array_email.length() >= 1){
                 out.write("3");     //邮箱不唯一
+                return;
+            }
+            if(array_tel.length() >= 1){
+                out.write("4");     //邮箱不唯一
                 return;
             }
             if(new CustomerSrv().add(customer) == 1)

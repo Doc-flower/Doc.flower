@@ -16,9 +16,9 @@ public class OrderDAO implements iOrdersDAO {
         int resultPlay=0;
         try
         {
-            String sql="insert into order(order_owner_name, order_flower_name, order_owner_tel, order_address, order_text)"
-                    + " values('" + order.getOwnername() + "', '" + order.getFlowername() + "', " + order.getTel() + ", "
-                    + order.getAddress() + "', '"+ order.getText() + " ')";
+            String sql="insert into order(order_time, order_commodity_name, order_commodity_img, order_owner_name, order_owner_tel, order_address, order_pay,order_status)"
+                    + " values('" + order.getTime() + "', '" + order.getCommodityname() + "', '" + order.getCommodityimg() + "', '"
+                    + order.getOwnername() + "', '"+ order.getTel() + "','"+ order.getAddress() + "''"+ order.getPay() + "''"+ order.getStatus() + "')";
             DBUtil db=new DBUtil();
             db.openConnection();
             ResultSet rst=db.getInsertObjectIDs(sql);
@@ -47,9 +47,10 @@ public class OrderDAO implements iOrdersDAO {
         int result=0;
         try
         {
-            String sql="update `order` set " + " order_owner_name  ='" + order.getOwnername() + "', " + " order_flower_name  = "
-                    + order.getFlowername() + ", " + " order_owner_tel  = " + order.getTel() + ", "
-                    + " order_address  = '" + order.getAddress() + " order_owner_tel  = " + order.getText() + ",  ";
+            String sql="update `order` set " + " order_time  ='" + order.getTime() + "', " + " order_commodity_name  = "
+                    + order.getCommodityname() + ", " + " order_commodity_img  = '" + order.getCommodityimg() + "', "
+                    + " order_owner_name  = '" + order.getOwnername() + " order_owner_tel  = '" + order.getTel()
+                    + "',order_address  = '" + order.getAddress() + "',order_status  = '" + order.getStatus() + "' ";
             sql+=" where order_id = " + order.getID();
             DBUtil db=new DBUtil();
             db.openConnection();
@@ -131,7 +132,7 @@ public class OrderDAO implements iOrdersDAO {
         try
         {
             employeeEmail.trim();
-            String sql="select * from `order` where order_owner_tel like '%" + employeeEmail + "%' ";
+            String sql="select * from `order` where order_owner_tel like '" + employeeEmail + "' ";
 
             db=new DBUtil();
             if(!db.openConnection())
@@ -146,11 +147,14 @@ public class OrderDAO implements iOrdersDAO {
                 {
                     Orders order = new Orders();
                     order.setID(rst.getInt("order_id"));
+                    order.setTime(rst.getString("order_time"));
+                    order.setCommodityname(rst.getString("order_commodity_name"));
+                    order.setCommodityimg(rst.getString("order_commodity_img"));
                     order.setOwnername(rst.getString("order_owner_name"));
-                    order.setFlowername(rst.getString("order_flower_name"));
                     order.setTel(rst.getString("order_owner_tel"));
                     order.setAddress(rst.getString("order_address"));
-                    order.setText(rst.getString("order_text"));
+                    order.setPay(rst.getString("order_pay"));
+                    order.setStatus(rst.getString("order_status"));
                     orderList.add(order);
                 }
             }
