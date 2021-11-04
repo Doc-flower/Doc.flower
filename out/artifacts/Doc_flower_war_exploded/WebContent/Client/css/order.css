@@ -8,12 +8,17 @@ a,a:hover{
 ul,ol{
     list-style-type: none;
 }
+
+
+
+.person_order{
+    font-size: 30px;
+    font-weight: bold;
+    border-bottom: #1b1e21 5px solid;
+}
+
 nav{
 }
-/* 别看啦
-要我陪你吗
-mua~
-*/
 .nav_main{
     margin: 0 auto;
     height: 70px;
@@ -46,18 +51,6 @@ mua~
     max-width: 150px;
     height: 100%;
 }
-/* 框框怎么出来
-    ·用border
-    大小怎么控制
-    width是宽
-    height是高
-    px是像素
-    爱你哟
-    我也爱你哟
-
-    你刚把代码都差点删了哈哈哈哈哈
-
-*/
 
 .nav_main_title ul li:hover{
     background: rgb(21, 81, 172);
@@ -78,14 +71,6 @@ mua~
     transition: .2s;
     line-height: 70px;
 }
-/* 宝宝不会打字了 我爱你
-我也爱你
-
-不丑，好看
-咋出来的☃
-宝宝乖好卡哈哈哈哈哈哈哈哈哈哈哈哈
-好看的我哈哈哈哈哈
-*/
 
 .title_active>a{
 }

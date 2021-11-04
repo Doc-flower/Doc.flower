@@ -224,8 +224,13 @@
                     setTimeout(failSignIn, 100);
                     document.getElementById("customeremail").style.background = "#ffb0b0";
                     document.getElementById("customeremail").value = "";
-                    document.getElementById("customeremail").setAttribute("placeholder","邮箱重复了,祖银换一个吧");
-                } else {
+                    document.getElementById("customeremail").setAttribute("placeholder","邮箱已经被注册了,祖银换一个吧");
+                } else if(req.responseText == 4){
+                    setTimeout(failSignIn, 100);
+                    document.getElementById("customertel").style.background = "#ffb0b0";
+                    document.getElementById("customertel").value = "";
+                    document.getElementById("customertel").setAttribute("placeholder","电话已经被注册了,祖银换一个吧");
+                }else {
                     setTimeout(SignUpSuccess,100);
                 }
             }
