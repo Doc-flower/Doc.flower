@@ -8,8 +8,126 @@
     <link rel="stylesheet" href="../css/huahuaxiaoshi.css">
     <link rel="stylesheet" href="../css/footer.css">
 
+    <script>
+
+        function init(){
+            var a = "";
+            search(a);
+            cookie_email_search();
+            console.log("页面重新加载啦")
+        }
+
+        function keypress(){
+            var name = document.getElementById("Flower_Seach").value;
+            console.log("搜索");
+            search(name);
+        }
+
+        function search(name){
+            var url = "../../../FlowersServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = searchComplete;
+                req.send("type=searchByName&flower_name="+name);
+            }
+        }
+
+        function searchComplete() {
+            console.log("flow" + req.readyState);
+            if (req.readyState == 4 && req.status == 200) {
+                var json =  JSON.parse(req.responseText);//转换为json对象
+                document.getElementById("flower_list").innerHTML = "";
+                if(json.length > 0) {
+                    for (i = 0; i < json.length; i++) {
+                        document.getElementById("flower_list").innerHTML +=
+                            '<div class="col-md-3">\n' +
+                            '            <a href="HuahuaXiaoShi_Buy.html">\n' +
+                            '                <div class="card mb-4 shadow-sm">\n' +
+                            '                    <img src="' + json[i].flower_image1 + '" width="253.4px" height="253.4px"/>\n' +
+                            '                    <div class="card-body">\n' +
+                            '                        <p class="card-text">' + json[i].flower_name + '</p>\n' +
+                            '                        <div class="d-flex justify-content-between align-items-center">\n' +
+                            '                        <span class="text-danger">\n' +
+                            '                            ￥' + json[i].flower_price + '\n' +
+                            '                        </span>\n' +
+                            '                            <div class="btn-group">\n' +
+                            '                                <button type="button" class="btn btn-sm btn-outline-success">收藏</button>\n' +
+                            '                                <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>\n' +
+                            '                            </div>\n' +
+                            '                        </div>\n' +
+                            '                    </div>\n' +
+                            '                </div>\n' +
+                            '            </a>\n' +
+                            '        </div>';
+                    }
+                }else {
+                    document.getElementById("flower_list").innerHTML =
+                        '<div class="mx-auto text-center  py-5">'+
+                        '        <img src="../img/Cry_Flowers.png" height="180" width="180" alt="."/>'+
+                        '        <h1 class="text-dark mx-auto my-5">抱歉，没有找到该花卉...</h1>'+
+                        '</div>';
+                }
+            }
+        }
+
+
+
+        function quit(){
+            document.cookie = "name=???";
+            window.location = "Sign.html";
+        }
+
+
+        function cookie_email_search(){
+            var url = "../../../CustomerServlet";
+            if (window.XMLHttpRequest)
+                req1 = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req1 = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req1) {
+                //采用POST方式，异步传输
+                req1.open("post", url, true);
+                req1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req1.onreadystatechange = cookie_email_searchComplete;
+                req1.send("type=search&method=byEmail&" + document.cookie);
+            }
+        }
+
+        function cookie_email_searchComplete(){
+            console.log("cus" + req1.readyState);
+            if (req1.readyState == 4 && req1.status == 200 ) {
+                console.log(JSON.parse(req1.responseText).length);
+                if(JSON.parse(req1.responseText).length != 0)
+                {
+                    var json1 =  JSON.parse(req1.responseText);//转换为json对象
+                    console.log(json1.length);
+                    document.getElementById("IfUserSginIn").innerHTML = '';
+                    document.getElementById("dropdown04").innerText = json1[0].name;
+                    document.getElementById("user_name").value = json1[0].name;
+                    console.log("---------->成功:" + document.cookie);
+                }else if(JSON.parse(req1.responseText).length == 0){
+                    document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
+                    document.getElementById("dropdown04").innerText = "个人中心";
+                    console.log("---------->失败:" + document.cookie);
+                }
+            } else{
+                document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
+                document.getElementById("dropdown04").innerText = "个人中心";
+                console.log("---------->失败:" + document.cookie);
+            }
+        }
+    </script>
+<!--    <script src="../js/index.js"></script>-->
+
 </head>
-<body>
+<body onload="init()">
 <nav>
     <div class="nav_main">
 
@@ -28,15 +146,16 @@
             </ul>
         </div>
         <div class="nav_main_user">
-            <a href="Sign.html" style="display: inline-block"><img src="../img/用户.png" alt=""></a>
-            <div class="nav-item dropdown float-right">
+            <div class="col-md-5 float-left" id="IfUserSginIn" >
+
+            </div>
+            <div class="nav-item dropdown col-md-6 float-right">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-expanded="false">个人中心</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown04">
                     <a class="dropdown-item" href="Person.html" target="_blank">个人信息</a>
-                    <a class="dropdown-item" href="order.html"  target="_blank">订单管理</a>
-                    <a class="dropdown-item" href="#">退出登录</a>
+                    <a class="dropdown-item" href="Person_Order.html" target="_blank">订单管理</a>
+                    <a class="dropdown-item" href="javascript:;" onclick="quit()">退出登录</a>
                 </div>
-                <div></div>
             </div>
         </div>
         
@@ -46,230 +165,16 @@
 
 
 <div class="container">
-    <div class="row">
-        <div class="input-group col-9 mx-auto mb-3 mt-3 order-search">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">搜索鲜花或绿植</span>
-            </div>
-            <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+    <div class="input-group col-9 mx-auto mb-3 mt-3 order-search">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">搜索花卉</span>
         </div>
-        <p class=" col-12  sale_title">
-            鲜花
-        </p>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-                <img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg" width="253.4px" height="253.4px"/>
-                <div class="card-body">
-                    <p class="card-text">卡罗拉</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥12.99
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-
-
-                <img src="../img/花/满天星/1.满天星(未包装)图集/满天星7.jpg" width="253.4px" height="253.4px"/>
-                <div class="card-body">
-                    <p class="card-text">满天星</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥48.8
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-                <img src="../img/花/百合类/1.百合花图集/百合花2.jpg" width="253.4px" height="253.4px"/>
-                <div class="card-body">
-                    <p class="card-text">百合花</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥52.21
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-                <img src="../img/花/百合类/3.六出花图集/六出花1.jpg" width="253.4px" height="253.4px"/>
-                <div class="card-body">
-                    <p class="card-text">六出花</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥77.88
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-
-                <img src="../img/花/玫瑰类/4.冷美人图集/冷美人3.jpg" height="253.4px" width="253.4px"/>
-                <div class="card-body">
-                    <p class="card-text">冷美人</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                                ￥99.88
-                            </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-                <img src="../img/花/百合类/5.玉簪花图集/玉簪花2.jpg" width="253.4px" height="253.4px"/>
-
-                <div class="card-body">
-                    <p class="card-text">玉簪花</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥188.88
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-                <img src="../img/花/百合类/6.嘉兰图集/嘉兰3.jpg" width="253.4px" height="253.4px"/>
-                <div class="card-body">
-                    <p class="card-text">嘉兰</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥21.99<!--我爱你-->
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-                <img src="../img/花/康乃馨/2.康乃馨(包装)图集/康乃馨3.jpg" width="253.4px" height="253.4px"/>
-                <div class="card-body">
-                    <p class="card-text">康乃馨</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥38.83
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div><div class="col-md-3">
-        <div class="card mb-4 shadow-sm">
-            <img src="../img/花/睡莲类/3.白睡莲图集/白睡莲3.jpg" width="253.4px" height="253.4px"/>
-            <div class="card-body">
-                <p class="card-text">白睡莲</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <span class="text-danger">
-                            ￥8.57
-                        </span>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                        <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <input type="text" id="Flower_Seach" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" onkeypress="keypress()">
     </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-
-
-                <img src="../img/花/稀有花类/1.山荷叶图集/山荷叶2.jpg" width="253.4px" height="253.4px"/>
-                <div class="card-body">
-                    <p class="card-text">山荷叶</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥56.65
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-
-                <img src="../img/花/稀有花类/2.天堂鸟图集/天堂鸟1.jpg" width="253.4px" height="253.4px"/>
-                <div class="card-body">
-                    <p class="card-text">天堂鸟</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥138.9
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card mb-4 shadow-sm">
-
-                <img src="../img/花/紫罗兰/1.紫罗兰(未包装)图集/紫罗兰4.jpg" width="253.4px" height="253.4px"/>
-                <div class="card-body">
-                    <p class="card-text">紫罗兰</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-danger">
-                            ￥66.66
-                        </span>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-success">收藏</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger ">立即购买</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
+    <p class=" col-12  sale_title">
+        鲜花
+    </p>
+    <div class="row" id="flower_list">
     </div>
 </div>
 
