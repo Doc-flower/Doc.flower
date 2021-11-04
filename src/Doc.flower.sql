@@ -228,13 +228,17 @@ insert into blogs(blog_name, blog_owner,blog_text, blog_time, blog_views, blog_l
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order`  (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `order_commodity_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `order_commodity_img` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `order_owner_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `order_flower_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `order_owner_tel` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `order_address` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `order_text` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `order_pay` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `order_status` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+
   PRIMARY KEY (`order_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 1000 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for shops
@@ -283,16 +287,16 @@ INSERT INTO customer(cus_name,cus_email,cus_telnum,cus_pwd,cus_paypwd,cus_addres
 ('苗欢','3030027737@qq.com', '13709188179','123456','555555','陕西临潼','无','无');
 
 
-INSERT INTO `order`(order_owner_name,order_flower_name,order_owner_tel,order_address,order_text) VALUES
-('刘宇阳','日巴欻', '13279505680','西安邮电大学长安校区东区','送女友');
-INSERT INTO `order`(order_owner_name,order_flower_name,order_owner_tel,order_address,order_text) VALUES
-('张若鹏','郁金香', '15129072144','西安邮电大学','无');
-INSERT INTO `order`(order_owner_name,order_flower_name,order_owner_tel,order_address,order_text) VALUES
-('范佳伟','狗尾巴草', '15830599166','邮电大学安悦南楼','自己留着吃');
-INSERT INTO `order`(order_owner_name,order_flower_name,order_owner_tel,order_address,order_text) VALUES
-('刘璇','狗娃屁','15929068966','邮电大学','送男友');
-INSERT INTO `order`(order_owner_name,order_flower_name,order_owner_tel,order_address,order_text) VALUES
-('张三','永生花', '1414141','邮电东区家属楼','拿来送老师');
+INSERT INTO `order`(order_time, order_commodity_name, order_commodity_img, order_owner_name, order_owner_tel, order_address, order_pay,order_status) values
+('2021-11-4 15:00','卡罗拉','../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg','刘宇阳','13279505680','西安邮电大学长安校区东区','19.9','运输中');
+INSERT INTO `order`(order_time, order_commodity_name, order_commodity_img, order_owner_name, order_owner_tel, order_address, order_pay,order_status) values
+('2021-10-4 15:00','白牡丹','../img/花/菊花类/2.白牡丹图集/白牡丹1.jpg','刘璇','159290068966','西安邮电大学长安校区东区安美公寓','19.9','运输中');
+INSERT INTO `order`(order_time, order_commodity_name, order_commodity_img, order_owner_name, order_owner_tel, order_address, order_pay,order_status) values
+('2021-11-26 15:00','玫瑰','../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg','刘宇阳','13279505680','西安邮电大学长安校区东区','19.9','运输中');
+INSERT INTO `order`(order_time, order_commodity_name, order_commodity_img, order_owner_name, order_owner_tel, order_address, order_pay,order_status) values
+('2021-11-4 15:00','玫瑰','../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg','刘宇阳','13279505680','西安邮电大学长安校区东区','19.9','运输中');
+INSERT INTO `order`(order_time, order_commodity_name, order_commodity_img, order_owner_name, order_owner_tel, order_address, order_pay,order_status) values
+('2021-11-4 15:00','玫瑰','../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg','刘宇阳','13279505680','西安邮电大学长安校区东区','19.9','运输中');
 
 
 INSERT INTO messages(message_name,message_title,message_email,message_time,message_text) VALUES

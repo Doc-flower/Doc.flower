@@ -36,8 +36,7 @@ public class OrdersServlet extends HttpServlet
             delete(request, response);
         else if(type.equalsIgnoreCase("update"))
             update(request, response);
-        else
-        if(type.equalsIgnoreCase("search"))
+        else if(type.equalsIgnoreCase("search"))
             search(request, response);
     }
 
@@ -47,13 +46,16 @@ public class OrdersServlet extends HttpServlet
         try
         {
             int order_id=Integer.valueOf(request.getParameter("order_id"));
+            String order_time=request.getParameter("order_time");
+            String order_commodity_name=request.getParameter("order_commodity_name");
+            String order_commodity_img=request.getParameter("order_commodity_img");
             String order_owner_name=request.getParameter("order_owner_name");
-            String order_flower_name=request.getParameter("order_flower_name");
             String order_owner_tel=request.getParameter("order_owner_tel");
             String order_address=request.getParameter("order_address");
-            String order_text=request.getParameter("order_text");
+            String order_pay=request.getParameter("order_pay");
+            String order_status=request.getParameter("order_status");
 
-            orders=new Orders(order_id, order_owner_name, order_flower_name, order_owner_tel, order_address,order_text);
+            orders=new Orders(order_id, order_time, order_commodity_name, order_commodity_img, order_owner_name,order_owner_tel,order_address,order_pay,order_status);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
 
@@ -96,13 +98,16 @@ public class OrdersServlet extends HttpServlet
         try
         {
             int order_id=Integer.valueOf(request.getParameter("order_id"));
+            String order_time=request.getParameter("order_time");
+            String order_commodity_name=request.getParameter("order_commodity_name");
+            String order_commodity_img=request.getParameter("order_commodity_img");
             String order_owner_name=request.getParameter("order_owner_name");
-            String order_flower_name=request.getParameter("order_flower_name");
             String order_owner_tel=request.getParameter("order_owner_tel");
             String order_address=request.getParameter("order_address");
-            String order_text=request.getParameter("order_text");
+            String order_pay=request.getParameter("order_pay");
+            String order_status=request.getParameter("order_status");
 
-            orders=new Orders(order_id, order_owner_name, order_flower_name, order_owner_tel, order_address,order_text);
+            orders=new Orders(order_id, order_time, order_commodity_name, order_commodity_img, order_owner_name,order_owner_tel,order_address,order_pay,order_status);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
 
@@ -138,11 +143,14 @@ public class OrdersServlet extends HttpServlet
             {
                 json=new JSONObject();
                 json.put("order_id", s.getID());
+                json.put("order_time", s.getTime());
+                json.put("order_commodity_name", s.getCommodityname());
+                json.put("order_commodity_img", s.getCommodityimg());
                 json.put("order_owner_name", s.getOwnername());
-                json.put("order_flower_name", s.getFlowername());
                 json.put("order_owner_tel", s.getTel());
-                json.put("order_owner_address", s.getAddress());
-                json.put("order_owner_text", s.getText());
+                json.put("order_address", s.getAddress());
+                json.put("order_pay", s.getPay());
+                json.put("order_status", s.getStatus());
                 array.put(json);
             }
             jsonStr=array.toString();
