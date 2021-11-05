@@ -45,7 +45,7 @@ public class OrdersServlet extends HttpServlet
         Orders orders=null;
         try
         {
-            int order_id=Integer.valueOf(request.getParameter("order_id"));
+            int order_id=0;
             String order_time=request.getParameter("order_time");
             String order_commodity_name=request.getParameter("order_commodity_name");
             String order_commodity_img=request.getParameter("order_commodity_img");

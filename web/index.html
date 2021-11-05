@@ -552,7 +552,7 @@
             },
             searchOrdersNum:function () {
                 var that = this;        //保存this
-                axios.post('../../../OrdersServlet?type=search&method=search&name=' + "")
+                axios.post('../../../OrdersServlet?type=search&method=search&tel=' + "")
                     .then(function (response) {
                         console.log(response);
                         that.OrdersNum = response.data.length

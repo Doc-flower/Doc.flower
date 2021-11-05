@@ -95,22 +95,64 @@
                 }
                 console.log(req.responseText);
                 var json =  JSON.parse(req.responseText);//转换为json对象
-                for(i=0; i<json.length; i++) {
-                    var rowCount = theTable.rows.length; //获得当前表格的行数
-                    var row = theTable.insertRow(rowCount);//在tale里动态的增加tr
-                    row.insertCell(0).innerHTML = json[i].order_id;
-                    row.insertCell(1).innerHTML = json[i].order_time;
-                    row.insertCell(2).innerHTML = json[i].order_commodity_name;
-                    row.insertCell(3).innerHTML = '<img src="../../Client/html/'+ json[i].order_commodity_img + '" width="80" height="80" class="flower_img"/>' ;
-                    row.insertCell(4).innerHTML = json[i].order_owner_name;
-                    row.insertCell(5).innerHTML = json[i].order_owner_tel;
-                    row.insertCell(6).innerHTML = json[i].order_address;
-                    row.insertCell(7).innerHTML = json[i].order_pay;
-                    row.insertCell(8).innerHTML = json[i].order_status;
-                    row.insertCell(9).innerHTML = '<input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del('+json[i].order_id+')" />';
+                if (json.length > 0){
+                    for(i=0; i<json.length; i++) {
+                        var rowCount = theTable.rows.length; //获得当前表格的行数
+                        var row = theTable.insertRow(rowCount);//在tale里动态的增加tr
+                        row.insertCell(0).innerHTML = json[i].order_id;
+                        row.insertCell(1).innerHTML = json[i].order_time;
+                        row.insertCell(2).innerHTML = json[i].order_commodity_name;
+                        row.insertCell(3).innerHTML = '<img src="../../Client/html/'+ json[i].order_commodity_img + '" width="80" height="80" class="flower_img"/>' ;
+                        row.insertCell(4).innerHTML = json[i].order_owner_name;
+                        row.insertCell(5).innerHTML = json[i].order_owner_tel;
+                        row.insertCell(6).innerHTML = json[i].order_address;
+                        row.insertCell(7).innerHTML = json[i].order_pay;
+                        row.insertCell(8).innerHTML = json[i].order_status;
+                        row.insertCell(9).innerHTML = '<input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del('+json[i].order_id+')" />';
+                    }
+                }else {
+                    document.getElementById("order_main").innerHTML =
+                        '<div class="mx-auto text-center  py-5">'+
+                        '        <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor" class="bi bi-emoji-frown" viewBox="0 0 16 16">\n' +
+                        '            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>\n' +
+                        '            <path d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>\n' +
+                        '        </svg>'+
+                        '        <h1 class="text-dark mx-auto my-5">祖银什么也没有买吖，快去买喜欢的花花和绿植吧...</h1>'+
+                        '</div>';
                 }
             }
         }
+
+
+
+        function del(id){
+
+            $("#delConfirm").click(function (){
+
+                var url = "../../../OrdersServlet";
+                if (window.XMLHttpRequest)
+                    req = new XMLHttpRequest();
+                else if (window.ActiveXObject)
+                    req = new ActiveXObject("Microsoft.XMLHTTP");
+                if (req) {
+                    //采用POST方式，异步传输
+                    req.open("post", url, true);
+                    //POST方式，必须加入如下头信息设定
+                    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    req.onreadystatechange = delComplete;
+                    req.send("type=delete&id="+id);
+                }
+            });
+        }
+
+
+        function delComplete() {
+            if (req.readyState == 4 && req.status == 200) {
+                if(req.responseText==1)
+                    search();
+            }
+        }
+
 
 
 
@@ -148,6 +190,27 @@
     </div>
 </nav>
 
+<!--            删除警示-->
+<div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="delModalLabel">确认退款</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                请谨慎操作！！！确认退款？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-danger"  data-dismiss="modal" id="delConfirm">确认退款</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row-cols-1 w-100 px-2">
     <input type="hidden" id="cus_tel" value="?_?_?">
     <div class=" col-12 my-3 person_order">
@@ -162,33 +225,11 @@
 
 
 
-    <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="delModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="delModalLabel">确认退款</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    确认退款？
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-danger"  data-dismiss="modal" id="delConfirm">确认退款</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
     <div class="row-cols-1 main my-1">
         <div class="row-cols-1">
 
 
-            <div class="shop_list sales_flower my-3">
+            <div id="order_main" class="shop_list sales_flower my-3">
                 <table class="table table-hover">
                     <thead>
                     <tr class="list_nav">

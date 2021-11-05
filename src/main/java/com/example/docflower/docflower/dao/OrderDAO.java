@@ -16,9 +16,9 @@ public class OrderDAO implements iOrdersDAO {
         int resultPlay=0;
         try
         {
-            String sql="insert into order(order_time, order_commodity_name, order_commodity_img, order_owner_name, order_owner_tel, order_address, order_pay,order_status)"
+            String sql="insert into `order`(order_time, order_commodity_name, order_commodity_img, order_owner_name, order_owner_tel, order_address, order_pay, order_status)"
                     + " values('" + order.getTime() + "', '" + order.getCommodityname() + "', '" + order.getCommodityimg() + "', '"
-                    + order.getOwnername() + "', '"+ order.getTel() + "','"+ order.getAddress() + "''"+ order.getPay() + "''"+ order.getStatus() + "')";
+                    + order.getOwnername() + "', '"+ order.getTel() + "','"+ order.getAddress() + "','"+ order.getPay() + "','"+ order.getStatus() + "')";
             DBUtil db=new DBUtil();
             db.openConnection();
             ResultSet rst=db.getInsertObjectIDs(sql);
