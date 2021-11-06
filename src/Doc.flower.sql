@@ -225,6 +225,33 @@ insert into blogs(blog_name, blog_owner,blog_text, blog_time, blog_views, blog_l
 
 
 -- ----------------------------
+-- Table structure for cpmment
+-- ----------------------------
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE `comment`  (
+                            `comment_id` INT(11) NOT NULL AUTO_INCREMENT,
+                            `blog_id`INT(10) DEFAULT NULL,
+                            `comment_owner` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+                            `comment_image` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+                            `comment_text` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+                            `comment_time` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+                            `comment_likes` INT(10) DEFAULT NULL,
+                            PRIMARY KEY (`comment_id`) USING BTREE
+
+) ENGINE = INNODB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = COMPACT;
+
+INSERT INTO COMMENT(blog_id,comment_owner, comment_image,comment_text,comment_time, comment_likes) VALUES
+(1,'刘璇','../img/user_img.jpg','中秋节应该和家人一起过','2021年11月6日',100);
+INSERT INTO COMMENT(blog_id,comment_owner, comment_image,comment_text,comment_time, comment_likes) VALUES
+(2,'刘宇阳','../img/user_img.jpg','学到了','2021年11月7日',100);
+INSERT INTO COMMENT(blog_id,comment_owner, comment_image,comment_text,comment_time, comment_likes) VALUES
+(3,'徐卓龙','../img/user_img.jpg','种植鲜花小技巧','2021年11月8日',100);
+INSERT INTO COMMENT(blog_id,comment_owner, comment_image,comment_text,comment_time, comment_likes) VALUES
+(4,'范佳伟','../img/user_img.jpg','这没想到有这么多的鲜花品种','2021年11月6日',100);
+INSERT INTO COMMENT(blog_id,comment_owner, comment_image,comment_text,comment_time, comment_likes) VALUES
+(5,'苗欢欢','../img/user_img.jpg','教师节可以送康乃馨','2021年11月1日',100);
+
+-- ----------------------------
 -- Table structure for order
 -- ----------------------------
 DROP TABLE IF EXISTS `order`;
