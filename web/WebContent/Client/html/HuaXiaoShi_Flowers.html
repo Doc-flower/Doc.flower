@@ -49,7 +49,7 @@
                     for (i = 0; i < json.length; i++) {
                         document.getElementById("flower_list").innerHTML +=
                             '<div class="col-md-3">\n' +
-                            '            <a href="HuahuaXiaoShi_Buy.html">\n' +
+                            '            <a href="HuaXiaoShi_Flowers_Buy.html?type=search&name='+ json[i].flower_name +'" target="_blank">\n' +
                             '                <div class="card mb-4 shadow-sm">\n' +
                             '                    <img src="' + json[i].flower_image1 + '" width="253.4px" height="253.4px"/>\n' +
                             '                    <div class="card-body">\n' +
@@ -127,8 +127,15 @@
                 console.log("---------->失败:" + document.cookie);
             }
         }
+
+
+
+        // 购买
+
+
     </script>
-<!--    <script src="../js/index.js"></script>-->
+    <link rel="stylesheet" href="../../public/css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--    <script src="../js/index.js"></script>-->
 
 </head>
 <body onload="init()">
@@ -176,6 +183,8 @@
         <input type="text" id="Flower_Seach" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" onkeypress="keypress()">
     </div>
     <p class=" col-12  sale_title">
+        <i class='fa fa-empire' ></i>
+
         鲜花
     </p>
     <div class="row" id="flower_list">

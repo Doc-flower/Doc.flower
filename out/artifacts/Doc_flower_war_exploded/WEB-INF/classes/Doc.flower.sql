@@ -174,6 +174,8 @@ insert into plants(plant_name, plant_introduction, plant_image1, plant_image2, p
     ('黑美人','性喜高温多湿，生育适温约22~30℃。寒流侵袭低于15℃以下，需注意预防寒害，避免叶片因滞水隔夜而冻伤。','../img/绿植/黑美人/img/黑美人1.jpg','../img/绿植/黑美人/img/黑美人2.jpg','69.9');
 insert into plants(plant_name, plant_introduction, plant_image1, plant_image2, plant_price) VALUES
     ('龙血树','主要价值 观赏：龙血树植株挺拔、素雅、朴实、雄伟，富有热带风情，大型植株可布置于庭院、大堂、客厅，小型植株和水养植株适于装饰书房、卧室等。药用：从龙血树的木质部提取出来的血竭为名贵中药材品种，深红色。具有活血祛瘀、消肿止痛、收敛止血之效','../img/绿植/龙血树/img/龙血树1.jpg','../img/绿植/龙血树/img/龙血树2.jpg','69.9');
+insert into plants(plant_name, plant_introduction, plant_image1, plant_image2, plant_price) VALUES
+    ('绿萝','形态特征：高大藤本，茎攀援，节间具纵槽；多分枝，枝悬垂。幼枝鞭状，细长，粗3-4毫米，节间长15-20厘米。生长习性：绿萝是阴性植物，喜散射光，较耐阴。它遇水即活，因顽强的生命力，被称为“生命之花”。蔓延下来的绿色枝叶，非常容易满足。室内养植时，不管是盆栽或是折几枝茎秆水培，都可以良好的生长。既可让其攀附于用棕扎成的圆柱上，也可培养成悬垂状置于书房、窗台，抑或直接盆栽摆放，是一种非常适合室内种植的优美花卉植物文化：绿萝遇水即活，因顽强的生命力，被称为“生命之花”。蔓延下来的绿色枝叶，非常容易满足，就连喝水也觉得自己是幸福的。 [2]绿萝的花语是“守望幸福”，大家可以在家中摆上一两盆绿萝，色彩明快、极富生机，既可以装点居室，又能够净化空气，给生活平添幸福的情趣！','../img/绿植/绿萝/img/绿萝1.jpg','../img/绿植/绿萝/img/绿萝2.jpg','49.9');
 
 
 -- ----------------------------
@@ -235,7 +237,7 @@ CREATE TABLE `order`  (
   `order_owner_tel` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `order_address` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `order_pay` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `order_status` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `order_status` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin default NULL,
 
   PRIMARY KEY (`order_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
