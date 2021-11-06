@@ -277,17 +277,6 @@ INSERT INTO shops(shop_id,shop_name,shop_address,shop_tel,shop_text) VALUES
 
 
 
-INSERT INTO customer(cus_name,cus_email,cus_telnum,cus_pwd,cus_paypwd,cus_address,cus_orders,cus_friends) VALUES
-('刘宇阳','2193560021@qq.com', '13279505680','liuyng01253217','111111','陕西杨凌','无','无');
-INSERT INTO customer(cus_name,cus_email,cus_telnum,cus_pwd,cus_paypwd,cus_address,cus_orders,cus_friends) VALUES
-('刘璇','3199432593@qq.com', '15929068966','lx123456789.','444444','陕西延安','无','无');
-INSERT INTO customer(cus_name,cus_email,cus_telnum,cus_pwd,cus_paypwd,cus_address,cus_orders,cus_friends) VALUES
-('徐卓龙','1299605102@qq.com', '17764753450','123456','222222','陕西宝鸡','无','无');
-INSERT INTO customer(cus_name,cus_email,cus_telnum,cus_pwd,cus_paypwd,cus_address,cus_orders,cus_friends) VALUES
-('范佳伟	','2058298285@qq.com', '15830599166','123456','333333','河北张北','无','无');
-INSERT INTO customer(cus_name,cus_email,cus_telnum,cus_pwd,cus_paypwd,cus_address,cus_orders,cus_friends) VALUES
-('苗欢','3030027737@qq.com', '13709188179','123456','555555','陕西临潼','无','无');
-
 
 INSERT INTO `order`(order_time, order_commodity_name, order_commodity_img, order_owner_name, order_owner_tel, order_address, order_pay,order_status) values
 ('2021-11-4 15:00','卡罗拉','../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg','刘宇阳','13279505680','西安邮电大学长安校区东区','19.9','运输中');
