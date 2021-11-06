@@ -13,7 +13,6 @@
 
         function init(){
             cookie_email_search();
-            setTimeout(search,50);
             console.log("页面重新加载啦")
         }
 
@@ -51,7 +50,7 @@
                     console.log(document.getElementById("cus_tel").value);
                     document.getElementById("IfUserSginIn").innerHTML = '';
                     document.getElementById("dropdown04").innerText = json1[0].name;
-                    document.getElementById("user_name").value = json1[0].name;
+                    search();
                     console.log("---------->成功:" + document.cookie);
                 }else if(JSON.parse(req1.responseText).length == 0){
                     document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
@@ -120,6 +119,7 @@
                         '        <h1 class="text-dark mx-auto my-5">祖银什么也没有买吖，快去买喜欢的花花和绿植吧...</h1>'+
                         '</div>';
                 }
+
             }
         }
 
