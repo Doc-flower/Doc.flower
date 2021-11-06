@@ -10,7 +10,55 @@
     <link rel="stylesheet" href="../css/footer.css">
     <script>
         window.onload = function (){
-            cookie_email_search();
+            blog_search();
+           // cookie_email_search();
+        }
+
+        function  blog_search(){
+           // console.log(window.localStorage.getItem('ID'));
+            var id=window.localStorage.getItem('ID');
+            console.log(typeof id);
+            var url = "../../../BlogsServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = searchComplete;
+                req.send("type=searchId&id="+id);
+            }
+        }
+
+        function searchComplete() {
+
+            if (req.readyState == 4 && req.status == 200) {
+                var json =  JSON.parse(req.responseText);//转换为json对象
+                document.getElementsByClassName("my_card")[0].innerHTML="";
+                if(json.length > 0) {
+                    for (i = 0; i < json.length; i++) {
+                        document.getElementsByClassName("my_card")[0].innerHTML +=' <div class="card-header">\n' +
+                            '        '+json[i].name+'\n' +
+                            '    </div>\n' +
+                            '    <p class="card-body my_card-body">\n' +
+                            '      '+json[i].text+'\n'+
+                            '    </p>\n';
+
+                    }
+                }else {
+                    document.getElementById("flower_list").innerHTML =
+                        '<div class="mx-auto text-center  py-5">'+
+                        '        <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor" class="bi bi-emoji-frown" viewBox="0 0 16 16">\n' +
+                        '            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>\n' +
+                        '            <path d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>\n' +
+                        '        </svg>'+
+                        '        <h1 class="text-dark mx-auto my-5">抱歉，没有找到该博客...</h1>'+
+                        '</div>';
+                }
+            }
         }
 
         function quit(){
@@ -69,8 +117,8 @@
             <ul>
                 <li><a href="./index.html">首页</a> </li>
                 <li><a href="./HuaXiaoKe.html">花小科</a></li>
-                <li><a href="HuahuaXiaoShi.html">花花小市</a></li>
-                <li><a href="LvzhiXiaoShi.html">绿植小市</a></li>
+                <li><a href="HuaXiaoShi_Flowers.html">花花小市</a></li>
+                <li><a href="HuaXiaoShi_Plants.html">绿植小市</a></li>
                 <li><a href="./HuaXiaoQuan.html">花小圈</a></li>
 
             </ul>
@@ -92,40 +140,8 @@
 
 </nav>
 
-
+<!--博客全文区 -->
 <div class="card my_card">
-    <div class="card-header">
-        《中秋节 是我们当今中国比较传统的团圆节日之一》
-    </div>
-    <p class="card-body my_card-body">
-         中秋节 是我们当今中国比较传统的团圆节日之一，在每年的农历八月十五。中秋当天，人们都会赏月亮、吃月饼。当然很多人都会选择在中秋佳节的时候与朋友、与情人团聚。那么，大家知不知道中秋节送什么花比较合适呢？
-　　接下来，就让我们一起来寻找答案吧！
-　　自古以来，中秋佳节同饮桂花酒，共吃各种秋月饼，水果瓜子，谈论美好的未来；因此它是离散亲属、海外游子、思亲念乡、喜具团聚地千古不变的佳节，一直流传到现在，而且是经久不衰。亲朋好友在中秋佳节时，不仅漫游在自家庭院或社区或公园或野外的花海中，也有的采摘或购买上百合、萱草、石榴、莲花等插瓶装饰，为节日更增添了一番团结欢乐的情趣。
-　　走亲访友的们，此时此刻如能带上束鲜花，或送去一个满带祝福的花篮，那比携带任何糕点礼品都更显友情珍贵、品位高雅。
-　　同样，远渡重洋、身居异国他乡的海外游子们，或旅居不自禁地“举头望明月，低头思故乡”，思念故乡的亲人们。
-　　这些人常用电传邮购方式，为父母或亲朋好友一个个蕴满深情的礼仪花篮中花束，以表达他们思亲念乡情。在国内与父母身居两地儿女们，在中秋佳节到来之际，首先是打电话问候祝福。也可以送礼送祝福，对亲人的思恋。
-　　鲜花／感激
-　　29枝红色康乃馨＋2枝多头粉香水百合＋水晶草＋黄莺
-　　每一个人，都会有想要“感激”的人。中秋节来了，正好把最美好的祝福送给对方。
-　　花语：常怀感恩之心的人是最幸福的，常怀感激之情的生活是最甜美的。
-　　学会感激——感激我的父母，因为他们给了我宝贵的生命；
-　　学会感激——感激我的老师，因为他们给了我无穷的知识；
-　　学会感激——感激我的朋友，因为他们给了我克服困难的力量；
-　　学会感激——感激我周围的一切，因为他们给了我和谐健康的成长空间。
-　　鲜花／想着你
-　　16枝香槟玫瑰＋2枝白香水百合＋红色小康乃馨＋黄莺
-　　因为各种原因，在中秋这个团圆的节日，有的人不能和家人团聚，不能陪着最亲密的人。一定要把那份盼团圆的心思传达给对方：“想着你”！
-　　花语：想着你，空气里满是花的蜜香！
-　　想着你，透过厚厚的玻璃，看到了太阳柔和的光芒！
-　　想着你，就象水波荡漾，就象花儿绽放满是自由和幸福的晕光！
-　　想着你，数着时钟的嘀哒，仿佛聆听快乐的音符！
-　　想着你，想对所有人说在想你中快乐闯进了我的心房！
-　　水果花篮／温馨祝福
-　　粉香水百合＋粉玫瑰＋康乃馨＋巴西叶＋绿叶
-　　橙子＋苹果＋红提
-　　特别的日子，要有所表示；特别美好的节日，要送上祝福。把寓意美好的鲜花和水果满满的装起来送给对方，就是最“温馨的祝福”。
-　　花语：满满的水果、盛开的花朵，带来温馨的祝福。让微笑，在这一刻绽放。欣喜的心情，如花儿般盛开！
-    </p>
 
 </div>
        <!--评论区 -->

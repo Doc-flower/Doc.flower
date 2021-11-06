@@ -456,16 +456,14 @@ ul{
     top: 200px;
     right: 0px;
     left: 0px;
-    width: 1329px;
+    width: 1180px;
     margin: 0px auto;
 }
 .blog_world li{
     float: left;
-    margin: 20px 15px 10px 15px;
+    margin: 20px 15px 10px 25px;
 }
-.blog_world li:first-child{
-    margin-left: 130px;
-}
+
 .blog_world li .card{
     width: 250px;
     height:450px ;
@@ -486,7 +484,7 @@ ul{
 }
 .blog_world li .card .list-group .card_author{
     position: absolute;
-    left: -115px;
+    left: -9px;
     top: 5px;
     font-size: 15px;
     color: #aaaaaa;
@@ -521,10 +519,13 @@ ul{
     overflow: hidden;
 }
 .blog_world li .card .card-title{
+    margin-top: -8px;
+    margin-left: -9px;
     color: #666;
-    font-size: 15px;
+    font-size: 13px;
 }
 .blog_world li .card .card-text{
+    margin-top: 15px;
     color: #aaaaaa;
     font-size: 13px;
 }
@@ -601,10 +602,10 @@ ul{
     width: 1064px;
 }
 .my_card-body{
-    height: 530px;
     resize: none;
     border: none;
     outline: none;
+    padding: 0px;
 }
 /*评论区部分*/
 #comment_area{
