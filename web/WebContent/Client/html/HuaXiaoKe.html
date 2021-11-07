@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../../public/css/slick.css"/>
     <link rel="stylesheet" type="text/css" href="../../public/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="../../public/css/juery.mmenu.all.css"/>
-    <link rel="stylesheet" type="text/css" href="../../public/css/style.css"/>
+<!--    <link rel="stylesheet" type="text/css" href="../../public/css/style.css"/>-->
     <link href="../../public/css/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" type="text/css" href="../../public/css/animate.css"/>
     <link rel="stylesheet" href="../css/footer.css">
@@ -49,6 +49,16 @@
             box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
         }
 
+        .card{
+            transition: .3s;
+        }
+
+        .card:hover{
+            background: #e5e5e5;
+        }
+        a,a:hover{
+            text-decoration: none;
+        }
     </style>
     <script src="../js/index.js"></script>
 
@@ -83,100 +93,50 @@
         </div>
     </div>
 </nav>
-<div id="root" class="wyzl">
+<div id="root" class="">
     <div class="col-12 mt-3 mb-5 text-center">
-        <h1 class="col-3 user-select-none mx-auto pt-5 pb-2 inter_every_intro  font-weight-bolder">花卉欣赏</h1>
+        <h1 class="col-9 user-select-none mx-auto pt-5 pb-2 inter_every_intro  font-weight-bolder">花卉欣赏</h1>
     </div>
     <p>{{FlowerName}}</p>
-    <ul class="clearfix mt-3">
-        <li class="wow bounceIn" v-for="item in FlowerList">
-            <a href="HuaXiaoKe_Flower.html">
-                <img :src="item.flower_image1" alt="" class="vcenter rounded" /><i></i>
-                {{item.flower_name}}
-            </a>
 
-        </li>
-    </ul>
+    <div class="card-columns container">
+        <ul>
+            <li v-for="item in FlowerList">
+                <div class="card mb-4" >
+                    <a href="#">
+                        <img :src="item.flower_image1" class="card-img-top" width="200" alt="...">
+                        <div class="card-body">
+                            <h4 class="card-title font-weight-bolder text-dark">{{item.flower_name}}</h4>
+                        </div>
+                    </a>
+                </div>
+            </li>
+        </ul>
+
+    </div>
 
     <div class="col-12 mt-3 mb-5 text-center">
-        <h1 class="col-3 user-select-none mx-auto pt-5 pb-2 inter_every_intro_Plants  font-weight-bolder">绿植欣赏</h1>
+        <h1 class="col-9 user-select-none mx-auto pt-5 pb-2 inter_every_intro_Plants  font-weight-bolder">绿植欣赏</h1>
     </div>
     <p>{{FlowerName}}</p>
-    <ul class="clearfix mt-3">
-        <li class="wow bounceIn" v-for="item in PlantsList">
-            <a href="HuaXiaoKe_Flower.html">
-                <img :src="item.plantimg1" alt="" class="vcenter rounded" /><i></i>
-                {{item.PlantName}}
-            </a>
+    <div class="card-columns container">
+        <ul>
+            <li v-for="item in PlantsList">
+                <div class="card mb-4" >
+                    <a href="#">
+                        <img :src="item.plantimg1" class="card-img-top" width="200" alt="...">
+                        <div class="card-body">
+                            <h4 class="card-title font-weight-bolder text-dark">{{item.plantname}}</h4>
+                        </div>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
 
-        </li>
-    </ul>
 </div>
 
-<div class="card-columns">
-    <div class="card">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title that wraps to a new line</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        </div>
-    </div>
-    <div class="card p-3">
-        <blockquote class="blockquote mb-0 card-body">
-            <p>A well-known quote, contained in a blockquote element.</p>
-            <footer class="blockquote-footer">
-                <small class="text-muted">
-                    Someone famous in <cite title="Source Title">Source Title</cite>
-                </small>
-            </footer>
-        </blockquote>
-    </div>
-    <div class="card">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-    </div>
-    <div class="card bg-primary text-white text-center p-3">
-        <blockquote class="blockquote mb-0">
-            <p>A well-known quote, contained in a blockquote element.</p>
-            <footer class="blockquote-footer text-white">
-                <small>
-                    Someone famous in <cite title="Source Title">Source Title</cite>
-                </small>
-            </footer>
-        </blockquote>
-    </div>
-    <div class="card text-center">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This card has a regular title and short paragraphy of text below it.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-    </div>
-    <div class="card">
-        <img src="..." class="card-img" alt="...">
-    </div>
-    <div class="card p-3 text-right">
-        <blockquote class="blockquote mb-0">
-            <p>A well-known quote, contained in a blockquote element.</p>
-            <footer class="blockquote-footer">
-                <small class="text-muted">
-                    Someone famous in <cite title="Source Title">Source Title</cite>
-                </small>
-            </footer>
-        </blockquote>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is another card with title and supporting text below. This card has some additional content to make it slightly taller overall.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-    </div>
-</div>
+
 
 <footer class="mt-5 pt-3">
     <div class="footer_main mx-auto col-md-6 clearfix">
