@@ -14,7 +14,7 @@
     <link href="../../public/css/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" type="text/css" href="../../public/css/animate.css"/>
     <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/flowers.css" type="text/css">
+    <link rel="stylesheet" href="../css/flower.css" type="text/css">
     <style>
 
         .btn-outline-primary {
@@ -52,58 +52,6 @@
     </style>
     <script src="../js/index.js"></script>
 
-
-    <!--    <script>-->
-<!--        window.onload = function (){-->
-<!--            cookie_email_search();-->
-<!--        }-->
-
-<!--        function quit(){-->
-<!--            document.cookie = "name=???";-->
-<!--            window.location = "Sign.html";-->
-<!--        }-->
-
-
-<!--        function cookie_email_search(){-->
-<!--            var url = "../../../CustomerServlet";-->
-<!--            if (window.XMLHttpRequest)-->
-<!--                req = new XMLHttpRequest();-->
-<!--            else if (window.ActiveXObject)-->
-<!--                req = new ActiveXObject("Microsoft.XMLHTTP");-->
-<!--            if (req) {-->
-<!--                //采用POST方式，异步传输-->
-<!--                req.open("post", url, true);-->
-<!--                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");-->
-<!--                req.onreadystatechange = cookie_email_searchComplete;-->
-<!--                req.send("type=search&method=byEmail&" + document.cookie);-->
-<!--            }-->
-<!--        }-->
-
-<!--        function cookie_email_searchComplete(){-->
-<!--            if (req.readyState == 4 && req.status == 200) {-->
-<!--                console.log(req.responseText);-->
-<!--                var j1 = '[{"name":"xuan","tel":"15929068966","id":8,"pwd":"8a00044f706210cc9d4b8958fd88e55d","email":"xuan@qq.com"}]';-->
-<!--                var j3 = JSON.parse(req.responseText);-->
-<!--                var j2 = JSON.parse(j1);-->
-<!--                console.log(JSON.parse(j1));-->
-<!--                console.log("JSON.parse(j1)" + JSON.parse(j1));-->
-<!--                console.log(j2);-->
-<!--                console.log(j3);-->
-<!--                var json =  JSON.parse(req.responseText);//转换为json对象-->
-<!--                console.log(json);-->
-
-<!--                console.log("&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;成功:" + document.cookie);-->
-<!--                document.getElementById("dropdown04").innerText = json[0].name;-->
-<!--                document.getElementById("IfUserSginIn").innerHTML = '';-->
-<!--            } else{-->
-<!--                document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'-->
-<!--                document.getElementById("dropdown04").innerText = "个人中心";-->
-<!--                console.log("&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;失败:" + document.cookie);-->
-<!--            }-->
-<!--        }-->
-
-<!--    </script>-->
-
 </head>
 <body>
 <nav>
@@ -135,49 +83,106 @@
         </div>
     </div>
 </nav>
-<div class="wyzl">
-    <div class="top_tit">
-        <span class="span1"><a href="court-travel.html" style="color: #8EB902;">鲜花走廊</a></span><br />
-        <span class="span2">FLOWER CORRIDOR</span>
+<div id="root" class="wyzl">
+    <div class="col-12 mt-3 mb-5 text-center">
+        <h1 class="col-3 user-select-none mx-auto pt-5 pb-2 inter_every_intro  font-weight-bolder">花卉欣赏</h1>
     </div>
-    <div class="top_qie">
-        <a href="">菊花类</a>
-        <a href="" class="active">玫瑰类</a>
-        <a href="" >睡莲类</a>
-        <a href="">百合类</a>
-        <a href="">康乃馨</a>
-        <a href="">满天星</a>
-    </div>
-    <ul class="clearfix">
-        <li class="wow bounceIn">
-            <a href="HuaXiaoKe_Flower.html"><img src="../img/花/菊花类/3.瑶台玉凤图集/瑶台玉凤1.jpg" alt="" class="vcenter" /><i></i></a>
-            <a href="HuaXiaoKe_Flower.html">菊花类</a>
+    <p>{{FlowerName}}</p>
+    <ul class="clearfix mt-3">
+        <li class="wow bounceIn" v-for="item in FlowerList">
+            <a href="HuaXiaoKe_Flower.html">
+                <img :src="item.flower_image1" alt="" class="vcenter rounded" /><i></i>
+                {{item.flower_name}}
+            </a>
+
         </li>
-        <li class="wow bounceIn">
-            <a href="HuaXiaoKe_Flower.html"><img src="../img/花/睡莲类/3.白睡莲图集/白睡莲1.jpg" alt="" class="vcenter" /><i></i></a>
-            <a href="HuaXiaoKe_Flower.html">睡莲类</a>
-        </li>
-        <li class="wow bounceIn">
-            <a href="HuaXiaoKe_Flower.html"><img src="../img/花/百合类/5.玉簪花图集/玉簪花3.jpg" alt="" class="vcenter" /><i></i></a>
-            <a href="HuaXiaoKe_Flower.html">百合类</a>
-        </li>
-        <li class="wow bounceIn">
-            <a href="HuaXiaoKe_Flower.html"><img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉2.jpg" alt="" class="vcenter" style="width: 403px; height: 302px;" /><i></i></a>
-            <a href="HuaXiaoKe_Flower.html">玫瑰类</a>
-        </li>
-        <li class="wow bounceIn">
-            <a href="HuaXiaoKe_Flower.html"><img src="../img/花/康乃馨/1.康乃馨(未包装)图集/康乃馨1.jpg" alt="" class="vcenter" /><i></i></a>
-            <a href="HuaXiaoKe_Flower.html">康乃馨</a>
-        </li>
-        <li class="wow bounceIn">
-            <a href="HuaXiaoKe_Flower.html"><img src="../img/花/满天星/1.满天星(未包装)图集/满天星6.jpg" alt="" class="vcenter" /><i></i></a>
-            <a href="HuaXiaoKe_Flower.html">满天星</a>
-        </li>
+<!--        <li class="wow bounceIn">-->
+<!--            <a href="HuaXiaoKe_Flower.html"><img src="../img/花/睡莲类/3.白睡莲图集/白睡莲1.jpg" alt="" class="vcenter rounded" /><i></i></a>-->
+<!--            <a href="HuaXiaoKe_Flower.html">睡莲类</a>-->
+<!--        </li>-->
+<!--        <li class="wow bounceIn">-->
+<!--            <a href="HuaXiaoKe_Flower.html"><img src="../img/花/百合类/5.玉簪花图集/玉簪花3.jpg" alt="" class="vcenter rounded" /><i></i></a>-->
+<!--            <a href="HuaXiaoKe_Flower.html">百合类</a>-->
+<!--        </li>-->
+<!--        <li class="wow bounceIn">-->
+<!--            <a href="HuaXiaoKe_Flower.html"><img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉2.jpg" alt="" class="vcenter rounded" style="width: 403px; height: 302px;" /><i></i></a>-->
+<!--            <a href="HuaXiaoKe_Flower.html">玫瑰类</a>-->
+<!--        </li>-->
+<!--        <li class="wow bounceIn">-->
+<!--            <a href="HuaXiaoKe_Flower.html"><img src="../img/花/康乃馨/1.康乃馨(未包装)图集/康乃馨1.jpg" alt="" class="vcenter rounded" /><i></i></a>-->
+<!--            <a href="HuaXiaoKe_Flower.html">康乃馨</a>-->
+<!--        </li>-->
+<!--        <li class="wow bounceIn">-->
+<!--            <a href="HuaXiaoKe_Flower.html"><img src="../img/花/满天星/1.满天星(未包装)图集/满天星6.jpg" alt="" class="vcenter rounded" /><i></i></a>-->
+<!--            <a href="HuaXiaoKe_Flower.html">满天星</a>-->
+<!--        </li>-->
     </ul>
 </div>
-<h1 style="text-align: center;font-size: 20px;color: #8EB902;" class="baike">
-    more..
-</h1>
+
+<div class="card-columns">
+    <div class="card">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Card title that wraps to a new line</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        </div>
+    </div>
+    <div class="card p-3">
+        <blockquote class="blockquote mb-0 card-body">
+            <p>A well-known quote, contained in a blockquote element.</p>
+            <footer class="blockquote-footer">
+                <small class="text-muted">
+                    Someone famous in <cite title="Source Title">Source Title</cite>
+                </small>
+            </footer>
+        </blockquote>
+    </div>
+    <div class="card">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+    <div class="card bg-primary text-white text-center p-3">
+        <blockquote class="blockquote mb-0">
+            <p>A well-known quote, contained in a blockquote element.</p>
+            <footer class="blockquote-footer text-white">
+                <small>
+                    Someone famous in <cite title="Source Title">Source Title</cite>
+                </small>
+            </footer>
+        </blockquote>
+    </div>
+    <div class="card text-center">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This card has a regular title and short paragraphy of text below it.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+    <div class="card">
+        <img src="..." class="card-img" alt="...">
+    </div>
+    <div class="card p-3 text-right">
+        <blockquote class="blockquote mb-0">
+            <p>A well-known quote, contained in a blockquote element.</p>
+            <footer class="blockquote-footer">
+                <small class="text-muted">
+                    Someone famous in <cite title="Source Title">Source Title</cite>
+                </small>
+            </footer>
+        </blockquote>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is another card with title and supporting text below. This card has some additional content to make it slightly taller overall.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+</div>
 
 <footer class="mt-5 pt-3">
     <div class="footer_main mx-auto col-md-6 clearfix">
@@ -202,12 +207,48 @@
 <script src="../../public/js/jquery-1.12.4.min.js"></script>
 <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.bundle.js"></script>
 <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
+<script src="../../public/js/vue.min.js"></script>
+<script src="../../public/js/axios.min.js"></script>
+
 <script>
-       /*点击more字体查看更多花种类，并且more字体消失*/
-        var baike = document.getElementsByClassName("baike");
-        baike[0].onclick=function(){
-            this.style.display="none";
+    Vue.config.productionTip = false
+
+    new Vue({
+        el:'#root',
+        data:{
+            FlowerName:"",
+            PlantName:"",
+            FlowerList:[],
+            PlantsList:[]
+        },
+        mounted(){
+            this.searchFlowers()
+            this.searchPlants()
+        },
+        methods:{
+            searchFlowers:function () {
+                var that = this;        //保存this
+                axios.post('../../../FlowersServlet?type=searchByName&flower_name=' + this.FlowerName)
+                    .then(function (response) {
+                        console.log(response);
+                        that.FlowerList = response.data
+                    })
+                    .catch(function (err) {
+                    })
+            },
+            searchPlants:function () {
+                var that = this;        //保存this
+                axios.post('../../../PlantsServlet?type=search&name=' + this.PlantName)
+                    .then(function (response) {
+                        console.log(response);
+                        that.PlantsList = response.data
+                    })
+                    .catch(function (err) {
+                    })
+            },
         }
+    })
 </script>
+
 </body>
 </html>
