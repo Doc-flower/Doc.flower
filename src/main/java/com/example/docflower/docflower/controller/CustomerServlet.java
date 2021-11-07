@@ -45,6 +45,7 @@ public class CustomerServlet  extends HttpServlet
             update(request, response);
     }
 
+
     private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         Customer customer=null;

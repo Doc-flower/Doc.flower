@@ -154,6 +154,14 @@ mua~
     height: 100px;
 }
 
+#custom-file{
+    position: absolute;
+    bottom: 120px;
+    left: -65px;
+    -webkit-transition: background .3s;
+    transition: background .3s;
+}
+
 
 .person_name{
     font-size: 35px;

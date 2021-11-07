@@ -96,26 +96,20 @@
             </a>
 
         </li>
-<!--        <li class="wow bounceIn">-->
-<!--            <a href="HuaXiaoKe_Flower.html"><img src="../img/花/睡莲类/3.白睡莲图集/白睡莲1.jpg" alt="" class="vcenter rounded" /><i></i></a>-->
-<!--            <a href="HuaXiaoKe_Flower.html">睡莲类</a>-->
-<!--        </li>-->
-<!--        <li class="wow bounceIn">-->
-<!--            <a href="HuaXiaoKe_Flower.html"><img src="../img/花/百合类/5.玉簪花图集/玉簪花3.jpg" alt="" class="vcenter rounded" /><i></i></a>-->
-<!--            <a href="HuaXiaoKe_Flower.html">百合类</a>-->
-<!--        </li>-->
-<!--        <li class="wow bounceIn">-->
-<!--            <a href="HuaXiaoKe_Flower.html"><img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉2.jpg" alt="" class="vcenter rounded" style="width: 403px; height: 302px;" /><i></i></a>-->
-<!--            <a href="HuaXiaoKe_Flower.html">玫瑰类</a>-->
-<!--        </li>-->
-<!--        <li class="wow bounceIn">-->
-<!--            <a href="HuaXiaoKe_Flower.html"><img src="../img/花/康乃馨/1.康乃馨(未包装)图集/康乃馨1.jpg" alt="" class="vcenter rounded" /><i></i></a>-->
-<!--            <a href="HuaXiaoKe_Flower.html">康乃馨</a>-->
-<!--        </li>-->
-<!--        <li class="wow bounceIn">-->
-<!--            <a href="HuaXiaoKe_Flower.html"><img src="../img/花/满天星/1.满天星(未包装)图集/满天星6.jpg" alt="" class="vcenter rounded" /><i></i></a>-->
-<!--            <a href="HuaXiaoKe_Flower.html">满天星</a>-->
-<!--        </li>-->
+    </ul>
+
+    <div class="col-12 mt-3 mb-5 text-center">
+        <h1 class="col-3 user-select-none mx-auto pt-5 pb-2 inter_every_intro_Plants  font-weight-bolder">绿植欣赏</h1>
+    </div>
+    <p>{{FlowerName}}</p>
+    <ul class="clearfix mt-3">
+        <li class="wow bounceIn" v-for="item in PlantsList">
+            <a href="HuaXiaoKe_Flower.html">
+                <img :src="item.plantimg1" alt="" class="vcenter rounded" /><i></i>
+                {{item.PlantName}}
+            </a>
+
+        </li>
     </ul>
 </div>
 

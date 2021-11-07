@@ -111,6 +111,12 @@
         }
 
 
+        // 修改头像
+
+        function updateUserImg(){
+            console.log(document.getElementById("UserImg").value);
+        }
+
     </script>
     <link rel="stylesheet" href="../css/normalize.min.css">
 
@@ -180,8 +186,6 @@
                         <input type="hidden" id="owner_id" name="owner_id" value="0">
 
                         <div  class="person_img_div person_img_bg col-md-6 float-left">
-                            <img src="../img/QQ图片20210925114618.jpg" id="person_img" class="rounded-circle person_img"  alt="">
-
                             <div class="wrapper ">
                                 <div class="palette">
                                     <div class="palette_item_wrapper">
@@ -199,30 +203,29 @@
                                     <div id="palette_color__main" class="palette_color__main"></div>
                                 </div>
                             </div>
-
                         </div>
                         <div class="col-md-6 float-right">
                             <div class="input-group  mb-3 float-left">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">用户名</span>
+                                    <span class="input-group-text" id="basic-addon2">用户名</span>
                                 </div>
                                 <input id="owner_name" name="owner_name" type="text" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                             </div>
                             <div class="input-group  mb-3 float-left">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon2">邮箱</span>
+                                    <span class="input-group-text" id="basic-addon3">邮箱</span>
                                 </div>
                                 <input id="owner_email" name="owner_email" type="text" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                             </div>
                             <div class=" input-group  mb-3 float-left">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">电话</span>
+                                    <span class="input-group-text" id="basic-addon4">电话</span>
                                 </div>
                                 <input id="owner_tel" name="owner_tel" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                             </div>
                             <div class=" input-group  mb-3 float-left">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon6">地址</span>
+                                    <span class="input-group-text" id="basic-addon5">地址</span>
                                 </div>
                                 <input id="owner_address" name="owner_address" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                             </div>
