@@ -65,27 +65,31 @@ public class CustomerServlet  extends HttpServlet
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
 
-            String method = "login";
+            String method_email = "method_email";
+            String method_tel = "method_tel";
 
-            List<Customer> result=null;
-            result=new CustomerSrv().Fetch(email,method);
+            List<Customer> result_email=null;
+            List<Customer> result_tel=null;
+            result_email=new CustomerSrv().Fetch(email,method_email);
+            result_tel=new CustomerSrv().Fetch(tel,method_tel);
 
             JSONArray array_email=new JSONArray();
             JSONArray array_tel=new JSONArray();
             JSONObject json_email;
             JSONObject json_tel;
 
-            for(Customer s : result)
+            for(Customer s1 : result_email)
             {
                 json_email=new JSONObject();
-                json_tel=new JSONObject();
-
-                json_email.put("email", s.getEmail());
-                json_tel.put("tel", s.getEmail());
-
+                json_email.put("email", s1.getEmail());
                 array_email.put(json_email);
-                array_tel.put(json_tel);
+            }
 
+            for(Customer s2 : result_tel)
+            {
+                json_tel=new JSONObject();
+                json_tel.put("tel", s2.getTel());
+                array_tel.put(json_tel);
             }
 //            System.out.println("------------>pwd:" + pwd);
 //
