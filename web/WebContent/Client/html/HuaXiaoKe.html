@@ -103,7 +103,7 @@
         <ul>
             <li v-for="item in FlowerList">
                 <div class="card mb-4" >
-                    <a href="#">
+                    <a :href="'HuaXiaoKe_Flowers.html?type=searchByName&flower_name=' + item.flower_name" >
                         <img :src="item.flower_image1" class="card-img-top" width="200" alt="...">
                         <div class="card-body">
                             <h4 class="card-title font-weight-bolder text-dark">{{item.flower_name}}</h4>
@@ -123,7 +123,7 @@
         <ul>
             <li v-for="item in PlantsList">
                 <div class="card mb-4" >
-                    <a href="#">
+                    <a :href="'HuaXiaoKe_Plants.html?type=search&name=' + item.plantname">
                         <img :src="item.plantimg1" class="card-img-top" width="200" alt="...">
                         <div class="card-body">
                             <h4 class="card-title font-weight-bolder text-dark">{{item.plantname}}</h4>
