@@ -10,7 +10,7 @@
 
 
     <script src="../../public/js/jquery-1.12.4.min.js"></script>
-    <script src="../js/slide.js"></script>
+<!--    <script src="../js/slide.js"></script>-->
     <script>
         function init(){
             getFlowerName();
@@ -155,8 +155,9 @@
                             '            <p class="mt-4 mb-4" style="font-family: \'HarmonyOS Sans\';line-height: 30px">\n' +
                             '                &nbsp;&nbsp;&nbsp;&nbsp;'+ json[i].flower_introduction +'\n' +
                             '            </p>\n' +
-                            '            <a href="https://baike.baidu.com/search/none?word='+ json[i].flower_name +'" class="col-md-12"><button type="button" class="btn btn-primary col-md-11 mb-3" style="font-family: \'HarmonyOS Sans\';line-height: 30px">在<span class="font-weight-bolder">百度百科</span>中搜索'+ json[i].flower_name +'</button></a>\n' +
-                            '            <a href="https://s.taobao.com/search?q='+ json[i].flower_name +'" class="col-md-12 "><button type="button" class="btn btn-warning col-md-11 " style="font-family: \'HarmonyOS Sans\';line-height: 30px">在<span class="font-weight-bolder">淘宝网</span>中搜索'+ json[i].flower_name +'</button></a>\n' +
+                            '            <a href="HuaXiaoShi_Flowers_Buy.html?type=search&name='+ json[i].flower_name +'" class="col-md-12" target="_blank"><button type="button" class="btn btn-success col-md-11 mb-2" style="font-family: \'HarmonyOS Sans\';line-height: 30px">在<span class="font-weight-bolder">花小市</span>中购买'+ json[i].flower_name +'</button></a>\n' +
+                            '            <a href="https://baike.baidu.com/search/none?word='+ json[i].flower_name +'" class="col-md-12" target="_blank"><button type="button" class="btn btn-primary col-md-11 mb-2" style="font-family: \'HarmonyOS Sans\';line-height: 30px">在<span class="font-weight-bolder">百度百科</span>中搜索'+ json[i].flower_name +'</button></a>\n' +
+                            '            <a href="https://s.taobao.com/search?q='+ json[i].flower_name +'" class="col-md-12 " target="_blank"><button type="button" class="btn btn-warning col-md-11 " style="font-family: \'HarmonyOS Sans\';line-height: 30px">在<span class="font-weight-bolder">淘宝网</span>中搜索'+ json[i].flower_name +'</button></a>\n' +
                             '        </div>'
                     }
                 }else {
