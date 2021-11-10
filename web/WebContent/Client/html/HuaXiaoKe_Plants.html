@@ -2,21 +2,207 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>鲜花走廊</title>
+    <title>购买</title>
     <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="../../public/css/bootstrap-4.6.0-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/index.css">
-    <!-- include main css -->
-    <link rel="stylesheet" type="text/css" href="../../public/css/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="../../public/css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="../../public/css/juery.mmenu.all.css"/>
-    <link rel="stylesheet" type="text/css" href="../../public/css/style.css"/>
-    <link href="../../public/css/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
-    <link rel="stylesheet" type="text/css" href="../../public/css/animate.css"/>
+    <link rel="stylesheet" href="../css/Buy.css">
     <link rel="stylesheet" href="../css/footer.css">
-    <link rel="stylesheet" href="../css/flower.css" type="text/css">
+
+
+    <script src="../../public/js/jquery-1.12.4.min.js"></script>
+    <!--    <script src="../js/slide.js"></script>-->
+    <script>
+        function init(){
+            getPlantsName();
+            cookie_email_search();
+            console.log("页面重新加载啦")
+        }
+        function keypress(){
+            var name = document.getElementById("Plant_Seach").value;
+            console.log("搜索");
+            search(name);
+        }
+        // 传入绿植
+        UrlParm = function() { // url参数
+            var data, index;
+            (function init() {
+                data = [];
+                index = {};
+                var u = window.location.search.substr(1);
+                if (u != '') {
+                    var parms = decodeURIComponent(u).split('&');
+                    for (var i = 0, len = parms.length; i < len; i++) {
+                        if (parms[i] != '') {
+                            var p = parms[i].split("=");
+                            if (p.length == 1 || (p.length == 2 && p[1] == '')) {// p | p=
+                                data.push([ '' ]);
+                                index[p[0]] = data.length - 1;
+                            } else if (typeof (p[0]) == 'undefined' || p[0] == '') { // =c | =
+                                data[0] = [ p[1] ];
+                            } else if (typeof (index[p[0]]) == 'undefined') { // c=aaa
+                                data.push([ p[1] ]);
+                                index[p[0]] = data.length - 1;
+                            } else {// c=aaa
+                                data[index[p[0]]].push(p[1]);
+                            }
+                        }
+                    }
+                }
+            })();
+            return {
+                // 获得参数
+                parm : function(o) { // o: 参数名或者参数次序
+                    try {
+                        return (typeof (o) == 'number' ? data[o][0] : data[index[o]][0]);
+                    } catch (e) {
+                    }
+                },
+                //获得参数组, 类似request.getParameterValues()
+                parmValues : function(o) { //  o: 参数名或者参数次序
+                    try {
+                        return (typeof (o) == 'number' ? data[o] : data[index[o]]);
+                    } catch (e) {
+                    }
+                },
+                //是否含有parmName参数
+                hasParm : function(parmName) {
+                    return typeof (parmName) == 'string' ? typeof (index[parmName]) != 'undefined' : false;
+                },
+                // 获得参数Map ,类似request.getParameterMap()
+                parmMap : function() {
+                    var map = {};
+                    try {
+                        for ( var p in index) {
+                            map[p] = data[index[p]];
+                        }
+                    } catch (e) {
+                    }
+                    return map;
+                }
+            }
+        }();
+
+        function getPlantsName(){
+            var plant_name = UrlParm.parm("name");
+            document.getElementsByTagName("title")[0].innerText = "花小科-" + plant_name;
+            search(plant_name);
+        }
+
+        function search(plant_name){
+            var url = "../../../PlantsServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = searchComplete;
+                req.send("type=search&name="+plant_name);
+            }
+        }
+
+        function searchComplete() {
+            if (req.readyState == 4 && req.status == 200) {
+                var json =  JSON.parse(req.responseText);//转换为json对象
+                console.log("长度：" + json.length);
+                document.getElementById("knowledge_plant").innerHTML = "";
+                if(json.length > 0){
+                    for(i=0; i<json.length; i++) {
+                        document.getElementById("knowledge_plant").innerHTML +=
+                            '<div class="col-md-6 text-center">\n' +
+                            '            <img src="' + json[i].plantimg2 + '" class="col-md-12" alt="">\n' +
+                            '        </div>\n' +
+                            '        <div class="col-md-6  pt-5">\n' +
+                            '            <span class="display-4 font-weight-bolder">\n' +
+                            '               '+ json[i].plantname +'\n' +
+                            '            </span>\n' +
+                            '            <p class="mt-4 mb-4" style="font-family: \'HarmonyOS Sans\';line-height: 30px">\n' +
+                            '                &nbsp;&nbsp;&nbsp;&nbsp;'+ json[i].plantintro +'\n' +
+                            '            </p>\n' +
+                            '            <a href="HuaXiaoShi_Plants_Buy.html?type=search&name='+ json[i].plantname +'" class="col-md-12" target="_blank"><button type="button" class="btn btn-success col-md-11 mb-2" style="font-family: \'HarmonyOS Sans\';line-height: 30px">在<span class="font-weight-bolder">花小市</span>中购买<span class="font-weight-bolder">'+ json[i].plantname +'</span></button></a>\n' +
+                            '            <a href="https://baike.baidu.com/search/none?word='+ json[i].plantname +'" class="col-md-12" target="_blank"><button type="button" class="btn btn-primary col-md-11 mb-2" style="font-family: \'HarmonyOS Sans\';line-height: 30px">在<span class="font-weight-bolder">百度百科</span>中搜索<span class="font-weight-bolder">'+ json[i].plantname +'</span></button></a>\n' +
+                            '            <a href="https://s.taobao.com/search?q='+ json[i].plantname +'" class="col-md-12 " target="_blank"><button type="button" class="btn btn-warning col-md-11 " style="font-family: \'HarmonyOS Sans\';line-height: 30px">在<span class="font-weight-bolder">淘宝网</span>中搜索<span class="font-weight-bolder">'+ json[i].plantname +'</span></button></a>\n' +
+                            '        </div>'
+                    }
+                }else {
+                    document.getElementById("knowledge_plant").innerHTML =
+                        '<div class="mx-auto text-center  py-5">'+
+                        '        <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" fill="currentColor" class="bi bi-emoji-frown" viewBox="0 0 16 16">\n' +
+                        '            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>\n' +
+                        '            <path d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>\n' +
+                        '        </svg>'+
+                        '        <h1 class="text-dark mx-auto my-5">抱歉，没有找到该绿植...</h1>'+
+                        '</div>';
+                }
+            }
+        }
+
+
+        // 登陆检测
+        function quit(){
+            document.cookie = "name=???";
+            window.location = "Sign.html";
+        }
+
+
+        function cookie_email_search(){
+            var url = "../../../CustomerServlet";
+            if (window.XMLHttpRequest)
+                req1 = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req1 = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req1) {
+                //采用POST方式，异步传输
+                req1.open("post", url, true);
+                req1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req1.onreadystatechange = cookie_email_searchComplete;
+                req1.send("type=search&method=byEmail&" + document.cookie);
+            }
+        }
+
+        function cookie_email_searchComplete(){
+            console.log("cus" + req1.readyState);
+            if (req1.readyState == 4 && req1.status == 200 ) {
+                console.log(JSON.parse(req1.responseText).length);
+                if(JSON.parse(req1.responseText).length != 0)
+                {
+                    var json1 =  JSON.parse(req1.responseText);//转换为json对象
+                    console.log(json1.length);
+                    document.getElementById("IfUserSginIn").innerHTML = '';
+                    document.getElementById("dropdown04").innerText = json1[0].name;
+                    // 购买框
+                    document.getElementById("flower_id").value = '1';
+                    document.getElementById("order_owner_name").value = json1[0].name;
+                    document.getElementById("order_owner_tel").value = json1[0].tel;
+                    document.getElementById("order_address").value = json1[0].address;
+
+                    console.log("---------->成功:" + document.cookie);
+
+                }else if(JSON.parse(req1.responseText).length == 0){
+                    document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
+                    document.getElementById("dropdown04").innerText = "个人中心";
+                    console.log("---------->失败:" + document.cookie);
+                }
+            } else{
+                document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
+                document.getElementById("dropdown04").innerText = "个人中心";
+                console.log("---------->失败:" + document.cookie);
+            }
+        }
+
+
+
+    </script>
+
+    <link rel="stylesheet" href="../../public/css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/HuaXiaoKe_banner.css">
+    <!--    <script src="../js/index.js"></script>-->
+
 </head>
-<body>
+<body onload="init()">
 <nav>
     <div class="nav_main">
 
@@ -24,130 +210,129 @@
         <div class="nav_main_title">
             <ul>
                 <li> <a href="./index.html" >首页</a> </li>
-                <li><a href="HuaXiaoShi_Flowers.html" class="title_active">花小科</a></li>
-                <li><a href="HuaXiaoShi_Flowers.html">花花小市</a></li>
-                <li><a href="HuaXiaoShi_Plants.html">绿植小市</a></li>
+                <li><a href="./HuaXiaoKe.html" class="title_active">花小科</a></li>
+                <li><a href="HuaXiaoShi_Flowers.html">花花小市</a>
+                </li>
+                <li>
+                    <a href="HuaXiaoShi_Plants.html">绿植小市</a>
+                </li>
                 <li><a href="./HuaXiaoQuan.html">花小圈</a></li>
 
             </ul>
         </div>
         <div class="nav_main_user">
-            <a href="Sign.html" style="display: inline-block"><img src="../img/用户.png" alt=""></a>
-            <div class="nav-item dropdown float-right">
+            <div class="col-md-5 float-left" id="IfUserSginIn" >
+
+            </div>
+            <div class="nav-item dropdown col-md-6 float-right">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-expanded="false">个人中心</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown04">
                     <a class="dropdown-item" href="Person.html" target="_blank">个人信息</a>
                     <a class="dropdown-item" href="Person_Order.html" target="_blank">订单管理</a>
-                    <a class="dropdown-item" href="#">退出登录</a>
+                    <a class="dropdown-item" href="javascript:;" onclick="quit()">退出登录</a>
                 </div>
-                <div></div>
             </div>
         </div>
+
+
+    </div>
 
 </nav>
 
 
-<div class="travel_con">
-   <div class="top_qie">
-        <a href="">假日公主</a>
-        <a href="" >白玫瑰</a>
-        <a href="" >冷美人</a>
-        <a href="">法兰西</a>
-        <a href="">金香玉</a>
-        <a href="">卡罗拉</a>
-    </div>
-    <div class="tra_ul">
 
-        <ul class="clearfix">
-            <li class="wow bounceIn">
-                <a href="HuaXiaoKe_flower-knowledge.html"><img style="height: 271px;width: 427px;" src="../img/花/玫瑰类/6.假日公主图集/假日公主1.jpg" alt="" class="vcenter" /><i></i></a>
-                <a href="HuaXiaoKe_flower-knowledge.html">假日公主</a>
-            </li>
-
-            <li class="wow bounceIn">
-                <a href="HuaXiaoKe_flower-knowledge.html"><img style="height: 271px;width: 427px;" src="../img/花/玫瑰类/2.白玫瑰图集/白玫瑰2.jpg" alt="" class="vcenter" /><i></i></a>
-                <a href="HuaXiaoKe_flower-knowledge.html">白玫瑰</a>
-            </li>
-            <li class="wow bounceIn">
-                <a href="HuaXiaoKe_flower-knowledge.html"><img style="height: 271px;width: 427px;" src="../img/花/玫瑰类/4.冷美人图集/冷美人1.jpg" alt="" class="vcenter" /><i></i></a>
-                <a href="HuaXiaoKe_flower-knowledge.html">冷美人</a>
-            </li>
-            <li class="wow bounceIn">
-                <a href="HuaXiaoKe_flower-knowledge.html"><img style="height: 271px;width: 427px;" src="../img/花/玫瑰类/3.法兰西图集/法兰西1.jpg" alt="" class="vcenter" /><i></i></a>
-                <a href="HuaXiaoKe_flower-knowledge.html">法兰西</a>
-            </li>
-            <li class="wow bounceIn">
-                <a href="HuaXiaoKe_flower-knowledge.html"><img style="height: 271px;width: 427px;" src="../img/花/玫瑰类/5.金香玉图集/金香玉3.jpg" alt="" class="vcenter" /><i></i></a>
-                <a href="HuaXiaoKe_flower-knowledge.html">金香玉</a>
-            </li>
-            <li class="wow bounceIn">
-                <a href="HuaXiaoKe_flower-knowledge.html"><img style="height: 271px;width: 427px;" src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg" alt="" class="vcenter" /><i></i></a>
-                <a href="HuaXiaoKe_flower-knowledge.html">卡罗拉</a>
-            </li>
-        </ul>
-        <div class="page">
-            <a href=""><i class="ye fa fa-backward"></i></a>
-            <a href=""><i class="ye fa fa-caret-left"></i></a>
-            <a href="" class="active">1</a>
-            <a href="" class="">2</a>
-            <a href="" class="">3</a>
-            <span href="" class="">…</span>
-            <a href=""><i class="ye fa fa-caret-right"></i></a>
-            <a href=""><i class="ye fa fa-forward"></i></a>
+<div id="container" class="container">
+    <div class="input-group col-9 mx-auto mb-3 mt-3 order-search">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">搜索</span>
         </div>
+        <input type="text" id="Plant_Seach" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" onkeypress="keypress()">
+    </div>
+
+    <p class=" col-12  sale_buy ">
+        <i class='fa fa-empire' ></i>
+        绿植介绍
+    </p>
+    <div class="row" id="knowledge_plant">
+
+    </div>
+    <p class="col-md-12 my-3 sale_buy">
+    </p>
+    <div class="col-md-12  my-3">
+        <!--            花卉推荐-->
+        <div class="col-12 mt-3 mb-4 text-center">
+            <h1 class="col-3 mx-auto pt-5 pb-2 inter_every_intro  font-weight-bolder">精品推荐</h1>
+        </div>
+        <div class="row mb-2 ">
+            <div class="col-md-6 ">
+                <a href="HuaXiaoShi_Flowers_Buy.html?type=search&name=卡罗拉">
+                    <div class="flower_reco row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative ">
+                        <div class="col-auto d-none d-lg-block flower_recommend">
+
+                            <img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉2.jpg"  height="275" width="380"/>
+                        </div>
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <strong class="d-inline-block mb-2 text-primary">鲜花</strong>
+                            <h3 class="mb-3">玫瑰</h3>
+                            <p class="card-text mb-auto font-weight-bolder text-danger">￥12.99</p>
+                            <button class="stretched-link btn btn-danger" >查看详情</button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 ">
+                <a href="HuaXiaoShi_Flowers_Buy.html?type=search&name=康乃馨">
+                    <div class="flower_reco row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col-auto d-none d-lg-block  flower_recommend">
+                            <img src="../img/花/康乃馨/2.康乃馨(包装)图集/康乃馨2.jpg" height="275" width="380"/></div>
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <strong class="d-inline-block mb-2 text-primary">鲜花</strong>
+                            <h3 class="mb-3">康乃馨</h3>
+                            <p class="card-text mb-auto font-weight-bolder text-danger">￥12.99</p>
+                            <button class="stretched-link btn btn-danger" >查看详情</button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-md-6">
+                <a href="HuaXiaoShi_Plants_Buy.html?type=search&name=吊兰">
+
+                    <div class="flower_reco row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col-auto d-none d-lg-block   flower_recommend">
+
+                            <img src="../img/绿植/吊兰/img/吊兰2.jpg" height="380" width="380"/></div>
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <strong class="d-inline-block mb-2 text-primary">绿植</strong>
+                            <h3 class="mb-3">吊兰</h3>
+                            <p class="card-text mb-auto font-weight-bolder text-danger">￥9.99</p>
+                            <button class="stretched-link btn btn-danger" >查看详情</button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="HuaXiaoShi_Plants_Buy.html?type=search&name=吊兰">
+
+                    <div class="flower_reco row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col-auto d-none d-lg-block   flower_recommend">
+                            <img src="../img/绿植/绿萝/img/绿萝1.jpg" height="380" width="380"/>
+                        </div>
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <strong class="d-inline-block mb-2 text-primary">绿植</strong>
+                            <h3 class="mb-3">绿萝</h3>
+                            <p class="card-text mb-auto font-weight-bolder text-danger">￥59.99</p>
+                            <button class="stretched-link btn btn-danger" >查看详情</button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
     </div>
 </div>
-<div class="home_news">
-    <div class="news_con">
-        <div class="top_tit">
-            <span class="span1"><a href="./HuaXiaoQuan.html">花小圈推荐</a></span><br />
-            <span class="span2">NEWS</span>
-        </div>
-        <ul>
-            <li class="clearfix wow bounceIn">
-                <div class="news_left">
-                    <a href="HuaXiaoQuan_story.html">Queen's day ——假日公主</a>
-                    <p>
-                        在中世纪，这种玫瑰的颜色充满活力, 以能够让人微笑而闻名，特别是在寒冷、艰难的冬天。一天，
-                        女王注意到市场上的这种玫瑰...
-                    </p>
-                </div>
-                <div class="news_right">
-                    <span>06.30</span>
-                    <time>2021</time>
-                </div>
-            </li>
-            <li class="clearfix wow bounceIn">
-                <div class="news_left">
-                    <a href="HuaXiaoQuan_story.html">Diphylleia grayi F. Schm. ——山荷叶</a>
-                    <p>
-                        为什么花瓣是透明的？
-                        因为水分容易侵入花瓣内的细胞间隙，由于水和细胞液折射率接近，消除了反射界面，透射部分
-                        增强，花瓣就显得透明了。
-                    </p>
-                </div>
-                <div class="news_right">
-                    <span>07.25</span>
-                    <time>2021</time>
-                </div>
-            </li>
-            <li class="clearfix">
-                <div class="news_left">
-                    <a href="HuaXiaoQuan_story.html">Rose ——卡罗拉</a>
-                    <p>
-                        印度神话称玫瑰花蕾里诞生了拉克什米女神，是保护神吡瑟孥吻她而把她唤醒的，从此，它就成了吡瑟孥的妻子...
-                    </p>
-                </div>
-                <div class="news_right">
-                    <span>08.10</span>
-                    <time>2021</time>
-                </div>
-            </li>
-        </ul>
-        <a href="./HuaXiaoQuan.html" class="more">MORE</a>
-    </div>
-</div>
-
 <footer class="mt-5 pt-3">
     <div class="footer_main mx-auto col-md-6 clearfix">
         <div class="footer_main_icon text-center py-2">
@@ -158,7 +343,7 @@
                     </span>
                 <br>
                 <span class="footer_main_text_email">
-                        https://github.com/Doc-flowers/Doc.flowers.Web.git
+                        https://github.com/Doc-flower/Doc.flower.Web.git
                     </span>
                 <br>
                 <span class="footer_main_text_company">
@@ -168,7 +353,7 @@
         </div>
     </div>
 </footer>
-<script src="../../public/js/jquery-1.12.4.min.js"></script>
+
 <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.bundle.js"></script>
 
 <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>

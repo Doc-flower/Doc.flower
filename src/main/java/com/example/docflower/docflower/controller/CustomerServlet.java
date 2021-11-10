@@ -252,12 +252,8 @@ public class CustomerServlet  extends HttpServlet
         String pwd_MD5="";
         try
         {
-
-
             for(Customer s : result)
             {
-
-
                 pwd_MD5 = s.getPwd();
             }
             System.out.println("------------>pwd:" + pwd);

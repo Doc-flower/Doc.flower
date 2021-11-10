@@ -16,6 +16,9 @@ public class DAOFactory
 
     private static iMessagesDAO messDao;
 
+    private static iManagersDAO manDAO;
+
+
     private  static iFlowersDAO flowerDAO;
 
     private  static iCommentsDAO commentsDAO;
@@ -60,6 +63,12 @@ public class DAOFactory
         if(null == messDao)
             messDao=new MessagesDAO();
         return messDao;
+    }
+    public static synchronized iManagersDAO creatManagersDAO()
+    {
+        if(null == manDAO)
+            manDAO=new ManagersDAO();
+        return manDAO;
     }
 
     public static synchronized iFlowersDAO creatflowerDAO()

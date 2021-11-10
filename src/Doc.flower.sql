@@ -25,6 +25,23 @@ CREATE TABLE `customer`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
 
 -- ----------------------------
+-- Table structure for managers
+-- ----------------------------
+DROP TABLE IF EXISTS `managers`;
+CREATE TABLE `managers`  (
+     `man_id` int(11) NOT NULL AUTO_INCREMENT,
+     `man_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+     `man_pwd`  varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '登陆密码',
+     PRIMARY KEY (`man_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
+
+insert into managers(man_name, man_pwd) values ('liuyuyang','liuyuyang');
+insert into managers(man_name, man_pwd) values ('liuxuan','liuxuan');
+insert into managers(man_name, man_pwd) values ('miaohuan','miaohuan');
+insert into managers(man_name, man_pwd) values ('xuzhuolong','xuzhuolong');
+insert into managers(man_name, man_pwd) values ('fanjiawei','fanjiawei');
+
+-- ----------------------------
 -- Table structure for flowers
 -- ----------------------------
 DROP TABLE IF EXISTS `flowers`;

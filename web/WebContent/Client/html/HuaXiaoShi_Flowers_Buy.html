@@ -247,14 +247,14 @@
                             '        </div>\n' +
                             '        <div class="col-md-6 ">\n' +
                             '            <h1 class="font-weight-bolder my-4 px-3">'+ json[i].flower_name +'</h1>\n' +
-                            '            <h5 class="my-1 px-3">类别：'+ json[i].flower_kind +'</h5>\n' +
+                            '            <h6 class="text-danger my-1 px-3 font-weight-bolder">类别：['+ json[i].flower_kind +']</h6>\n' +
                             '            <p class="mt-3 mb-5" style="font-family: \'HarmonyOS Sans\'">\n' +
                             '                &nbsp;&nbsp;&nbsp;&nbsp;'+ json[i].flower_introduction +'\n' +
                             '            </p>\n' +
                             '            <h3 class="text-primary my-1 px-3">￥'+ json[i].flower_price +'</h3>\n' +
                             '            <div class="col-md-12 my-4">\n' +
-                            '                <button class="btn btn-primary col-md-5 mx-2" style="font-size: 22px" data-toggle="modal" data-target="#buyModal" onclick="buy('+ json[i].flower_id +')">购买</button>\n' +
-                            '                <button class="btn btn-warning col-md-6" style="font-size: 22px" >加入购物车</button>\n' +
+                            '                <button class="btn btn-primary col-md-11 mx-2 mb-3" style="font-size: 28px;line-height: 50px" data-toggle="modal" data-target="#buyModal" onclick="buy('+ json[i].flower_id +')">购买花卉</button>\n' +
+                            '                <a href="https://xa.meituan.com/s/'+ json[i].flower_name +'" class="btn btn-warning col-md-11 mx-2" target="_blank">在<span class="font-weight-bolder">美团</span>中搜索<span class="font-weight-bolder">'+ json[i].flower_name +'</span></a>\n' +
                             '            </div>\n' +
                             '        </div>'
                     }
@@ -578,67 +578,81 @@
 
 
         <!--            花卉推荐-->
-        <div class="col-12 mt-3 mb-4 text-center">
-            <h1 class="col-3 mx-auto pt-5 pb-2 inter_every_intro  font-weight-bolder">精品推荐</h1>
+        <div class="  my-3">
+            <!--            花卉推荐-->
+            <div class="col-12 mt-3 mb-4 text-center">
+                <h1 class="col-3 mx-auto pt-5 pb-2 inter_every_intro  font-weight-bolder">精品推荐</h1>
+            </div>
+            <div class="row mb-2 ">
+                <div class="col-md-6 ">
+                    <a href="HuaXiaoShi_Flowers_Buy.html?type=search&name=卡罗拉">
+                        <div class="flower_reco row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative ">
+                            <div class="col-auto d-none d-lg-block flower_recommend">
+
+                                <img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉2.jpg"  height="275" width="380"/>
+                            </div>
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <strong class="d-inline-block mb-2 text-primary">鲜花</strong>
+                                <h3 class="mb-3">玫瑰</h3>
+                                <p class="card-text mb-auto font-weight-bolder text-danger">￥12.99</p>
+                                <button class="stretched-link btn btn-danger" >查看详情</button>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6 ">
+                    <a href="HuaXiaoShi_Flowers_Buy.html?type=search&name=康乃馨">
+                        <div class="flower_reco row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col-auto d-none d-lg-block  flower_recommend">
+                                <img src="../img/花/康乃馨/2.康乃馨(包装)图集/康乃馨2.jpg" height="275" width="380"/></div>
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <strong class="d-inline-block mb-2 text-primary">鲜花</strong>
+                                <h3 class="mb-3">康乃馨</h3>
+                                <p class="card-text mb-auto font-weight-bolder text-danger">￥12.99</p>
+                                <button class="stretched-link btn btn-danger" >查看详情</button>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-md-6">
+                    <a href="HuaXiaoShi_Plants_Buy.html?type=search&name=吊兰">
+
+                        <div class="flower_reco row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col-auto d-none d-lg-block   flower_recommend">
+
+                                <img src="../img/绿植/吊兰/img/吊兰2.jpg" height="380" width="380"/></div>
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <strong class="d-inline-block mb-2 text-primary">绿植</strong>
+                                <h3 class="mb-3">吊兰</h3>
+                                <p class="card-text mb-auto font-weight-bolder text-danger">￥9.99</p>
+                                <button class="stretched-link btn btn-danger" >查看详情</button>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a href="HuaXiaoShi_Plants_Buy.html?type=search&name=吊兰">
+
+                        <div class="flower_reco row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col-auto d-none d-lg-block   flower_recommend">
+                                <img src="../img/绿植/绿萝/img/绿萝1.jpg" height="380" width="380"/>
+                            </div>
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <strong class="d-inline-block mb-2 text-primary">绿植</strong>
+                                <h3 class="mb-3">绿萝</h3>
+                                <p class="card-text mb-auto font-weight-bolder text-danger">￥59.99</p>
+                                <button class="stretched-link btn btn-danger" >查看详情</button>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
         </div>
 
-        <div class="row mb-2 ">
-            <div class="col-md-6 ">
-                <div class="flower_reco row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative ">
-                    <div class="col-auto d-none d-lg-block flower_recommend">
-
-                        <img src="../img/花/玫瑰类/1.卡罗拉图集/卡罗拉2.jpg"  height="275" width="380"/>
-                    </div>
-                    <div class="col p-4 d-flex flex-column position-static">
-                        <strong class="d-inline-block mb-2 text-primary">鲜花</strong>
-                        <h3 class="mb-3">玫瑰</h3>
-                        <p class="card-text mb-auto font-weight-bolder text-danger">￥12.99</p>
-                        <a href="#" class="stretched-link btn btn-danger" >查看详情</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 ">
-                <div class="flower_reco row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                    <div class="col-auto d-none d-lg-block  flower_recommend">
-                        <img src="../img/花/康乃馨/2.康乃馨(包装)图集/康乃馨2.jpg" height="275" width="380"/></div>
-                    <div class="col p-4 d-flex flex-column position-static">
-                        <strong class="d-inline-block mb-2 text-primary">鲜花</strong>
-                        <h3 class="mb-3">康乃馨</h3>
-                        <p class="card-text mb-auto font-weight-bolder text-danger">￥12.99</p>
-                        <a href="#" class="stretched-link btn btn-danger" >查看详情</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mb-2">
-            <div class="col-md-6">
-                <div class="flower_reco row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                    <div class="col-auto d-none d-lg-block   flower_recommend">
-
-                        <img src="../img/绿植/吊兰/img/吊兰2.jpg" height="380" width="380"/></div>
-                    <div class="col p-4 d-flex flex-column position-static">
-                        <strong class="d-inline-block mb-2 text-primary">绿植</strong>
-                        <h3 class="mb-3">吊兰</h3>
-                        <p class="card-text mb-auto font-weight-bolder text-danger">￥9.99</p>
-                        <a href="#" class="stretched-link btn btn-danger" >查看详情</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="flower_reco row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                    <div class="col-auto d-none d-lg-block   flower_recommend">
-                        <img src="../img/绿植/绿萝/img/绿萝1.jpg" height="380" width="380"/>
-                    </div>
-                    <div class="col p-4 d-flex flex-column position-static">
-                        <strong class="d-inline-block mb-2 text-primary">绿植</strong>
-                        <h3 class="mb-3">绿萝</h3>
-                        <p class="card-text mb-auto font-weight-bolder text-danger">￥59.99</p>
-                        <a href="#" class="stretched-link btn btn-danger" >查看详情</a>
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </div>
 </div>
