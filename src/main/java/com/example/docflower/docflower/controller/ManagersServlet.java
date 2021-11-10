@@ -51,6 +51,7 @@ public class ManagersServlet extends HttpServlet
         {
             for(Managers s : result)
             {
+                s.getName();
                 pwd_database = s.getPwd();
                 System.out.println("------------>getPwd:" + s.getPwd());
             }
