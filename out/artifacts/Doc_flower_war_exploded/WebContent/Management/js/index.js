@@ -1,5 +1,5 @@
 function searchMessages(){
-    var url = "MessagesServlet";
+    var url = "../../../MessagesServlet";
     if (window.XMLHttpRequest)
         req = new XMLHttpRequest();
     else if (window.ActiveXObject)
@@ -21,7 +21,7 @@ function searchMessagesComplete() {
         for(i=json.length-1; i>json.length-6; i--) {
             messages.innerHTML += '<div class="comment col-md-12 animated flipInX">\n' +
 '                                        <div class="comment_name ">\n' +
-'                                            <img src="WebContent/Client/img/用户.png" height="30" width="30"/>\n' +
+'                                            <img src="../../Client/img/用户.png" height="30" width="30"/>\n' +
 '                                               <span class="user_name">\n' +
 '                                                '+ json[i].name + '\n' +
 '                                               </span>\n' +

@@ -11,11 +11,15 @@
   <script src="WebContent/public/js/jquery-1.12.4.min.js"></script>
   <link rel="stylesheet" href="WebContent/public/css/animate.min.css">
   <style>
+    html,body{
+      height: 100%;
+      overflow: hidden;
+    }
     #user,#customer,#manager{
       border-radius: 15px;
       /*border: 1px #1b1e21 solid;*/
       margin: 0 auto;
-      height: 340px;
+      height: 360px;
       cursor: pointer;
       transition: .3s;
     }
@@ -66,6 +70,28 @@
       var customer = $("#customer");
       var manager = $("#manager");
 
+      $(document).ready(function(){
+        userFadeInUpBig();
+      })
+
+      function userFadeInUpBig(){
+        $("#user_ani").addClass("bounceInUp");
+        user.removeClass("fade");
+        setTimeout(customerFadeInUpBig,20);
+      }
+
+      function customerFadeInUpBig(){
+        $("#customer_ani").addClass("bounceInUp");
+        customer.removeClass("fade");
+
+        setTimeout(managerFadeInUpBig,20);
+
+      }
+      function managerFadeInUpBig(){
+        $("#manager_ani").addClass("bounceInUp");
+        manager.removeClass("fade");
+
+      }
 
       customer.click(function (){
         setfadeOutUpBig(customer);
@@ -164,27 +190,42 @@
   <img src="WebContent/public/img/logo.png" class="mx-auto" width="200" height="210" alt="">
 </div>
 <div id="root" class="container  mt-3">
+  <div class="container">
+
   <div class="row text-center">
-    <div id="user" class="col-md-3 col-sm-11 pt-5 animated mb-5">
-      <h1 class="font-weight-bolder my-5">我是游客</h1>
-      <button class=" btn btn-dark btn-select" style="font-size: 20px  ;line-height: 31px">进入用户端</button>
+    <div id="user_ani" class="col-md-4 col-sm-11 animated">
+      <div id="user" class=" pt-5   mb-5 fade">
+        <div class="">
+          <h1 class="font-weight-bolder my-5">我是游客</h1>
+          <button class=" btn btn-dark btn-select" style="font-size: 20px  ;line-height: 31px">进入用户端</button>
+        </div>
+      </div>
     </div>
-    <div id="customer" class="col-md-3 col-sm-11  pt-5 animated mb-5">
-      <h1 class="font-weight-bolder my-5">我是用户</h1>
+    <div id="customer_ani" class="col-md-4 col-sm-11 animated">
 
-      <button class=" btn btn-dark btn-select" style="font-size: 20px  ;line-height: 31px">进入登录端</button>
+      <div id="customer" class="  pt-5 animated mb-5 fade">
 
+        <h1 class="font-weight-bolder my-5">我是用户</h1>
+
+        <button class=" btn btn-dark btn-select" style="font-size: 20px  ;line-height: 31px">进入登录端</button>
+
+      </div>
     </div>
-    <div id="manager" class="col-md-3 col-sm-11  pt-5 animated mb-5" data-toggle="modal" data-target="#loginManagerModal">
-      <h1 class="font-weight-bolder my-5">我是管理员</h1>
-      <button class=" btn btn-dark btn-select" style="font-size: 20px  ;line-height: 31px"  >进入管理端</button>
+    <div id="manager_ani" class="col-md-4 col-sm-11 animated">
 
+      <div id="manager" class=" pt-5 animated mb-5 fade" data-toggle="modal" data-target="#loginManagerModal">
+        <h1 class="font-weight-bolder my-5">我是管理员</h1>
+        <button class=" btn btn-dark btn-select" style="font-size: 20px  ;line-height: 31px"  >进入管理端</button>
+
+      </div>
     </div>
+  </div>
+
   </div>
 </div>
 
 <div class="modal fade mt-5" id="loginManagerModal" tabindex="-1" aria-labelledby="loginManagerModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm mt-5" >
+  <div class="modal-dialog mt-5" >
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="loginManagerModalLabel">登录管理员</h5>
