@@ -166,6 +166,7 @@
       function failSignIn(){
         manager.addClass("shake");
         setTimeout(failSignIn_animateRemove,500);
+        document.getElementById("manager_pwd").value = "";
       }
 
 
@@ -193,15 +194,15 @@
   <div class="container">
 
   <div class="row text-center">
-    <div id="user_ani" class="col-md-4 col-sm-11 animated">
-      <div id="user" class=" pt-5   mb-5 fade">
+    <div id="user_ani" class="col-md-12 col-xl-4 col-sm-11 animated">
+      <div id="user" class=" pt-5 animated  mb-5 fade">
         <div class="">
           <h1 class="font-weight-bolder my-5">我是游客</h1>
           <button class=" btn btn-dark btn-select" style="font-size: 20px  ;line-height: 31px">进入用户端</button>
         </div>
       </div>
     </div>
-    <div id="customer_ani" class="col-md-4 col-sm-11 animated">
+    <div id="customer_ani" class="col-md-12 col-xl-4 col-sm-11 animated">
 
       <div id="customer" class="  pt-5 animated mb-5 fade">
 
@@ -211,7 +212,7 @@
 
       </div>
     </div>
-    <div id="manager_ani" class="col-md-4 col-sm-11 animated">
+    <div id="manager_ani" class="col-md-12 col-xl-4 col-sm-11 animated">
 
       <div id="manager" class=" pt-5 animated mb-5 fade" data-toggle="modal" data-target="#loginManagerModal">
         <h1 class="font-weight-bolder my-5">我是管理员</h1>
