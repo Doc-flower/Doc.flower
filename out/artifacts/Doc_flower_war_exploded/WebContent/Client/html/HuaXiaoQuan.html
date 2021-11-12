@@ -15,9 +15,102 @@
     <link rel="stylesheet" type="text/css" href="../../public/css/animate.css"/>
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/blog.css" type="text/css">
+    <style>
 
+        .btn-outline-primary {
+            color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-outline-primary:hover {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-outline-primary:focus, .btn-outline-primary.focus {
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+        }
+
+        .btn-outline-primary.disabled, .btn-outline-primary:disabled {
+            color: #007bff;
+            background-color: transparent;
+        }
+
+        .btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active,
+        .show > .btn-outline-primary.dropdown-toggle {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-outline-primary:not(:disabled):not(.disabled):active:focus, .btn-outline-primary:not(:disabled):not(.disabled).active:focus,
+        .show > .btn-outline-primary.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+        }
+
+    </style>
+
+    <script>
+
+
+        function init(){
+            cookie_email_search();
+            console.log("页面重新加载啦")
+        }
+
+
+
+        // 登陆检测
+        function quit(){
+            document.cookie = "name=???";
+            window.location = "Sign.html";
+        }
+
+
+        function cookie_email_search(){
+            var url = "../../../CustomerServlet";
+            if (window.XMLHttpRequest)
+                req1 = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req1 = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req1) {
+                //采用POST方式，异步传输
+                req1.open("post", url, true);
+                req1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req1.onreadystatechange = cookie_email_searchComplete;
+                req1.send("type=search&method=byEmail&" + document.cookie);
+            }
+        }
+
+        function cookie_email_searchComplete(){
+            console.log("cus" + req1.readyState);
+            if (req1.readyState == 4 && req1.status == 200 ) {
+                console.log(JSON.parse(req1.responseText).length);
+                if(JSON.parse(req1.responseText).length != 0)
+                {
+                    var json1 =  JSON.parse(req1.responseText);//转换为json对象
+                    console.log(json1.length);
+                    document.getElementById("IfUserSginIn").innerHTML = '';
+                    document.getElementById("dropdown04").innerText = json1[0].name;
+                    document.getElementById("user_name").value = json1[0].name;
+                    console.log("---------->成功:" + document.cookie);
+                }else if(JSON.parse(req1.responseText).length == 0){
+                    document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-3" id="user" href="Sign.html" value="登录/注册"></a>\n'
+                    document.getElementById("dropdown04").innerText = "个人中心";
+                    console.log("---------->失败:" + document.cookie);
+                }
+            } else{
+                document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-3" id="user" href="Sign.html" value="登录/注册"></a>\n'
+                document.getElementById("dropdown04").innerText = "个人中心";
+                console.log("---------->失败:" + document.cookie);
+            }
+        }
+
+
+    </script>
 </head>
-<body>
+<body onload="init()">
 <nav>
     <div class="nav_main">
 
@@ -32,15 +125,16 @@
             </ul>
         </div>
         <div class="nav_main_user">
-            <a href="Sign.html" style="display: inline-block"><img src="../img/用户.png" alt=""></a>
-            <div class="nav-item dropdown float-right">
+            <div class="col-md-5 float-left" id="IfUserSginIn" >
+
+            </div>
+            <div class="nav-item dropdown col-md-6 float-right">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-expanded="false">个人中心</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown04">
                     <a class="dropdown-item" href="Person.html" target="_blank">个人信息</a>
                     <a class="dropdown-item" href="Person_Order.html" target="_blank">订单管理</a>
-                    <a class="dropdown-item" href="#">退出登录</a>
+                    <a class="dropdown-item" href="javascript:;" onclick="quit()">退出登录</a>
                 </div>
-                <div></div>
             </div>
         </div>
     </div>
@@ -50,10 +144,7 @@
 <section class="banner_zi">
     <div><img src=".././img/花/故事汇.jpg" alt="" style="width: 1329px;height: 150px;"></div>
 </section>
-<!--banner end-->
-<div class="head_bar HuaXiaoQuan_head_bar">
-    <span>位置：</span><a href="index.html">首页 </a> > <span class="active">花小圈</span>
-</div>
+
 
 <div class="news_zi">
     <div class="top_qie">
@@ -78,7 +169,7 @@
             </div>
             <div class="news_right">
                 <span>07.25</span>
-                <time>2021</time>
+                <span>2021</span>
             </div>
         </li>
         <li class="clearfix">
