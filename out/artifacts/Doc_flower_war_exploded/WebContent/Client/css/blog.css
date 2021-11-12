@@ -601,6 +601,9 @@ ul{
     margin: 10px auto;
     width: 1064px;
 }
+.owner_time{
+    border-bottom: 1px solid #a1a2a3;
+}
 .my_card-body{
     resize: none;
     border: none;
