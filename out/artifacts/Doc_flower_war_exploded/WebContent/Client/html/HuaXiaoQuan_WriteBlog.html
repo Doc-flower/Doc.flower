@@ -32,6 +32,8 @@
                 .catch(error => {
                     console.error(error);
                 });
+
+            cookie_email_search();
         }
 
 
@@ -102,6 +104,53 @@
             return time;
         }
 
+
+
+        // 登陆检测
+        function quit(){
+            document.cookie = "name=???";
+            window.location = "Sign.html";
+        }
+
+
+        function cookie_email_search(){
+            var url = "../../../CustomerServlet";
+            if (window.XMLHttpRequest)
+                req1 = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req1 = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req1) {
+                //采用POST方式，异步传输
+                req1.open("post", url, true);
+                req1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req1.onreadystatechange = cookie_email_searchComplete;
+                req1.send("type=search&method=byEmail&" + document.cookie);
+            }
+        }
+
+        function cookie_email_searchComplete(){
+            console.log("cus" + req1.readyState);
+            if (req1.readyState == 4 && req1.status == 200 ) {
+                console.log(JSON.parse(req1.responseText).length);
+                if(JSON.parse(req1.responseText).length != 0)
+                {
+                    var json1 =  JSON.parse(req1.responseText);//转换为json对象
+                    console.log(json1.length);
+                    document.getElementById("IfUserSginIn").innerHTML = '';
+                    document.getElementById("dropdown04").innerText = json1[0].name;
+                    document.getElementById("user_name").value = json1[0].name;
+                    console.log("---------->成功:" + document.cookie);
+                }else if(JSON.parse(req1.responseText).length == 0){
+                    document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
+                    document.getElementById("dropdown04").innerText = "个人中心";
+                    console.log("---------->失败:" + document.cookie);
+                }
+            } else{
+                document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
+                document.getElementById("dropdown04").innerText = "个人中心";
+                console.log("---------->失败:" + document.cookie);
+            }
+        }
 
     </script>
     <script src="../../public/js/ckeditor5-build-classic/ckeditor.js"></script>
