@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../../public/css/font-awesome-4.7.0/css/font-awesome.min.css">
     <script src="../js/index.js"></script>
+    <link rel="stylesheet" href="../../public/css/animate.min.css">
 
 </head>
-<body>
+<body onload="cookie_email_search()">
     <nav>
         <div class="nav_main">
             <img src="../../public/img/logo.png" height="30" width="30" alt="."/>
@@ -42,12 +43,12 @@
     </nav>
 
     <section class="home" id="home">
-        <div class="content">
+        <div class="content animated fadeInLeft">
             <h3>花博士</h3>
             <span> 花店不开了，花继续开</span>
             <p>这样的时刻，我就只想在春天必经的路口，开一间花店。店不大，朴素，宛如乡庐；小巧，宛如画屏；精致，宛如庭院</p>
         </div>
-        <img src="../img/contact-img.svg"  alt="">
+        <img src="../img/contact-img.svg" class="animated fadeInDown"  alt="">
     </section>
 
     <div class="container">
@@ -55,22 +56,22 @@
 
 
 <!--            花卉欣赏-->
-            <div class="col-12 mt-3 mb-4 text-center">
+            <div id="flower_admire" class="col-12 mt-3 mb-4 text-center fade">
                 <h1 class="col-3 mx-auto pt-5 pb-2 inter_every_intro  font-weight-bolder">花卉欣赏</h1>
             </div>
-            <img src="../img/wallhaven-0pq899_1920x1080.png" class="col-md-6 mb-4  flower_admire "  alt="">
-            <img src="../img/wallhaven-48mdl1_1920x1080.png" class="col-md-6  mb-4 flower_admire"  alt="">
-            <img src="../img/wallhaven-x1gr8z_1920x1080.png" class="col-md-6  mb-4 flower_admire"  alt="">
-            <img src="../img/wallhaven-p815p3_1920x1080.png" class="col-md-6  mb-4 flower_admire"  alt="">
+            <img src="../img/wallhaven-0pq899_1920x1080.png" class="col-md-6 mb-4  flower_admire fade"  alt="">
+            <img src="../img/wallhaven-48mdl1_1920x1080.png" class="col-md-6  mb-4 flower_admire fade"  alt="">
+            <img src="../img/wallhaven-x1gr8z_1920x1080.png" class="col-md-6  mb-4 flower_admire fade"  alt="">
+            <img src="../img/wallhaven-p815p3_1920x1080.png" class="col-md-6  mb-4 flower_admire fade"  alt="">
 
 <!--            花卉推荐-->
             <div class="  my-3">
                 <!--            花卉推荐-->
-                <div class="col-12 mt-3 mb-4 text-center">
+                <div id="flower_intro" class="col-12 mt-3 mb-4 text-center fade">
                     <h1 class="col-3 mx-auto pt-5 pb-2 inter_every_intro  font-weight-bolder">精品推荐</h1>
                 </div>
                 <div class="row mb-2 ">
-                    <div class="col-md-6 ">
+                    <div class="col-md-6 flower_intro1 fade">
                         <a href="HuaXiaoShi_Flowers_Buy.html?type=search&name=卡罗拉">
                             <div class="flower_reco row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative ">
                                 <div class="col-auto d-none d-lg-block flower_recommend">
@@ -86,7 +87,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-md-6 ">
+                    <div class="col-md-6 flower_intro2 fade">
                         <a href="HuaXiaoShi_Flowers_Buy.html?type=search&name=康乃馨">
                             <div class="flower_reco row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                                 <div class="col-auto d-none d-lg-block  flower_recommend">
@@ -103,7 +104,7 @@
                 </div>
 
                 <div class="row mb-2">
-                    <div class="col-md-6">
+                    <div class="col-md-6 flower_intro1 fade">
                         <a href="HuaXiaoShi_Plants_Buy.html?type=search&name=吊兰">
 
                             <div class="flower_reco row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -119,7 +120,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 flower_intro2 fade">
                         <a href="HuaXiaoShi_Plants_Buy.html?type=search&name=吊兰">
 
                             <div class="flower_reco row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -142,12 +143,12 @@
 
 
             <!--            新品上架-->
-            <div class="col-12 mt-3 mb-4 text-center">
-                <h1 class="col-3 mx-auto pt-5 pb-2 new_flower  font-weight-bolder">新品上架</h1>
+            <div id="new_flower" class="col-12 mt-3 mb-4 text-center fade">
+                <h1 class="col-3 mx-auto pt-5 pb-2 inter_every_intro  font-weight-bolder">新品上架</h1>
             </div>
 
 
-            <div class="col-md-4">
+            <div class="col-md-4 new_flower1 fade">
                 <div class="card mb-4 shadow-sm">
                     <a href="HuaXiaoShi_Flowers_Buy.html?type=search&name=六出花">
                         <img src="../img/花/百合类/3.六出花图集/六出花1.jpg" class="new_flower"/>
@@ -166,7 +167,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 new_flower4 fade">
                 <div class="card mb-4 shadow-sm">
                     <a href="HuaXiaoShi_Flowers_Buy.html?type=search&name=冷美人">
                         <img src="../img/花/玫瑰类/4.冷美人图集/冷美人3.jpg" class="new_flower"/>
@@ -185,7 +186,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 new_flower3 fade">
                 <div class="card mb-4 shadow-sm">
                     <a href="HuaXiaoShi_Flowers_Buy.html?type=search&name=紫罗兰">
 
@@ -206,7 +207,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 new_flower1 fade">
                 <div class="card mb-4 shadow-sm">
                     <a href="HuaXiaoShi_Plants_Buy.html?type=search&name=龙血树">
 
@@ -226,7 +227,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 new_flower4 fade">
                 <div class="card mb-4 shadow-sm">
                     <a href="HuaXiaoShi_Plants_Buy.html?type=search&name=光瓜栗">
 
@@ -246,7 +247,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 new_flower3 fade">
                 <div class="card mb-4 shadow-sm">
                     <a href="HuaXiaoShi_Plants_Buy.html?type=search&name=人参榕">
                         <img src="../img/绿植/人参榕/img/人参榕1.jpg" class="new_flower"/>
@@ -270,11 +271,11 @@
 
 
             <!--            联系我们-->
-            <div class="col-12 mt-3 mb-4 text-center">
+            <div id="contact_us" class="col-12 mt-3 mb-4 text-center">
                 <h1 class="col-3 mx-auto pt-5 pb-2 contact_us  font-weight-bolder">联系我们</h1>
             </div>
 
-            <div class="contact_us_card col-md-4 mb-3 text-center shadow">
+            <div class="contact_us_card col-md-4 mb-3 text-center shadow contact_us1 fade">
                 <div class="my-3 mx-auto shadow rounded-circle icon-background">
                     <i class="fa fa-phone fa-2x my-3"></i>
                 </div>
@@ -283,7 +284,7 @@
                 <br>
                 <span>15929068966</span>
             </div>
-            <div class="contact_us_card col-md-3 mb-3 text-center float-right shadow">
+            <div class="contact_us_card col-md-3 mb-3 text-center float-right shadow contact_us1 fade">
                 <div class="my-3 mx-auto shadow rounded-circle icon-background">
                     <i class="fa fa-envelope fa-2x my-3"></i>
                 </div>
@@ -292,7 +293,7 @@
                 <br>
                 <span>3199432593@qq.com</span>
             </div>
-            <div class="contact_us_card col-md-4 mb-3 text-center float-right shadow">
+            <div class="contact_us_card col-md-4 mb-3 text-center float-right shadow contact_us1 fade">
                 <div class="my-3 mx-auto shadow rounded-circle icon-background">
                     <i class="fa fa-map-marker fa-2x my-3"></i>
                 </div>
@@ -300,16 +301,11 @@
                 <h3>公司地址</h3>
                 <span>陕西省·西安市·长安区·西安邮电大学（长安校区）-东区</span>
             </div>
-<!--            <div class="contact_us_card col-md-4">-->
-<!--                <i class="fas fa-map-marker-alt"></i>-->
-<!--                <h3>our location</h3>-->
-<!--                <p>mumbai, india - 400104</p>-->
-<!--            </div>-->
 
             <section class="contact mt-3" id="contact">
 
                 <div class="row1">
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-3 send_message1">
                         <form class="form clearfix"  id="form_message">
                             <p class="send_message">
                                 发送留言
@@ -343,8 +339,8 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 mb-3">
-                        <form  class="form clearfix" id="form_join_us">
+                    <div class="col-md-6 mb-3 join_us1">
+                        <form  class="form clearfixc" id="form_join_us">
                             <p class="join_us">
                                 加入我们
                             </p>
@@ -404,8 +400,15 @@
         </div>
     </footer>
 
+    <!--返回顶部-->
+    <div id="goTop" class="animated fadeInUp pt-1">
+        <a href="javascript:;"><i class="fa fa-arrow-up fa-lg"></i><p class="font-weight-bolder">回顶部</p></a>
+    </div>
+
 
     <script src="../../public/js/jquery-1.12.4.min.js"></script>
+    <script src="../js/index_animated.js"></script>
+    <script src="../js/index_gotop.js"></script>
     <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.bundle.js"></script>
     <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
 </body>

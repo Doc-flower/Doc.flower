@@ -116,18 +116,19 @@
                     document.getElementById("user_name").value = json1[0].name;
                     console.log("---------->成功:" + document.cookie);
                 }else if(JSON.parse(req1.responseText).length == 0){
-                    document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
+                    document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-1" id="user" href="Sign.html" value="登录/注册"></a>\n'
                     document.getElementById("dropdown04").innerText = "个人中心";
                     console.log("---------->失败:" + document.cookie);
                 }
             } else{
-                document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
+                document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-1" id="user" href="Sign.html" value="登录/注册"></a>\n'
                 document.getElementById("dropdown04").innerText = "个人中心";
                 console.log("---------->失败:" + document.cookie);
             }
         }
     </script>
     <link rel="stylesheet" href="../../public/css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../public/css/animate.min.css">
     <!--    <script src="../js/index.js"></script>-->
 
 </head>
@@ -176,12 +177,12 @@
         <input type="text" id="Plant_Seach" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" onkeypress="keypress()">
     </div>
 
-    <p class=" col-12  sale_title_plants">
+    <p class=" col-12  sale_title_plants animated bounceInUp">
         <i class='fa fa-deviantart' ></i>
 
         绿植
     </p>
-    <div class="row" id="plant_list">
+    <div class="row animated bounceInUp" id="plant_list">
     </div>
 </div>
 
