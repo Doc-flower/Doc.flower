@@ -243,6 +243,7 @@ body{
 
 .new_flower{
     width: 100%;
+
 }
 
 
@@ -322,4 +323,30 @@ body{
 .contact .row1 .form textarea{
     height: 15rem;
     resize: none;
+}
+
+/*返回顶部的样式*/
+#goTop{
+    width: 70px;
+    height: 64px;
+    position: fixed;
+    top: 650px;
+    right: 2px;
+    background-color: #efefef;
+    cursor: pointer;
+    text-align: center;
+    display: none;
+    border-radius: 10px;
+}
+#goTop a{
+    font-size: 18px;
+    color: #757575;
+    transition: .25s;
+}
+#goTop:hover a{
+    color: #ff6700;
+}
+#goTop img{
+    width: 30px;
+    margin: 17px auto 1px;
 }
