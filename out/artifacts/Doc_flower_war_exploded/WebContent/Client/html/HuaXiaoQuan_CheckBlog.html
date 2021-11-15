@@ -310,13 +310,19 @@
             }
         }
         function sortTimeDesc(a,b){
-            return b.comment_time-a.comment_time
+            return (a.comment_time > b.comment_time) ? 1 : (a.comment_time < b.comment_time) ? -1 : 0;
         }
         function searchComplete4() {
             if (req7.readyState == 4 && req7.status == 200) {
                 var json =  JSON.parse(req7.responseText);//转换为json对象
                 //根据时间对JSON进行排序，最近时间在最前面
+                for(var i=0;i<json.length;i++){
+                    console.log("排序前的:"+json[i].comment_time);
+                }
                 json.sort(sortTimeDesc);
+                for(var i=0;i<json.length;i++){
+                    console.log("排序后的:"+json[i].comment_time);
+                }
                 document.getElementById("comment_li_list").innerHTML="";
                 if(json.length > 0) {
                     for (i = 0; i < json.length; i++) {
@@ -336,12 +342,12 @@
                             '                        <div class="text">'+json[i].comment_text+'</div>\n' +
                             '                    </div>\n' +
                             '                </li>';
-                        comment_height+=180;
+                        /*comment_height+=180;
                         comment_area_height+=180;
                         var temp1=comment_height+"px";
                         var temp2=comment_area_height+"px";
                         document.getElementById("comment").style.height=temp1;
-                        document.getElementById("comment_area").style.height=temp2;
+                        document.getElementById("comment_area").style.height=temp2;*/
                     }
                 }
             }
