@@ -1,4 +1,3 @@
-create database docflower;
 use docflower;
 
 SET NAMES utf8mb4;
