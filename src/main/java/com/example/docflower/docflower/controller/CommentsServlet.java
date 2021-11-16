@@ -74,15 +74,15 @@ public class CommentsServlet extends HttpServlet{
     private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         Comments comments =null;
-        int id=0;
         try
         {
+            int id=Integer.valueOf(request.getParameter("id"));
             int blog_id=Integer.valueOf(request.getParameter("blog_id"));
             String comment_owner=request.getParameter("comment_owner");
             String comment_image=request.getParameter("comment_image");
             String comment_text=request.getParameter("comment_text");
             String comment_time=request.getParameter("comment_time");
-            int comment_likes=0;
+            int comment_likes=Integer.valueOf(request.getParameter("comment_likes"));
             comments =new  Comments(id, blog_id,comment_owner,comment_image,comment_text,comment_time,comment_likes);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
@@ -167,6 +167,7 @@ public class CommentsServlet extends HttpServlet{
                 json.put("comment_time", s.getComment_time());
                 json.put("comment_likes", s.getComment_likes());
                 array.put(json);
+                System.out.println(json);
             }
             jsonStr=array.toString();
         }
