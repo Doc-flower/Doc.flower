@@ -107,7 +107,7 @@
                         row.insertCell(6).innerHTML = json[i].order_address;
                         row.insertCell(7).innerHTML = json[i].order_pay;
                         row.insertCell(8).innerHTML = json[i].order_status;
-                        row.insertCell(9).innerHTML = '<input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del('+json[i].order_id+')" />';
+                        row.insertCell(9).innerHTML = '<input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="退款" onclick="del('+json[i].order_id+')" />';
                     }
                 }else {
                     document.getElementById("order_main").innerHTML =

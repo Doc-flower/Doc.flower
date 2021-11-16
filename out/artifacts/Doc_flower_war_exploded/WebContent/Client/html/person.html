@@ -58,7 +58,7 @@
                 document.getElementById("owner_tel").value = json[0].tel;
                 document.getElementById("owner_address").value = json[0].address;
             } else{
-                document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
+                document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-1" id="user" href="Sign.html" value="登录/注册"></a>\n'
                 document.getElementById("dropdown04").innerText = "个人中心";
                 document.getElementById("person_name").innerText = "请先登录";
 
@@ -186,6 +186,8 @@
                         <input type="hidden" id="owner_id" name="owner_id" value="0">
 
                         <div  class="person_img_div person_img_bg col-md-6 float-left">
+                            <img src="../img/QQ图片20210925114618.jpg" id="person_img" class="rounded-circle person_img"  alt="">
+
                             <div class="wrapper ">
                                 <div class="palette">
                                     <div class="palette_item_wrapper">
