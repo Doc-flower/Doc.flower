@@ -143,7 +143,7 @@
                             </div>';
                 var body_node = document.createElement("div");
                 body_node.setAttribute("class", "body");
-                body_node.innerHTML = '<div class="user_name">匿名用户</div>\
+                body_node.innerHTML = '<div class="user_name">'+ document.getElementById("user_name").value +'</div>\
                              <div class="text">' + text + '</div>';
                 li_node.appendChild(other_node);
                 li_node.appendChild(user_node);
@@ -172,7 +172,7 @@
                         + "&blog_id="
                         + id
                         + "&comment_owner="
-                        + "匿名用户"
+                        + document.getElementById("user_name").value
                         + "&comment_image="
                         + "../img/user_img.jpg"
                         + "&comment_text="
@@ -437,6 +437,7 @@
 </div>
        <!--评论区 -->
 <div id="comment_area">
+    <input type="hidden" id="user_name" value="未登录用户" name="user_name">
     <div id="header">
         <span class="font">网友评论</span>
         <span class="sort_quality" onclick="sortBylike()">质量排序</span>
