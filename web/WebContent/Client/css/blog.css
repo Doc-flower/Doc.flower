@@ -702,7 +702,8 @@ ul{
     position: absolute;
     top: 20px;
     left: 10px;
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: bolder;
 }
 #comment_ul .body .star{
     position: absolute;
@@ -718,8 +719,8 @@ ul{
     left: 10px;
     width: 650px;
     height: 80px;
-    font-size: 13px;
-    color: #a0a0a0;
+    font-size: 15px;
+    color: #585858;
 }
 #comment_ul .other{
     position: absolute;
