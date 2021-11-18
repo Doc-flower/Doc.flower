@@ -107,12 +107,12 @@
                             '                        <div class="text">'+json[i].comment_text+'</div>\n' +
                             '                    </div>\n' +
                             '                </li>';
-                        comment_height+=180;
-                        comment_area_height+=180;
-                        var temp1=comment_height+"px";
-                        var temp2=comment_area_height+"px";
-                        document.getElementById("comment").style.height=temp1;
-                        document.getElementById("comment_area").style.height=temp2;
+                        // comment_height+=180;
+                        // comment_area_height+=180;
+                        // var temp1=comment_height+"px";
+                        // var temp2=comment_area_height+"px";
+                        // document.getElementById("comment").style.height=temp1;
+                        // document.getElementById("comment_area").style.height=temp2;
                     }
                 }
             }
@@ -143,20 +143,20 @@
                             </div>';
                 var body_node = document.createElement("div");
                 body_node.setAttribute("class", "body");
-                body_node.innerHTML = '<div class="user_name">'+ document.getElementById("user_name").value +'</div>\
+                body_node.innerHTML = '<div class="user_name">匿名用户</div>\
                              <div class="text">' + text + '</div>';
                 li_node.appendChild(other_node);
                 li_node.appendChild(user_node);
                 li_node.appendChild(body_node);
                 //增加一个评论，对应的地方也要变长
-                comment_height += 180;
-                comment_area_height += 180;
-                var temp1 = comment_height + "px";
-                var temp2 = comment_area_height + "px";
-                document.getElementById("comment").style.height = temp1;
-                document.getElementById("comment_area").style.height = temp2;
+                // comment_height += 180;
+                // comment_area_height += 180;
+                // var temp1 = comment_height + "px";
+                // var temp2 = comment_area_height + "px";
+                // document.getElementById("comment").style.height = temp1;
+                // document.getElementById("comment_area").style.height = temp2;
 
-                comment_li_list.insertBefore(li_node, comment_li_list.firstChild);
+                comment_li_list.append(li_node);
                 //给评论的数据库当中添加一条评论
                 var url = "../../../CommentsServlet";
                 if (window.XMLHttpRequest)
@@ -174,7 +174,7 @@
                         + "&comment_owner="
                         + document.getElementById("user_name").value
                         + "&comment_image="
-                        + "../img/user_img.jpg"
+                        + "../img/用户.png"
                         + "&comment_text="
                         + text
                         + "&comment_time="
@@ -187,12 +187,19 @@
                 }
                 return false;
             }
-        }
-            function addCommentComplete() {
-                if (req3.readyState == 4 && req3.status == 200) {
-                    console.log("添加成功");
-                }
+            else {
+                alert("评论为空")
+                return false;
             }
+        }
+
+        function addCommentComplete() {
+            if (req3.readyState == 4 && req3.status == 200) {
+                console.log("添加成功");
+                // comment_search();
+
+            }
+        }
        //点赞数更新
         function addlike(comment_id) {
             var url = "../../../CommentsServlet";

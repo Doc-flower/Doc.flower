@@ -614,7 +614,7 @@ ul{
 #comment_area{
     margin: 20px auto;
     width: 1064px;
-    height: 330px;
+    /*height: 330px;*/
     border: 1px solid #d8d8d8;
     background-color: #f8f8f8;
 }
@@ -653,7 +653,7 @@ ul{
     position: relative;
     margin-bottom: 10px;
     width: 1040px;
-    height: 260px;
+    /*height: 260px;*/
     left: 10px;
     border: 1px solid #eeeeee;
     border-radius: 10px;
