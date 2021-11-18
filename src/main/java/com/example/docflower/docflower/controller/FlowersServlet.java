@@ -4,6 +4,7 @@ import main.java.com.example.docflower.docflower.model.Flowers;
 import main.java.com.example.docflower.docflower.model.Plants;
 import main.java.com.example.docflower.docflower.service.FlowersSrv;
 import main.java.com.example.docflower.docflower.service.PlantsSrv;
+import main.java.com.example.docflower.util.DBUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,6 +44,8 @@ public class FlowersServlet extends HttpServlet{
             searchByImg(request,response);
         else if(type.equalsIgnoreCase("searchId"))
             searchId(request, response);
+        else if(type.equalsIgnoreCase("sale_stock"))
+            sale_stock(request, response);
     }
 
     private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -247,5 +250,34 @@ public class FlowersServlet extends HttpServlet{
             out.close();
         }
         // System.out.print(jsonStr);
+    }
+
+
+    private void sale_stock(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        try
+        {
+            int result=0;
+            int flower_id=Integer.valueOf(request.getParameter("flower_id"));
+            response.setContentType("text/html;charset=utf-8");
+            String sql="update flowers set flower_sale = flower_sale + 1 , flower_stock = flower_stock - 1";
+            sql+=" where flower_id = " + flower_id;
+            DBUtil db=new DBUtil();
+            db.openConnection();
+            result=db.execCommand(sql);
+            db.close();
+            PrintWriter out=response.getWriter();
+            if(result == 1)
+                out.write("销量修改成功");
+            else
+                out.write("销量修改失败，请重试");
+            out.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            response.setContentType("text/html;charset=utf-8");
+            response.getWriter().write("操作错误，请重试");
+        }
     }
 }

@@ -56,6 +56,8 @@ CREATE TABLE `flowers`  (
   `flower_image3` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `flower_image4` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `flower_price` int(5) DEFAULT NULL,
+  `flower_sale` int (5) DEFAULT 0,
+  `flower_stock` int (5) DEFAULT 1000,
   PRIMARY KEY (`flower_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
 
@@ -125,13 +127,15 @@ INSERT INTO flowers(flower_name,flower_kind,flower_introduction,flower_image1,fl
 -- ----------------------------
 DROP TABLE IF EXISTS `plants`;
 CREATE TABLE `plants`  (
-                           `plant_id` int(11) NOT NULL AUTO_INCREMENT,
-                           `plant_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-                           `plant_introduction` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-                           `plant_image1` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-                           `plant_image2` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-                           `plant_price` int(5) DEFAULT NULL,
-                           PRIMARY KEY (`plant_id`) USING BTREE
+       `plant_id` int(11) NOT NULL AUTO_INCREMENT,
+       `plant_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+       `plant_introduction` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+       `plant_image1` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+       `plant_image2` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+       `plant_price` int(5) DEFAULT NULL,
+       `plant_sale` int (5) DEFAULT 0,
+       `plant_stock` int (5) DEFAULT 1000,
+       PRIMARY KEY (`plant_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
 
 
