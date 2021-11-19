@@ -202,5 +202,49 @@ public class FlowersDAO implements iFlowersDAO {
             return flowersList;
         }
     }
+
+
+    @SuppressWarnings("finally")
+    @Override
+    public List<Flowers> selectsale_stock()
+    {
+        DBUtil db=null;
+        List<Flowers> flowersDescList=null;
+        flowersDescList=new LinkedList<Flowers>();
+        try
+        {
+            String sql="select * from flowers order by flower_sale DESC;";
+            db=new DBUtil();
+            if(!db.openConnection())
+            {
+                System.out.print("fail to connect database table plants");
+                return null;
+            }
+            ResultSet rst=db.execQuery(sql);
+            if(rst != null)
+            {
+                while(rst.next())
+                {
+                    Flowers stu=new Flowers();
+                    stu.setFlower_id(rst.getInt("flower_id"));
+                    stu.setFlower_name(rst.getString("flower_name"));
+                    stu.setFlower_sale(rst.getInt("flower_sale"));
+                    stu.setFlower_stock(rst.getInt("flower_stock"));
+                    flowersDescList.add(stu);
+                }
+            }
+            db.close(rst);
+            db.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            return flowersDescList;
+        }
+    }
+
 }
 

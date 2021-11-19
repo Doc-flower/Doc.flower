@@ -3,6 +3,7 @@ package main.java.com.example.docflower.docflower.controller;
 import main.java.com.example.docflower.docflower.model.Plants;
 import main.java.com.example.docflower.docflower.service.PlantsSrv;
 import main.java.com.example.docflower.docflower.service.ShopsSrv;
+import main.java.com.example.docflower.util.DBUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,6 +42,10 @@ public class PlantsServlet extends HttpServlet
             search(request, response);
         else if(type.equalsIgnoreCase("search_id"))
             searchId(request, response);
+        else if(type.equalsIgnoreCase("sale_stock"))
+            sale_stock(request, response);
+        else if(type.equalsIgnoreCase("sale_stock_search"))
+            sale_stock_search(request, response);
     }
 
     private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -54,7 +59,9 @@ public class PlantsServlet extends HttpServlet
             String img1="";
             String img2="";
             int price=Integer.valueOf(request.getParameter("plants_price"));
-            stu=new Plants(id, name, intro,img1, img2,price);
+            int sale=0;
+            int stock=1000;
+            stu=new Plants(id, name, intro,img1, img2,price,sale,stock);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
 
@@ -101,7 +108,9 @@ public class PlantsServlet extends HttpServlet
             String img1="";
             String img2="";
             int price=Integer.valueOf(request.getParameter("plants_price"));
-            stu=new Plants(id, name, intro,img1, img2,price);
+            int sale=0;
+            int stock=1000;
+            stu=new Plants(id, name, intro,img1, img2,price,sale,stock);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
 
@@ -181,6 +190,70 @@ public class PlantsServlet extends HttpServlet
                 json.put("plantimg1", s.getImg1());
                 json.put("plantimg2", s.getImg2());
                 json.put("price", s.getPrice());
+                array.put(json);
+            }
+            jsonStr=array.toString();
+        }
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            out.println(jsonStr);
+            out.flush();
+            out.close();
+        }
+        // System.out.print(jsonStr);
+    }
+
+    private void sale_stock(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        try
+        {
+            int result=0;
+            int plant_id=Integer.valueOf(request.getParameter("plant_id"));
+            response.setContentType("text/html;charset=utf-8");
+            String sql="update plants set plant_sale = plant_sale + 1 , plant_stock = plant_stock - 1";
+            sql+=" where plant_id = " + plant_id;
+            DBUtil db=new DBUtil();
+            db.openConnection();
+            result=db.execCommand(sql);
+            db.close();
+            PrintWriter out=response.getWriter();
+            if(result == 1)
+                out.write("销量修改成功");
+            else
+                out.write("销量修改失败，请重试");
+            out.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            response.setContentType("text/html;charset=utf-8");
+            response.getWriter().write("操作错误，请重试");
+        }
+    }
+
+
+    private void sale_stock_search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out=response.getWriter();
+        List<Plants> result=null;
+        result=new PlantsSrv().FetchSale_stock();
+        String jsonStr="";
+        try
+        {
+            JSONArray array=new JSONArray();
+            JSONObject json;
+            for(Plants s : result)
+            {
+                json=new JSONObject();
+                json.put("plantid", s.getID());
+                json.put("plantname", s.getName());
+                json.put("plantsale", s.getSale());
+                json.put("plantstock", s.getStock());
                 array.put(json);
             }
             jsonStr=array.toString();

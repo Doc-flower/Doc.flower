@@ -10,12 +10,15 @@ public class Flowers {
     private String flower_image3="";
     private String flower_image4="";
     private int flower_price=0;
+    private int flower_sale=0;
+    private int flower_stock=0;
+
 
     public Flowers(){
         flower_id=0;
     }
 
-    public Flowers(int flower_id, String flower_name, String flower_kind, String flower_introduction, String flower_image1, String flower_image2, String flower_image3, String flower_image4, int flower_price) {
+    public Flowers(int flower_id, String flower_name, String flower_kind, String flower_introduction, String flower_image1, String flower_image2, String flower_image3, String flower_image4, int flower_price,int flower_sale,int flower_stock) {
         this.flower_id = flower_id;
         this.flower_name = flower_name;
         this.flower_kind = flower_kind;
@@ -25,6 +28,8 @@ public class Flowers {
         this.flower_image3 = flower_image3;
         this.flower_image4 = flower_image4;
         this.flower_price = flower_price;
+        this.flower_sale = flower_sale;
+        this.flower_stock = flower_stock;
     }
 
     public int getFlower_id() {
@@ -63,6 +68,15 @@ public class Flowers {
         return flower_price;
     }
 
+    public int getFlower_sale() {
+        return flower_sale;
+    }
+
+    public int getFlower_stock() {
+        return flower_stock;
+    }
+
+
 
     public void setFlower_id(int flower_id) {
         this.flower_id = flower_id;
@@ -99,4 +113,13 @@ public class Flowers {
     public void setFlower_price(int flower_price) {
         this.flower_price = flower_price;
     }
+
+    public void setFlower_sale(int flower_price) {
+        this.flower_sale = flower_price;
+    }
+
+    public void setFlower_stock(int flower_price) {
+        this.flower_stock = flower_price;
+    }
+
 }

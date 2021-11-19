@@ -7,18 +7,22 @@ public class Plants {
     private String img1="";
     private String img2="";
     private int price=0;
+    private int sale=0;
+    private int stock=0;
 
 
     public Plants(){
         id = 0;
     }
-    public Plants(int ID, String name, String intro, String img1, String img2, int price){
+    public Plants(int ID, String name, String intro, String img1, String img2, int price,int sale,int stock){
         id = ID;
         this.name=name;
         this.intro = intro;
         this.img1 = img1;
         this.img2 = img2;
         this.price = price;
+        this.sale = sale;
+        this.stock = stock;
     }
 
     public int getId() {
@@ -73,6 +77,22 @@ public class Plants {
 
     public int getPrice(){
         return price;
+    }
+
+    public void setSale(int intro){
+        this.sale=intro;
+    }
+
+    public int getSale(){
+        return sale;
+    }
+
+    public void setStock(int count){
+        this.stock=count;
+    }
+
+    public int getStock(){
+        return stock;
     }
 
 }

@@ -17,5 +17,7 @@ public interface iPlantsDAO {
 
     public List<Plants> selectName(String playname);
 
+    public List<Plants> selectsale_stock();
+
 
 }
