@@ -312,17 +312,19 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 
 INSERT INTO shops(shop_id,shop_name,shop_address,shop_tel,shop_text) VALUES
-('001','范佳伟的店铺','西安邮电大学',15830599166,'备注1');
+('001','范佳伟的店铺','西安邮电大学1517-1',15830599166,'备注1');
 INSERT INTO shops(shop_id,shop_name,shop_address,shop_tel,shop_text) VALUES
-('002','徐卓龙的店铺','西安邮电大学',17792379816,'备注2');
+('002','徐卓龙的店铺','西安邮电大学1517-5',17792379816,'备注2');
 INSERT INTO shops(shop_id,shop_name,shop_address,shop_tel,shop_text) VALUES
-('003','刘璇的店铺','西安邮电大学',15929068966,'备注3');
+('003','刘璇的店铺','西安邮电大学3518-3',15929068966,'备注3');
 INSERT INTO shops(shop_id,shop_name,shop_address,shop_tel,shop_text) VALUES
-('004','刘宇阳的店铺','西安邮电大学',13279505680,'备注4');
+('004','刘宇阳的店铺','西安邮电大学1517-4',13279505680,'备注4');
 INSERT INTO shops(shop_id,shop_name,shop_address,shop_tel,shop_text) VALUES
-('005','张嘉祺的店铺','西安邮电大学',17792379816,'备注5');
+('005','张嘉祺的店铺','西安邮电大学1517-2',17792379816,'备注5');
 INSERT INTO shops(shop_id,shop_name,shop_address,shop_tel,shop_text) VALUES
-('006','张若鹏的店铺','西安邮电大学',17792379816,'备注6');
+('006','张若鹏的店铺','西安邮电大学1517-3',17792379816,'备注6');
+INSERT INTO shops(shop_id,shop_name,shop_address,shop_tel,shop_text) VALUES
+('007','钱璞玉的店铺','西安邮电大学1517-6',17792379816,'备注7');
 
 
 

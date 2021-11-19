@@ -15,4 +15,6 @@ public interface iFlowersDAO {
     public List<Flowers> selectbyID(int flower_id);
 
     public List<Flowers> select(String flowerinformation);
+
+    public List<Flowers> selectsale_stock();
 }

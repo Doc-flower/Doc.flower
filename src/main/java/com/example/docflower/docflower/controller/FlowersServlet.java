@@ -46,6 +46,8 @@ public class FlowersServlet extends HttpServlet{
             searchId(request, response);
         else if(type.equalsIgnoreCase("sale_stock"))
             sale_stock(request, response);
+        else if(type.equalsIgnoreCase("sale_stock_search"))
+            sale_stock_search(request, response);
     }
 
     private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -62,8 +64,9 @@ public class FlowersServlet extends HttpServlet{
             String flower_image3="";
             String flower_image4="";
             int flower_price=Integer.valueOf(request.getParameter("flower_price"));
-            flowers =new Flowers(id, flower_name, flower_kind,flower_introduction,flower_image1,flower_image2,flower_image3,flower_image4,flower_price);
-            response.setContentType("text/html;charset=utf-8");
+            int flower_sale=0;
+            int flower_stock=1000;
+            flowers =new Flowers(id, flower_name, flower_kind,flower_introduction,null,null,null,null,flower_price,flower_sale,flower_stock);
             PrintWriter out=response.getWriter();
             if(new FlowersSrv().add(flowers) == 1)
                 out.write("数据添加成功");
@@ -108,7 +111,9 @@ public class FlowersServlet extends HttpServlet{
             String flower_kind=request.getParameter("flower_kind");
             String flower_introduction=request.getParameter("flower_introduction");
             int flower_price=Integer.valueOf(request.getParameter("flower_price"));
-            flowers =new Flowers(id, flower_name, flower_kind,flower_introduction,null,null,null,null,flower_price);
+            int flower_sale=0;
+            int flower_stock=1000;
+            flowers =new Flowers(id, flower_name, flower_kind,flower_introduction,null,null,null,null,flower_price,flower_sale,flower_stock);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
             if(new FlowersSrv().modify(flowers) == 1)
@@ -279,5 +284,41 @@ public class FlowersServlet extends HttpServlet{
             response.setContentType("text/html;charset=utf-8");
             response.getWriter().write("操作错误，请重试");
         }
+    }
+
+
+    private void sale_stock_search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out=response.getWriter();
+        List<Flowers> result=null;
+        result=new FlowersSrv().FetchSale_stock();
+        String jsonStr="";
+        try
+        {
+            JSONArray array=new JSONArray();
+            JSONObject json;
+            for(Flowers s : result)
+            {
+                json=new JSONObject();
+                json.put("flower_id", s.getFlower_id());
+                json.put("flower_name", s.getFlower_name());
+                json.put("flower_sale", s.getFlower_sale());
+                json.put("flower_stock", s.getFlower_stock());
+                array.put(json);
+            }
+            jsonStr=array.toString();
+        }
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            out.println(jsonStr);
+            out.flush();
+            out.close();
+        }
+        // System.out.print(jsonStr);
     }
 }

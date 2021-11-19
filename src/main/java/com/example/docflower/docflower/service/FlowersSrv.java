@@ -33,4 +33,10 @@ public class FlowersSrv {
 
         return flowerDAO.select(flowerinformation);
     }
+
+    public List<Flowers> FetchSale_stock(){
+
+        return flowerDAO.selectsale_stock();
+    }
+
 }

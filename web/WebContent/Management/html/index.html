@@ -33,10 +33,22 @@
     <script src="../js/jquery.circliful.min.js"></script>
     <script type="text/javascript">
         $( document ).ready(function() {
-            $('#myStathalf').circliful();
-            $('#myStat').circliful();
-            $('#myStathalf2').circliful();
-            $('#myStat2').circliful();
+            setTimeout(function () {
+                $('#myStathalf').circliful();
+            }, 100);
+            setTimeout(function () {
+                $('#myStat').circliful();
+            }, 100);
+            setTimeout(function () {
+                $('#myStathalf2').circliful();
+            }, 100);
+            setTimeout(function () {
+                $('#myStat2').circliful();
+            }, 100);
+            // $('#myStathalf').circliful();
+            // $('#myStat').circliful();
+            // $('#myStathalf2').circliful();
+            // $('#myStat2').circliful();
         });
     </script>
     <link rel="stylesheet" href="../../Client/css/footer.css">
@@ -261,21 +273,21 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>玫瑰</td>
-                                            <td>758</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>康乃馨</td>
-                                            <td>537</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>郁金香</td>
-                                            <td>494</td>
-                                        </tr>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>{{FlowersSaleStockList[0].flower_name}}</td>
+                                                <td>{{FlowersSaleStockList[0].flower_sale}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>{{FlowersSaleStockList[1].flower_name}}</td>
+                                                <td>{{FlowersSaleStockList[1].flower_sale}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>{{FlowersSaleStockList[2].flower_name}}</td>
+                                                <td>{{FlowersSaleStockList[2].flower_sale}}</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -290,21 +302,21 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>吊兰</td>
-                                            <td>458</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>绿萝</td>
-                                            <td>372</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>铜钱草</td>
-                                            <td>291</td>
-                                        </tr>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>{{PlantsSaleStockList[0].plantname}}</td>
+                                                <td>{{PlantsSaleStockList[0].plantsale}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>{{PlantsSaleStockList[1].plantname}}</td>
+                                                <td>{{PlantsSaleStockList[1].plantsale}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>{{PlantsSaleStockList[2].plantname}}</td>
+                                                <td>{{PlantsSaleStockList[2].plantsale}}</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -558,13 +570,19 @@
             UserNum:"",
             OrdersNum:"",
             BlogsNum:"",
-            MessagesNum:""
+            MessagesNum:"",
+            SaleStockList:[],
+            PlantsSaleStockList:[],
+            FlowersSaleStockList:[]
         },
         mounted(){
             this.searchUserNum()
             this.searchOrdersNum()
             this.searchBlogsNum()
             this.searchMessagesNum()
+            this.searchSaleStock()
+            this.searchPlantsSaleStock()
+            this.searchFlowersSaleStock()
         },
         methods:{
             searchUserNum:function () {
@@ -607,8 +625,41 @@
                     .catch(function (err) {
                     })
             },
+
+            searchSaleStock:function () {
+                var that = this;        //保存this
+                axios.post('../../../PlantsServlet?type=sale_stock_search')
+                    .then(function (response) {
+                        console.log(response);
+                        that.SaleStockList = response.data
+                    })
+                    .catch(function (err) {
+                    })
+            },
+
+            searchPlantsSaleStock:function () {
+                var that = this;        //保存this
+                axios.post('../../../PlantsServlet?type=sale_stock_search')
+                    .then(function (response) {
+                        console.log(response);
+                        that.PlantsSaleStockList = response.data
+                    })
+                    .catch(function (err) {
+                    })
+            },
+            searchFlowersSaleStock:function () {
+                var that = this;        //保存this
+                axios.post('../../../FlowersServlet?type=sale_stock_search')
+                    .then(function (response) {
+                        console.log(response);
+                        that.FlowersSaleStockList = response.data
+                    })
+                    .catch(function (err) {
+                    })
+            },
         }
     })
+
 </script>
 
 </body>

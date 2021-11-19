@@ -254,5 +254,48 @@ public class PlantsDAO implements iPlantsDAO
         }
     }
 
+
+    @SuppressWarnings("finally")
+    @Override
+    public List<Plants> selectsale_stock()
+    {
+        DBUtil db=null;
+        List<Plants> plantsDescList=null;
+        plantsDescList=new LinkedList<Plants>();
+        try
+        {
+            String sql="select * from plants order by plant_sale DESC;";
+            db=new DBUtil();
+            if(!db.openConnection())
+            {
+                System.out.print("fail to connect database table plants");
+                return null;
+            }
+            ResultSet rst=db.execQuery(sql);
+            if(rst != null)
+            {
+                while(rst.next())
+                {
+                    Plants stu=new Plants();
+                    stu.setID(rst.getInt("plant_id"));
+                    stu.setName(rst.getString("plant_name"));
+                    stu.setSale(rst.getInt("plant_sale"));
+                    stu.setStock(rst.getInt("plant_stock"));
+                    plantsDescList.add(stu);
+                }
+            }
+            db.close(rst);
+            db.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            return plantsDescList;
+        }
+    }
+
 }
 
