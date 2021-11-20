@@ -34,9 +34,9 @@ public class FlowersSrv {
         return flowerDAO.select(flowerinformation);
     }
 
-    public List<Flowers> FetchSale_stock(){
+    public List<Flowers> FetchSale_stock(String flag){
 
-        return flowerDAO.selectsale_stock();
+        return flowerDAO.selectsale_stock(flag);
     }
 
 }

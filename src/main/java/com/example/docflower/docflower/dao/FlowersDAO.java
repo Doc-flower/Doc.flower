@@ -206,18 +206,26 @@ public class FlowersDAO implements iFlowersDAO {
 
     @SuppressWarnings("finally")
     @Override
-    public List<Flowers> selectsale_stock()
+    public List<Flowers> selectsale_stock(String flag)
     {
         DBUtil db=null;
         List<Flowers> flowersDescList=null;
         flowersDescList=new LinkedList<Flowers>();
         try
         {
-            String sql="select * from flowers order by flower_sale DESC;";
+
+            String sql="";
+            if(flag.equalsIgnoreCase("sale")){
+
+                sql="select * from flowers order by flower_sale DESC;";
+            }else if(flag.equalsIgnoreCase("stock")){
+                sql="select * from flowers order by flower_stock ASC;";
+            }
+
             db=new DBUtil();
             if(!db.openConnection())
             {
-                System.out.print("fail to connect database table plants");
+                System.out.print("fail to connect database table flowers");
                 return null;
             }
             ResultSet rst=db.execQuery(sql);

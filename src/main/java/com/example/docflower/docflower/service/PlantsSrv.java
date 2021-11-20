@@ -33,7 +33,7 @@ public class PlantsSrv {
         return scheDAO.selectName(playname);
     }
 
-    public List<Plants> FetchSale_stock() {
-        return scheDAO.selectsale_stock();
+    public List<Plants> FetchSale_stock(String flag) {
+        return scheDAO.selectsale_stock(flag);
     }
 }

@@ -290,9 +290,10 @@ public class FlowersServlet extends HttpServlet{
     private void sale_stock_search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         response.setCharacterEncoding("UTF-8");
+        String flag = request.getParameter("flag");
         PrintWriter out=response.getWriter();
         List<Flowers> result=null;
-        result=new FlowersSrv().FetchSale_stock();
+        result=new FlowersSrv().FetchSale_stock(flag);
         String jsonStr="";
         try
         {
