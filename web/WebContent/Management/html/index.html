@@ -13,6 +13,14 @@
 
 
     <style>
+
+        .animated {
+            -webkit-animation-duration: .8s;
+            animation-duration: .8s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+
         #active{
             color: #043a58;
             background: #fff;
@@ -223,13 +231,25 @@
         function stock_low_switch(){
             var stock_low_name = document.getElementById("checkbox").value
             if(stock_low_name == "plants"){
+                document.getElementById("stock_low_main").classList.add('fadeInLeft')
+
                 stock_low_search_flower()
                 document.getElementById("checkbox").value = 'flowers'
+                setTimeout(stock_low_mainremoveaniLeft,800)
             }else if(stock_low_name == "flowers"){
+                document.getElementById("stock_low_main").classList.add('fadeInRight')
                 stock_low_search_plants()
                 document.getElementById("checkbox").value = 'plants'
+                setTimeout(stock_low_mainremoveaniRight,800)
             }
             console.log(stock_low_name)
+        }
+
+        function stock_low_mainremoveaniRight(){
+            document.getElementById("stock_low_main").classList.remove('fadeInRight')
+        }
+        function stock_low_mainremoveaniLeft(){
+            document.getElementById("stock_low_main").classList.remove('fadeInLeft')
         }
 
         function stock_low_search_flower(){
@@ -251,6 +271,8 @@
         function stock_low_search_flowerComplete(){
             if (req.readyState == 4 && req.status == 200) {
                 var stock_low_plants = document.getElementById("stock_low");
+
+
                 var json =  JSON.parse(req.responseText);//转换为json对象
                 stock_low_plants.innerHTML = ""
                 for(i=0; i<3; i++) {
@@ -344,13 +366,27 @@
         function stock_high_switch(){
             var stock_high_name = document.getElementById("checkbox2").value
             if(stock_high_name == "plants"){
+                document.getElementById("stock_high_main").classList.add('fadeInLeft')
+
                 stock_high_search_flower()
                 document.getElementById("checkbox2").value = 'flowers'
+                setTimeout(stock_high_mainremoveaniLeft,800)
             }else if(stock_high_name == "flowers"){
+                document.getElementById("stock_high_main").classList.add('fadeInRight')
+
                 stock_high_search_plants()
                 document.getElementById("checkbox2").value = 'plants'
+                setTimeout(stock_high_mainremoveaniRight,800)
+
             }
             console.log(stock_high_name)
+        }
+
+        function stock_high_mainremoveaniRight(){
+            document.getElementById("stock_high_main").classList.remove('fadeInRight')
+        }
+        function stock_high_mainremoveaniLeft(){
+            document.getElementById("stock_high_main").classList.remove('fadeInLeft')
         }
 
 
@@ -780,7 +816,7 @@
                                     </div>
                                 </div>
                                 <!--                                <hr class="col-11">-->
-                                <div class="sales sales_flower">
+                                <div id="stock_low_main" class="sales sales_flower animated">
                                     <table class="table  col-md-12">
                                         <thead>
                                         <tr>
@@ -789,7 +825,7 @@
                                             <th scope="col">库存量</th>
                                         </tr>
                                         </thead>
-                                        <tbody id="stock_low">
+                                        <tbody id="stock_low" class="animated">
 
                                         </tbody>
                                     </table>
@@ -821,7 +857,7 @@
                                 </div>
                                 <!--                                <hr class="col-11">-->
 
-                                <div class="sales sales_plants">
+                                <div id="stock_high_main" class="sales sales_plants animated">
                                     <table class="table  col-md-12">
                                         <thead>
                                         <tr>
