@@ -188,9 +188,10 @@
 
         window.onload = function (){
             searchMessages();
-            setTimeout(stock_low_search_flower,300)
-            setTimeout(stock_high_search_flower,300)
             setTimeout(JudgeMan,50);
+            setTimeout(stock_low_search_flower,200)
+            setTimeout(stock_high_search_flower,80)
+            setTimeout(circle_plant,80)
         }
 
         function JudgeMan(){
@@ -259,6 +260,48 @@
                         '                       <td>'+ json[i].flower_stock +'</td>\n' +
                         '                   </tr>'
                 }
+
+                for (i=0;i<json.length;i++){
+                    document.getElementById("circle_stock").value = parseInt(document.getElementById("circle_stock").value) + json[i].flower_stock
+                }
+                document.getElementById("circle_all").value = parseInt(document.getElementById("circle_all").value) + json.length * 1000
+                console.log(document.getElementById("circle_all").value)
+
+            }
+        }
+
+        function circle_plant(){
+            var url = "../../../PlantsServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = circle_plantComplete;
+                req.send("type=sale_stock_search&flag=stock");
+            }
+        }
+
+        function circle_plantComplete(){
+            if (req.readyState == 4 && req.status == 200) {
+                var json =  JSON.parse(req.responseText);//转换为json对象
+
+                for (i=0;i<json.length;i++){
+                    document.getElementById("circle_stock").value = parseInt(document.getElementById("circle_stock").value) + json[i].plantstock
+                }
+                document.getElementById("circle_all").value = parseInt(document.getElementById("circle_all").value) + json.length * 1000
+                console.log(document.getElementById("circle_all").value)
+
+                var percent = parseInt((document.getElementById("circle_stock").value / document.getElementById("circle_all").value) * 100)
+                console.log(percent)
+                document.getElementById("myStat").setAttribute("data-text",percent + "%")
+                document.getElementById("myStat").setAttribute("data-percent",percent)
+
+
             }
         }
 
@@ -290,7 +333,10 @@
                         '                   </tr>'
                 }
 
-
+                for (i=0;i<json.length;i++){
+                    document.getElementById("circle_stock").value = parseInt(document.getElementById("circle_stock").value) + json[i].plantstock
+                }
+                document.getElementById("circle_all").value = parseInt(document.getElementById("circle_all").value) + json.length * 1000
             }
         }
 
@@ -530,6 +576,8 @@
             <div class="col-lg-4 col-sm-4 animated bounceInRight">
                 <div class="card mb-4 main_sta">
                     <div class="card-body p-3 text-center">
+                        <input type="hidden" id="circle_stock" value="0" >
+                        <input type="hidden" id="circle_all" value="0" >
                         <div id="myStat" data-dimension="250" data-text="67%" data-info="库存剩余" data-width="30" data-fontsize="30" data-percent="67" data-fgcolor="#043a58" data-bgcolor="#eee" data-fill="#ddd"></div>
                     </div>
                 </div>
