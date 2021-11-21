@@ -150,6 +150,8 @@ public class PlantsServlet extends HttpServlet
                 json.put("plantimg1", s.getImg1());
                 json.put("plantimg2", s.getImg2());
                 json.put("price", s.getPrice());
+                json.put("plantsale", s.getSale());
+                json.put("plantstock", s.getStock());
                 array.put(json);
             }
             jsonStr=array.toString();
@@ -190,6 +192,8 @@ public class PlantsServlet extends HttpServlet
                 json.put("plantimg1", s.getImg1());
                 json.put("plantimg2", s.getImg2());
                 json.put("price", s.getPrice());
+                json.put("plantsale", s.getSale());
+                json.put("plantstock", s.getStock());
                 array.put(json);
             }
             jsonStr=array.toString();

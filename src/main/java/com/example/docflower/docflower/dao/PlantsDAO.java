@@ -151,6 +151,8 @@ public class PlantsDAO implements iPlantsDAO
                     stu.setImg1(rst.getString("plant_image1"));
                     stu.setImg2(rst.getString("plant_image2"));
                     stu.setPrice(rst.getInt("plant_price"));
+                    stu.setSale(rst.getInt("plant_sale"));
+                    stu.setStock(rst.getInt("plant_stock"));
                     stuList.add(stu);
                 }
             }
@@ -193,6 +195,8 @@ public class PlantsDAO implements iPlantsDAO
                     stu.setImg1(rst.getString("plant_image1"));
                     stu.setImg2(rst.getString("plant_image2"));
                     stu.setPrice(rst.getInt("plant_price"));
+                    stu.setSale(rst.getInt("plant_sale"));
+                    stu.setStock(rst.getInt("plant_stock"));
                     stuList.add(stu);
                 }
             }
@@ -238,6 +242,8 @@ public class PlantsDAO implements iPlantsDAO
                     stu.setImg1(rst.getString("plant_image1"));
                     stu.setImg2(rst.getString("plant_image2"));
                     stu.setPrice(rst.getInt("plant_price"));
+                    stu.setSale(rst.getInt("plant_sale"));
+                    stu.setStock(rst.getInt("plant_stock"));
                     stuList.add(stu);
                 }
             }
