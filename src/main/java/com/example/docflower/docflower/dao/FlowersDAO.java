@@ -129,6 +129,8 @@ public class FlowersDAO implements iFlowersDAO {
                    flowers.setFlower_image3(rst.getString("flower_image3"));
                    flowers.setFlower_image4(rst.getString("flower_image4"));
                    flowers.setFlower_price(rst.getInt("flower_price"));
+                   flowers.setFlower_sale(rst.getInt("flower_sale"));
+                   flowers.setFlower_stock(rst.getInt("flower_stock"));
 
                    stuList.add(flowers);
                }
@@ -186,6 +188,8 @@ public class FlowersDAO implements iFlowersDAO {
                     flowers.setFlower_image3(rst.getString("flower_image3"));
                     flowers.setFlower_image4(rst.getString("flower_image4"));
                     flowers.setFlower_price(rst.getInt("flower_price"));
+                    flowers.setFlower_sale(rst.getInt("flower_sale"));
+                    flowers.setFlower_stock(rst.getInt("flower_stock"));
 
                     flowersList.add(flowers);
                 }

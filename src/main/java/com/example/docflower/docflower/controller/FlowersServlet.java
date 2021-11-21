@@ -156,6 +156,8 @@ public class FlowersServlet extends HttpServlet{
                 json.put("flower_image3", s.getFlower_image3());
                 json.put("flower_image4", s.getFlower_image4());
                 json.put("flower_price", s.getFlower_price());
+                json.put("flower_sale", s.getFlower_sale());
+                json.put("flower_stock", s.getFlower_stock());
                 array.put(json);
             }
             jsonStr=array.toString();
@@ -198,6 +200,8 @@ public class FlowersServlet extends HttpServlet{
                 json.put("flower_image3", s.getFlower_image3());
                 json.put("flower_image4", s.getFlower_image4());
                 json.put("flower_price", s.getFlower_price());
+                json.put("flower_sale", s.getFlower_sale());
+                json.put("flower_stock", s.getFlower_stock());
                 array.put(json);
             }
             jsonStr=array.toString();
@@ -240,6 +244,8 @@ public class FlowersServlet extends HttpServlet{
                 json.put("flower_image3", s.getFlower_image3());
                 json.put("flower_image4", s.getFlower_image4());
                 json.put("flower_price", s.getFlower_price());
+                json.put("flower_sale", s.getFlower_sale());
+                json.put("flower_stock", s.getFlower_stock());
                 array.put(json);
             }
             jsonStr=array.toString();
