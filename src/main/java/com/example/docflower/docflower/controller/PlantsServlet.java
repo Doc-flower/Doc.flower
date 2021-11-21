@@ -150,6 +150,8 @@ public class PlantsServlet extends HttpServlet
                 json.put("plantimg1", s.getImg1());
                 json.put("plantimg2", s.getImg2());
                 json.put("price", s.getPrice());
+                json.put("plantsale", s.getSale());
+                json.put("plantstock", s.getStock());
                 array.put(json);
             }
             jsonStr=array.toString();
@@ -190,6 +192,8 @@ public class PlantsServlet extends HttpServlet
                 json.put("plantimg1", s.getImg1());
                 json.put("plantimg2", s.getImg2());
                 json.put("price", s.getPrice());
+                json.put("plantsale", s.getSale());
+                json.put("plantstock", s.getStock());
                 array.put(json);
             }
             jsonStr=array.toString();
@@ -239,9 +243,10 @@ public class PlantsServlet extends HttpServlet
     private void sale_stock_search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         response.setCharacterEncoding("UTF-8");
+        String flag = request.getParameter("flag");
         PrintWriter out=response.getWriter();
         List<Plants> result=null;
-        result=new PlantsSrv().FetchSale_stock();
+        result=new PlantsSrv().FetchSale_stock(flag);
         String jsonStr="";
         try
         {

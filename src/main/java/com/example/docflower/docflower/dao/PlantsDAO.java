@@ -151,6 +151,8 @@ public class PlantsDAO implements iPlantsDAO
                     stu.setImg1(rst.getString("plant_image1"));
                     stu.setImg2(rst.getString("plant_image2"));
                     stu.setPrice(rst.getInt("plant_price"));
+                    stu.setSale(rst.getInt("plant_sale"));
+                    stu.setStock(rst.getInt("plant_stock"));
                     stuList.add(stu);
                 }
             }
@@ -193,6 +195,8 @@ public class PlantsDAO implements iPlantsDAO
                     stu.setImg1(rst.getString("plant_image1"));
                     stu.setImg2(rst.getString("plant_image2"));
                     stu.setPrice(rst.getInt("plant_price"));
+                    stu.setSale(rst.getInt("plant_sale"));
+                    stu.setStock(rst.getInt("plant_stock"));
                     stuList.add(stu);
                 }
             }
@@ -238,6 +242,8 @@ public class PlantsDAO implements iPlantsDAO
                     stu.setImg1(rst.getString("plant_image1"));
                     stu.setImg2(rst.getString("plant_image2"));
                     stu.setPrice(rst.getInt("plant_price"));
+                    stu.setSale(rst.getInt("plant_sale"));
+                    stu.setStock(rst.getInt("plant_stock"));
                     stuList.add(stu);
                 }
             }
@@ -257,14 +263,21 @@ public class PlantsDAO implements iPlantsDAO
 
     @SuppressWarnings("finally")
     @Override
-    public List<Plants> selectsale_stock()
+    public List<Plants> selectsale_stock(String flag)
     {
         DBUtil db=null;
         List<Plants> plantsDescList=null;
         plantsDescList=new LinkedList<Plants>();
+        System.out.println(flag);
         try
         {
-            String sql="select * from plants order by plant_sale DESC;";
+            String sql="";
+            if(flag.equalsIgnoreCase("sale")){
+
+                sql="select * from plants order by plant_sale DESC;";
+            }else if(flag.equalsIgnoreCase("stock")){
+                sql="select * from plants order by plant_stock ASC;";
+            }
             db=new DBUtil();
             if(!db.openConnection())
             {

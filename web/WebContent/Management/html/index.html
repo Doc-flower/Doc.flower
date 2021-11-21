@@ -13,6 +13,14 @@
 
 
     <style>
+
+        .animated {
+            -webkit-animation-duration: .8s;
+            animation-duration: .8s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+
         #active{
             color: #043a58;
             background: #fff;
@@ -22,6 +30,139 @@
         #myStat{
             margin: -10px auto;
         }
+
+
+        .toggle-button-cover
+        {
+            display: table-cell;
+            position: relative;
+            width: 200px;
+            height: 30px;
+            box-sizing: border-box;
+        }
+
+        .button-cover
+        {
+            height: 35px;
+            background-color: #fff;
+            border-radius: 4px;
+        }
+
+
+        .button-cover, .knobs, .layer
+        {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        .button
+        {
+            position: relative;
+            top: 50%;
+            width: 140px;
+            height: 40px;
+            margin: -25px auto 0 auto;
+            overflow: hidden;
+        }
+
+        .button.r, .button.r .layer
+        {
+            border-radius: 100px;
+        }
+
+        .button.b2
+        {
+            border-radius: 2px;
+        }
+
+        .checkbox
+        {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 3;
+        }
+
+        .knobs
+        {
+            z-index: 2;
+        }
+
+        .layer
+        {
+            width: 100%;
+            background-color: #ebf7fc;
+            transition: 0.3s ease all;
+            z-index: 1;
+        }
+
+        /* Button 13 */
+        .button-13 .knobs:before, .button-13 .knobs:after, .button-13 .knobs span
+        {
+            position: absolute;
+            top: 3px;
+            width: 70px;
+            height: 36px;
+            font-size: 10px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1;
+            padding: 9px 4px;
+            border-radius: 2px;
+            transition: 0.3s ease all;
+        }
+
+        .button-13 .knobs:before, .button-13 .knobs:after
+        {
+            color: #4e4e4e;
+            z-index: 1;
+        }
+
+        .button-13 .knobs:before
+        {
+            content: '花卉';
+            font-size: 14px;
+            color: #d4247b;
+            left: 4px;
+            top: 5px;
+        }
+
+        .button-13 .knobs:after
+        {
+            content: '绿植';
+            font-size: 14px;
+            color: #168023;
+            right: 4px;
+            top: 5px;
+
+        }
+
+        .button-13 .knobs span
+        {
+            width: 65px;
+            left: 70px;
+            background-color: #d4247b;
+            z-index: 2;
+        }
+
+        .button-13 .checkbox:checked + .knobs span
+        {
+            left: 4px;
+            background-color: #168023;
+        }
+
+        .button-13 .checkbox:checked ~ .layer
+        {
+            background-color: #fcebeb;
+        }
+
     </style>
 
 
@@ -35,20 +176,16 @@
         $( document ).ready(function() {
             setTimeout(function () {
                 $('#myStathalf').circliful();
-            }, 100);
+            }, 500);
             setTimeout(function () {
                 $('#myStat').circliful();
-            }, 100);
+            }, 500);
             setTimeout(function () {
                 $('#myStathalf2').circliful();
-            }, 100);
+            }, 500);
             setTimeout(function () {
                 $('#myStat2').circliful();
-            }, 100);
-            // $('#myStathalf').circliful();
-            // $('#myStat').circliful();
-            // $('#myStathalf2').circliful();
-            // $('#myStat2').circliful();
+            }, 500);
         });
     </script>
     <link rel="stylesheet" href="../../Client/css/footer.css">
@@ -60,6 +197,9 @@
         window.onload = function (){
             searchMessages();
             setTimeout(JudgeMan,50);
+            setTimeout(stock_low_search_flower,200)
+            setTimeout(stock_high_search_flower,80)
+            setTimeout(circle_plant,80)
         }
 
         function JudgeMan(){
@@ -86,6 +226,230 @@
             return ""
         }
 
+
+        // 库存过少检测
+        function stock_low_switch(){
+            var stock_low_name = document.getElementById("checkbox").value
+            if(stock_low_name == "plants"){
+                document.getElementById("stock_low_main").classList.add('fadeInLeft')
+
+                stock_low_search_flower()
+                document.getElementById("checkbox").value = 'flowers'
+                setTimeout(stock_low_mainremoveaniLeft,800)
+            }else if(stock_low_name == "flowers"){
+                document.getElementById("stock_low_main").classList.add('fadeInRight')
+                stock_low_search_plants()
+                document.getElementById("checkbox").value = 'plants'
+                setTimeout(stock_low_mainremoveaniRight,800)
+            }
+            console.log(stock_low_name)
+        }
+
+        function stock_low_mainremoveaniRight(){
+            document.getElementById("stock_low_main").classList.remove('fadeInRight')
+        }
+        function stock_low_mainremoveaniLeft(){
+            document.getElementById("stock_low_main").classList.remove('fadeInLeft')
+        }
+
+        function stock_low_search_flower(){
+            var url = "../../../FlowersServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = stock_low_search_flowerComplete;
+                req.send("type=sale_stock_search&flag=stock");
+            }
+        }
+
+        function stock_low_search_flowerComplete(){
+            if (req.readyState == 4 && req.status == 200) {
+                var stock_low_plants = document.getElementById("stock_low");
+
+
+                var json =  JSON.parse(req.responseText);//转换为json对象
+                stock_low_plants.innerHTML = ""
+                for(i=0; i<3; i++) {
+                    stock_low_plants.innerHTML += '<tr>\n' +
+                        '                       <th scope="row">'+ json[i].flower_id +'</th>\n' +
+                        '                       <td>'+ json[i].flower_name +'</td>\n' +
+                        '                       <td>'+ json[i].flower_stock +'</td>\n' +
+                        '                   </tr>'
+                }
+
+                for (i=0;i<json.length;i++){
+                    document.getElementById("circle_stock").value = parseInt(document.getElementById("circle_stock").value) + json[i].flower_stock
+                }
+                document.getElementById("circle_all").value = parseInt(document.getElementById("circle_all").value) + json.length * 1000
+                console.log(document.getElementById("circle_all").value)
+
+            }
+        }
+
+        function circle_plant(){
+            var url = "../../../PlantsServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = circle_plantComplete;
+                req.send("type=sale_stock_search&flag=stock");
+            }
+        }
+
+        function circle_plantComplete(){
+            if (req.readyState == 4 && req.status == 200) {
+                var json =  JSON.parse(req.responseText);//转换为json对象
+
+                for (i=0;i<json.length;i++){
+                    document.getElementById("circle_stock").value = parseInt(document.getElementById("circle_stock").value) + json[i].plantstock
+                }
+                document.getElementById("circle_all").value = parseInt(document.getElementById("circle_all").value) + json.length * 1000
+                console.log(document.getElementById("circle_all").value)
+
+                var percent = parseInt((document.getElementById("circle_stock").value / document.getElementById("circle_all").value) * 100)
+                console.log(percent)
+                document.getElementById("myStat").setAttribute("data-text",percent + "%")
+                document.getElementById("myStat").setAttribute("data-percent",percent)
+
+
+            }
+        }
+
+        function stock_low_search_plants(){
+            var url = "../../../PlantsServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = stock_low_search_plantsComplete;
+                req.send("type=sale_stock_search&flag=stock");
+            }
+        }
+        function stock_low_search_plantsComplete(){
+            if (req.readyState == 4 && req.status == 200) {
+                var stock_low_plants = document.getElementById("stock_low");
+                var json =  JSON.parse(req.responseText);//转换为json对象
+                stock_low_plants.innerHTML = ""
+                for(i=0; i<3; i++) {
+                    stock_low_plants.innerHTML += '<tr>\n' +
+                        '                       <th scope="row">'+ json[i].plantid +'</th>\n' +
+                        '                       <td>'+ json[i].plantname +'</td>\n' +
+                        '                       <td>'+ json[i].plantstock +'</td>\n' +
+                        '                   </tr>'
+                }
+
+                for (i=0;i<json.length;i++){
+                    document.getElementById("circle_stock").value = parseInt(document.getElementById("circle_stock").value) + json[i].plantstock
+                }
+                document.getElementById("circle_all").value = parseInt(document.getElementById("circle_all").value) + json.length * 1000
+            }
+        }
+
+        // 库存堆积检测
+        function stock_high_switch(){
+            var stock_high_name = document.getElementById("checkbox2").value
+            if(stock_high_name == "plants"){
+                document.getElementById("stock_high_main").classList.add('fadeInLeft')
+
+                stock_high_search_flower()
+                document.getElementById("checkbox2").value = 'flowers'
+                setTimeout(stock_high_mainremoveaniLeft,800)
+            }else if(stock_high_name == "flowers"){
+                document.getElementById("stock_high_main").classList.add('fadeInRight')
+
+                stock_high_search_plants()
+                document.getElementById("checkbox2").value = 'plants'
+                setTimeout(stock_high_mainremoveaniRight,800)
+
+            }
+            console.log(stock_high_name)
+        }
+
+        function stock_high_mainremoveaniRight(){
+            document.getElementById("stock_high_main").classList.remove('fadeInRight')
+        }
+        function stock_high_mainremoveaniLeft(){
+            document.getElementById("stock_high_main").classList.remove('fadeInLeft')
+        }
+
+
+        function stock_high_search_flower(){
+            var url = "../../../FlowersServlet";
+            if (window.XMLHttpRequest)
+                req1 = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req1 = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req1) {
+                //采用POST方式，异步传输
+                req1.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req1.onreadystatechange = stock_high_search_flowerComplete;
+                req1.send("type=sale_stock_search&flag=stock");
+            }
+        }
+
+        function stock_high_search_flowerComplete(){
+            if (req1.readyState == 4 && req1.status == 200) {
+                var stock_high_flowers = document.getElementById("stock_high");
+                var json =  JSON.parse(req1.responseText);//转换为json对象
+                stock_high_flowers.innerHTML = ""
+                for(i=json.length-1; i > json.length - 4; i--) {
+                    stock_high_flowers.innerHTML += '<tr>\n' +
+                        '                       <th scope="row">'+ json[i].flower_id +'</th>\n' +
+                        '                       <td>'+ json[i].flower_name +'</td>\n' +
+                        '                       <td>'+ json[i].flower_stock +'</td>\n' +
+                        '                   </tr>'
+                }
+            }
+        }
+
+        function stock_high_search_plants(){
+            var url = "../../../PlantsServlet";
+            if (window.XMLHttpRequest)
+                req2 = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req2 = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req2) {
+                //采用POST方式，异步传输
+                req2.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req2.onreadystatechange = stock_high_search_plantsComplete;
+                req2.send("type=sale_stock_search&flag=stock");
+            }
+        }
+        function stock_high_search_plantsComplete(){
+            if (req2.readyState == 4 && req2.status == 200) {
+                var stock_high_plants = document.getElementById("stock_high");
+                var json =  JSON.parse(req2.responseText);//转换为json对象
+                stock_high_plants.innerHTML = ""
+                for(i=json.length - 1; i > json.length - 4; i--) {
+                    stock_high_plants.innerHTML += '<tr>\n' +
+                        '                       <th scope="row">'+ json[i].plantid +'</th>\n' +
+                        '                       <td>'+ json[i].plantname +'</td>\n' +
+                        '                       <td>'+ json[i].plantstock +'</td>\n' +
+                        '                   </tr>'
+                }
+            }
+        }
     </script>
 </head>
 <body>
@@ -248,6 +612,8 @@
             <div class="col-lg-4 col-sm-4 animated bounceInRight">
                 <div class="card mb-4 main_sta">
                     <div class="card-body p-3 text-center">
+                        <input type="hidden" id="circle_stock" value="0" >
+                        <input type="hidden" id="circle_all" value="0" >
                         <div id="myStat" data-dimension="250" data-text="67%" data-info="库存剩余" data-width="30" data-fontsize="30" data-percent="67" data-fgcolor="#043a58" data-bgcolor="#eee" data-fill="#ddd"></div>
                     </div>
                 </div>
@@ -275,18 +641,18 @@
                                         <tbody>
                                             <tr>
                                                 <th scope="row">1</th>
-                                                <td>{{FlowersSaleStockList[0].flower_name}}</td>
-                                                <td>{{FlowersSaleStockList[0].flower_sale}}</td>
+                                                <td>{{FlowersSaleList[0].flower_name}}</td>
+                                                <td>{{FlowersSaleList[0].flower_sale}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
-                                                <td>{{FlowersSaleStockList[1].flower_name}}</td>
-                                                <td>{{FlowersSaleStockList[1].flower_sale}}</td>
+                                                <td>{{FlowersSaleList[1].flower_name}}</td>
+                                                <td>{{FlowersSaleList[1].flower_sale}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">3</th>
-                                                <td>{{FlowersSaleStockList[2].flower_name}}</td>
-                                                <td>{{FlowersSaleStockList[2].flower_sale}}</td>
+                                                <td>{{FlowersSaleList[2].flower_name}}</td>
+                                                <td>{{FlowersSaleList[2].flower_sale}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -304,18 +670,18 @@
                                         <tbody>
                                             <tr>
                                                 <th scope="row">1</th>
-                                                <td>{{PlantsSaleStockList[0].plantname}}</td>
-                                                <td>{{PlantsSaleStockList[0].plantsale}}</td>
+                                                <td>{{PlantsSaleList[0].plantname}}</td>
+                                                <td>{{PlantsSaleList[0].plantsale}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
-                                                <td>{{PlantsSaleStockList[1].plantname}}</td>
-                                                <td>{{PlantsSaleStockList[1].plantsale}}</td>
+                                                <td>{{PlantsSaleList[1].plantname}}</td>
+                                                <td>{{PlantsSaleList[1].plantsale}}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">3</th>
-                                                <td>{{PlantsSaleStockList[2].plantname}}</td>
-                                                <td>{{PlantsSaleStockList[2].plantsale}}</td>
+                                                <td>{{PlantsSaleList[2].plantname}}</td>
+                                                <td>{{PlantsSaleList[2].plantsale}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -377,9 +743,6 @@
                                         </p>
                                     </div>
                                 </div>
-
-
-
                                 <div class="comment col-md-12">
                                     <div class="comment_name ">
                                         <img src="../../Client/img/用户.png" height="30" width="30"/>
@@ -430,16 +793,27 @@
             </div>
 
             <div class=" col-sm-12  col-xl-4">
-                <div class="flower_data card mb-4  main_card animated flipInY">
+                <div class="stock_low card mb-4  main_card animated flipInY">
                     <div class="card-body p-3">
                         <div class="row">
                             <div class="col-12">
-                                <div class="numbers">
-                                    <p class="text-sm text-danger mb-0 text-capitalize font-weight-bold">库存紧张</p>
+                                <div class="numbers clearfix">
+                                    <p class="text-sm text-danger mb-0 text-capitalize font-weight-bold float-left">库存紧张</p>
 
+                                    <div class="toggle-button-cover float-right">
+                                        <div class="button-cover">
+                                            <div class="button b2 button-13" id="">
+                                                <input id="checkbox" type="checkbox" class="checkbox" value="flowers" onclick="stock_low_switch()">
+                                                <div class="knobs">
+                                                    <span></span>
+                                                </div>
+                                                <div class="layer"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--                                <hr class="col-11">-->
-                                <div class="sales sales_flower">
+                                <div id="stock_low_main" class="sales sales_flower animated">
                                     <table class="table  col-md-12">
                                         <thead>
                                         <tr>
@@ -448,22 +822,8 @@
                                             <th scope="col">库存量</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>玫瑰-卡罗拉</td>
-                                            <td>758</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>康乃馨</td>
-                                            <td>537</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>郁金香</td>
-                                            <td>494</td>
-                                        </tr>
+                                        <tbody id="stock_low" class="animated">
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -477,13 +837,24 @@
                     <div class="card-body p-3">
                         <div class="row">
                             <div class="col-12">
-                                <div class="numbers">
-                                    <p class="text-sm text-warning mb-0 text-capitalize font-weight-bold">库存堆积</p>
+                                <div class="numbers clearfix">
+                                    <p class="text-sm text-warning mb-0 text-capitalize float-left font-weight-bold">库存堆积</p>
 
+                                    <div class="toggle-button-cover float-right">
+                                        <div class="button-cover">
+                                            <div class="button b2 button-13">
+                                                <input id="checkbox2" type="checkbox" class="checkbox" value="flowers" onclick="stock_high_switch()">
+                                                <div class="knobs">
+                                                    <span></span>
+                                                </div>
+                                                <div class="layer"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--                                <hr class="col-11">-->
 
-                                <div class="sales sales_plants">
+                                <div id="stock_high_main" class="sales sales_plants animated">
                                     <table class="table  col-md-12">
                                         <thead>
                                         <tr>
@@ -492,22 +863,8 @@
                                             <th scope="col">库存量</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>吊兰</td>
-                                            <td>458</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>绿萝</td>
-                                            <td>372</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>铜钱草</td>
-                                            <td>291</td>
-                                        </tr>
+                                        <tbody id="stock_high">
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -571,18 +928,19 @@
             OrdersNum:"",
             BlogsNum:"",
             MessagesNum:"",
-            SaleStockList:[],
-            PlantsSaleStockList:[],
-            FlowersSaleStockList:[]
+            PlantsSaleList:[],
+            FlowersSaleList:[],
+            PlantsStockList:[],
+
         },
         mounted(){
             this.searchUserNum()
             this.searchOrdersNum()
             this.searchBlogsNum()
             this.searchMessagesNum()
-            this.searchSaleStock()
-            this.searchPlantsSaleStock()
-            this.searchFlowersSaleStock()
+            this.searchPlantsSale()
+            this.searchFlowersSale()
+            this.searchPlantsStock()
         },
         methods:{
             searchUserNum:function () {
@@ -626,37 +984,38 @@
                     })
             },
 
-            searchSaleStock:function () {
+            searchPlantsSale:function () {
                 var that = this;        //保存this
-                axios.post('../../../PlantsServlet?type=sale_stock_search')
+                axios.post('../../../PlantsServlet?type=sale_stock_search&flag=sale')
                     .then(function (response) {
                         console.log(response);
-                        that.SaleStockList = response.data
+                        that.PlantsSaleList = response.data
+                    })
+                    .catch(function (err) {
+                    })
+            },
+            searchFlowersSale:function () {
+                var that = this;        //保存this
+                axios.post('../../../FlowersServlet?type=sale_stock_search&flag=sale')
+                    .then(function (response) {
+                        console.log(response);
+                        that.FlowersSaleList = response.data
                     })
                     .catch(function (err) {
                     })
             },
 
-            searchPlantsSaleStock:function () {
+            searchPlantsStock:function () {
                 var that = this;        //保存this
-                axios.post('../../../PlantsServlet?type=sale_stock_search')
+                axios.post('../../../PlantsServlet?type=sale_stock_search&flag=stock')
                     .then(function (response) {
                         console.log(response);
-                        that.PlantsSaleStockList = response.data
+                        that.PlantsStockList = response.data
                     })
                     .catch(function (err) {
                     })
             },
-            searchFlowersSaleStock:function () {
-                var that = this;        //保存this
-                axios.post('../../../FlowersServlet?type=sale_stock_search')
-                    .then(function (response) {
-                        console.log(response);
-                        that.FlowersSaleStockList = response.data
-                    })
-                    .catch(function (err) {
-                    })
-            },
+
         }
     })
 

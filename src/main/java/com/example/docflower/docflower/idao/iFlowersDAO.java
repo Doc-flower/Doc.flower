@@ -16,5 +16,5 @@ public interface iFlowersDAO {
 
     public List<Flowers> select(String flowerinformation);
 
-    public List<Flowers> selectsale_stock();
+    public List<Flowers> selectsale_stock(String flag);
 }
