@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>花小圈</title>
@@ -56,6 +56,7 @@
 
         function init(){
             cookie_email_search();
+            storys_search();
             console.log("页面重新加载啦")
         }
 
@@ -107,7 +108,53 @@
             }
         }
 
-
+       //搜索全部花卉趣事
+        function  storys_search(){
+            var url = "../../../StorysServlet";
+            if (window.XMLHttpRequest)
+                req_storys = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req_storys = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req_storys) {
+                //采用POST方式，异步传输
+                req_storys.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req_storys.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req_storys.onreadystatechange = storys_searchComplete;
+                req_storys.send("type=search&name="+"");
+            }
+        }
+        function storys_searchComplete(){
+            if (req_storys.readyState == 4 && req_storys.status == 200) {
+                var json =  JSON.parse(req_storys.responseText);//转换为json对象
+                document.getElementById("story_list").innerHTML = "";
+                if(json.length > 0) {
+                    for (i = 0; i < json.length; i++) {
+                        document.getElementById("story_list").innerHTML +=' <li class="clearfix">\n' +
+                            '            <div class="news_left clearfix">\n' +
+                            '                <div class="pic">\n' +
+                            '                    <a href="HuaXiaoQuan_story.html" onclick="check_story('+json[i].story_id+')"><img src="'+json[i].story_image+'" alt="" /></a>\n' +
+                            '                    <i></i>\n' +
+                            '                </div>\n' +
+                            '                <div class="txt">\n' +
+                            '                    <a href="HuaXiaoQuan_story.html" onclick="check_story('+json[i].story_id+')">'+json[i].story_title+'</a>\n' +
+                            '                    <p>\n' +
+                            '                        '+json[i].story_introduction+
+                            '                    </p>\n' +
+                            '                </div>\n' +
+                            '            </div>\n' +
+                            '            <div class="news_right" style="padding-left: 2%;">\n' +
+                            '                <span>'+json[i].story_time+'</span>\n' +
+                            '            </div>\n' +
+                            '        </li>';
+                    }
+                }
+            }
+        }
+       function  check_story(id){
+           location.href='./HuaXiaoQuan_story.html';
+           window.localStorage.setItem('ID',id);
+       }
     </script>
 </head>
 <body onload="init()">
@@ -142,7 +189,7 @@
 </nav>
 <!--banner  start-->
 <section class="banner_zi">
-    <div><img src=".././img/花/故事汇.jpg" alt="" style="width: 1329px;height: 150px;"></div>
+    <div><img src=".././img/花/故事汇.jpg" alt="" style="width: 1063px;height: 150px;"></div>
 </section>
 
 
@@ -152,83 +199,8 @@
         <a href="HuaXiaoQuan_blog.html" class="active">个人博客</a>
         <a href="HuaXiaoQuan_blogWorld.html">博客世界</a>
     </div>
-    <ul class="news_zi_ul">
-        <li class="clearfix">
-            <div class="news_left clearfix">
-                <div class="pic">
-                    <a href="HuaXiaoQuan_story.html"><img src=".././img/花/玫瑰类/6.假日公主图集/假日公主1.jpg" alt="" /></a>
-                    <i></i>
-                </div>
-                <div class="txt">
-                    <a href="HuaXiaoQuan_story.html">Queen's day ——假日公主</a>
-                    <p>
-                        在中世纪，这种玫瑰的颜色充满活力, 以能够让人微笑而闻名，特别是在寒冷、艰难的冬天。一天，
-                        女王注意到市场上的这种玫瑰...
-                    </p>
-                </div>
-            </div>
-            <div class="news_right">
-                <span>07.25</span>
-                <span>2021</span>
-            </div>
-        </li>
-        <li class="clearfix">
-            <div class="news_left clearfix">
-                <div class="pic">
-                    <a href="HuaXiaoQuan_story.html"><img src=".././img/花/百合类/2.郁金香图集/郁金香2.jpg" alt="" /></a>
-                    <i></i>
-                </div>
-                <div class="txt">
-                    <a href="HuaXiaoQuan_story.html">Didier's tulip ——郁金香</a>
-                    <p>
-                        从前有位美丽的少女，在一个阳光明媚的早上，少女提着装满种子的花篮，到处播撒种子，希望
-                        能为春天增加美丽的...
-                    </p>
-                </div>
-            </div>
-            <div class="news_right">
-                <span>06.30</span>
-                <time>2021</time>
-            </div>
-        </li>
-        <li class="clearfix">
-            <div class="news_left clearfix">
-                <div class="pic">
-                    <a href="HuaXiaoQuan_story.html"><img src=".././img/花/稀有花类/1.山荷叶图集/山荷叶1.jpg" alt="" /></a>
-                    <i></i>
-                </div>
-                <div class="txt">
-                    <a href="HuaXiaoQuan_story.html">Diphylleia grayi F. Schm. ——山荷叶</a>
-                    <p>
-                        为什么花瓣是透明的？
-                        因为水分容易侵入花瓣内的细胞间隙，由于水和细胞液折射率接近，消除了反射界面，透射部分
-                        增强，花瓣就显得透明了。
-                    </p>
-                </div>
-            </div>
-            <div class="news_right">
-                <span>08.10</span>
-                <time>2021</time>
-            </div>
-        </li>
-        <li class="clearfix">
-            <div class="news_left clearfix">
-                <div class="pic">
-                    <a href="HuaXiaoQuan_story.html"><img src=".././img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg" alt="" /></a>
-                    <i></i>
-                </div>
-                <div class="txt">
-                    <a href="HuaXiaoQuan_story.html">Rose ——卡罗拉</a>
-                    <p>
-                        印度神话称玫瑰花蕾里诞生了拉克什米女神，是保护神吡瑟孥吻她而把她唤醒的，从此，它就成了吡瑟孥的妻子...
-                    </p>
-                </div>
-            </div>
-            <div class="news_right">
-                <span>10.01</span>
-                <time>2021</time>
-            </div>
-        </li>
+    <ul class="news_zi_ul" id="story_list" style="width: 1063px;margin-left: 83px;">
+
     </ul>
     <div class="page">
         <a href=""><i class="ye fa fa-backward"></i></a>

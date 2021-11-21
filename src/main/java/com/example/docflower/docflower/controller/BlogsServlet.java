@@ -94,9 +94,10 @@ public class BlogsServlet extends HttpServlet
     private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         Blogs blogs =null;
-        int id=0;
+
         try
         {
+            int id=Integer.valueOf(request.getParameter("id"));
             String name=request.getParameter("name");
             String owner=request.getParameter("owner");
             String text=request.getParameter("text");
@@ -202,4 +203,3 @@ public class BlogsServlet extends HttpServlet
     }
 
 }
-

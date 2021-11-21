@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/index.css">
     <!-- include main css -->
     <link rel="stylesheet" type="text/css" href="../../public/css/slick.css"/>
-<!--    <link rel="stylesheet" type="text/css" href="../../public/css/bootstrap.css"/>-->
+    <!--    <link rel="stylesheet" type="text/css" href="../../public/css/bootstrap.css"/>-->
     <link rel="stylesheet" type="text/css" href="../../public/css/juery.mmenu.all.css"/>
     <link rel="stylesheet" type="text/css" href="../../public/css/style.css"/>
     <link href="../../public/css/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
@@ -19,10 +19,9 @@
         function init(){
             var a = "";
             search(a);
-           cookie_email_search();
-            console.log("页面重新加载啦")
+            cookie_email_search();
         }
-
+        //搜索所有博客
         function search(name){
             var url = "../../../BlogsServlet";
             if (window.XMLHttpRequest)
@@ -61,9 +60,9 @@
                             '                 </div>\n' +
                             '                 <div class="card-body card-footer">\n' +
                             '                     <span class="iconfont look">&#xe7a5;</span>\n' +
-                            '                     <span  class="card-link look_num">(<span>30</span>)</span>\n' +
-                            '                     <span class="iconfont like" >&#xe8ad;</span>\n' +
-                            '                     <span  class="card-link like_num">(<span>10</span>)</span>\n' +
+                            '                     <span  class="card-link look_num">'+json[i].views+'</span>\n' +
+                            '                     <span class="iconfont like" onmousedown="func1(this,this.nextSibling.nextSibling)" onmouseup="func2(this)" onclick="addlikes('+json[i].id+')">&#xe8ad;</span>\n' +
+                            '                     <span  class="card-link like_num">'+json[i].likes+'</span>\n' +
                             '                      <a class="card-link check_article" href="./HuaXiaoQuan_CheckBlog.html"  onclick="checkblog('+json[i].id+')">查看全文</a>\n'+
                             '                 </div>\n' +
                             '             </div>\n' +
@@ -82,12 +81,303 @@
                 }
             }
         }
+
+
         function checkblog(id){
-                  location.href='./HuaXiaoQuan_CheckBlog.html';
-                  window.localStorage.setItem('ID',id);
+            location.href='./HuaXiaoQuan_CheckBlog.html';
+            window.localStorage.setItem('ID',id);
         }
 
 
+        //给博客添加点赞数
+        function addlikes(id) {
+            var url = "../../../BlogsServlet";
+            if (window.XMLHttpRequest)
+                req2 = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req2 = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req2) {
+                //采用POST方式，异步传输
+                req2.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req2.onreadystatechange = searchComplete2;
+                req2.send("type=searchId&id="+id);
+            }
+        }
+        function searchComplete2() {
+
+            if (req2.readyState == 4 && req2.status == 200) {
+                var json =  JSON.parse(req2.responseText);//转换为json对象
+                var like_num=json[0].likes+1;
+                var url = "../../../BlogsServlet";
+                if (window.XMLHttpRequest)
+                    req3 = new XMLHttpRequest();
+                else if (window.ActiveXObject)
+                    req3 = new ActiveXObject("Microsoft.XMLHTTP");
+                if (req3) {
+                    //采用POST方式，异步传输
+                    req3.open("post", url, true);
+                    req3.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    req3.onreadystatechange = checkComplete;
+                    var data = "type=update" +"&id=" + json[0].id + "&name="
+                        + json[0].name + "&owner="
+                        + json[0].owner +"&text="
+                        + json[0].text + "&time="
+                        + json[0].time+"&views="
+                        +json[0].views+"&likes="
+                        +like_num;
+                    req3.send(data);
+                }
+            }
+        }
+        function checkComplete() {
+            if (req3.readyState == 4 && req3.status == 200) {
+                console.log("点赞数已更新");
+            }
+        }
+        //对博客进行排序
+        function sortTime1(a,b){
+            return (a.time < b.time) ? -1 : (a.time > b.time) ? 1 : 0;
+        }
+        function sortTimeDesc1(a,b){
+            return (a.time > b.time) ? 1 : (a.time < b.time) ? -1 : 0;
+        }
+        function sortViewDesc(a,b){
+            return b.views-a.views
+        }
+        function sortLikesDesc1(a,b){
+            return b.likes-a.likes
+        }
+        //按最早时间排序
+        function sortByTime() {
+            var url = "../../../BlogsServlet";
+            if (window.XMLHttpRequest)
+                req_ByTime = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req_ByTime = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req_ByTime) {
+                //采用POST方式，异步传输
+                req_ByTime.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req_ByTime.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req_ByTime.onreadystatechange = sortByTimeComplete;
+                req_ByTime.send("type=search&name="+"");
+            }
+        }
+        function sortByTimeComplete() {
+            console.log( req_ByTime.readyState+" "+ req_ByTime.status);
+            if ( req_ByTime.readyState == 4 &&  req_ByTime.status == 200) {
+                var json = JSON.parse(req_ByTime.responseText);//转换为json对象
+                for(var i=0;i<json.length;i++){
+                    console.log("排序前的:"+json[i].time);
+                }
+                //按最早时间排序
+                json.sort(sortTime1);
+                for(var i=0;i<json.length;i++){
+                    console.log("排序后的:"+json[i].time);
+                }
+                document.getElementById("blog_world").innerHTML = "";
+                if (json.length > 0) {
+                    for (i = 0; i < json.length; i++) {
+                        document.getElementById("blog_world").innerHTML += ' <li>\n' +
+                            '             <div class="card" >\n' +
+                            '                 <ul class="list-group list-group-flush">\n' +
+                            '                     <li class="list-group-item">\n' +
+                            '                         <span class=" card_author">作者-><a href="#">' + json[i].owner + '</a></作者-></span>\n' +
+                            '                         <button>关注</button>\n' +
+                            '                     </li>\n' +
+                            '                 </ul>\n' +
+                            '                 <img src="..\\img\\花\\玫瑰类\\1.卡罗拉图集\\卡罗拉1.jpg" class="card-img-top" alt="...">\n' +
+                            '                 <div class="card-body card_article">\n' +
+                            '                       <p class="card-text">' + json[i].time + '</p>\n' +
+                            '                     <h5 class="card-title">' + json[i].name + '</h5>\n' +
+                            '                 </div>\n' +
+                            '                 <div class="card-body card-footer">\n' +
+                            '                     <span class="iconfont look">&#xe7a5;</span>\n' +
+                            '                     <span  class="card-link look_num">'+json[i].views+'</span>\n' +
+                            '                     <span class="iconfont like" onmousedown="func1(this,this.nextSibling.nextSibling)" onmouseup="func2(this)" onclick="addlikes(' + json[i].id + ')">&#xe8ad;</span>\n' +
+                            '                     <span  class="card-link like_num">'+json[i].likes+'</span>\n' +
+                            '                      <a class="card-link check_article" href="./HuaXiaoQuan_CheckBlog.html"  onclick="checkblog(' + json[i].id + ')">查看全文</a>\n' +
+                            '                 </div>\n' +
+                            '             </div>\n' +
+                            '         </li>';
+
+                    }
+                }
+            }
+        }
+  //按最近时间
+        function sortByTimeDesc() {
+            var url = "../../../BlogsServlet";
+            if (window.XMLHttpRequest)
+                req_ByTimeDesc = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req_ByTimeDesc = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req_ByTimeDesc) {
+                //采用POST方式，异步传输
+                req_ByTimeDesc.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req_ByTimeDesc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req_ByTimeDesc.onreadystatechange = sortByTimeDescComplete;
+                req_ByTimeDesc.send("type=search&name="+"");
+            }
+        }
+        function sortByTimeDescComplete() {
+            if (  req_ByTimeDesc.readyState == 4 &&   req_ByTimeDesc.status == 200) {
+                var json = JSON.parse( req_ByTimeDesc.responseText);//转换为json对象
+                for(var i=0;i<json.length;i++){
+                    console.log("排序前的:"+json[i].time);
+                }
+                //按最近时间排序
+                json.sort(sortTimeDesc1);
+                for(var i=0;i<json.length;i++){
+                    console.log("排序后的:"+json[i].time);
+                }
+                document.getElementById("blog_world").innerHTML = "";
+                if (json.length > 0) {
+                    for (i = 0; i < json.length; i++) {
+                        document.getElementById("blog_world").innerHTML += ' <li>\n' +
+                            '             <div class="card" >\n' +
+                            '                 <ul class="list-group list-group-flush">\n' +
+                            '                     <li class="list-group-item">\n' +
+                            '                         <span class=" card_author">作者-><a href="#">' + json[i].owner + '</a></作者-></span>\n' +
+                            '                         <button>关注</button>\n' +
+                            '                     </li>\n' +
+                            '                 </ul>\n' +
+                            '                 <img src="..\\img\\花\\玫瑰类\\1.卡罗拉图集\\卡罗拉1.jpg" class="card-img-top" alt="...">\n' +
+                            '                 <div class="card-body card_article">\n' +
+                            '                       <p class="card-text">' + json[i].time + '</p>\n' +
+                            '                     <h5 class="card-title">' + json[i].name + '</h5>\n' +
+                            '                 </div>\n' +
+                            '                 <div class="card-body card-footer">\n' +
+                            '                     <span class="iconfont look">&#xe7a5;</span>\n' +
+                            '                     <span  class="card-link look_num">'+json[i].views+'</span>\n' +
+                            '                     <span class="iconfont like" onmousedown="func1(this,this.nextSibling.nextSibling)" onmouseup="func2(this)" onclick="addlikes(' + json[i].id + ')">&#xe8ad;</span>\n' +
+                            '                     <span  class="card-link like_num">'+json[i].likes+'</span>\n' +
+                            '                      <a class="card-link check_article" href="./HuaXiaoQuan_CheckBlog.html"  onclick="checkblog(' + json[i].id + ')">查看全文</a>\n' +
+                            '                 </div>\n' +
+                            '             </div>\n' +
+                            '         </li>';
+
+                    }
+                }
+            }
+        }
+//按浏览量排序
+        function sortByViewDesc() {
+            var url = "../../../BlogsServlet";
+            if (window.XMLHttpRequest)
+                req_ByViewDesc = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req_ByViewDesc = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req_ByViewDesc) {
+                //采用POST方式，异步传输
+                req_ByViewDesc.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req_ByViewDesc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req_ByViewDesc.onreadystatechange = sortByViewDescComplete;
+                req_ByViewDesc.send("type=search&name="+"");
+            }
+        }
+        function sortByViewDescComplete() {
+            if (   req_ByViewDesc.readyState == 4 &&    req_ByViewDesc.status == 200) {
+                var json = JSON.parse(  req_ByViewDesc.responseText);//转换为json对象
+                for(var i=0;i<json.length;i++){
+                    console.log("排序前的:"+json[i].views);
+                }
+                //按浏览量排序
+                json.sort(sortViewDesc);
+                for(var i=0;i<json.length;i++){
+                    console.log("排序后的:"+json[i].views);
+                }
+                document.getElementById("blog_world").innerHTML = "";
+                if (json.length > 0) {
+                    for (i = 0; i < json.length; i++) {
+                        document.getElementById("blog_world").innerHTML += ' <li>\n' +
+                            '             <div class="card" >\n' +
+                            '                 <ul class="list-group list-group-flush">\n' +
+                            '                     <li class="list-group-item">\n' +
+                            '                         <span class=" card_author">作者-><a href="#">' + json[i].owner + '</a></作者-></span>\n' +
+                            '                         <button>关注</button>\n' +
+                            '                     </li>\n' +
+                            '                 </ul>\n' +
+                            '                 <img src="..\\img\\花\\玫瑰类\\1.卡罗拉图集\\卡罗拉1.jpg" class="card-img-top" alt="...">\n' +
+                            '                 <div class="card-body card_article">\n' +
+                            '                       <p class="card-text">' + json[i].time + '</p>\n' +
+                            '                     <h5 class="card-title">' + json[i].name + '</h5>\n' +
+                            '                 </div>\n' +
+                            '                 <div class="card-body card-footer">\n' +
+                            '                     <span class="iconfont look">&#xe7a5;</span>\n' +
+                            '                     <span  class="card-link look_num">'+json[i].views+'</span>\n' +
+                            '                     <span class="iconfont like" onmousedown="func1(this,this.nextSibling.nextSibling)" onmouseup="func2(this)" onclick="addlikes(' + json[i].id + ')">&#xe8ad;</span>\n' +
+                            '                     <span  class="card-link like_num">'+json[i].likes+'</span>\n' +
+                            '                      <a class="card-link check_article" href="./HuaXiaoQuan_CheckBlog.html"  onclick="checkblog(' + json[i].id + ')">查看全文</a>\n' +
+                            '                 </div>\n' +
+                            '             </div>\n' +
+                            '         </li>';
+
+                    }
+                }
+            }
+        }
+ //按点赞量排序
+        function sortByLikesDesc() {
+            var url = "../../../BlogsServlet";
+            if (window.XMLHttpRequest)
+                req_ByLikesDesc = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req_ByLikesDesc = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req_ByLikesDesc) {
+                //采用POST方式，异步传输
+                req_ByLikesDesc.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req_ByLikesDesc.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req_ByLikesDesc.onreadystatechange = sortByLikesDescComplete;
+                req_ByLikesDesc.send("type=search&name="+"");
+            }
+        }
+        function sortByLikesDescComplete() {
+            if (   req_ByLikesDesc.readyState == 4 &&  req_ByLikesDesc.status == 200) {
+                var json = JSON.parse(  req_ByLikesDesc.responseText);//转换为json对象
+                for(var i=0;i<json.length;i++){
+                    console.log("排序前的:"+json[i].likes);
+                }
+                //按点赞量排序
+                json.sort(sortLikesDesc1);
+                for(var i=0;i<json.length;i++){
+                    console.log("排序后的:"+json[i].likes);
+                }
+                document.getElementById("blog_world").innerHTML = "";
+                if (json.length > 0) {
+                    for (i = 0; i < json.length; i++) {
+                        document.getElementById("blog_world").innerHTML += ' <li>\n' +
+                            '             <div class="card" >\n' +
+                            '                 <ul class="list-group list-group-flush">\n' +
+                            '                     <li class="list-group-item">\n' +
+                            '                         <span class=" card_author">作者-><a href="#">' + json[i].owner + '</a></作者-></span>\n' +
+                            '                         <button>关注</button>\n' +
+                            '                     </li>\n' +
+                            '                 </ul>\n' +
+                            '                 <img src="..\\img\\花\\玫瑰类\\1.卡罗拉图集\\卡罗拉1.jpg" class="card-img-top" alt="...">\n' +
+                            '                 <div class="card-body card_article">\n' +
+                            '                       <p class="card-text">' + json[i].time + '</p>\n' +
+                            '                     <h5 class="card-title">' + json[i].name + '</h5>\n' +
+                            '                 </div>\n' +
+                            '                 <div class="card-body card-footer">\n' +
+                            '                     <span class="iconfont look">&#xe7a5;</span>\n' +
+                            '                     <span  class="card-link look_num">'+json[i].views+'</span>\n' +
+                            '                     <span class="iconfont like" onmousedown="func1(this,this.nextSibling.nextSibling)" onmouseup="func2(this)" onclick="addlikes(' + json[i].id + ')">&#xe8ad;</span>\n' +
+                            '                     <span  class="card-link like_num">'+json[i].likes+'</span>\n' +
+                            '                      <a class="card-link check_article" href="./HuaXiaoQuan_CheckBlog.html"  onclick="checkblog(' + json[i].id + ')">查看全文</a>\n' +
+                            '                 </div>\n' +
+                            '             </div>\n' +
+                            '         </li>';
+
+                    }
+                }
+            }
+        }
         function quit(){
             document.cookie = "name=???";
             window.location = "Sign.html";
@@ -172,21 +462,29 @@
     <span>位置：</span><a href="./HuaXiaoQuan.html">花小圈 </a> > <span class="active">博客世界</span>
 </div>
 <div class="sort">
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-            按最近时间
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">按最早时间</a>
-            <a class="dropdown-item" href="#">按最近时间</a>
-            <a class="dropdown-item" href="#">按浏览量</a>
-            <a class="dropdown-item" href="#">按点赞量</a>
-        </div>
+    <div class="btn-group btn-group-sm " role="group" aria-label="Basic example">
+      <!--  <button type="button" class="btn btn-secondary  btn-light text-secondary" onclick="sortByTime()">按最早时间</button>
+        <button type="button" class="btn btn-secondary  btn-light text-secondary" onclick="sortByTimeDesc()">按最近时间</button>-->
+        <button type="button" class="btn btn-secondary  btn-light text-secondary" onclick="sortByViewDesc()">按浏览量</button>
+        <button type="button" class="btn btn-secondary  btn-light text-secondary" onclick="sortByLikesDesc()">按点赞量</button>
     </div>
-</div>
- <ul class="blog_world" id="blog_world">
 
- </ul>
+
+    <!-- <div class="dropdown">
+         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+             按最近时间
+         </button>
+         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+             <a class="dropdown-item" href="#" >按最早时间</a>
+             <a class="dropdown-item" href="#" >按最近时间</a>
+             <a class="dropdown-item" href="#" >按浏览量</a>
+             <a class="dropdown-item" href="#" >按点赞量</a>
+         </div>
+     </div>-->
+</div>
+<ul class="blog_world" id="blog_world">
+
+</ul>
 
 
 </body>
@@ -195,21 +493,16 @@
 
 <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
 <script>
-    /*点击小手1次，点赞量加1*/
-    /*var list=document.getElementsByClassName("card-footer");
-    list[0].childNodes[2].onclick=function () {
-                  this.style.color="red";
+    //点击点赞按钮，按钮发生变化，点赞数加1
+    function func1(obj,obj1){
+        console.log("like");
+        obj.style.color="#e7b9ce";
+        var num=parseInt(obj1.innerHTML);
+        num++;
+        obj1.innerHTML=num+"";
     }
-
-    /*双击小手，取消刚才的点赞，点赞量减1*/
-    /*对排序进行响应，选择排序的li后，最上面的内容变为选中的内容*/
-   /* var sort_button=document.getElementById("dropdownMenuButton");
-    var sort_li=document.getElementsByClassName("dropdown-item");
-    var i;
-    for(i=0;i<sort_li.length;i++){
-        sort_li[i].onclick=function () {
-              sort_button.innerHTML=this.innerHTML;
-        }
-    }*/
+    function func2(obj){
+        obj.style.color="#aaaaaa";
+    }
 </script>
 </html>

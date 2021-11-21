@@ -23,6 +23,8 @@ public class DAOFactory
 
     private  static iCommentsDAO commentsDAO;
 
+    private  static iStorysDAO storysDAO;
+
     public static synchronized iShopsDAO creatStudioDAO()
     {
         if(null == stuDao)
@@ -83,5 +85,12 @@ public class DAOFactory
         if(null == commentsDAO)
             commentsDAO=new CommentsDAO();
         return commentsDAO;
+    }
+
+    public static synchronized iStorysDAO creatstoryDAO()
+    {
+        if(null == storysDAO)
+            storysDAO=new StorysDAO();
+        return storysDAO;
     }
 }

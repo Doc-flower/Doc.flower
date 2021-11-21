@@ -14,14 +14,60 @@
         var comment_area_height=330;
 
         window.onload = function (){
-            blog_search();
+            view_update();
             comment_search();
             cookie_email_search();
         }
+        //浏览量更新
+        function view_update(){
+            var url = "../../../BlogsServlet";
+            if (window.XMLHttpRequest)
+                req_view = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req_view = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req_view) {
+                //采用POST方式，异步传输
+                req_view.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req_view.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req_view.onreadystatechange = view_Search_Complete;
+                req_view.send("type=searchId&id="+id);
+            }
+        }
+        function view_Search_Complete() {
 
+            if (req_view.readyState == 4 && req_view.status == 200) {
+                var json =  JSON.parse(req_view.responseText);//转换为json对象
+                var view_num=json[0].views+1;
+                var url = "../../../BlogsServlet";
+                if (window.XMLHttpRequest)
+                    req_view1 = new XMLHttpRequest();
+                else if (window.ActiveXObject)
+                    req_view1 = new ActiveXObject("Microsoft.XMLHTTP");
+                if (req_view1) {
+                    //采用POST方式，异步传输
+                    req_view1.open("post", url, true);
+                    req_view1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    req_view1.onreadystatechange = check_ViewComplete;
+                    var data = "type=update" +"&id=" + json[0].id + "&name="
+                        + json[0].name + "&owner="
+                        + json[0].owner +"&text="
+                        + json[0].text + "&time="
+                        + json[0].time+"&views="
+                        +view_num+"&likes="
+                        +json[0].likes;
+                    req_view1.send(data);
+                }
+            }
+        }
+        function check_ViewComplete() {
+            if (req_view1.readyState == 4 && req_view1.status == 200) {
+                blog_search();
+                console.log("浏览量已更新");
+            }
+        }
+        //博客搜索
         function  blog_search(){
-            console.log(window.localStorage.getItem('ID'));
-            console.log(typeof id);
             var url = "../../../BlogsServlet";
             if (window.XMLHttpRequest)
                 req = new XMLHttpRequest();
@@ -46,7 +92,7 @@
                     for (i = 0; i < json.length; i++) {
                         document.getElementsByClassName("my_card")[0].innerHTML +=
                         '<h1 class="font-weight-bolder mt-3">'+json[i].name+'</h1>\n' +
-                        '    <p class="owner_time px-3 text-secondary">作者：'+json[i].owner +'&nbsp;&nbsp;&nbsp;&nbsp;发布时间：'+json[i].time +'&nbsp;&nbsp;&nbsp;&nbsp;浏览量：'+json[i].views +'&nbsp;&nbsp;&nbsp;&nbsp;浏览量：'+json[i].likes +'</p>\n' +
+                        '    <p class="owner_time px-3 text-secondary">作者：'+json[i].owner +'&nbsp;&nbsp;&nbsp;&nbsp;发布时间：'+json[i].time +'&nbsp;&nbsp;&nbsp;&nbsp;浏览量：'+json[i].views +'&nbsp;&nbsp;&nbsp;&nbsp;点赞量：'+json[i].likes +'</p>\n' +
                         ''+json[i].text+' ' +
                         '    <hr>';
                     console.log(json[i].name);

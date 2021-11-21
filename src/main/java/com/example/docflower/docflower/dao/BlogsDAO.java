@@ -18,9 +18,9 @@ public class BlogsDAO implements iBlogsDAO
         try
         {
             String sql="insert into blogs(blog_name, blog_owner,blog_text, blog_time, blog_views, blog_likes) VALUES"
-                        + "('" + blogs.getName() + "', '" + blogs.getOwner() + "', '"
-                        + blogs.getText() + "', '" + blogs.getTime()
-                        + "', " + blogs.getViews() + ", " + blogs.getLikes() + " )";
+                    + "('" + blogs.getName() + "', '" + blogs.getOwner() + "', '"
+                    + blogs.getText() + "', '" + blogs.getTime()
+                    + "', " + blogs.getViews() + ", " + blogs.getLikes() + " )";
             DBUtil db=new DBUtil();
             db.openConnection();
             ResultSet rst=db.getInsertObjectIDs(sql);
@@ -49,10 +49,9 @@ public class BlogsDAO implements iBlogsDAO
         int result=0;
         try
         {
-            String sql="update blogs set " + " play_name  ='" + blogs.getName() + "', " + " play_kind  = "
-                    + blogs.getOwner() + ", " + " play_length  = " + blogs.getTime() + ", "
-                    + " play_ticket_price  = '" + blogs.getViews() + "' ";
-            sql+=" where play_id = " + blogs.getID();
+            String sql="update blogs set " + " blog_views  =" + blogs.getViews() + ", " + " blog_likes = "
+                    + blogs.getLikes();
+            sql+=" where blog_id = " + blogs.getID();
             DBUtil db=new DBUtil();
             db.openConnection();
             result=db.execCommand(sql);
@@ -180,4 +179,3 @@ public class BlogsDAO implements iBlogsDAO
     }
 
 }
-
