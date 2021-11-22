@@ -12,11 +12,11 @@
         var id=window.localStorage.getItem('ID');
         var comment_height=260;
         var comment_area_height=330;
-
+        var owner="";
         window.onload = function (){
             view_update();
-            comment_search();
             cookie_email_search();
+            comment_search();
         }
         //浏览量更新
         function view_update(){
@@ -218,7 +218,7 @@
                         + "&blog_id="
                         + id
                         + "&comment_owner="
-                        + document.getElementById("user_name").value
+                        + owner
                         + "&comment_image="
                         + "../img/用户.png"
                         + "&comment_text="
@@ -437,7 +437,8 @@
                     console.log(json1.length);
                     document.getElementById("IfUserSginIn").innerHTML = '';
                     document.getElementById("dropdown04").innerText = json1[0].name;
-                    document.getElementById("user_name").value = json1[0].name;
+                    owner=json1[0].name;
+                    //document.getElementById("user_name").value = json1[0].name;
                     console.log("---------->成功:" + document.cookie);
                 }else if(JSON.parse(req1.responseText).length == 0){
                     document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-1" id="user" href="Sign.html" value="登录/注册"></a>\n'
