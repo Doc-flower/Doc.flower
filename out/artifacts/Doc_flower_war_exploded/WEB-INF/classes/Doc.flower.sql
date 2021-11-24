@@ -12,7 +12,7 @@ CREATE TABLE `customer`  (
   `cus_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `cus_email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `cus_telnum` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `cus_img` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `cus_img` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT '../img/用户.png',
   `cus_img_bg` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `cus_pwd` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '登陆密码',
   `cus_paypwd` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '支付密码',
@@ -244,6 +244,31 @@ insert into blogs(blog_name, blog_owner,blog_text, blog_time) VALUES
 insert into blogs(blog_name, blog_owner,blog_text, blog_time) VALUES
     ('教师节该送什么花给老师？','徐卓龙','<p>&nbsp; &nbsp; 教师节可以送老师郁金香、百合花、康乃馨、向日葵、文竹等。送郁金香代表着神圣、祝福、永恒；百合花象征着女性之美，代表了伟大的爱；康乃馨是表达爱和尊敬；送向日葵象征着老师用爱心温暖着每个学生；文竹代表着老师文气十足，师爱永恒。<br>&nbsp; &nbsp; 9月10日是教师节，师恩不忘，不管老师在岗也好，退休也罢，他们永远是我们最尊敬的老师，让我们在节日这一天送上我们最真挚的祝福吧！</p><p><strong>教师节适合送的鲜花：</strong><br><strong>郁金香</strong><br>&nbsp; &nbsp; 郁金香这个花比较好看，做成花束就更为漂亮了。郁金香代表了神圣、祝福、永恒，可以送给老师一支，也可以是一束，或者是做成花篮送也是可以的。红色郁金香代表热烈的爱意、粉色郁金香代表永远的爱、黄色郁金香代表开朗、白色郁金香代表纯洁清高的恋情，我建议送粉色和黄色搭配表答对老师的爱，希望老师开朗快乐每一天。<br><strong>百合花</strong><br>&nbsp; &nbsp; 百合花送给老师是不错的选择，百合花代表了纯洁，也有很多人把百合花和甜蜜联系到了一起，都说明了百合花的寓意是非常好的。百合花颜色丰富，并且被认为是圣母之花。所以说百合花非常适合送给老师，特别是送给女老师。<br><strong>康乃馨</strong><br>&nbsp; &nbsp; 对于送长辈来的鲜花来说，康乃馨是万能的。可以送给父母、也可以送给身边的朋友。康乃馨的花语有热情、魅力、真情、温馨的祝福、热爱着你、慈祥、不求代价、宽容、伟大，神圣，慰问，所以说教师节送给老师是再合适不过的。不过康乃馨的颜色多种多样，有红色、粉色。个人建议粉色主要送给女性，而红色康乃馨可以送给男性和女性。<br><strong>向日葵</strong><br>&nbsp; &nbsp; 这个花是送给老师最合适的花卉了。受到这种花祝福的人，必定是像太阳一样伟大或者受人尊敬。她必定有着一颗明朗和快乐的心。近年来赠送给老师这个花的时候并不流行用花束了，而是搭配个漂亮且文艺的花盆，直接栽种在里面送给老师。其实这样也好，可以让花开更长时间。<br><strong>微型玫瑰</strong><br>&nbsp; &nbsp; 在古希腊神话中，玫瑰是集爱与美于一身，既是美神的化身，也是爱神的象征。虽然玫瑰常用来表达爱情，但也表达了对人的尊敬。教师节送给老师这个花，也是非常应景的。 不过更流行的是微型玫瑰盆栽了。<br><strong>剑兰</strong><br>&nbsp; &nbsp; “剑兰”花它代表的意思是“怀念、用心、长寿、福禄、节节上升和坚固”。这也代表着祝愿我们敬爱的老师永远健康快乐，师生间的友谊永久长存。<br><strong>文竹</strong><br>&nbsp; &nbsp; 寓意老师文气十足，师爱永恒。文竹容易抽出新枝，学生的新知不断而来。摆在老师办公室的桌上挺有生命力的，而且可让老师长期把你的心意留下。</p>','2021-9-8 14:29');
 
+-- ----------------------------
+-- Table structure for story
+-- ----------------------------
+DROP TABLE IF EXISTS `story`;
+CREATE TABLE `story`  (
+                          `story_id` int(11) NOT NULL AUTO_INCREMENT,
+                          `story_owner` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+                          `story_title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+                          `story_introduction` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+                          `story_text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+                          `story_image` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+                          `story_time` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+
+                          PRIMARY KEY (`story_id`) USING BTREE
+
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
+
+INSERT INTO  story(story_owner,story_title,story_introduction,story_text,story_image,story_time) VALUES
+('听故事，赏鲜花','Queen''s day ——假日公主','在中世纪，这种玫瑰的颜色充满活力, 以能够让人微笑而闻名，特别是在寒冷、艰难的冬天。一天,女王注意到市场上的这种玫瑰...','  <p>花语：快乐、笑容、美好的心情、愿你开怀每一天。介绍：Queen''s day，花头大、枝条长，香槟色。</p><div class="s_img clearfix"><div class="pic"><img src=".././img/花/玫瑰类/6.假日公主图集/假日公主1.jpg" alt="" class="vcenter" style="width: 463px;height: 347px;"/><i></i></div><div class="pic"><img src=".././img/花/玫瑰类/6.假日公主图集/假日公主2.jpg" alt="" class="vcenter" style="width: 463px;height: 347px;"/><i></i></div></div><p>在中世纪，这种玫瑰的颜色充满活力, 以能够让人微笑而闻名，特别是在寒冷、艰难的冬天。一天，女王注意到市场上的这种玫瑰，于是要求每天都把一支玫瑰放在床边，</p><p>这样她每天起床后都能够看到 美丽的东西，尽管外面天气灰暗沉闷，尽管她的臣民心情不太好。从此以后，女王每天醒来后，都心 情舒畅，心中郁闷都远离而去。</p><p>这个习惯一直坚持到她去世。以后，人们把这种玫瑰命名为“Queen''s Day”,一直沿用至今，中文名字叫做假日公主。</p>','.././img/花/玫瑰类/6.假日公主图集/假日公主1.jpg','2021-09-30');
+INSERT INTO  story(story_owner,story_title,story_introduction,story_text,story_image,story_time) VALUES
+('Love Live','Didier''s tulip ——郁金香','从前有位美丽的少女，在一个阳光明媚的早上，少女提着装满种子的花篮，到处播撒种子，希望能为春天增加美丽的...','<p>花语：博爱、体贴、高雅、富贵、能干、聪颖，这些无不是郁金香的代名词。介绍：英文名为“Didier''s tulip”或“Garden tulip”。叶3-5枚，条状披针形至卵状披针状，花单朵顶生，大型而艳丽，花被片红色或杂有白色和黄色，有时为白色或黄色，长5-7厘米，宽2-4厘米，6枚雄蕊等长，花丝无毛，无花柱，柱头增大呈鸡冠状，花期4-5月。</p><div class="s_img clearfix"><div class="pic"><img src=".././img/花/百合类/2.郁金香图集/郁金香1.png" alt="" class="vcenter" style="width: 463px;height: 347px;"/><i></i></div><div class="pic"><img src=".././img/花/百合类/2.郁金香图集/郁金香3.png" alt="" class="vcenter" style="width: 463px;height: 347px;"/><i></i></div></div><p>郁金香的故事我们慢慢道来：从前有位美丽的少女，在一个阳光明媚的早上，少女提着装满种子的花篮，到处播撒种子，希望能为春天增加美丽的色彩。美丽的少女走累了，就在一个河边坐下来休息。</p><p>结果被风神布鲁斯无意间发现了，风神对少女产生了爱慕之心，于是便不断地追求少女。少女被风神穷追不舍，只好求助于女性的守护神洁安娜。洁安娜为了救助女孩而将她</p><p>变成了一株鲜花，后来人们就给这朵花 起了一个美丽的名字——郁金香。</p>','.././img/花/百合类/2.郁金香图集/郁金香2.jpg','2021-10-01');
+INSERT INTO  story(story_owner,story_title,story_introduction,story_text,story_image,story_time) VALUES
+('随遇而安','Diphylleia grayi F. Schm. ——山荷叶','为什么花瓣是透明的？因为水分容易侵入花瓣内的细胞间隙，由于水和细胞液折射率接近，消除了反射界面，透射部分增强，花瓣就显得透明了。',' <p>花语：亲情。别名：金魁莲、旱八角、八角莲、佛爷伞、大叶子、大脖梗子。拉丁学名：Diphylleia grayi F. Schm.</p><div class="s_img clearfix"><div class="pic"><img src=".././img/花/稀有花类/1.山荷叶图集/山荷叶1.jpg" alt="" class="vcenter" style="width: 463px;height: 347px;"/><i></i></div><div class="pic"><img src=".././img/花/稀有花类/1.山荷叶图集/山荷叶2.jpg" alt="" class="vcenter" style="width: 463px;height: 347px;"/><i></i></div></div><p>介绍：多年生草本，植株高40-150厘米。根状茎粗状，横生，多须根；茎直立，不分枝，无毛，淡绿色。 花深红色，5-8朵簇生于离叶基部不远处。</p><p>变身秘诀：为什么花瓣是透明的？</p><p>因为水分容易侵入花瓣内的细胞间隙，由于水和细胞液折射率接近，消除了反射界面，透射部分增强，花瓣就显得透明了。</p>','.././img/花/稀有花类/1.山荷叶图集/山荷叶1.jpg','2021-11-13');
+INSERT INTO  story(story_owner,story_title,story_introduction,story_text,story_image,story_time) VALUES
+('悬浮的枸杞','Rose ——卡罗拉','印度神话称玫瑰花蕾里诞生了拉克什米女神，是保护神吡瑟孥吻她而把她唤醒的，从此，它就成了吡瑟孥的妻子...','<p>花语：幸福而浪漫的爱情。</p><div class="s_img clearfix"><div class="pic"><img src=".././img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg" alt="" class="vcenter" style="width: 463px;height: 347px;"/><i></i></div><div class="pic"><img src=".././img/花/玫瑰类/1.卡罗拉图集/卡罗拉2.jpg" alt="" class="vcenter" style="width: 463px;height: 347px;"/><i></i></div></div><p>介绍：卡罗拉（Carola），切花月季的一个品种，具有鲜红色，高芯卷边大花型等特点。</p> <p>赠送理由：卡罗拉玫瑰是属于玫瑰中的精品，它的花色十分经典，花朵饱满丰富，并且 盛开之后明艳动人。</p><p>因此，将卡罗拉玫瑰赠送给心爱的人，寓意十分美好，可以表达一种真挚之情。</p>','.././img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg','2021-11-18');
 
 -- ----------------------------
 -- Table structure for cpmment

@@ -162,6 +162,7 @@
 
   <script src="../../public/js/jquery-1.12.4.min.js"></script>
   <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
+
   <script src="../../public/js/vue.min.js"></script>
   <script src="../../public/js/axios.min.js"></script>
 
@@ -220,6 +221,7 @@
   </script>
 
   <link rel="stylesheet" href="../css/index.css">
+  <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 
@@ -323,6 +325,24 @@
     </div>
   </div>
 </div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroupFileAddon01">上传头像</span>
+  </div>
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+    <label id="inputGroupFile01_name" class="custom-file-label" for="inputGroupFile01">选择文件</label>
+  </div>
+</div>
+
+<input type="file" value="" class="btn btn-primary custom-file-input" id="btn"  width="50" height="50">
+<script>
+  $("#inputGroupFile01").change(function (){
+    console.log(document.getElementById("inputGroupFile01").value);
+    document.getElementById("inputGroupFile01_name").innerText = document.getElementById("inputGroupFile01").value;
+  })
+</script>
 
 </body>
 </html>

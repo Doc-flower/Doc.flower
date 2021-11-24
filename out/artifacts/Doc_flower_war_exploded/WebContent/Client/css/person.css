@@ -154,6 +154,13 @@ mua~
     height: 100px;
 }
 
+
+.person_img_upload{
+    margin-top: 15px;
+    width: 120px;
+    height: 120px;
+}
+
 #custom-file{
     position: absolute;
     bottom: 120px;

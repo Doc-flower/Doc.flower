@@ -10,10 +10,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -23,6 +25,7 @@ public class CustomerServlet  extends HttpServlet
 {
     private static final long serialVersionUID=1L;
 
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         doPost(request, response);
@@ -30,7 +33,11 @@ public class CustomerServlet  extends HttpServlet
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+
+        request.setCharacterEncoding("UTF-8");
+
         String type=request.getParameter("type");
+        System.out.println("type:" + type);
 
         // 根据请求操作类型，执行相应的增、删、该、查
         if(type.equalsIgnoreCase("add"))
@@ -152,9 +159,6 @@ public class CustomerServlet  extends HttpServlet
                 json.put("email", s.getEmail());
                 array.put(json);
             }
-//            System.out.println("------------>pwd:" + pwd);
-//
-//            System.out.println("------------>MD5:" + pwd_MD5);
             System.out.println("---------->arry:" + array);
             System.out.println("---------->arry.length():" + array.length());
             if(array.length() >= 2){
@@ -217,6 +221,7 @@ public class CustomerServlet  extends HttpServlet
                 json.put("email", s.getEmail());
                 json.put("pwd", s.getPwd());
                 json.put("paypwd", s.getPayPwd());
+                json.put("img",s.getImg());
                 json.put("imgbg", s.getImg_bg());
                 json.put("address", s.getAddress());
                 json.put("orders", s.getOrders());
