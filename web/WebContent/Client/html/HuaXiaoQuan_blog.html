@@ -52,21 +52,37 @@
         .show > .btn-outline-primary.dropdown-toggle:focus {
             box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
         }
-
+        .close_text{
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp:2;
+            word-break: break-all;
+            overflow: hidden;
+        }
+        .show_more{
+            width: 100%;
+            text-align: right;
+        }
+        .show_more a{
+            text-decoration: none;
+            font-family: SimSun-ExtB;
+            font-size: 12px;
+            color: #231815;
+        }
     </style>
 
 
     <script>
 
 
+       // 定义登录者
+       var owner="";
 
         function init(){
             cookie_email_search();
             search_myblog();
             console.log("页面重新加载啦");
         }
-
-
 
         // 登陆检测
         function quit(){
@@ -100,7 +116,10 @@
                     console.log(json1.length);
                     document.getElementById("IfUserSginIn").innerHTML = '';
                     document.getElementById("dropdown04").innerText = json1[0].name;
-                    document.getElementById("user_name").value = json1[0].name;
+                   // document.getElementById("user_name").value = json1[0].name;
+                    document.getElementById("owner_email").innerHTML=json1[0].email;
+                    document.getElementById("owner_name").innerHTML=json1[0].name;
+                    owner=json1[0].name;
                     console.log("---------->成功:" + document.cookie);
                 }else if(JSON.parse(req1.responseText).length == 0){
                     document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-3" id="user" href="Sign.html" value="登录/注册"></a>\n'
@@ -115,7 +134,6 @@
         }
 
         //搜索个人博客
-        var owner="刘璇";
         function  search_myblog(){
             var url = "../../../BlogsServlet";
             if (window.XMLHttpRequest)
@@ -146,16 +164,17 @@
                                 '                <div class="card">\n' +
                                 '                    <div class="card-header" class="headingOne">\n' +
                                 '                        <h2 class="mb-0">\n' +
-                                '                            <button class="text-secondary btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#demo" aria-expanded="true" aria-controls="collapseOne">\n' +
+                                '                            <button class="text-secondary btn btn-link btn-block text-left" type="button" data-toggle="collapse"  aria-expanded="true" aria-controls="collapseOne">\n' +
                                 '                                '+json[i].name+'\n' +
                                 '                            </button>\n' +
                                 '                        </h2>\n' +
                                 '                    </div>\n' +
                                 '\n' +
-                                '                    <div id="demo" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">\n' +
-                                '                        <div class="card-body">\n' +
+                                '                    <div  class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">\n' +
+                                '                        <div class="card-body text close_text" status="0">\n' +
                                 '                         '+json[i].text+' \n'+
                                 '                        </div>\n' +
+                                '<div class="show_more"><a href="" class="show_more_btn">查看全文</a></div>'+
                                 '                    </div>\n' +
                                 '                </div>\n' +
                                 '                <div class="card" style="height:35px;">\n' +
@@ -180,9 +199,28 @@
                         }
 
                     }
-
                         document.getElementById("view").innerHTML=view_sum;
                         document.getElementById("like").innerHTML=like_sum;
+                    $(function(){
+                        $(".show_more_btn").click(function (){
+                            var status=$(".text").attr("status");
+                            if(status==1){
+                                console.log("进入js");
+                                overflow:hidden;
+                                $(".text").addClass("close_text");
+                                $(".text").attr("status",0);
+                                $(this).html("查看更多");
+                            }
+                            else{
+                                $(".text").removeClass("close_text");
+                                $(".text").attr("status",1);
+                                $(this).html("收起");
+                            }
+                            return false;
+                        })
+                    })
+
+
 
                 }
             }
@@ -221,9 +259,10 @@
                                 '                    </div>\n' +
                                 '\n' +
                                 '                    <div id="a" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">\n' +
-                                '                        <div class="card-body">\n' +
+                                '                        <div class="card-body text close_text" status="0"">\n' +
                                 '                         '+json[i].text+' \n'+
                                 '                        </div>\n' +
+                                '<div class="show_more"><a href="" class="show_more_btn">查看全文</a></div>'+
                                 '                    </div>\n' +
                                 '                </div>\n' +
                                 '                <div class="card" style="height:35px;">\n' +
@@ -245,9 +284,28 @@
                                 '            </div>';
                         }
                     }
+                    $(function(){
+                        $(".show_more_btn").click(function (){
+                            var status=$(".text").attr("status");
+                            if(status==1){
+                                console.log("进入js");
+                                overflow:hidden;
+                                $(".text").addClass("close_text");
+                                $(".text").attr("status",0);
+                                $(this).html("查看更多");
+                            }
+                            else{
+                                $(".text").removeClass("close_text");
+                                $(".text").attr("status",1);
+                                $(this).html("收起");
+                            }
+                            return false;
+                        })
+                    })
                 }
             }
         }
+
     </script>
 </head>
 <body onload="init()">
@@ -288,10 +346,10 @@
         </div>
         <div class="col-md-3 col-sm-6 ">
             <h2 id="owner_name" class="font-weight-bold">
-                鱼尔Snn
+
             </h2>
-            <p class="text-dark">
-                liuyuyng@qq.com
+            <p class="text-dark" id="owner_email">
+
             </p>
         </div>
         <div class="col-md-1 col-sm-6 text-center">
