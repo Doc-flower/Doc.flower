@@ -36,7 +36,6 @@
         function cookie_email_searchComplete(){
             if (req.readyState == 4 && req.status == 200) {
                 console.log(req.responseText);
-
                 var json =  JSON.parse(req.responseText);//转换为json对象
                 console.log(json);
 
@@ -59,6 +58,7 @@
 
 
                 document.getElementById("palette_color__main").style.background = json[0].imgbg;
+
 
                 //    修改资料
                 document.getElementById("owner_id").value = json[0].id;
@@ -174,8 +174,8 @@
 
 </nav>
 
-<div class="person_icon person_img_bg">
-    <img src="" class="rounded-circle person_img" alt="">
+<div class="person_icon person_img_bg" >
+    <img src="" class="rounded-circle person_img" alt=".">
 
     <p id="person_name" class="person_name my-1">
 
