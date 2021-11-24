@@ -11,6 +11,28 @@
     <link rel="stylesheet" href="../../public/css/font-awesome-4.7.0/css/font-awesome.min.css">
     <script src="../js/index.js"></script>
     <link rel="stylesheet" href="../../public/css/animate.min.css">
+    <style>
+        .custom-shape-divider-bottom-1637738260 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+
+        .custom-shape-divider-bottom-1637738260 svg {
+            position: relative;
+            display: block;
+            width: calc(152% + 1.3px);
+            height: 124px;
+        }
+
+        .custom-shape-divider-bottom-1637738260 .shape-fill {
+            fill: #FFFFFF;
+        }
+    </style>
 
 </head>
 <body onload="cookie_email_search()">
@@ -44,12 +66,18 @@
 
     <section class="home" id="home">
         <div class="content animated fadeInLeft">
-            <h3>花博士</h3>
+            <h3 class="font-weight-bolder">花博士</h3>
             <span> 花店不开了，花继续开</span>
             <p>这样的时刻，我就只想在春天必经的路口，开一间花店。店不大，朴素，宛如乡庐；小巧，宛如画屏；精致，宛如庭院</p>
         </div>
         <img src="../img/contact-img.svg" class="animated fadeInDown"  alt="">
+
     </section>
+    <div class="custom-shape-divider-bottom-1637738260">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+        </svg>
+    </div>
 
     <div class="container">
         <div class="row">
@@ -63,7 +91,6 @@
             <img src="../img/wallhaven-48mdl1_1920x1080.png" class="col-md-6  mb-4 flower_admire fade"  alt="">
             <img src="../img/wallhaven-x1gr8z_1920x1080.png" class="col-md-6  mb-4 flower_admire fade"  alt="">
             <img src="../img/wallhaven-p815p3_1920x1080.png" class="col-md-6  mb-4 flower_admire fade"  alt="">
-
 <!--            花卉推荐-->
             <div class="  my-3">
                 <!--            花卉推荐-->
@@ -340,16 +367,30 @@
                     </div>
 
                     <div class="col-md-6 mb-3 join_us1">
-                        <form  class="form clearfixc" id="form_join_us">
+<!--                        <form  class="form clearfixc" id="form_join_us">-->
+<!--                            <p class="join_us">-->
+<!--                                加入我们-->
+<!--                            </p>-->
+<!--                            <input type="text" placeholder="店铺名称" class="box" name="shop_name">-->
+<!--                            <input type="text" placeholder="店铺地址" class="box" name="shop_address">-->
+<!--                            <input type="text" placeholder="店铺电话" class="box" name="shop_tel">-->
+<!--                            <textarea name="shop_text" class="box" placeholder="备注，请输入..." cols="30" rows="10"></textarea>-->
+<!--                            <input type="button" value="加入我们" class="btn btn-danger rounded-pill float-right "  data-toggle="modal" data-target="#addSuccessModal" onclick="check_join_us()">-->
+<!--                        </form>-->
+
+
+                        <form class="form clearfix"  id="form_join_us">
                             <p class="join_us">
                                 加入我们
                             </p>
+                            <input type="hidden" id="user_name1" value="未登录用户" name="user_name">
                             <input type="text" placeholder="店铺名称" class="box" name="shop_name">
                             <input type="text" placeholder="店铺地址" class="box" name="shop_address">
                             <input type="text" placeholder="店铺电话" class="box" name="shop_tel">
                             <textarea name="shop_text" class="box" placeholder="备注，请输入..." cols="30" rows="10"></textarea>
-                            <input type="button" value="加入我们" class="btn btn-danger rounded-pill float-right"  data-toggle="modal" data-target="#addSuccessModal" onclick="check_join_us()">
+                            <input type="button" value="加入我们" class="btn btn-danger rounded-pill float-right "  data-toggle="modal" data-target="#addSuccessModal" onclick="check_join_us()">
                         </form>
+
                     </div>
 
                     <!--添加成功-->

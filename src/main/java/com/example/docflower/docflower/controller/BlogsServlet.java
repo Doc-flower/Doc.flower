@@ -50,11 +50,12 @@ public class BlogsServlet extends HttpServlet
         {
             String name=request.getParameter("name");
             String owner=request.getParameter("owner");
+            int owner_id=Integer.parseInt(request.getParameter("owner_id"));
             String text=request.getParameter("text");
             String time=request.getParameter("time");
             int views=0;
             int likes=0;
-            blogs =new Blogs(id, name, owner,text,time,views,likes);
+            blogs =new Blogs(id, name, owner,owner_id,text,time,views,likes);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
 
@@ -97,14 +98,15 @@ public class BlogsServlet extends HttpServlet
 
         try
         {
-            int id=Integer.valueOf(request.getParameter("id"));
+            int id=Integer.parseInt(request.getParameter("id"));
             String name=request.getParameter("name");
             String owner=request.getParameter("owner");
+            int owner_id=Integer.parseInt(request.getParameter("owner_id"));
             String text=request.getParameter("text");
             String time=request.getParameter("time");
-            int views=Integer.valueOf(request.getParameter("views"));
-            int likes=Integer.valueOf(request.getParameter("likes"));
-            blogs =new Blogs(id, name, owner,text,time,views,likes);
+            int views=Integer.parseInt(request.getParameter("views"));
+            int likes=Integer.parseInt(request.getParameter("likes"));
+            blogs =new Blogs(id, name, owner,owner_id,text,time,views,likes);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
 
@@ -141,6 +143,7 @@ public class BlogsServlet extends HttpServlet
                 json.put("id", s.getID());
                 json.put("name", s.getName());
                 json.put("owner", s.getOwner());
+                json.put("owner_id", s.getOwner_id());
                 json.put("text", s.getText());
                 json.put("time", s.getTime());
                 json.put("views", s.getViews());
@@ -181,6 +184,7 @@ public class BlogsServlet extends HttpServlet
                 json.put("id", s.getID());
                 json.put("name", s.getName());
                 json.put("owner", s.getOwner());
+                json.put("owner_id", s.getOwner_id());
                 json.put("text", s.getText());
                 json.put("time", s.getTime());
                 json.put("views", s.getViews());

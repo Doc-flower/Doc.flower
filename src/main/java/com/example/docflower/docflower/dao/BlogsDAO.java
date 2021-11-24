@@ -17,10 +17,9 @@ public class BlogsDAO implements iBlogsDAO
         int resultPlay=0;
         try
         {
-            String sql="insert into blogs(blog_name, blog_owner,blog_text, blog_time, blog_views, blog_likes) VALUES"
-                    + "('" + blogs.getName() + "', '" + blogs.getOwner() + "', '"
-                    + blogs.getText() + "', '" + blogs.getTime()
-                    + "', " + blogs.getViews() + ", " + blogs.getLikes() + " )";
+            String sql="insert into blogs(blog_name, blog_owner, blog_owner_id, blog_text, blog_time, blog_views, blog_likes) VALUES"
+                    + "('" + blogs.getName() + "', '" + blogs.getOwner() + "', "
+                    + blogs.getOwner_id() + ", '"+ blogs.getText() + "', '" + blogs.getTime() + "', " + blogs.getViews() + ", " + blogs.getLikes() + " )";
             DBUtil db=new DBUtil();
             db.openConnection();
             ResultSet rst=db.getInsertObjectIDs(sql);
@@ -112,6 +111,7 @@ public class BlogsDAO implements iBlogsDAO
                     blogs.setID(rst.getInt("blog_id"));
                     blogs.setName(rst.getString("blog_name"));
                     blogs.setOwner(rst.getString("blog_owner"));
+                    blogs.setOwner_id(rst.getInt("blog_owner_id"));
                     blogs.setText(rst.getString("blog_text"));
                     blogs.setTime(rst.getString("blog_time"));
                     blogs.setViews(rst.getInt("blog_views"));
@@ -158,6 +158,7 @@ public class BlogsDAO implements iBlogsDAO
                     blogs.setID(rst.getInt("blog_id"));
                     blogs.setName(rst.getString("blog_name"));
                     blogs.setOwner(rst.getString("blog_owner"));
+                    blogs.setOwner_id(rst.getInt("blog_owner_id"));
                     blogs.setText(rst.getString("blog_text"));
                     blogs.setTime(rst.getString("blog_time"));
                     blogs.setViews(rst.getInt("blog_views"));

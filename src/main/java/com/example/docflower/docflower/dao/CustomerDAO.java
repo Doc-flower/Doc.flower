@@ -50,7 +50,7 @@ public class CustomerDAO  implements iCustomerDAO {
 
             String sql="update customer set " + " cus_name  ='" + customer.getName()+ "', " + " cus_email  = '"
                     + customer.getEmail() + "', " + " cus_telnum  = '" + customer.getTel() + "', "
-                    + " cus_img = '" + customer.getImg()+"'," + " cus_img_bg  = '" + customer.getImg_bg() + "' , "
+                     + " cus_img_bg  = '" + customer.getImg_bg() + "' , "
                     +"cus_address = '"+ customer.getAddress() + "'";
             sql+=" where cus_id = " + customer.getID();
             DBUtil db=new DBUtil();

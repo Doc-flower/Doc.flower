@@ -50,6 +50,8 @@
                 document.getElementById("container").setAttribute("style","");
                 document.getElementsByClassName("person_img_bg")[0].style.background = json[0].imgbg;
                 document.getElementsByClassName("person_img_bg")[1].style.background = json[0].imgbg;
+                document.getElementsByClassName("person_img_bg")[2].style.background = json[0].imgbg;
+
 
                 document.getElementsByClassName("person_img")[0].setAttribute("src",json[0].img);
                 document.getElementsByClassName("person_img")[1].setAttribute("src",json[0].img);
@@ -114,32 +116,8 @@
                     document.getElementById("owner_email").value = "";
                     document.getElementById("owner_email").setAttribute("placeholder","邮箱重复了,祖银换一个吧");
                 } else {
-                    uploadUserImg();
                     cookie_email_search();
                 }
-            }
-        }
-
-        function uploadUserImg(){
-            var url = "../../../UploadServlet";
-            if (window.XMLHttpRequest)
-                req = new XMLHttpRequest();
-            else if (window.ActiveXObject)
-                req = new ActiveXObject("Microsoft.XMLHTTP");
-            if (req) {
-                //采用POST方式，异步传输
-                req.open("post", url, true);
-                req.setRequestHeader("Content-Type", "multipart/form-data");
-                req.onreadystatechange = uploadUserImgComplete;
-                var data ="&customerimg="
-                    + document.getElementById("inputGroupFile01").files[0]
-                req.send(data);
-            }
-        }
-
-        function uploadUserImgComplete(){
-            if (req.readyState == 4 && req.status == 200) {
-                console.log("成功了")
             }
         }
 

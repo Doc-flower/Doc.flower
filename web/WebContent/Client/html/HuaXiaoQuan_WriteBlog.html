@@ -55,6 +55,8 @@
                     + encodeURIComponent(document.getElementById("blog_title").value)
                     + "&owner="
                     + encodeURIComponent(document.getElementById("owner").value)
+                    + "&owner_id="
+                    + document.getElementById("user_name_id").value
                     + "&text="
                     + encodeURIComponent(myEditor.getData())
                     + "&time="
@@ -138,7 +140,7 @@
                     console.log(json1.length);
                     document.getElementById("IfUserSginIn").innerHTML = '';
                     document.getElementById("dropdown04").innerText = json1[0].name;
-                    document.getElementById("user_name").value = json1[0].name;
+                    document.getElementById("user_name_id").value = json1[0].id;
                     console.log("---------->成功:" + document.cookie);
                 }else if(JSON.parse(req1.responseText).length == 0){
                     document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
@@ -225,14 +227,16 @@
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-lg">博客标题</span>
             </div>
-            <input type="text" id="blog_title" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            <input type="text" id="blog_title" class="form-control" placeholder="在这里输入文章标题..." aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
         </div>
         <div class="centered">
             <div id="editor">
                 <h1>在这里编辑你的博客...</h1>
             </div>
         </div>
+        <input type="hidden" id="user_name_id" value="未登录用户">
         <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#addSuccessModal" onclick="check_blog()">发表博客</button>
+        <a href="HuaXiaoQuan_blog.html"><input type="button" class="btn btn-danger" value="返回个人博客"></a>
     </main>
 
 

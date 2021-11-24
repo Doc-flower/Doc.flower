@@ -2,9 +2,10 @@ package main.java.com.example.docflower.docflower.model;
 
 public class Blogs {
 
-    private int id=0      ;
+    private int id=0;
     private String name="" ;
     private String owner="";
+    private int owner_id = 0;
     private String text="";
     private String time="" ;
     private int views=0;
@@ -13,10 +14,12 @@ public class Blogs {
     public Blogs(){
         id = 0;
     }
-    public Blogs(int ID, String name, String owner,String text, String time, int views, int likes){
+    public Blogs(int ID, String name, String owner,int owner_id,String text, String time, int views, int likes){
         this.id = ID;
         this.name=name;
         this.owner = owner;
+        this.owner_id = owner_id;
+
         this.text = text;
         this.time=time;
         this.views = views;
@@ -51,6 +54,14 @@ public class Blogs {
 
     public String getOwner(){
         return owner;
+    }
+
+    public void setOwner_id(int intro){
+        this.owner_id=intro;
+    }
+
+    public int getOwner_id (){
+        return owner_id;
     }
 
     public void setText(String intro){
