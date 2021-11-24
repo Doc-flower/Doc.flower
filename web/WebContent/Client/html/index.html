@@ -36,7 +36,7 @@
 
 
 
-        .box {
+        .box1 {
             position: relative;
             width: 900px;
             height: 360px;
@@ -220,11 +220,11 @@
 
 
 <!--            花卉欣赏-->
-            <div id="flower_admire" class="col-12 mt-3 mb-4 text-center fade">
+            <div id="flower_admire" class="col-12 mt-3 mb-1 text-center fade">
                 <h1 class="col-3 mx-auto pt-5 pb-2 inter_every_intro  font-weight-bolder">花卉欣赏</h1>
             </div>
-            <div id="app">
-                <div class="box">
+            <div id="app" class="flower_admire fade">
+                <div class="box1">
                     <!--<button @click="imgMove">点击</button>-->
                     <div class="main clearfix" @mouseover="btnOpen" @mouseout="btnHide">
                         <div class="minMain">
@@ -248,10 +248,17 @@
             </div>
 
 
-            <img src="../img/flower_admire_img/wallhaven-0pq899_1920x1080.png" class="col-md-6 mb-4  flower_admire fade" alt="">
-            <img src="../img/flower_admire_img/wallhaven-48mdl1_1920x1080.png" class="col-md-6  mb-4 flower_admire fade" alt="">
-            <img src="../img/flower_admire_img/wallhaven-x1gr8z_1920x1080.png" class="col-md-6  mb-4 flower_admire fade" alt="">
-            <img src="../img/flower_admire_img/wallhaven-p815p3_1920x1080.png" class="col-md-6  mb-4 flower_admire fade" alt="">
+            <img src="../img/flower_admire_img/wallhaven-0pq899_1920x1080.png" class="col-md-4 mb-4  flower_admire1 fade" alt="">
+            <img src="../img/flower_admire_img/wallhaven-1jko69_1920x1080.png" class="col-md-4  mb-4 flower_admire1 fade" alt="">
+            <img src="../img/flower_admire_img/wallhaven-x1gr8z_1920x1080.png" class="col-md-4  mb-4 flower_admire1 fade" alt="">
+            <img src="../img/flower_admire_img/wallhaven-47olxv_1920x1080.png" class="col-md-6  mb-4 flower_admire1 fade" alt="">
+            <img src="../img/flower_admire_img/wallhaven-95v1j8_1920x1080.png" class="col-md-6  mb-4 flower_admire1 fade" alt="">
+            <img src="../img/flower_admire_img/wallhaven-0191gw_1920x1080.png" class="col-md-6  mb-4 flower_admire1 fade" alt="">
+            <img src="../img/flower_admire_img/wallhaven-4yym57_1920x1080.png" class="col-md-6  mb-4 flower_admire1 fade" alt="">
+            <img src="../img/flower_admire_img/wallhaven-4l5qkq_1920x1080.png" class="col-md-4  mb-4 flower_admire1 fade" alt="">
+            <img src="../img/flower_admire_img/wallhaven-p815p3_1920x1080.png" class="col-md-4  mb-4 flower_admire1 fade" alt="">
+            <img src="../img/flower_admire_img/wallhaven-vmeo78_1920x1080.png" class="col-md-4  mb-4 flower_admire1 fade" alt="">
+
 
 
 
@@ -626,14 +633,27 @@
             data() {
                 return {
                     list: [
-                        { imgUrl: '../img/flower_admire_img/wallhaven-0pq899_1920x1080.png' },
+                        { imgUrl: '../img/flower_admire_img/wallhaven-mp96r9_1920x1080.png' },
                         { imgUrl: '../img/flower_admire_img/wallhaven-48mdl1_1920x1080.png' },
                         { imgUrl: '../img/flower_admire_img/wallhaven-x1gr8z_1920x1080.png' },
                         { imgUrl: '../img/flower_admire_img/wallhaven-p815p3_1920x1080.png' },
-                        { imgUrl: '../img/flower_admire_img/wallhaven-48mdl1_1920x1080.png' }
+                        { imgUrl: '../img/flower_admire_img/wallhaven-4yym57_1920x1080.png' }
                     ],
-                    pressList: [{ name: '1', isShow: false }, { name: '2', isShow: false }, { name: '3', isShow: false }, { name: '4', isShow: false }, { name: '5', isShow: false }],
-                    numList: ['p0', 'p1', 'p2', 'p3', 'p4'],
+                    pressList:
+                        [
+                            { name: '1', isShow: false },
+                            { name: '2', isShow: false },
+                            { name: '3', isShow: false },
+                            { name: '4', isShow: false },
+                            { name: '5', isShow: false }
+                        ],
+                    numList: [
+                        'p0',
+                        'p1',
+                        'p2',
+                        'p3',
+                        'p4',
+                    ],
                     imgIndex: 0,
                     imgTimer: null,
                     btnShow: false

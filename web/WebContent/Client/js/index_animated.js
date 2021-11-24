@@ -13,7 +13,10 @@ $(window).scroll(function(){
     }
     function Classflower_admire(){
         $(".flower_admire").addClass("animated fadeInUp show").removeClass("fade");
-
+        setTimeout(Classflower_admire1,100)
+    }
+    function Classflower_admire1(){
+        $(".flower_admire1").addClass("animated fadeInUp show").removeClass("fade");
     }
 
     if(scrollT > flower_intro){
