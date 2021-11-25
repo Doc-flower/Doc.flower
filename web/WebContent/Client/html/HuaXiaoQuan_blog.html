@@ -91,20 +91,36 @@
         }
 
 
-        function cookie_email_search(){
-            var url = "../../../CustomerServlet";
-            if (window.XMLHttpRequest)
-                req1 = new XMLHttpRequest();
-            else if (window.ActiveXObject)
-                req1 = new ActiveXObject("Microsoft.XMLHTTP");
-            if (req1) {
-                //采用POST方式，异步传输
-                req1.open("post", url, true);
-                req1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                req1.onreadystatechange = cookie_email_searchComplete;
-                req1.send("type=search&method=byEmail&" + document.cookie);
-            }
-        }
+       function getCookie(c_name)
+       {
+           if (document.cookie.length>0)
+           {
+               c_start=document.cookie.indexOf(c_name + "=")
+               if (c_start!=-1)
+               {
+                   c_start=c_start + c_name.length+1
+                   c_end=document.cookie.indexOf(";",c_start)
+                   if (c_end==-1) c_end=document.cookie.length
+                   return unescape(document.cookie.substring(c_start,c_end))
+               }
+           }
+           return ""
+       }
+
+       function cookie_email_search(){
+           var url = "../../../CustomerServlet";
+           if (window.XMLHttpRequest)
+               req1 = new XMLHttpRequest();
+           else if (window.ActiveXObject)
+               req1 = new ActiveXObject("Microsoft.XMLHTTP");
+           if (req1) {
+               //采用POST方式，异步传输
+               req1.open("post", url, true);
+               req1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+               req1.onreadystatechange = cookie_email_searchComplete;
+               req1.send("type=search&method=byEmail&name=" + getCookie("name"));
+           }
+       }
 
         function cookie_email_searchComplete(){
             console.log("cus" + req1.readyState);
@@ -165,9 +181,9 @@
                                 '                <div class="card">\n' +
                                 '                    <div class="card-header" class="headingOne">\n' +
                                 '                        <h2 class="mb-0">\n' +
-                                '                            <button class="text-secondary btn btn-link btn-block text-left" type="button" data-toggle="collapse"  aria-expanded="true" aria-controls="collapseOne">\n' +
+                                '                            <a class="text-dark font-weight-bolder mb-2  text-left" style="font-size: 28px" >\n' +
                                 '                                '+json[i].name+'\n' +
-                                '                            </button>\n' +
+                                '                            </a>\n' +
                                 '                        </h2>\n' +
                                 '                    </div>\n' +
                                 '\n' +
@@ -253,9 +269,9 @@
                                 '                <div class="card">\n' +
                                 '                    <div class="card-header" class="headingOne">\n' +
                                 '                        <h2 class="mb-0">\n' +
-                                '                            <button class="text-secondary btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#a" aria-expanded="true" aria-controls="collapseOne">\n' +
+                                '                            <a class="text-dark font-weight-bolder mb-2  text-left" style="font-size: 28px" >\n' +
                                 '                                '+json[i].name+'\n' +
-                                '                            </button>\n' +
+                                '                            </a>\n' +
                                 '                        </h2>\n' +
                                 '                    </div>\n' +
                                 '\n' +
@@ -369,11 +385,11 @@
             <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="搜索博客">
         </div>
     </div>
-    <div class="col-md-12 border ">
+    <div class="col-md-12 ">
         <a href="HuaXiaoQuan_WriteBlog.html" target="_blank"><input type="button" class="btn btn-primary my-3 text-lg-center" value="写博客"></a>
         <a href="./HuaXiaoKe.html" target="_blank" class="m-5"><input type="button" class="bg-success btn text-white my-3 text-lg-center" value="去看花"></a>
         <a href="HuaXiaoShi_Flowers.html" target="_blank"><input type="button" class="bg-warning btn text-white my-3 text-lg-center" value="去买花"></a>
-        <div class="card mb-3" style="max-width: 1100px;" id="my_blog">
+        <div class=" mb-3" style="max-width: 1100px;" id="my_blog">
 
         </div>
     </div>

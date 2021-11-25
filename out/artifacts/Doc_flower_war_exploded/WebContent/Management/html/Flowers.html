@@ -80,7 +80,17 @@
                 }
                 var json =  JSON.parse(req.responseText);//转换为json对象
                 for(i=0; i<json.length; i++) {
-                    theTable.innerHTML += '<tr><td>'+ json[i].flower_id +'</td><td>'+ json[i].flower_name +'</td><td>'+json[i].flower_kind+'</td><td class="">'+ json[i].flower_introduction +'</td><td>' + json[i].flower_price+ '</td><td><input type="button" class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#exampleModal" value="修改" onclick="update(' + json[i].flower_id + ')"></td><td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del('+ json[i].flower_id +')"></td></tr>'
+                    theTable.innerHTML +=
+                        '<tr>' +
+                            '<td>'+ json[i].flower_id +'</td>' +
+                            '<td>'+ json[i].flower_name +'</td>' +
+                            '<td>' +json[i].flower_kind+'</td>' +
+                            '<td><img src="../../Client/html/'+ json[i].flower_image1 +'" width="80" height="80"/></td>' +
+                            '<td class="">'+ json[i].flower_introduction +'</td>' +
+                            '<td>' + json[i].flower_price+ '</td>' +
+                            '<td><input type="button" class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#exampleModal" value="修改" onclick="update(' + json[i].flower_id + ')"></td>' +
+                            '<td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del('+ json[i].flower_id +')"></td>' +
+                        '</tr>'
                 }
 
 
@@ -421,6 +431,7 @@
                                             <th class="text-center">ID</th>
                                             <th class="text-center">名称</th>
                                             <th class="text-center">种类</th>
+                                            <th class="text-center">图片</th>
                                             <th class="text-center align-middle">介绍</th>
                                             <th class="text-center">价格</th>
                                             <th class="text-center">修改</th>

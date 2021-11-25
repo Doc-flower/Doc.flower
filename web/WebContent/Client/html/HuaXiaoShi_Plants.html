@@ -88,6 +88,22 @@
         }
 
 
+        function getCookie(c_name)
+        {
+            if (document.cookie.length>0)
+            {
+                c_start=document.cookie.indexOf(c_name + "=")
+                if (c_start!=-1)
+                {
+                    c_start=c_start + c_name.length+1
+                    c_end=document.cookie.indexOf(";",c_start)
+                    if (c_end==-1) c_end=document.cookie.length
+                    return unescape(document.cookie.substring(c_start,c_end))
+                }
+            }
+            return ""
+        }
+
         function cookie_email_search(){
             var url = "../../../CustomerServlet";
             if (window.XMLHttpRequest)
@@ -99,7 +115,7 @@
                 req1.open("post", url, true);
                 req1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 req1.onreadystatechange = cookie_email_searchComplete;
-                req1.send("type=search&method=byEmail&" + document.cookie);
+                req1.send("type=search&method=byEmail&name=" + getCookie("name"));
             }
         }
 

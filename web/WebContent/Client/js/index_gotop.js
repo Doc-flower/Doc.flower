@@ -30,7 +30,25 @@ window.onload=function(){
 }
 
 
+
+function getCookie(c_name)
+{
+    if (document.cookie.length>0)
+    {
+        c_start=document.cookie.indexOf(c_name + "=")
+        if (c_start!=-1)
+        {
+            c_start=c_start + c_name.length+1
+            c_end=document.cookie.indexOf(";",c_start)
+            if (c_end==-1) c_end=document.cookie.length
+            return unescape(document.cookie.substring(c_start,c_end))
+        }
+    }
+    return ""
+}
+
 function cookie_email_search(){
+    console.log("getCookie" + getCookie("name"));
     var url = "../../../CustomerServlet";
     if (window.XMLHttpRequest)
         req = new XMLHttpRequest();
@@ -41,7 +59,7 @@ function cookie_email_search(){
         req.open("post", url, true);
         req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         req.onreadystatechange = cookie_email_searchComplete;
-        req.send("type=search&method=byEmail&" + document.cookie);
+        req.send("type=search&method=byEmail&name=" + getCookie("name"));
     }
 }
 
@@ -57,15 +75,15 @@ function cookie_email_searchComplete(){
             document.getElementById("IfUserSginIn").innerHTML = '';
             document.getElementById("dropdown04").innerText = json[0].name;
             document.getElementById("user_name").value = json[0].name;
-            console.log("---------->成功:" + document.cookie);
+            console.log("---------->成功:" + getCookie("name"));
         }else if(JSON.parse(req.responseText).length == 0){
             document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
             document.getElementById("dropdown04").innerText = "个人中心";
-            console.log("---------->失败:" + document.cookie);
+            console.log("---------->失败:" + getCookie("name"));
         }
     } else{
         document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
         document.getElementById("dropdown04").innerText = "个人中心";
-        console.log("---------->失败:" + document.cookie);
+        console.log("---------->失败:" + getCookie("name"));
     }
 }
