@@ -9,11 +9,11 @@ $(window).scroll(function(){
 
     if(scrollT > flower_admire){
         $("#flower_admire").addClass("animated fadeInUp show").removeClass("fade");
-        setTimeout(Classflower_admire,100)
+        setTimeout(Classflower_admire,200)
     }
     function Classflower_admire(){
         $(".flower_admire").addClass("animated fadeInUp show").removeClass("fade");
-        setTimeout(Classflower_admire1,100)
+        setTimeout(Classflower_admire1,500)
     }
     function Classflower_admire1(){
         $(".flower_admire1").addClass("animated fadeInUp show").removeClass("fade");
@@ -33,14 +33,14 @@ $(window).scroll(function(){
         setTimeout(ClassNew_flower,300)
     }
     function ClassNew_flower(){
-        $(".new_flower1").addClass("animated bounceInLeft show").removeClass("fade");
-        $(".new_flower3").addClass("animated bounceInRight show").removeClass("fade");
-        $(".new_flower4").addClass("animated bounceInUp show").removeClass("fade");
+        $(".new_flower1").addClass("animated fadeInLeft show").removeClass("fade");
+        $(".new_flower3").addClass("animated fadeInRight show").removeClass("fade");
+        $(".new_flower4").addClass("animated fadeInUp show").removeClass("fade");
     }
 
     if(scrollT > contact_us){
         $("#contact_us").addClass("animated fadeInUp show").removeClass("fade");
-        setTimeout(ClassContact_us,200)
+        setTimeout(ClassContact_us,400)
     }
     function ClassContact_us(){
         $(".contact_us1").addClass("animated flipInX show").removeClass("fade");
@@ -48,4 +48,5 @@ $(window).scroll(function(){
         $(".join_us1").addClass("animated flipInY show").removeClass("fade");
 
     }
+
 });
