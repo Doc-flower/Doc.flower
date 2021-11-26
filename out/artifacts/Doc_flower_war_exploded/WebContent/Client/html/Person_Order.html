@@ -64,8 +64,9 @@
                     console.log(json1.length);
                     document.getElementById("cus_tel").value = json1[0].tel;
                     console.log(document.getElementById("cus_tel").value);
-                    document.getElementById("IfUserSginIn").innerHTML = '';
-                    document.getElementById("dropdown04").innerText = json1[0].name;
+
+                    document.getElementById("IfUserSginIn").innerHTML = '<a href="Person.html"><img src="../../public/img/logo.png" id="nav_user_img" height="40" width="40" alt="."/></a>';
+                    document.getElementById("nav_user_img").setAttribute("src",json1[0].img) ;                    document.getElementById("dropdown04").innerText = json1[0].name;
                     search();
                     console.log("---------->成功:" + document.cookie);
                 }else if(JSON.parse(req1.responseText).length == 0){

@@ -53,7 +53,9 @@ function cookie_email_searchComplete(){
             var json =  JSON.parse(req1.responseText);//转换为json对象
             console.log(json.length);
             document.getElementById("IfUserSginIn").innerHTML = '<a href="Person.html"><img src="../../public/img/logo.png" id="nav_user_img" class="rounded-circle" height="40" width="40" alt="."/></a>';
-            document.getElementById("nav_user_img").setAttribute("src",json[0].img) ;
+            document.getElementById("nav_user_img").setAttribute("src",json[0].img);
+            document.getElementById("messages_img").value = json[0].img;
+
             document.getElementById("dropdown04").innerText = json[0].name;
             document.getElementById("user_name").value = json[0].name;
             console.log("---------->成功:" + document.cookie);
@@ -171,9 +173,14 @@ function check_message() {
         req.open("post", url, true);
         req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         req.onreadystatechange = checkMessageComplete;
-        var data = "type=add" + "&messagename="
-            + encodeURIComponent(form.user_name.value) + "&messagetitle="
-            + encodeURIComponent(form.message_name.value) + "&messageemail="
+        var data = "type=add"
+            + "&messagename="
+            + encodeURIComponent(form.user_name.value)
+            + "&messageimg="
+            + encodeURIComponent(document.getElementById("messages_img").value)
+            + "&messagetitle="
+            + encodeURIComponent(form.message_name.value)
+            + "&messageemail="
             + encodeURIComponent(form.message_email.value) + "&messagetime="
             + getCurrentDate() + "&messagetext="
             + encodeURIComponent(form.message_text.value);

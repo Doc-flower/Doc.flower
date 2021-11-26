@@ -49,11 +49,12 @@ public class MessagesServlet extends HttpServlet
         try
         {
             String name=request.getParameter("messagename");
+            String img=request.getParameter("messageimg");
             String title=request.getParameter("messagetitle");
             String email=request.getParameter("messageemail");
             String time=request.getParameter("messagetime");
             String text=request.getParameter("messagetext");
-            customer=new Messages(id,name, title, email,time,text);
+            customer=new Messages(id,name,img, title, email,time,text);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
 
@@ -109,6 +110,7 @@ public class MessagesServlet extends HttpServlet
                 json=new JSONObject();
                 json.put("id", s.getID());
                 json.put("name", s.getName());
+                json.put("img", s.getImg());
                 json.put("title", s.getTitle());
                 json.put("email", s.getEmail());
                 json.put("time", s.getTime());

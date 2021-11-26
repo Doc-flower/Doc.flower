@@ -4,6 +4,7 @@ public class Messages {
 
     private int id=0      ;
     private String name="" ;
+    private String img="" ;
     private String title="" ;
     private String Email="";
     private String time="";
@@ -12,10 +13,11 @@ public class Messages {
     public Messages(){
         id = 0;
     }
-    public Messages(int ID, String name, String title, String email, String time, String text){
+    public Messages(int ID, String name,String img, String title, String email, String time, String text){
         this.id = ID;
         this.title = title;
         this.name=name;
+        this.img=img;
         this.Email = email;
         this.time = time;
         this.text = text;
@@ -51,6 +53,14 @@ public class Messages {
 
     public String getName(){
         return name;
+    }
+
+    public void setImg(String img){
+        this.img=img;
+    }
+
+    public String getImg(){
+        return img;
     }
 
     public void setEmail(String count){

@@ -16,8 +16,8 @@ public class MessagesDAO implements iMessagesDAO {
         int result=0;
         try
         {
-            String sql="INSERT INTO messages(message_name,message_title,message_email,message_time,message_text)"
-                    + " values('" + messages.getName() + "', '" + messages.getTitle() + "', '" + messages.getEmail() + "', '" + messages.getTime() + "', '" + messages.getText() + "' )";
+            String sql="INSERT INTO messages(message_name,message_user_img,message_title,message_email,message_time,message_text)"
+                    + " values('" + messages.getName() + "','"+ messages.getImg() +"','" + messages.getTitle() + "', '" + messages.getEmail() + "', '" + messages.getTime() + "', '" + messages.getText() + "' )";
             DBUtil db=new DBUtil();
             db.openConnection();
             ResultSet rst=db.getInsertObjectIDs(sql);
@@ -74,7 +74,7 @@ public class MessagesDAO implements iMessagesDAO {
             db=new DBUtil();
             if(!db.openConnection())
             {
-                System.out.print("fail to connect database table customer");
+                System.out.print("fail to connect database table messages");
                 return null;
             }
             ResultSet rst=db.execQuery(sql);
@@ -85,6 +85,7 @@ public class MessagesDAO implements iMessagesDAO {
                     Messages messages = new Messages();
                     messages.setID(rst.getInt("message_id"));
                     messages.setName(rst.getString("message_name"));
+                    messages.setImg(rst.getString("message_user_img"));
                     messages.setTitle(rst.getString("message_title"));
                     messages.setEmail(rst.getString("message_email"));
                     messages.setTime(rst.getString("message_time"));
