@@ -85,11 +85,12 @@
                     var rowCount = theTable.rows.length; //获得当前表格的行数
                     var row = theTable.insertRow(rowCount);//在tale里动态的增加tr
                     row.insertCell(0).innerHTML = json[i].id;
-                    row.insertCell(1).innerHTML = json[i].name;
-                    row.insertCell(2).innerHTML = json[i].tel;
-                    row.insertCell(3).innerHTML = json[i].email;
-                    row.insertCell(4).innerHTML = json[i].address;
-                    row.insertCell(5).innerHTML = '<input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del('+json[i].id+')" />';
+                    row.insertCell(1).innerHTML = '<img src="../../Client/html/'+ json[i].img +'" width="80" height="80"/>';
+                    row.insertCell(2).innerHTML = json[i].name;
+                    row.insertCell(3).innerHTML = json[i].tel;
+                    row.insertCell(4).innerHTML = json[i].email;
+                    row.insertCell(5).innerHTML = json[i].address;
+                    row.insertCell(6).innerHTML = '<input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del('+json[i].id+')" />';
                 }
             }
         }
@@ -261,6 +262,7 @@
                                         <thead>
                                         <tr class="list_nav">
                                             <th>ID</th>
+                                            <th>用户头像</th>
                                             <th>用户名</th>
                                             <th>电话</th>
                                             <th>邮箱</th>

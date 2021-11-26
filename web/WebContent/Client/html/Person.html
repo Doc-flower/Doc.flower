@@ -51,16 +51,14 @@
         }
 
         function cookie_email_searchComplete(){
-            if (req.readyState == 4 && req.status == 200) {
-                console.log(req.responseText);
-                var json =  JSON.parse(req.responseText);//转换为json对象
-                console.log(json);
+            if (req1.readyState == 4 && req1.status == 200) {
+                var json =  JSON.parse(req1.responseText);//转换为json对象
 
 
-                console.log("---------->成功:" + document.cookie);
                 document.getElementById("dropdown04").innerText = json[0].name;
-                document.getElementById("IfUserSginIn").innerHTML = '';
 
+                document.getElementById("IfUserSginIn").innerHTML = '<a href="Person.html"><img src="../../public/img/logo.png" id="nav_user_img" height="40" width="40" alt="."/></a>';
+                document.getElementById("nav_user_img").setAttribute("src",json1[0].img) ;
                 document.getElementById("img_user_id").value = json[0].id;
                 document.getElementById("person_name").innerText = json[0].name;
                 document.getElementById("person_email").innerText = json[0].email;
@@ -91,7 +89,6 @@
                 document.getElementById("dropdown04").innerText = "个人中心";
                 document.getElementsByClassName("person_img")[0].setAttribute("style","");
                 document.getElementById("person_name").innerText = "祖银，您还没有登录哩...";
-                console.log("---------->失败:" + document.cookie);
             }
         }
 

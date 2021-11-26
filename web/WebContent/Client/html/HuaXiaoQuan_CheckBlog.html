@@ -185,7 +185,7 @@
                 var user_node = document.createElement("div");
                 user_node.setAttribute("class", "user");
                 user_node.innerHTML = '<div class="user_img">\
-                                <img src="../img/user_img.jpg" alt="">\
+                                <img src="'+ document.getElementById("user_img").value +'" alt="">\
                             </div>';
                 var body_node = document.createElement("div");
                 body_node.setAttribute("class", "body");
@@ -220,7 +220,7 @@
                         + "&comment_owner="
                         + owner
                         + "&comment_image="
-                        + "../img/用户.png"
+                        + document.getElementById("user_img").value
                         + "&comment_text="
                         + text
                         + "&comment_time="
@@ -451,10 +451,13 @@
                 {
                     var json1 =  JSON.parse(req1.responseText);//转换为json对象
                     console.log(json1.length);
-                    document.getElementById("IfUserSginIn").innerHTML = '';
+                    document.getElementById("IfUserSginIn").innerHTML = '<a href="Person.html"><img src="../../public/img/logo.png" id="nav_user_img" height="40" width="40" alt="."/></a>';
+                    document.getElementById("nav_user_img").setAttribute("src",json1[0].img) ;
                     document.getElementById("dropdown04").innerText = json1[0].name;
                     owner=json1[0].name;
-                    //document.getElementById("user_name").value = json1[0].name;
+                    document.getElementById("user_name").value = json1[0].name;
+                    document.getElementById("user_img").value = json1[0].img;
+                    document.getElementById("input_user_img").setAttribute("src",json1[0].img) ;
                     console.log("---------->成功:" + document.cookie);
                 }else if(JSON.parse(req1.responseText).length == 0){
                     document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-1" id="user" href="Sign.html" value="登录/注册"></a>\n'
@@ -513,6 +516,7 @@
        <!--评论区 -->
 <div id="comment_area">
     <input type="hidden" id="user_name" value="未登录用户" name="user_name">
+    <input type="hidden" id="user_img" value="未登录用户" name="user_name">
     <div id="header">
         <span class="font">网友评论</span>
         <span class="sort_quality" onclick="sortBylike()">质量排序</span>
@@ -527,7 +531,7 @@
         <div id="comment_input">
             <div class="input_user">
                 <div class="input_user_img">
-                    <img src="../img/user_img.jpg" alt="">
+                    <img src="../img/用户.png" id="input_user_img" alt="">
                 </div>
             </div>
             <div class="input_body">

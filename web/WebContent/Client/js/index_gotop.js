@@ -72,7 +72,10 @@ function cookie_email_searchComplete(){
         {
             var json =  JSON.parse(req.responseText);//转换为json对象
             console.log(json.length);
-            document.getElementById("IfUserSginIn").innerHTML = '';
+
+            document.getElementById("IfUserSginIn").innerHTML = '<a href="Person.html"><img src="../../public/img/logo.png" id="nav_user_img" height="40" width="40" alt="."/></a>';
+            document.getElementById("nav_user_img").setAttribute("src",json[0].img) ;
+            document.getElementById("nav_user_img").classList.add("ml-5");
             document.getElementById("dropdown04").innerText = json[0].name;
             document.getElementById("user_name").value = json[0].name;
             console.log("---------->成功:" + getCookie("name"));
