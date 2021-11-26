@@ -322,6 +322,7 @@ DROP TABLE IF EXISTS `messages`;
 CREATE TABLE `messages`  (
       `message_id` int(11) NOT NULL AUTO_INCREMENT,
       `message_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+      `message_user_img` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT '../img/用户.png',
       `message_title` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
       `message_email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
       `message_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
