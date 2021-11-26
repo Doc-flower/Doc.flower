@@ -58,12 +58,10 @@ public class BlogsServlet extends HttpServlet
             blogs =new Blogs(id, name, owner,owner_id,text,time,views,likes);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
-
             if(new BlogsSrv().add(blogs) == 1)
                 out.write("数据添加成功");
             else
                 out.write("数据添加失败，请重试");
-
             out.close();
         }
         catch(Exception e)
@@ -162,7 +160,6 @@ public class BlogsServlet extends HttpServlet
             out.flush();
             out.close();
         }
-        // System.out.print(jsonStr);
     }
 
 
@@ -203,7 +200,6 @@ public class BlogsServlet extends HttpServlet
             out.flush();
             out.close();
         }
-        // System.out.print(jsonStr);
     }
 
 }

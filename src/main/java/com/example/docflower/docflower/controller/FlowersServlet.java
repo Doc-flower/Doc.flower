@@ -172,7 +172,6 @@ public class FlowersServlet extends HttpServlet{
             out.flush();
             out.close();
         }
-        // System.out.print(jsonStr);
     }
 
 
@@ -216,7 +215,6 @@ public class FlowersServlet extends HttpServlet{
             out.flush();
             out.close();
         }
-        // System.out.print(jsonStr);
     }
 
     private void searchByImg(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -260,7 +258,6 @@ public class FlowersServlet extends HttpServlet{
             out.flush();
             out.close();
         }
-        // System.out.print(jsonStr);
     }
 
 
@@ -326,6 +323,5 @@ public class FlowersServlet extends HttpServlet{
             out.flush();
             out.close();
         }
-        // System.out.print(jsonStr);
     }
 }

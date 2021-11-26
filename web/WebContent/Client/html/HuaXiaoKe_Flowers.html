@@ -185,11 +185,9 @@
         function cookie_email_searchComplete(){
             console.log("cus" + req1.readyState);
             if (req1.readyState == 4 && req1.status == 200 ) {
-                console.log(JSON.parse(req1.responseText).length);
                 if(JSON.parse(req1.responseText).length != 0)
                 {
                     var json1 =  JSON.parse(req1.responseText);//转换为json对象
-                    console.log(json1.length);
 
                     document.getElementById("IfUserSginIn").innerHTML = '<a href="Person.html"><img src="../../public/img/logo.png" id="nav_user_img" class="rounded-circle" height="40" width="40" alt="."/></a>';
                     document.getElementById("nav_user_img").setAttribute("src",json1[0].img) ;
@@ -200,17 +198,14 @@
                     document.getElementById("order_owner_tel").value = json1[0].tel;
                     document.getElementById("order_address").value = json1[0].address;
 
-                    console.log("---------->成功:" + document.cookie);
 
                 }else if(JSON.parse(req1.responseText).length == 0){
                     document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
                     document.getElementById("dropdown04").innerText = "个人中心";
-                    console.log("---------->失败:" + document.cookie);
                 }
             } else{
                 document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
                 document.getElementById("dropdown04").innerText = "个人中心";
-                console.log("---------->失败:" + document.cookie);
             }
         }
 

@@ -54,11 +54,9 @@ public class OrdersServlet extends HttpServlet
             String order_address=request.getParameter("order_address");
             String order_pay=request.getParameter("order_pay");
             String order_status=request.getParameter("order_status");
-
             orders=new Orders(order_id, order_time, order_commodity_name, order_commodity_img, order_owner_name,order_owner_tel,order_address,order_pay,order_status);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
-
             if(new OrdersSrv().add(orders) == 1)
                 out.write("数据添加成功");
             else
@@ -132,8 +130,7 @@ public class OrdersServlet extends HttpServlet
         PrintWriter out=response.getWriter();
         String tel=request.getParameter("tel");
         List<Orders> result=null;
-//        if(name != null && name.length() > 0)
-            result=new OrdersSrv().Fetch(tel);
+        result=new OrdersSrv().Fetch(tel);
         String jsonStr="";
         try
         {
@@ -165,7 +162,6 @@ public class OrdersServlet extends HttpServlet
             out.flush();
             out.close();
         }
-        // System.out.print(jsonStr);
     }
 
 }

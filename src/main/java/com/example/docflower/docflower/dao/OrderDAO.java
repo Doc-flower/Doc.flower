@@ -86,41 +86,6 @@ public class OrderDAO implements iOrdersDAO {
         return result;
     }
 
-//    @SuppressWarnings("finally")
-//    public String selectplayid(int condt)
-//    {
-//        DBUtil db=null;
-//        String result="";
-//        try
-//        {
-//            String sql="select play_name from play  where play_id= " + condt;
-//            db=new DBUtil();
-//            if(!db.openConnection())
-//            {
-//                System.out.print("fail to connect database");
-//                return null;
-//            }
-//            ResultSet rst=db.execQuery(sql);
-//            if(rst != null)
-//            {
-//                while(rst.next())
-//                {
-//                    result=rst.getString("play_name");
-//                }
-//            }
-//            db.close(rst);
-//            db.close();
-//        }
-//        catch(Exception e)
-//        {
-//            e.printStackTrace();
-//        }
-//        finally
-//        {
-//            return result;
-//        }
-//    }
-
 
     @SuppressWarnings("finally")
     @Override
@@ -137,7 +102,7 @@ public class OrderDAO implements iOrdersDAO {
             db=new DBUtil();
             if(!db.openConnection())
             {
-                System.out.print("fail to connect database table play");
+                System.out.print("fail to connect database table order");
                 return null;
             }
             ResultSet rst=db.execQuery(sql);

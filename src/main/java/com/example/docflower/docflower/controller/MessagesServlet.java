@@ -36,8 +36,6 @@ public class MessagesServlet extends HttpServlet
             add(request, response);
         else if(type.equalsIgnoreCase("delete"))
             delete(request, response);
-//        else if(type.equalsIgnoreCase("update"))
-//            update(request, response);
         else if(type.equalsIgnoreCase("search"))
             search(request, response);
     }
@@ -98,8 +96,7 @@ public class MessagesServlet extends HttpServlet
         String name=request.getParameter("name");
         String method=request.getParameter("method");
         List<Messages> result=null;
-//        if(name != null && name.length() > 0)
-            result=new MessagesSrv().Fetch(name);
+        result=new MessagesSrv().Fetch(name);
         String jsonStr="";
         try
         {
@@ -130,7 +127,6 @@ public class MessagesServlet extends HttpServlet
             out.flush();
             out.close();
         }
-        // System.out.print(jsonStr);
     }
 
 }

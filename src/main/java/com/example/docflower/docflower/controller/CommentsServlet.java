@@ -140,7 +140,6 @@ public class CommentsServlet extends HttpServlet{
             out.flush();
             out.close();
         }
-        // System.out.print(jsonStr);
     }
 
     private void search__BlogId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -181,7 +180,6 @@ public class CommentsServlet extends HttpServlet{
             out.flush();
             out.close();
         }
-        // System.out.print(jsonStr);
     }
 
 }

@@ -22,7 +22,6 @@ public class ManagersDAO implements iManagersDAO {
         try
         {
             manName.trim();
-            System.out.println("DAO:" + manName);
             String sql = null;
             sql="select * from managers where man_name like '" + manName + "'";
             db=new DBUtil();

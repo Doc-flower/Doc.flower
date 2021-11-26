@@ -7,22 +7,22 @@ import main.java.com.example.docflower.docflower.model.Orders;
 import java.util.List;
 
 public class OrdersSrv {
-    private iOrdersDAO employeeDAO= DAOFactory.creatEmployeeDAO();
+    private iOrdersDAO ordersDAO= DAOFactory.creatEmployeeDAO();
 
     public int add(Orders play){
-        return employeeDAO.insert(play);
+        return ordersDAO.insert(play);
     }
 
     public int modify(Orders order){
-        return employeeDAO.update(order);
+        return ordersDAO.update(order);
     }
 
     public int delete(int ID){
-        return employeeDAO.delete(ID);
+        return ordersDAO.delete(ID);
     }
 
     public List<Orders> Fetch(String tel){
-        return employeeDAO.select(tel);
+        return ordersDAO.select(tel);
     }
 
 }

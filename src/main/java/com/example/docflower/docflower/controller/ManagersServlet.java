@@ -44,21 +44,14 @@ public class ManagersServlet extends HttpServlet
         String pwd=request.getParameter("pwd");
         List<Managers> result=null;
         result=new ManagersSrv().Fetch(name);
-        System.out.println("------------>result:" + result);
 
         String pwd_database="";
         try
         {
-            for(Managers s : result)
-            {
+            for(Managers s : result) {
                 s.getName();
                 pwd_database = s.getPwd();
-                System.out.println("------------>getPwd:" + s.getPwd());
             }
-            System.out.println("------------>pwd:" + pwd);
-
-            System.out.println("------------>pwd_database:" + pwd_database);
-
             if(pwd_database.equals(pwd))
             {
                 out.write("1");     //登陆成功

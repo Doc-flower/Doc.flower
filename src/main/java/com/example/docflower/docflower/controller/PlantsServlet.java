@@ -166,7 +166,6 @@ public class PlantsServlet extends HttpServlet
             out.flush();
             out.close();
         }
-        // System.out.print(jsonStr);
     }
 
 
@@ -208,7 +207,6 @@ public class PlantsServlet extends HttpServlet
             out.flush();
             out.close();
         }
-        // System.out.print(jsonStr);
     }
 
     private void sale_stock(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -273,7 +271,6 @@ public class PlantsServlet extends HttpServlet
             out.flush();
             out.close();
         }
-        // System.out.print(jsonStr);
     }
 }
 

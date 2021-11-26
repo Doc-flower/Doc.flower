@@ -67,7 +67,6 @@ public class UploadServlet extends HttpServlet
                 System.out.println("上传文件过大!");
             }
             request.setAttribute("desc", "上传文件过大(限制5M)，或存在异常!");
-//            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
 
     }

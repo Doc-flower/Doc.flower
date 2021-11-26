@@ -8,25 +8,25 @@ import java.util.List;
 
 public class BlogsSrv {
 
-    private iBlogsDAO playDAO= DAOFactory.creatPlayDAO();
+    private iBlogsDAO blogsDAO= DAOFactory.creatPlayDAO();
 
     public int add(Blogs blogs){
-        return playDAO.insert(blogs);
+        return blogsDAO.insert(blogs);
     }
 
     public int modify(Blogs blogs){
-        return playDAO.update(blogs);
+        return blogsDAO.update(blogs);
     }
 
     public int delete(int ID){
-        return playDAO.delete(ID);
+        return blogsDAO.delete(ID);
     }
 
     public List<Blogs> Fetch(String condt){
-        return playDAO.select(condt);
+        return blogsDAO.select(condt);
     }
 
     public List<Blogs> FetchId(int id){
-        return playDAO.selectId(id);
+        return blogsDAO.selectId(id);
     }
 }

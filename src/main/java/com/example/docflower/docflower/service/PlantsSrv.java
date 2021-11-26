@@ -7,33 +7,33 @@ import main.java.com.example.docflower.docflower.model.Plants;
 import java.util.List;
 
 public class PlantsSrv {
-    private iPlantsDAO scheDAO = DAOFactory.creatScheduleDAO();
+    private iPlantsDAO plantsDAO = DAOFactory.creatScheduleDAO();
 
     public int add(Plants stu) {
-        return scheDAO.insert(stu);
+        return plantsDAO.insert(stu);
     }
 
     public int modify(Plants stu) {
-        return scheDAO.update(stu);
+        return plantsDAO.update(stu);
     }
 
     public int delete(int ID) {
-        return scheDAO.delete(ID);
+        return plantsDAO.delete(ID);
     }
 
     public List<Plants> Fetch(int playid) {
-        return scheDAO.select(playid);
+        return plantsDAO.select(playid);
     }
 
     public List<Plants> FetchSchedid(int schedid) {
-        return scheDAO.selectSchedid(schedid);
+        return plantsDAO.selectSchedid(schedid);
     }
 
     public List<Plants> FetchName(String playname) {
-        return scheDAO.selectName(playname);
+        return plantsDAO.selectName(playname);
     }
 
     public List<Plants> FetchSale_stock(String flag) {
-        return scheDAO.selectsale_stock(flag);
+        return plantsDAO.selectsale_stock(flag);
     }
 }

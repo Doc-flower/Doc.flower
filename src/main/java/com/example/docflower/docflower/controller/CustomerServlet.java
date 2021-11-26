@@ -98,14 +98,6 @@ public class CustomerServlet  extends HttpServlet
                 json_tel.put("tel", s2.getTel());
                 array_tel.put(json_tel);
             }
-//            System.out.println("------------>pwd:" + pwd);
-//
-//            System.out.println("------------>MD5:" + pwd_MD5);
-            System.out.println("---------->arry_email:" + array_email);
-            System.out.println("---------->arry_email.length():" + array_email.length());
-
-            System.out.println("---------->arry_tel:" + array_tel);
-            System.out.println("---------->arry_tel.length():" + array_tel.length());
             if(array_email.length() >= 1){
                 out.write("3");     //邮箱不唯一
                 return;
@@ -159,14 +151,10 @@ public class CustomerServlet  extends HttpServlet
                 json.put("email", s.getEmail());
                 array.put(json);
             }
-            System.out.println("---------->arry:" + array);
-            System.out.println("---------->arry.length():" + array.length());
             if(array.length() >= 2){
                 out.write("3");     //邮箱不唯一
                 return;
             }
-
-
             if(new CustomerSrv().modify(customer) == 1)
                 out.write("数据修改成功");
             else
@@ -240,7 +228,6 @@ public class CustomerServlet  extends HttpServlet
             out.flush();
             out.close();
         }
-        // System.out.print(jsonStr);
     }
 
 

@@ -9,7 +9,7 @@ public class Blogs {
     private String text="";
     private String time="" ;
     private int views=0;
-    private int likes=0; //���
+    private int likes=0;
 
     public Blogs(){
         id = 0;

@@ -74,7 +74,6 @@ public class PlantsDAO implements iPlantsDAO
         int result=0;
         try
         {
-            System.out.println("------------->ID:" +ID);
             String sql="delete from plants where plant_id = " + ID;
             DBUtil db=new DBUtil();
             db.openConnection();
@@ -180,7 +179,7 @@ public class PlantsDAO implements iPlantsDAO
             db=new DBUtil();
             if(!db.openConnection())
             {
-                System.out.print("fail to connect database table studio");
+                System.out.print("fail to connect database table plants");
                 return null;
             }
             ResultSet rst=db.execQuery(sql);
@@ -227,7 +226,7 @@ public class PlantsDAO implements iPlantsDAO
             db=new DBUtil();
             if(!db.openConnection())
             {
-                System.out.print("fail to connect database table studio");
+                System.out.print("fail to connect database table plants");
                 return null;
             }
             ResultSet rst=db.execQuery(sql);

@@ -47,8 +47,6 @@ public class ShopsDAO implements iShopsDAO
         int result=0;
         try
         {
-            System.out.println("---------->stu_name:" + stu.getName());
-            System.out.println("---------->stu_ID:" + stu.getID());
             String sql="update shops set " + " shop_name ='" + stu.getName() + "', " + " shop_address = '"
                     + stu.getAddress() + "', " + " shop_tel = '" + stu.getTel() + "', shop_text = '" + stu.getText() + "' ";
             sql+=" where shop_id = " + stu.getID();
@@ -100,7 +98,7 @@ public class ShopsDAO implements iShopsDAO
             db=new DBUtil();
             if(!db.openConnection())
             {
-                System.out.print("fail to connect database table studio");
+                System.out.print("fail to connect database table shops");
                 return null;
             }
             ResultSet rst=db.execQuery(sql);
@@ -145,7 +143,7 @@ public class ShopsDAO implements iShopsDAO
             db=new DBUtil();
             if(!db.openConnection())
             {
-                System.out.print("fail to connect database table studio");
+                System.out.print("fail to connect database table shops");
                 return null;
             }
             ResultSet rst=db.execQuery(sql);

@@ -151,7 +151,6 @@ public class ShopsServlet extends HttpServlet
             out.flush();
             out.close();
         }
-        // System.out.print(jsonStr);
     }
 
 
@@ -190,7 +189,6 @@ public class ShopsServlet extends HttpServlet
             out.flush();
             out.close();
         }
-        // System.out.print(jsonStr);
     }
 
 }

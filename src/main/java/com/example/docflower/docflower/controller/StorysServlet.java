@@ -70,7 +70,6 @@ public class StorysServlet extends HttpServlet{
             out.flush();
             out.close();
         }
-        // System.out.print(jsonStr);
     }
 
 
@@ -110,7 +109,6 @@ public class StorysServlet extends HttpServlet{
             out.flush();
             out.close();
         }
-        // System.out.print(jsonStr);
     }
 
 }
