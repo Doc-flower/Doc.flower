@@ -185,8 +185,9 @@
                 if(JSON.parse(req1.responseText).length != 0)
                 {
                     var json1 =  JSON.parse(req1.responseText);//转换为json对象
-                    document.getElementById("IfUserSginIn").innerHTML = '<a href="Person.html"><img src="../../public/img/logo.png" id="nav_user_img" height="40" width="40" alt="."/></a>';
-                    document.getElementById("nav_user_img").setAttribute("src",json1[0].img) ;                    document.getElementById("dropdown04").innerText = json1[0].name;
+                    document.getElementById("IfUserSginIn").innerHTML = '<a href="Person.html"><img src="../../public/img/logo.png" id="nav_user_img" class="rounded-circle" height="45" width="45" alt="."/></a>';
+                    document.getElementById("nav_user_img").setAttribute("src",json1[0].img) ;
+                    document.getElementById("dropdown04").innerText = json1[0].name;
                     // 购买框
                     document.getElementById("flower_id").value = '1';
                     document.getElementById("order_owner_name").value = json1[0].name;
@@ -211,40 +212,52 @@
 
 </head>
 <body onload="init()">
-<nav>
-    <div class="nav_main">
 
-        <img src="../../public/img/logo.png" height="30" width="30" alt="."/>
-        <div class="nav_main_title">
-            <ul>
-                <li> <a href="./index.html" >首页</a> </li>
-                <li><a href="./HuaXiaoKe.html" class="title_active">花小科</a></li>
-                <li><a href="HuaXiaoShi_Flowers.html">花花小市</a>
-                </li>
-                <li>
-                    <a href="HuaXiaoShi_Plants.html">绿植小市</a>
-                </li>
-                <li><a href="./HuaXiaoQuan.html">花小圈</a></li>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-xl">
+        <a class="navbar-brand" href="#">
+            <img src="../../public/img/logo.png" height="50" width="50" alt="."/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07XL" aria-controls="navbarsExample07XL" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
+        <div class="collapse navbar-collapse" id="navbarsExample07XL">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item mx-3 ">
+                    <a class="nav-link  " href="index.html">首页 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item mx-3  active">
+                    <a class="nav-link   font-weight-bolder" href="HuaXiaoKe.html">花小科</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link" href="HuaXiaoShi_Flowers.html">花花小市</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link" href="HuaXiaoShi_Plants.html">绿植小市</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link" href="HuaXiaoQuan.html">花小圈</a>
+                </li>
             </ul>
-        </div>
-        <div class="nav_main_user">
-            <div class="col-md-5 float-left" id="IfUserSginIn" >
+            <form class="form-inline float-right my-2 my-md-0">
+                <div class=" float-left mr-2" id="IfUserSginIn" >
 
-            </div>
-            <div class="nav-item dropdown col-md-6 float-right">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-expanded="false">个人中心</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown04">
-                    <a class="dropdown-item" href="Person.html" target="_blank">个人信息</a>
-                    <a class="dropdown-item" href="Person_Order.html" target="_blank">订单管理</a>
-                    <a class="dropdown-item" href="javascript:;" onclick="quit()">退出登录</a>
                 </div>
-            </div>
+                <ul>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-expanded="false">个人中心</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown07XL">
+                            <a class="dropdown-item" href="Person.html" target="_blank">个人中心</a>
+                            <a class="dropdown-item" href="Person_Order.html" target="_blank">个人订单</a>
+                            <a class="dropdown-item" href="javascript:;" onclick="quit()">退出登录</a>
+                        </div>
+                    </li>
+                </ul>
+            </form>
         </div>
-
-
     </div>
-
 </nav>
 
 
@@ -362,7 +375,6 @@
     </div>
 </footer>
 
-<script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.bundle.js"></script>
 
 <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
 </body>

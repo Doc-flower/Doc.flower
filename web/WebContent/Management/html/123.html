@@ -223,7 +223,7 @@
   <link rel="stylesheet" href="../css/index.css">
   <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body onload="Man_login()">
 
 
 
@@ -337,12 +337,84 @@
 </div>
 
 <input type="file" value="" class="btn btn-primary custom-file-input" id="btn"  width="50" height="50">
+
+
+
+
+<input type="button" class="btn btn-primary" value="发送" onclick="Man_login()">
+
 <script>
   $("#inputGroupFile01").change(function (){
     console.log(document.getElementById("inputGroupFile01").value);
     document.getElementById("inputGroupFile01_name").innerText = document.getElementById("inputGroupFile01").value;
   })
+
+
+
+  function Man_login(){
+    var url = "http://139.9.140.236:8080/Doc.flower/WebContent/public/img/logo.png";
+    if (window.XMLHttpRequest)
+      req = new XMLHttpRequest();
+    else if (window.ActiveXObject)
+      req = new ActiveXObject("Microsoft.XMLHTTP");
+    if (req) {
+      //采用POST方式，异步传输
+      req.open("get", url, true);
+      //POST方式，必须加入如下头信息设定
+      req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      req.onreadystatechange = Man_loginComplete;
+      req.send("type=manLogin&name=123&pwd=123");
+    }
+  }
+
+  function Man_loginComplete(){
+    if (req.readyState == 4 && req.status == 200) {
+      if(req.responseText == 1){
+        console.log(1);
+      } else {
+        console.log(2);
+      }
+    }else {
+      console.log(2);
+    }
+  }
 </script>
+
+
+<script>
+  Vue.config.productionTip = false
+
+  new Vue({
+    el:'#root',
+    data:{
+      UserNum:"",
+      OrdersNum:"",
+      BlogsNum:"",
+      MessagesNum:"",
+      PlantsSaleList:[],
+      FlowersSaleList:[],
+      PlantsStockList:[],
+
+    },
+    mounted(){
+      this.searchUserNum()
+    },
+    methods:{
+      searchUserNum:function () {
+        var that = this;        //保存this
+        axios.get('http://139.9.140.236:8080/Doc.flower/WebContent/public/img/logo.png')
+                .then(function (response) {
+                  console.log(response);
+                  that.UserNum = response.data.length
+                })
+                .catch(function (err) {
+                })
+      },
+    }
+  })
+
+</script>
+
 
 </body>
 </html>
