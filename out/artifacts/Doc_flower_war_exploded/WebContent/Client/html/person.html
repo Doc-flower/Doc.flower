@@ -58,7 +58,7 @@
                 document.getElementById("dropdown04").innerText = json[0].name;
 
                 document.getElementById("IfUserSginIn").innerHTML = '<a href="Person.html"><img src="../../public/img/logo.png" id="nav_user_img" height="40" width="40" alt="."/></a>';
-                document.getElementById("nav_user_img").setAttribute("src",json1[0].img) ;
+                document.getElementById("nav_user_img").setAttribute("src",json[0].img) ;
                 document.getElementById("img_user_id").value = json[0].id;
                 document.getElementById("person_name").innerText = json[0].name;
                 document.getElementById("person_email").innerText = json[0].email;
@@ -205,7 +205,7 @@
 
 <div id="container" style="display: none">   <!--style="display: none"-->
 
-<div class="container clearfix">
+<div id="root" class="container clearfix">
     <div class="row-cols-1 col-xl-12">
 
         <button type="button" class="btn btn-primary btn-lg btn-block my-3 col-xl-6 float-left"   data-toggle="modal" data-target="#UserImgUploadModal">更换头像</button>
@@ -306,7 +306,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon4">电话</span>
                                 </div>
-                                <input id="owner_tel" name="owner_tel" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                                <input id="owner_tel" v-model="user_tel" name="owner_tel" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                             </div>
                             <div class=" input-group  mb-3 float-left">
                                 <div class="input-group-prepend">
@@ -331,51 +331,39 @@
 
 
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <h1 class="display-4">账单</h1>
+        <h1 class="display-4">账号信息</h1>
 <!--        <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>-->
     </div>
     <div class="card-deck mb-3 text-center">
         <div class="card mb-4 shadow-sm">
             <div class="card-header">
-                <h4 class="my-0 font-weight-normal">年账单</h4>
+                <h4 class="my-0 font-weight-normal">博客数量</h4>
             </div>
             <div class="card-body">
-                <h1 class="card-title pricing-card-title">RMB：0 <small class="text-muted"></small></h1>
+                <h1 class="card-title pricing-card-title"><span>{{OrdersNum}}</span> <small class="text-muted"></small></h1>
                 <ul class="list-unstyled mt-3 mb-4">
-<!--                    <li>10 users included</li>-->
-<!--                    <li>2 GB of storage</li>-->
-<!--                    <li>Email support</li>-->
-<!--                    <li>Help center access</li>-->
                 </ul>
                 <button type="button" class="btn btn-lg btn-block btn-outline-info">明细查询</button>
             </div>
         </div>
         <div class="card mb-4 shadow-sm">
             <div class="card-header">
-                <h4 class="my-0 font-weight-normal">月账单</h4>
+                <h4 class="my-0 font-weight-normal">订单数量</h4>
             </div>
             <div class="card-body">
-                <h1 class="card-title pricing-card-title">RMB：15 <small class="text-muted"></small></h1>
+                <h1 class="card-title pricing-card-title"><span>{{BlogsNum}}</span> <small class="text-muted"></small></h1>
                 <ul class="list-unstyled mt-3 mb-4">
-<!--                    <li>20 users included</li>-->
-<!--                    <li>10 GB of storage</li>-->
-<!--                    <li>Priority email support</li>-->
-<!--                    <li>Help center access</li>-->
                 </ul>
                 <button type="button" class="btn btn-lg btn-block btn-outline-info">明细查询</button>
             </div>
         </div>
         <div class="card mb-4 shadow-sm">
             <div class="card-header">
-                <h4 class="my-0 font-weight-normal">日支出</h4>
+                <h4 class="my-0 font-weight-normal">留言数量</h4>
             </div>
             <div class="card-body">
-                <h1 class="card-title pricing-card-title">RMB：29 <small class="text-muted"></small></h1>
+                <h1 class="card-title pricing-card-title"><span>{{MessagesNum}}</span> <small class="text-muted"></small></h1>
                 <ul class="list-unstyled mt-3 mb-4">
-<!--                    <li>30 users included</li>-->
-<!--                    <li>15 GB of storage</li>-->
-<!--                    <li>Phone and email support</li>-->
-<!--                    <li>Help center access</li>-->
                 </ul>
                 <button type="button" class="btn btn-lg btn-block btn-outline-info">明细查询</button>
             </div>
@@ -468,13 +456,68 @@
 <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
 <script src="../js/Person_color_select.js"></script>
 
+<script src="../../public/js/vue.min.js"></script>
+<script src="../../public/js/axios.min.js"></script>
 <script>
     $("#inputGroupFile01").change(function (){
         console.log(document.getElementById("inputGroupFile01").value);
         document.getElementById("inputGroupFile01_name").innerText = document.getElementById("inputGroupFile01").value;
-
-
     })
 </script>
+
+
+<script>
+    Vue.config.productionTip = false
+
+    new Vue({
+        el:'#root',
+        data:{
+            user_tel:"",
+            OrdersNum:"",
+            BlogsNum:"",
+            MessagesNum:"",
+        },
+        mounted(){
+            this.searchOrdersNum()
+            this.searchBlogsNum()
+            this.searchMessagesNum()
+        },
+        methods:{
+            searchOrdersNum:function () {
+                var that = this;        //保存this
+                axios.post('../../../OrdersServlet?type=search&method=search&tel=' + this.user_tel)
+                    .then(function (response) {
+                        console.log(response);
+                        that.OrdersNum = response.data.length
+                    })
+                    .catch(function (err) {
+                    })
+            },
+            searchBlogsNum:function () {
+                var that = this;        //保存this
+                axios.post('../../../BlogsServlet?type=search&method=search&name=' + "")
+                    .then(function (response) {
+                        console.log(response);
+                        that.BlogsNum = response.data.length
+                    })
+                    .catch(function (err) {
+                    })
+            },
+            searchMessagesNum:function () {
+                var that = this;        //保存this
+                axios.post('../../../MessagesServlet?type=search&method=search&name=' + "")
+                    .then(function (response) {
+                        console.log(response);
+                        that.MessagesNum = response.data.length
+                    })
+                    .catch(function (err) {
+                    })
+            },
+
+        }
+    })
+
+</script>
+
 </body>
 </html>
