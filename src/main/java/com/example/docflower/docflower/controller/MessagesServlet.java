@@ -96,7 +96,7 @@ public class MessagesServlet extends HttpServlet
         String name=request.getParameter("name");
         String method=request.getParameter("method");
         List<Messages> result=null;
-        result=new MessagesSrv().Fetch(name);
+        result=new MessagesSrv().Fetch(name ,method);
         String jsonStr="";
         try
         {
@@ -113,7 +113,6 @@ public class MessagesServlet extends HttpServlet
                 json.put("time", s.getTime());
                 json.put("text", s.getText());
                 array.put(json);
-
             }
             jsonStr=array.toString();
         }

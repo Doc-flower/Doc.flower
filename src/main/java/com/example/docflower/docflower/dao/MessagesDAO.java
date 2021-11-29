@@ -61,7 +61,7 @@ public class MessagesDAO implements iMessagesDAO {
 
     @SuppressWarnings("finally")
     @Override
-    public List<Messages> select(String customerEmail)
+    public List<Messages> select(String customerEmail,String method)
     {
         DBUtil db=null;
         List<Messages> customerList=null;
@@ -70,7 +70,12 @@ public class MessagesDAO implements iMessagesDAO {
         {
             customerEmail.trim();
             String sql = null;
-            sql="select * from messages where message_title like '%" + customerEmail + "%'";
+            System.out.println("method:" + method);
+            if(method.equalsIgnoreCase("search")){
+                sql="select * from messages where message_title like '%" + customerEmail + "%'";
+            }else if (method.equalsIgnoreCase("searchByEmail")){
+                sql="select * from messages where message_email like '" + customerEmail + "'";
+            }
             db=new DBUtil();
             if(!db.openConnection())
             {

@@ -129,8 +129,9 @@ public class OrdersServlet extends HttpServlet
         response.setCharacterEncoding("UTF-8");
         PrintWriter out=response.getWriter();
         String tel=request.getParameter("tel");
+        String method = request.getParameter("method");
         List<Orders> result=null;
-        result=new OrdersSrv().Fetch(tel);
+        result=new OrdersSrv().Fetch(tel,method);
         String jsonStr="";
         try
         {

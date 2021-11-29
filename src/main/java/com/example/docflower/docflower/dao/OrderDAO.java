@@ -89,7 +89,7 @@ public class OrderDAO implements iOrdersDAO {
 
     @SuppressWarnings("finally")
     @Override
-    public List<Orders> select(String tel)
+    public List<Orders> select(String tel,String method)
     {
         DBUtil db=null;
         List<Orders> orderList =null;
@@ -97,8 +97,12 @@ public class OrderDAO implements iOrdersDAO {
         try
         {
             tel.trim();
-            String sql="select * from `order` where order_owner_tel like '%" + tel + "%' ";
-
+            String sql = null;
+            if(method.equalsIgnoreCase("tel")){
+                sql="select * from `order` where order_owner_tel like '%" + tel + "%' ";
+            }else if(method.equalsIgnoreCase("tel2")){
+                sql="select * from `order` where order_owner_tel like '" + tel + "' ";
+            }
             db=new DBUtil();
             if(!db.openConnection())
             {

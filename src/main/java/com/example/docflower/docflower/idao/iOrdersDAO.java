@@ -14,5 +14,5 @@ public interface iOrdersDAO {
     public int delete(int ID);
 
 
-    public List<Orders> select(String employeeEmail);
+    public List<Orders> select(String employeeEmail,String method);
 }

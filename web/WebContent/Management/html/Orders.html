@@ -67,7 +67,7 @@
                 //POST方式，必须加入如下头信息设定
                 req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 req.onreadystatechange = searchComplete;
-                req.send("type=search&method=search&tel="+document.getElementById("order_search").value);
+                req.send("type=search&method=tel&tel="+document.getElementById("order_search").value);
             }
         }
 

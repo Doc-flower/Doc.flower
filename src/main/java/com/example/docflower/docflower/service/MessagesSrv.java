@@ -22,7 +22,7 @@ public class MessagesSrv {
         return messagesDAO.delete(ID);
     }
 
-    public List<Messages> Fetch(String email){
-        return messagesDAO.select(email);
+    public List<Messages> Fetch(String email,String method){
+        return messagesDAO.select(email,method);
     }
 }

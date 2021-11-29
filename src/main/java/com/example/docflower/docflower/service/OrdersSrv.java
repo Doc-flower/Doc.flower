@@ -21,8 +21,8 @@ public class OrdersSrv {
         return ordersDAO.delete(ID);
     }
 
-    public List<Orders> Fetch(String tel){
-        return ordersDAO.select(tel);
+    public List<Orders> Fetch(String tel,String method){
+        return ordersDAO.select(tel,method);
     }
 
 }

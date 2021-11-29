@@ -197,9 +197,9 @@
         window.onload = function (){
             searchMessages();
             setTimeout(JudgeMan,50);
-            setTimeout(stock_low_search_flower,200)
-            setTimeout(stock_high_search_flower,150)
-            setTimeout(circle_plant,150)
+            setTimeout(stock_low_search_flower,300)
+            setTimeout(stock_high_search_flower,200)
+            setTimeout(circle_plant,200)
         }
 
         function JudgeMan(){
@@ -955,7 +955,7 @@
             },
             searchOrdersNum:function () {
                 var that = this;        //保存this
-                axios.post('../../../OrdersServlet?type=search&method=search&tel=' + "")
+                axios.post('../../../OrdersServlet?type=search&method=tel&tel=' + "")
                     .then(function (response) {
                         console.log(response);
                         that.OrdersNum = response.data.length

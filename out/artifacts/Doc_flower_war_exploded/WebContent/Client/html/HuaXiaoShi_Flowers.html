@@ -48,10 +48,10 @@
                 if(json.length > 0) {
                     for (i = 0; i < json.length; i++) {
                         document.getElementById("flower_list").innerHTML +=
-                            '<div class="col-md-3">\n' +
+                            '<div class="col-lg-3 col-md-4 col-sm-12">\n' +
                             '            <a href="HuaXiaoShi_Flowers_Buy.html?type=search&name='+ json[i].flower_name +'" target="_blank">\n' +
                             '                <div class="card mb-4 shadow-sm">\n' +
-                            '                    <img src="' + json[i].flower_image1 + '" width="253.4px" height="253.4px"/>\n' +
+                            '                    <img src="' + json[i].flower_image1 + '" />\n' +
                             '                    <div class="card-body">\n' +
                             '                        <p class="card-text">' + json[i].flower_name + '</p>\n' +
                             '                        <div class="d-flex justify-content-between align-items-center">\n' +

@@ -14,5 +14,5 @@ public interface iMessagesDAO {
     public int delete(int ID);
 //
 
-    public List<Messages> select(String customerEmail);
+    public List<Messages> select(String customerEmail,String method);
 }

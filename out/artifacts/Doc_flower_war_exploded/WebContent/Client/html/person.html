@@ -76,7 +76,9 @@
 
                 document.getElementsByClassName("person_img_upload")[0].setAttribute("src",json[0].img);
 
+                searchOrdersNum(json[0].tel);
 
+                searchMessagesNum(json[0].email);
 
 
                 //    修改资料
@@ -153,6 +155,53 @@
                 return false;
             }
         }
+
+
+        function searchOrdersNum(cus_tel){
+            var url = "../../../OrdersServlet";
+            if (window.XMLHttpRequest)
+                req4 = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req4 = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req4) {
+                //采用POST方式，异步传输
+                req4.open("post", url, true);
+                req4.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req4.onreadystatechange = searchOrdersNumComplete;
+                req4.send("type=search&method=tel2&tel=" + cus_tel);
+            }
+        }
+
+        function searchOrdersNumComplete(){
+            if (req4.readyState == 4 && req4.status == 200) {
+                var json = JSON.parse(req4.responseText);//转换为json对象
+                document.getElementById("BlogsNum").innerText = json.length;
+            }
+        }
+
+
+        function searchMessagesNum(cus_email){
+            var url = "../../../MessagesServlet";
+            if (window.XMLHttpRequest)
+                req2 = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req2 = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req2) {
+                //采用POST方式，异步传输
+                req2.open("post", url, true);
+                req2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req2.onreadystatechange = searchMessagesNumComplete;
+                req2.send("type=search&method=searchByEmail&name=" + cus_email);
+            }
+        }
+
+        function searchMessagesNumComplete(){
+            if (req2.readyState == 4 && req2.status == 200) {
+                var json =  JSON.parse(req2.responseText);//转换为json对象
+                document.getElementById("MessagesNum").innerText = json.length;
+            }
+        }
+
 
 
     </script>
@@ -317,7 +366,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3">邮箱</span>
                                 </div>
-                                <input id="owner_email" name="owner_email" type="text" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                                <input id="owner_email" v-model="user_email" name="owner_email" type="text" class="form-control"  placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                             </div>
                             <div class=" input-group  mb-3 float-left">
                                 <div class="input-group-prepend">
@@ -368,7 +417,7 @@
                 <h4 class="my-0 font-weight-normal">订单数量</h4>
             </div>
             <div class="card-body">
-                <h1 class="card-title pricing-card-title"><span>{{BlogsNum}}</span> <small class="text-muted"></small></h1>
+                <h1 class="card-title pricing-card-title"><span id="BlogsNum"></span> <small class="text-muted"></small></h1>
                 <ul class="list-unstyled mt-3 mb-4">
                 </ul>
                 <button type="button" class="btn btn-lg btn-block btn-outline-info">明细查询</button>
@@ -379,7 +428,7 @@
                 <h4 class="my-0 font-weight-normal">留言数量</h4>
             </div>
             <div class="card-body">
-                <h1 class="card-title pricing-card-title"><span>{{MessagesNum}}</span> <small class="text-muted"></small></h1>
+                <h1 class="card-title pricing-card-title"><span id="MessagesNum"></span> <small class="text-muted"></small></h1>
                 <ul class="list-unstyled mt-3 mb-4">
                 </ul>
                 <button type="button" class="btn btn-lg btn-block btn-outline-info">明细查询</button>
@@ -481,59 +530,6 @@
     })
 </script>
 
-
-<script>
-    Vue.config.productionTip = false
-
-    new Vue({
-        el:'#root',
-        data:{
-            user_tel:"",
-            OrdersNum:"",
-            BlogsNum:"",
-            MessagesNum:"",
-        },
-        mounted(){
-            this.searchOrdersNum()
-            this.searchBlogsNum()
-            this.searchMessagesNum()
-        },
-        methods:{
-            searchOrdersNum:function () {
-                var that = this;        //保存this
-                axios.post('../../../OrdersServlet?type=search&method=search&tel=' + this.user_tel)
-                    .then(function (response) {
-                        console.log(response);
-                        that.OrdersNum = response.data.length
-                    })
-                    .catch(function (err) {
-                    })
-            },
-            searchBlogsNum:function () {
-                var that = this;        //保存this
-                axios.post('../../../BlogsServlet?type=search&method=search&name=' + "")
-                    .then(function (response) {
-                        console.log(response);
-                        that.BlogsNum = response.data.length
-                    })
-                    .catch(function (err) {
-                    })
-            },
-            searchMessagesNum:function () {
-                var that = this;        //保存this
-                axios.post('../../../MessagesServlet?type=search&method=search&name=' + "")
-                    .then(function (response) {
-                        console.log(response);
-                        that.MessagesNum = response.data.length
-                    })
-                    .catch(function (err) {
-                    })
-            },
-
-        }
-    })
-
-</script>
 
 </body>
 </html>

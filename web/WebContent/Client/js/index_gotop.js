@@ -79,6 +79,8 @@ function cookie_email_searchComplete(){
             document.getElementById("nav_user_img").classList.add("ml-5");
             document.getElementById("dropdown04").innerText = json[0].name;
             document.getElementById("user_name").value = json[0].name;
+            document.getElementById("message_email").value = json[0].email;
+            document.getElementById("message_tel").value = json[0].tel;
             console.log("---------->成功:" + getCookie("name"));
         }else if(JSON.parse(req.responseText).length == 0){
             document.getElementById("IfUserSginIn").innerHTML = '<a href="Sign.html"><input type="button" class="btn btn-outline-primary mt-2" id="user" href="Sign.html" value="登录/注册"></a>\n'
