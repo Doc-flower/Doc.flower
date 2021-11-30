@@ -76,6 +76,8 @@
 
                 document.getElementsByClassName("person_img_upload")[0].setAttribute("src",json[0].img);
 
+                searchBlogsNum(json[0].id);
+
                 searchOrdersNum(json[0].tel);
 
                 searchMessagesNum(json[0].email);
@@ -157,6 +159,28 @@
         }
 
 
+        function searchBlogsNum(cus_id){
+            var url = "../../../BlogsServlet";
+            if (window.XMLHttpRequest)
+                req5 = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req5 = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req5) {
+                //采用POST方式，异步传输
+                req5.open("post", url, true);
+                req5.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req5.onreadystatechange = searchBlogsNumComplete;
+                req5.send("type=searchOwnerId&OwnerId=" + cus_id);
+            }
+        }
+
+        function searchBlogsNumComplete(){
+            if (req5.readyState == 4 && req5.status == 200) {
+                var json = JSON.parse(req5.responseText);//转换为json对象
+                document.getElementById("BlogsNum").innerText = json.length;
+            }
+        }
+
         function searchOrdersNum(cus_tel){
             var url = "../../../OrdersServlet";
             if (window.XMLHttpRequest)
@@ -175,7 +199,7 @@
         function searchOrdersNumComplete(){
             if (req4.readyState == 4 && req4.status == 200) {
                 var json = JSON.parse(req4.responseText);//转换为json对象
-                document.getElementById("BlogsNum").innerText = json.length;
+                document.getElementById("OrdersNum").innerText = json.length;
             }
         }
 
@@ -200,6 +224,67 @@
                 var json =  JSON.parse(req2.responseText);//转换为json对象
                 document.getElementById("MessagesNum").innerText = json.length;
             }
+        }
+
+        function searchMessagesPress(){
+            document.getElementById("messages").innerHTML =
+                '<div class="container alert alert-info alert-dismissible fade show animated" id="messages_alert" role="alert">\n' +
+                '        <h1>历史留言</h1>\n' +
+                '        <button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
+                '            <span aria-hidden="true">&times;</span>\n' +
+                '        </button>\n' +
+                '        <hr>\n' +
+                '        <div id="messages_content">\n' +
+                '\n' +
+                '        </div>\n' +
+                '    </div>'
+            searchMessages();
+
+        }
+
+
+        function searchMessages(){
+            var url = "../../../MessagesServlet";
+            if (window.XMLHttpRequest)
+                req = new XMLHttpRequest();
+            else if (window.ActiveXObject)
+                req = new ActiveXObject("Microsoft.XMLHTTP");
+            if (req) {
+                //采用POST方式，异步传输
+                req.open("post", url, true);
+                //POST方式，必须加入如下头信息设定
+                req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                req.onreadystatechange = searchMessagesComplete;
+                req.send("type=search&method=searchByEmail&name="+getCookie("name"));
+            }
+        }
+
+
+
+        function searchMessagesComplete() {
+            if (req.readyState == 4 && req.status == 200) {
+                var json =  JSON.parse(req.responseText);//转换为json对象
+                var messages_content = document.getElementById("messages_content");
+                for(i=json.length-1; i>0; i--) {
+                    messages_content.innerHTML += '<div class="comment col-md-12 animated">\n' +
+                        '                                        <div class="comment_name ">\n' +
+                        '                                            <img src="'+ json[i].img +'" id="message_user_img" class="rounded-circle" height="30" width="30"/>\n' +
+                        '                                               <span class="user_name">\n' +
+                        '                                                '+ json[i].name + '\n' +
+                        '                                               </span>\n' +
+                        '                                               <span class="comment_time mx-3">\n' +
+                        '                                                '+ json[i].time +'\n' +
+                        '                                               </span>\n' +
+                        '                                        </div>\n' +
+                        '                                        <div class="comment_content" >\n' +
+                        '                                            <p class="my-1">\n' +
+                        '                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ json[i].title +'\n' +
+                        '                                            </p>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div><hr>'
+                }
+            }
+
         }
 
 
@@ -394,9 +479,7 @@
     </div>
 
 
-
-
-    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center" >
         <h1 class="display-4">账号信息</h1>
 <!--        <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>-->
     </div>
@@ -406,10 +489,10 @@
                 <h4 class="my-0 font-weight-normal">博客数量</h4>
             </div>
             <div class="card-body">
-                <h1 class="card-title pricing-card-title"><span>{{OrdersNum}}</span> <small class="text-muted"></small></h1>
+                <h1 class="card-title pricing-card-title"><span id="BlogsNum"></span> <small class="text-muted"></small></h1>
                 <ul class="list-unstyled mt-3 mb-4">
                 </ul>
-                <button type="button" class="btn btn-lg btn-block btn-outline-info">明细查询</button>
+                <a href="HuaXiaoQuan_blog.html"><button type="button" class="btn btn-lg btn-block btn-outline-primary">个人博客</button></a>
             </div>
         </div>
         <div class="card mb-4 shadow-sm">
@@ -417,10 +500,10 @@
                 <h4 class="my-0 font-weight-normal">订单数量</h4>
             </div>
             <div class="card-body">
-                <h1 class="card-title pricing-card-title"><span id="BlogsNum"></span> <small class="text-muted"></small></h1>
+                <h1 class="card-title pricing-card-title"><span id="OrdersNum"></span> <small class="text-muted"></small></h1>
                 <ul class="list-unstyled mt-3 mb-4">
                 </ul>
-                <button type="button" class="btn btn-lg btn-block btn-outline-info">明细查询</button>
+                <a href="Person_Order.html"><button type="button" class="btn btn-lg btn-block btn-outline-danger">个人订单</button></a>
             </div>
         </div>
         <div class="card mb-4 shadow-sm">
@@ -431,11 +514,17 @@
                 <h1 class="card-title pricing-card-title"><span id="MessagesNum"></span> <small class="text-muted"></small></h1>
                 <ul class="list-unstyled mt-3 mb-4">
                 </ul>
-                <button type="button" class="btn btn-lg btn-block btn-outline-info">明细查询</button>
+                <button type="button" class="btn btn-lg btn-block btn-outline-info" onclick="searchMessagesPress()">历史留言</button>
             </div>
         </div>
     </div>
 </div>
+
+<div id="messages">
+
+
+</div>
+
 <div class="container">
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <h1 class="display-4">好友推荐</h1>
