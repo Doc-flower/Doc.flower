@@ -42,6 +42,7 @@ public class UploadServlet extends HttpServlet
             request.setCharacterEncoding("UTF-8");
             // 接收文本
             int user_name_id = Integer.parseInt(request.getParameter("img_user_id"));
+            String user_email = request.getParameter("img_user_email");
             System.out.println(user_name_id);
             // 接收图片:图片封装在part对象中
             part = request.getPart("play_image");
@@ -52,6 +53,7 @@ public class UploadServlet extends HttpServlet
             part.write(getServletContext().getRealPath("/WebContent/Client/img/user_img/") + fileName);
             //向数据库中存入路径
             updateUserImg(user_name_id,fileName);
+            updateMessagesUserImg(user_email,fileName);
 
             System.out.println(fileName);
             System.out.println(part.getSize());
@@ -94,7 +96,6 @@ public class UploadServlet extends HttpServlet
     }
 
 
-//    @SuppressWarnings("finally")
     public void updateUserImg(int user_name_id, String fileName)
     {
         int result=0;
@@ -112,9 +113,25 @@ public class UploadServlet extends HttpServlet
         {
             e.printStackTrace();
         }
-//        finally
-//        {
-//            return;
-//        }
+    }
+
+
+    public void updateMessagesUserImg(String user_email, String fileName)
+    {
+        int result=0;
+        try
+        {
+
+            String sql="update messages set message_user_img = '../img/user_img/" + fileName;
+            sql+="' where message_email = '" + user_email + "'";
+            DBUtil db=new DBUtil();
+            db.openConnection();
+            result=db.execCommand(sql);
+            db.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
