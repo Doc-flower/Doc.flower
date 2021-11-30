@@ -271,7 +271,7 @@
             if (req.readyState == 4 && req.status == 200) {
                 var json =  JSON.parse(req.responseText);//转换为json对象
                 var messages_content = document.getElementById("messages_content");
-                for(i=json.length-1; i>0; i--) {
+                for(i=json.length-1; i>=0; i--) {
                     messages_content.innerHTML += '<div class="comment col-md-12 animated">\n' +
                         '                                        <div class="comment_name ">\n' +
                         '                                            <img src="'+ json[i].img +'" id="message_user_img" class="rounded-circle" height="30" width="30"/>\n' +
