@@ -147,6 +147,9 @@
         }
 
 
+
+
+
         function isPic()
         {
             var pic=myform.play_image.value;
@@ -389,7 +392,9 @@
                     <div class="col-md-12 float-right">
 
                         <form name="myform" action="../../../UploadServlet" method="post" enctype="multipart/form-data">
-                            <input type="file" name="play_image"><br>
+                            <input type="file" style="visibility: hidden" id="play_image" name="play_image"><br>
+                            <input type="button" id="btn_select" value="上传图片" class="btn btn-danger my-1">
+                            <span id="img_name"></span>
                             <input type="hidden" id="img_user_id" name="img_user_id" value="未登录用户" >
                             <input type="hidden" id="img_user_email" name="img_user_email" value="未登录用户">
 <!--                            <input type="submit" value="提交" onclick="return isPic()"><br>-->
@@ -621,6 +626,14 @@
         console.log(document.getElementById("inputGroupFile01").value);
         document.getElementById("inputGroupFile01_name").innerText = document.getElementById("inputGroupFile01").value;
     })
+
+
+    document.querySelector('#btn_select').addEventListener('click',function () {
+        document.querySelector('#play_image').click();
+    });
+    document.querySelector('#play_image').onchange = function (){
+        document.getElementById("img_name").innerText = document.querySelector('#play_image').value;
+    }
 </script>
 
 

@@ -479,9 +479,13 @@
 </div>
 <img src="http://139.9.140.236:8080/LX/lxlyy.jpg" width="320"    height="400" alt="">
 
-<button onclick="addfriend()" class="btn btn-primary">添加好友</button>
-
-
+<input type="file" style="visibility: hidden" id="select_img" value="">
+<input type="button" id="btn" value="选择图片"  class="btn btn-primary">
+<script>
+    document.querySelector('#btn').addEventListener('click',function () {
+        document.querySelector('#select_img').click();
+    });
+</script>
 <script src="../../public/js/jquery-1.12.4.min.js"></script>
 
 <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
