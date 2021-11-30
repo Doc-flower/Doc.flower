@@ -14,4 +14,6 @@ public interface iBlogsDAO {
     public List<Blogs> select(String playName);
 
     public List<Blogs> selectId(int id);
+
+    public List<Blogs> selectOwnerId(int Ownerid);
 }

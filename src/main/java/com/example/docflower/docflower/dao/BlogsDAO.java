@@ -94,7 +94,6 @@ public class BlogsDAO implements iBlogsDAO
         blogsList =new LinkedList<Blogs>();
         try
         {
-            blogName.trim();
             String sql="select * from blogs where blog_name like '%" + blogName + "%'";
             db=new DBUtil();
             if(!db.openConnection())
@@ -143,6 +142,53 @@ public class BlogsDAO implements iBlogsDAO
         try
         {
             String sql="select * from blogs where blog_id = '" + id + "'";
+            db=new DBUtil();
+            if(!db.openConnection())
+            {
+                System.out.print("fail to connect database table blogs");
+                return null;
+            }
+            ResultSet rst=db.execQuery(sql);
+            if(rst != null)
+            {
+                while(rst.next())
+                {
+                    Blogs blogs =new Blogs();
+                    blogs.setID(rst.getInt("blog_id"));
+                    blogs.setName(rst.getString("blog_name"));
+                    blogs.setOwner(rst.getString("blog_owner"));
+                    blogs.setOwner_id(rst.getInt("blog_owner_id"));
+                    blogs.setText(rst.getString("blog_text"));
+                    blogs.setTime(rst.getString("blog_time"));
+                    blogs.setViews(rst.getInt("blog_views"));
+                    blogs.setLikes(rst.getInt("blog_likes"));
+                    blogsList.add(blogs);
+                }
+            }
+            db.close(rst);
+            db.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            return blogsList;
+        }
+    }
+
+
+    @SuppressWarnings("finally")
+    @Override
+    public List<Blogs> selectOwnerId(int Ownerid)
+    {
+        DBUtil db=null;
+        List<Blogs> blogsList =null;
+        blogsList =new LinkedList<Blogs>();
+        try
+        {
+            String sql="select * from blogs where blog_owner_id = '" + Ownerid + "'";
             db=new DBUtil();
             if(!db.openConnection())
             {

@@ -29,4 +29,9 @@ public class BlogsSrv {
     public List<Blogs> FetchId(int id){
         return blogsDAO.selectId(id);
     }
+
+    public List<Blogs> FetchOwnerId(int Ownerid){
+        return blogsDAO.selectOwnerId(Ownerid);
+    }
+
 }

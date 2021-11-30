@@ -40,6 +40,8 @@ public class BlogsServlet extends HttpServlet
             search(request, response);
         else if(type.equalsIgnoreCase("searchId"))
             searchId(request, response);
+        else if(type.equalsIgnoreCase("searchOwnerId"))
+            searchOwnerId(request, response);
     }
 
     private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -99,7 +101,7 @@ public class BlogsServlet extends HttpServlet
             int id=Integer.parseInt(request.getParameter("id"));
             String name=request.getParameter("name");
             String owner=request.getParameter("owner");
-            int owner_id=Integer.parseInt(request.getParameter("owner_id"));
+            int owner_id=0;
             String text=request.getParameter("text");
             String time=request.getParameter("time");
             int views=Integer.parseInt(request.getParameter("views"));
@@ -186,6 +188,46 @@ public class BlogsServlet extends HttpServlet
                 json.put("time", s.getTime());
                 json.put("views", s.getViews());
                 json.put("likes", s.getLikes());
+                array.put(json);
+            }
+            jsonStr=array.toString();
+        }
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            out.println(jsonStr);
+            out.flush();
+            out.close();
+        }
+    }
+
+
+    private void searchOwnerId(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out=response.getWriter();
+        int ownerId=Integer.parseInt(request.getParameter("OwnerId"));
+        List<Blogs> result=null;
+        result=new BlogsSrv().FetchOwnerId(ownerId);
+        String jsonStr="";
+        try
+        {
+            JSONArray array=new JSONArray();
+            JSONObject json;
+            for(Blogs s : result)
+            {
+                json=new JSONObject();
+                json.put("id", s.getID());
+                json.put("name", s.getName());
+                json.put("owner", s.getOwner());
+                json.put("owner_id", s.getOwner_id());
+//                json.put("text", s.getText());
+//                json.put("time", s.getTime());
+//                json.put("views", s.getViews());
+//                json.put("likes", s.getLikes());
                 array.put(json);
             }
             jsonStr=array.toString();
