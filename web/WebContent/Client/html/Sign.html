@@ -14,7 +14,22 @@
 
     <script type="text/javascript">
 
+
         function search(){
+
+            var path;
+            var tel = /^1[3,4,5,7,8]\d{9}$/;
+            var email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,6}$/;
+            var User = document.getElementById("emailOrTel").value;
+            if(tel.test(User)){
+                path = "tel"
+            }else if(email.test(User)){
+                path = "email"
+            }else {
+                path = "啥也不是"
+            }
+
+
             var url = "../../../CustomerServlet";
             if (window.XMLHttpRequest)
                 req = new XMLHttpRequest();
@@ -26,7 +41,7 @@
                 //POST方式，必须加入如下头信息设定
                 req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 req.onreadystatechange = searchComplete;
-                req.send("type=login&method=login&email="+document.getElementById("email").value+"&pwd="+document.getElementById("password").value);
+                req.send("type=login&method=login&path="+ path +"&data="+document.getElementById("emailOrTel").value+"&pwd="+document.getElementById("password").value);
             }
         }
 
@@ -205,6 +220,7 @@
             //获取用户数据
             var inp = document.getElementById(id);
             var va=inp.value;
+            console.log(reg.test(va));
             //获取span对象
             //开始校验
             if(reg.test(va)){
@@ -286,7 +302,7 @@
                         <img src="../../public/img/logo.png" alt="" width="110" height="110">
 
                         <h1>登  录</h1>
-                        <input type="text" id="email" name="email" placeholder="邮箱地址" autofocus>
+                        <input type="text" id="emailOrTel" name="emailOrTel" placeholder="电话号码/邮箱地址" autofocus >
                         <input type="password" id="password" name="password" placeholder="密码">
                         <input type="button" id="bt1" value="登 录" onclick="search()">
                         <p class="signup">还没有账户？ <a href="#" onclick="toggleForm();">去注册</a></p>

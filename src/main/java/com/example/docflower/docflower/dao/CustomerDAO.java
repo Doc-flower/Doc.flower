@@ -90,7 +90,7 @@ public class CustomerDAO  implements iCustomerDAO {
 
     @SuppressWarnings("finally")
     @Override
-    public List<Customer> select(String customerEmail,String method)
+    public List<Customer> select(String customerEmail,String method,String path)
     {
         DBUtil db=null;
         List<Customer> customerList=null;
@@ -103,7 +103,12 @@ public class CustomerDAO  implements iCustomerDAO {
             if(method.equalsIgnoreCase("search")) {
                 sql="select * from customer where cus_email like '%" + customerEmail + "%'";
             }else if(method.equalsIgnoreCase("login")){
-                sql="select * from customer where cus_email like '" + customerEmail + "'";
+                if(path.equalsIgnoreCase("tel")){
+                    sql="select * from customer where cus_telnum like '" + customerEmail + "'";
+                } else if (path.equalsIgnoreCase("email")){
+                    sql="select * from customer where cus_email like '" + customerEmail + "'";
+
+                }
             }
             else if(method.equalsIgnoreCase("byEmail")){
                 sql="select * from customer where cus_email like '" + customerEmail + "'";

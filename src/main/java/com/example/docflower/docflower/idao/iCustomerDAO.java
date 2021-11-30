@@ -14,5 +14,5 @@ public interface iCustomerDAO {
     public int delete(int ID);
 //
 
-    public List<Customer> select(String customerEmail,String method);
+    public List<Customer> select(String customerEmail,String method,String path);
 }

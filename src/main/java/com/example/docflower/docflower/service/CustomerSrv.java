@@ -22,7 +22,7 @@ public class CustomerSrv {
         return customerDAO.delete(ID);
     }
 
-    public List<Customer> Fetch(String email,String method){
-        return customerDAO.select(email,method);
+    public List<Customer> Fetch(String email,String method,String path){
+        return customerDAO.select(email,method,path);
     }
 }

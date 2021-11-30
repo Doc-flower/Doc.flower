@@ -62,6 +62,7 @@ public class CustomerServlet  extends HttpServlet
             String name=request.getParameter("cusname");
             String tel=request.getParameter("custel");
             String email=request.getParameter("cusemail");
+            String path="";
             String pwd1=request.getParameter("customerpwd");
             String pwd = MD5Utils.code(pwd1);
             String paypwd=request.getParameter("customerpaypwd");
@@ -77,8 +78,8 @@ public class CustomerServlet  extends HttpServlet
 
             List<Customer> result_email=null;
             List<Customer> result_tel=null;
-            result_email=new CustomerSrv().Fetch(email,method_email);
-            result_tel=new CustomerSrv().Fetch(tel,method_tel);
+            result_email=new CustomerSrv().Fetch(email,method_email,path);
+            result_tel=new CustomerSrv().Fetch(tel,method_tel,path);
 
             JSONArray array_email=new JSONArray();
             JSONArray array_tel=new JSONArray();
@@ -133,6 +134,7 @@ public class CustomerServlet  extends HttpServlet
             String email=request.getParameter("cusemail");
             String img_bg=request.getParameter("customerimg_bg");
             String address=request.getParameter("customeraddress");
+            String path="";
             customer=new Customer(id,tel, name, email,null,null,img_bg,address);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
@@ -140,7 +142,7 @@ public class CustomerServlet  extends HttpServlet
             String method = "login";
 
             List<Customer> result=null;
-            result=new CustomerSrv().Fetch(email,method);
+            result=new CustomerSrv().Fetch(email,method,path);
 
             JSONArray array=new JSONArray();
             JSONObject json;
@@ -193,8 +195,9 @@ public class CustomerServlet  extends HttpServlet
         PrintWriter out=response.getWriter();
         String name=request.getParameter("name");
         String method=request.getParameter("method");
+        String path="";
         List<Customer> result=null;
-        result=new CustomerSrv().Fetch(name,method);
+        result=new CustomerSrv().Fetch(name,method,path);
         String jsonStr="";
         try
         {
@@ -236,11 +239,12 @@ public class CustomerServlet  extends HttpServlet
         response.setCharacterEncoding("UTF-8");
         PrintWriter out=response.getWriter();
         String method=request.getParameter("method");
-        String email=request.getParameter("email");
+        String path=request.getParameter("path");
+        String email=request.getParameter("data");
         String pwd1=request.getParameter("pwd");
         String pwd=MD5Utils.code(pwd1);
         List<Customer> result=null;
-        result=new CustomerSrv().Fetch(email,method);
+        result=new CustomerSrv().Fetch(email,method,path);
         String pwd_MD5="";
         try
         {
