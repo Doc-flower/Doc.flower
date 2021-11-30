@@ -246,11 +246,13 @@ public class CustomerServlet  extends HttpServlet
         List<Customer> result=null;
         result=new CustomerSrv().Fetch(email,method,path);
         String pwd_MD5="";
+        String database_email = "";
         try
         {
             for(Customer s : result)
             {
                 pwd_MD5 = s.getPwd();
+                database_email = s.getEmail();
             }
             System.out.println("------------>pwd:" + pwd);
 
@@ -258,9 +260,9 @@ public class CustomerServlet  extends HttpServlet
 
             if(pwd_MD5.equals(pwd))
             {
-                out.write("1");     //登陆成功
+                out.write(database_email);     //登陆成功
             }else {
-                out.write("0");     //登陆失败
+                out.write("failed");     //登陆失败
             }
 
             out.close();

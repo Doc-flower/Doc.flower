@@ -47,12 +47,12 @@
 
         function searchComplete() {
             if (req.readyState == 4 && req.status == 200) {
-                if(req.responseText == 1){
-                    setTimeout(SignInSuccess,100);
-                    document.cookie = "name=" + document.getElementById("email").value;
-                    console.log(document.cookie);
-                } else {
+                if(req.responseText == "failed"){
                     setTimeout(failSignIn, 100);
+                } else {
+                    setTimeout(SignInSuccess,100);
+                    document.cookie = "name=" + req.responseText;
+                    console.log(document.cookie);
                 }
 
             }
