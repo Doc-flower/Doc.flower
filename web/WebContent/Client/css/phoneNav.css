@@ -1,0 +1,11 @@
+@media screen and (max-width: 992px) {
+    nav .navbar-brand img{
+        height: 100px;
+        width: 100px;
+    }
+
+    nav .collapse ul li a{
+        font-size: 30px;
+        margin: 10px 0;
+    }
+}

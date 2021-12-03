@@ -192,7 +192,7 @@
                                 '                </div>\n' +
                                 '                <div class="card" style="height:35px;">\n' +
                                 '                    <div class="card-header " class="headingThree">\n' +
-                                '                        <div class="col-md-3 col-sm-6 text-secondary">\n' +
+                                '                        <div class="col-md-5 col-sm-6 text-secondary">\n' +
                                 '                              <span>发布时间:</span>\n' +
                                 '                               <span>'+json[i].time+'</span>\n' +
                                 '                        </div>\n' +
@@ -280,7 +280,7 @@
                                 '                </div>\n' +
                                 '                <div class="card" style="height:35px;">\n' +
                                 '                    <div class="card-header " class="headingThree">\n' +
-                                '                        <div class="col-md-3 col-sm-6 text-secondary">\n' +
+                                '                        <div class="col-md-5 col-sm-6 text-secondary">\n' +
                                 '                              <span>发布时间:</span>\n' +
                                 '                               <span>'+json[i].time+'</span>\n' +
                                 '                        </div>\n' +
@@ -320,6 +320,7 @@
         }
 
     </script>
+    <link rel="stylesheet" href="../css/phoneNav.css">
 </head>
 <body onload="init()">
 
@@ -370,7 +371,9 @@
     </div>
 </nav>
 
-<div id="body" class="container align-content-center mx-auto">
+<div class="row">
+
+<div id="body" class="col-xl-9 col-md-12 col-sm-12 mx-auto">
     <div class="author col-md-12">
         <div class="col-md-2 col-sm-6">
             <img class="rounded-circle" id="user_img"  height="100" width="100" src="" alt="">
@@ -395,7 +398,7 @@
 
             </h3>
         </div>
-        <div class="col-md-4  pt-5 offset-md-1" onkeypress="search_blog()" >
+        <div class="col-md-4  pt-5 float-right" onkeypress="search_blog()" >
             <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="搜索博客">
         </div>
     </div>
@@ -452,6 +455,7 @@
     <!--    </div>-->
 </div>
 
+</div>
 
 
 </body>

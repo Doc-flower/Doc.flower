@@ -46,7 +46,7 @@ body{
     float: left;
     max-width: 150px;
     height: 100%;
-    transition: .2s;
+    transition: .1s;
 
 }
 
@@ -67,7 +67,7 @@ body{
     height:60px;
     color: black;
     font-weight: bold;
-    transition: .2s;
+    transition: .1s;
     line-height: 60px;
 }
 
@@ -98,7 +98,7 @@ body{
     text-align: center;
     height:35px;
     color: black;
-    transition: .2s;
+    transition: .1s;
     line-height: 35px;
 
 }

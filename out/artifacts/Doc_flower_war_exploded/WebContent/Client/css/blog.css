@@ -845,3 +845,9 @@ ul{
     height: 28px;
     background-color: #ffffff;
 }
+
+
+
+.card-header a{
+    cursor: pointer;
+}

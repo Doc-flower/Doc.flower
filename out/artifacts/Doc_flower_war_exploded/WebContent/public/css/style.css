@@ -1143,9 +1143,9 @@ ul li {
 }
 /*æ–°é—»é¡µé¢*/
 .news_zi {
-  max-width: 1240px;
+  max-width: 1190px;
   width: 98%;
-  margin: auto;
+  /*margin: auto;*/
 }
 .top_qie {
   height: 70px;
