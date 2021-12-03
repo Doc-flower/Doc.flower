@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>头像上传成功</title>
+  <style>
+    html{
+        background-image: -moz-linear-gradient(135deg, rgb(189, 199, 255), rgb(189, 255, 153));
+
+        background-image: -webkit-linear-gradient(135deg, rgb(189, 199, 255), rgb(189, 255, 153));
+
+        background-image: linear-gradient(135deg, rgb(189, 199, 255), rgb(189, 255, 153));
+        height: 1500px;
+    }
+    h1{
+      margin: 300px auto;
+      text-align: center;
+      font-size: 70px;
+    }
+  </style>
+</head>
+<body>
+<h1>Load...</h1>
+<script>
+
+  window.onload = function (){
+    setTimeout(returnPerson,300)
+  }
+
+  function returnPerson(){
+    window.location = "WebContent/Management/html/Plants.html"
+  }
+</script>
+</body>
+</html>

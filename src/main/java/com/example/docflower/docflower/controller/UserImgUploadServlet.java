@@ -15,7 +15,7 @@ import javax.servlet.http.Part;
 
 @MultipartConfig(maxFileSize = 1024 * 1024 * 5)
 @WebServlet("/UploadServlet")
-public class UploadServlet extends HttpServlet
+public class UserImgUploadServlet extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
     private static final MultipartConfig config;
@@ -23,7 +23,7 @@ public class UploadServlet extends HttpServlet
     // 得到注解信息
     static
     {
-        config = UploadServlet.class.getAnnotation(MultipartConfig.class);
+        config = UserImgUploadServlet.class.getAnnotation(MultipartConfig.class);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
