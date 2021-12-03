@@ -3,8 +3,6 @@ package main.java.com.example.docflower.docflower.controller;
 import main.java.com.example.docflower.docflower.model.Customer;
 import main.java.com.example.docflower.util.DBUtil;
 
-import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -12,10 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import java.io.IOException;
+import java.sql.ResultSet;
 
 @MultipartConfig(maxFileSize = 1024 * 1024 * 5)
-@WebServlet("/UploadServlet")
-public class UserImgUploadServlet extends HttpServlet
+@WebServlet("/BlogImgUploadServlet")
+public class BlogImgUploadServlet extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
     private static final MultipartConfig config;
@@ -23,7 +23,7 @@ public class UserImgUploadServlet extends HttpServlet
     // 得到注解信息
     static
     {
-        config = UserImgUploadServlet.class.getAnnotation(MultipartConfig.class);
+        config = BlogImgUploadServlet.class.getAnnotation(MultipartConfig.class);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -35,32 +35,34 @@ public class UserImgUploadServlet extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
-        Customer customer = new Customer();
         Part part;
         try
         {
             request.setCharacterEncoding("UTF-8");
             // 接收文本
-            int user_name_id = Integer.parseInt(request.getParameter("img_user_id"));
-            String user_email = request.getParameter("img_user_email");
-            System.out.println(user_name_id);
+
+            String img_blog_name = request.getParameter("img_blog_name");
+            String img_blog_owner = request.getParameter("img_blog_owner");
+            int img_blog_owner_id = Integer.parseInt(request.getParameter("img_blog_owner_id"));
+            String img_blog_text = request.getParameter("img_blog_text");
+            String img_blog_time = request.getParameter("img_blog_time");
+//            System.out.println(user_name_id);
             // 接收图片:图片封装在part对象中
-            part = request.getPart("play_image");
+            part = request.getPart("blog_image");
             System.out.println(part);
             String fileName = getFileName(part);
 //            customer.setImg(fileName);
             // 保存图片
-            part.write(getServletContext().getRealPath("/WebContent/Client/img/user_img/") + fileName);
+            part.write(getServletContext().getRealPath("/WebContent/Client/img/blog_img/") + fileName);
             //向数据库中存入路径
-            updateUserImg(user_name_id,fileName);
-            updateMessagesUserImg(user_email,fileName);
+            InsertBlog(img_blog_name,img_blog_owner,img_blog_owner_id,img_blog_text,img_blog_time,fileName);
 
             System.out.println(fileName);
             System.out.println(part.getSize());
 
             // 带着play对象转发到result.java页
-            request.setAttribute("play", customer);
-            request.getRequestDispatcher("/WebContent/Client/html/UserImgUploadComplete.html").forward(request, response);
+//            request.setAttribute("play", customer);
+            request.getRequestDispatcher("/WebContent/Client/html/BlogImgUploadComplete.html").forward(request, response);
         }
         catch(Exception e)
         {
@@ -96,17 +98,21 @@ public class UserImgUploadServlet extends HttpServlet
     }
 
 
-    public void updateUserImg(int user_name_id, String fileName)
+    public void InsertBlog(String img_blog_name,String img_blog_owner,int img_blog_owner_id,String img_blog_text,String img_blog_time,String fileName)
     {
-        int result=0;
         try
         {
-
-            String sql="update customer set cus_img = '../img/user_img/" + fileName;
-            sql+="' where cus_id = " + user_name_id;
+            String sql="insert into blogs(blog_name, blog_owner, blog_owner_id, blog_text, blog_image, blog_time, blog_views, blog_likes) VALUES"
+                    + "('" + img_blog_name + "', '" + img_blog_owner + "', "
+                    + img_blog_owner_id + ", '"+ img_blog_text + "','../img/blog_img/" + fileName + "', '" + img_blog_time + "', " + 0 + ", " + 0 + " )";
             DBUtil db=new DBUtil();
             db.openConnection();
-            result=db.execCommand(sql);
+            ResultSet rst=db.getInsertObjectIDs(sql);
+//            if(rst != null && rst.first())
+//            {
+////                blogs.setID(rst.getInt(1));
+//            }
+            db.close(rst);
             db.close();
         }
         catch(Exception e)
@@ -115,23 +121,4 @@ public class UserImgUploadServlet extends HttpServlet
         }
     }
 
-
-    public void updateMessagesUserImg(String user_email, String fileName)
-    {
-        int result=0;
-        try
-        {
-
-            String sql="update messages set message_user_img = '../img/user_img/" + fileName;
-            sql+="' where message_email = '" + user_email + "'";
-            DBUtil db=new DBUtil();
-            db.openConnection();
-            result=db.execCommand(sql);
-            db.close();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
 }

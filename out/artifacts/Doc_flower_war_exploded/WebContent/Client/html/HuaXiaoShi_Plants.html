@@ -46,7 +46,7 @@
                 if(json.length > 0){
                     for(i=0; i<json.length; i++) {
                         document.getElementById("plant_list").innerHTML +=
-                            '<div class="col-lg-3 col-md-4 col-sm-12">\n' +
+                            '<div class="col-lg-3 col-md-6 col-sm-12">\n' +
                             '            <a href="HuaXiaoShi_Plants_Buy.html?type=search&name='+ json[i].plantname +'" target="_blank">\n' +
                             '                <div class="card mb-4 shadow-sm">\n' +
                             '                    <img src="'+ json[i].plantimg1 + '"/>\n' +
@@ -199,7 +199,7 @@
 </nav>
 
 
-<div id="container" class="container">
+<div id="container" class="col-xl-10 col-md-12 col-sm-12 mx-auto">
     <div class="input-group col-9 mx-auto mb-3 mt-3 order-search">
         <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">搜索绿植</span>

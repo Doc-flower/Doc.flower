@@ -508,7 +508,7 @@ ul{
     border: 1px solid #e7b9ce;
 }
 .blog_world li .card img{
-    height:260px ;
+    height:240px ;
     margin: 0px auto;
 }
 .blog_world li .card .card-body{
@@ -613,14 +613,14 @@ ul{
 /*评论区部分*/
 #comment_area{
     margin: 20px auto;
-    width: 1064px;
+    /*width: 1064px;*/
     /*height: 330px;*/
     border: 1px solid #d8d8d8;
     background-color: #f8f8f8;
 }
 #header{
     position: relative;
-    width:1064px;
+    /*width:1064px;*/
     height: 60px;
     line-height: 60px;
 }
@@ -630,8 +630,8 @@ ul{
     font-size: 18px;
 }
 #header .sort_quality{
-    position: absolute;
-    left:880px;
+    /*position: absolute;*/
+    /*left:880px;*/
     font-size: 14px;
     cursor: pointer;
     color: #c5c5c5;
@@ -640,8 +640,8 @@ ul{
     color: #92cbc3;
 }
 #header .sort_time{
-    position: absolute;
-    left: 960px;
+    /*position: absolute;*/
+    /*left: 960px;*/
     font-size: 14px;
     cursor: pointer;
     color: #c5c5c5;
@@ -652,7 +652,7 @@ ul{
 #comment{
     position: relative;
     margin-bottom: 10px;
-    width: 1040px;
+    /*width: 1040px;*/
     /*height: 260px;*/
     left: 10px;
     border: 1px solid #eeeeee;
@@ -661,7 +661,7 @@ ul{
 
 }
 #comment_ul li{
-    width: 1040px;
+    /*width: 1040px;*/
     height: 180px;
     border: 1px solid #eeeeee;
     border-bottom: none;
@@ -694,7 +694,7 @@ ul{
 #comment_ul .body{
     position: absolute;
     left: 80px;
-    width: 840px;
+    /*width: 840px;*/
     height: 179px;
     border-bottom: 1px solid #efefef;
 }
@@ -723,29 +723,29 @@ ul{
     color: #585858;
 }
 #comment_ul .other{
-    position: absolute;
-    left: 905px;
+    /*position: absolute;*/
+    /*left: 905px;*/
     float: right;
     width: 130px;
     height: 179px;
     border-bottom: 1px solid #efefef;
 }
 #comment_ul .other .date{
-    position: absolute;
+    /*position: absolute;*/
     top: 35px;
     left: 27px;
     font-size: 12px;
     color: #c3c3c3;
 }
 #comment_ul .other .c{
-    position: absolute;
+    /*position: absolute;*/
     top: 136px;
     left: 76px;
     cursor: pointer;
     color: #e4e4e4;
 }
 #comment_ul .other .like{
-    position: absolute;
+    /*position: absolute;*/
     top: 138px;
     left: 100px;
     font-size: 14px;
@@ -753,7 +753,7 @@ ul{
 }
 #comment_input{
 
-    width: 1038px;
+    /*width: 1038px;*/
     height: 240px;
     border-radius: 0px 0px 10px 10px;
 
@@ -780,7 +780,7 @@ ul{
 #comment_input .input_body{
     position: absolute;
     left: 80px;
-    width: 800px;
+    /*width: 800px;*/
     height: 240px;
 }
 #comment_input .input_body .input_title{
@@ -801,17 +801,17 @@ ul{
 #comment_input .input_body .input_text{
     position: absolute;
     top: 70px;
-    width: 940px;
+    /*width: 940px;*/
     height: 100px;
     border: 2px solid #d5d5d5;
     border-radius: 10px;
     background-color: #ffffff;
 }
 #comment_input .input_body .input_text textarea{
-    position: absolute;
+    /*position: absolute;*/
     top: 5px;
     left: 3px;
-    width: 775px;
+    /*width: 775px;*/
     height: 90px;
     max-width: 775px;
     max-height: 90px;
@@ -823,9 +823,9 @@ ul{
     resize: none;
 }
 #comment_input .input_body .submit{
-    position: absolute;
-    left: 830px;
-    top: 120px;
+    /*position: absolute;*/
+    /*left: 830px;*/
+    /*top: 120px;*/
     width: 90px;
     height: 30px;
     line-height: 30px;

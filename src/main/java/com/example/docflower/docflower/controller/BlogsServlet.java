@@ -145,6 +145,7 @@ public class BlogsServlet extends HttpServlet
                 json.put("owner", s.getOwner());
                 json.put("owner_id", s.getOwner_id());
                 json.put("text", s.getText());
+                json.put("img", s.getImg());
                 json.put("time", s.getTime());
                 json.put("views", s.getViews());
                 json.put("likes", s.getLikes());
@@ -185,6 +186,7 @@ public class BlogsServlet extends HttpServlet
                 json.put("owner", s.getOwner());
                 json.put("owner_id", s.getOwner_id());
                 json.put("text", s.getText());
+                json.put("img", s.getImg());
                 json.put("time", s.getTime());
                 json.put("views", s.getViews());
                 json.put("likes", s.getLikes());

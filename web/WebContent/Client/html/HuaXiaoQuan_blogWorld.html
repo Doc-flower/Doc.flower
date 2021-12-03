@@ -53,7 +53,7 @@
                             '                         <button>关注</button>\n' +
                             '                     </li>\n' +
                             '                 </ul>\n' +
-                            '                 <img src="..\\img\\花\\玫瑰类\\1.卡罗拉图集\\卡罗拉1.jpg" class="card-img-top" alt="...">\n' +
+                            '                 <img src="'+ json[i].img +'" class="card-img-top" alt="...">\n' +
                             '                 <div class="card-body card_article">\n' +
                             '                       <p class="card-text">'+json[i].time+'</p>\n' +
                             '                     <h5 class="card-title">'+json[i].name+'</h5>\n' +
@@ -63,7 +63,7 @@
                             '                     <span  class="card-link look_num">'+json[i].views+'</span>\n' +
                             '                     <span class="iconfont like" onmousedown="func1(this,this.nextSibling.nextSibling)" onmouseup="func2(this)" onclick="addlikes('+json[i].id+')">&#xe8ad;</span>\n' +
                             '                     <span  class="card-link like_num">'+json[i].likes+'</span>\n' +
-                            '                      <a class="card-link check_article" href="./HuaXiaoQuan_CheckBlog.html"  onclick="checkblog('+json[i].id+')">查看全文</a>\n'+
+                            '                      <a class="card-link check_article" href="HuaXiaoQuan_ViewBlog.html"  onclick="checkblog('+json[i].id+')">查看全文</a>\n'+
                             '                 </div>\n' +
                             '             </div>\n' +
                             '         </li>';
@@ -84,7 +84,7 @@
 
 
         function checkblog(id){
-            location.href='./HuaXiaoQuan_CheckBlog.html';
+            location.href='HuaXiaoQuan_ViewBlog.html';
             window.localStorage.setItem('ID',id);
         }
 
@@ -188,7 +188,7 @@
                             '                         <button>关注</button>\n' +
                             '                     </li>\n' +
                             '                 </ul>\n' +
-                            '                 <img src="..\\img\\花\\玫瑰类\\1.卡罗拉图集\\卡罗拉1.jpg" class="card-img-top" alt="...">\n' +
+                            '                 <img src="'+ json[i].img +'" class="card-img-top" alt="...">\n' +
                             '                 <div class="card-body card_article">\n' +
                             '                       <p class="card-text">' + json[i].time + '</p>\n' +
                             '                     <h5 class="card-title">' + json[i].name + '</h5>\n' +
@@ -198,7 +198,7 @@
                             '                     <span  class="card-link look_num">'+json[i].views+'</span>\n' +
                             '                     <span class="iconfont like" onmousedown="func1(this,this.nextSibling.nextSibling)" onmouseup="func2(this)" onclick="addlikes(' + json[i].id + ')">&#xe8ad;</span>\n' +
                             '                     <span  class="card-link like_num">'+json[i].likes+'</span>\n' +
-                            '                      <a class="card-link check_article" href="./HuaXiaoQuan_CheckBlog.html"  onclick="checkblog(' + json[i].id + ')">查看全文</a>\n' +
+                            '                      <a class="card-link check_article" href="HuaXiaoQuan_ViewBlog.html"  onclick="checkblog(' + json[i].id + ')">查看全文</a>\n' +
                             '                 </div>\n' +
                             '             </div>\n' +
                             '         </li>';
@@ -245,7 +245,7 @@
                             '                         <button>关注</button>\n' +
                             '                     </li>\n' +
                             '                 </ul>\n' +
-                            '                 <img src="..\\img\\花\\玫瑰类\\1.卡罗拉图集\\卡罗拉1.jpg" class="card-img-top" alt="...">\n' +
+                            '                 <img src="'+ json[i].img +'" class="card-img-top" alt="...">\n' +
                             '                 <div class="card-body card_article">\n' +
                             '                       <p class="card-text">' + json[i].time + '</p>\n' +
                             '                     <h5 class="card-title">' + json[i].name + '</h5>\n' +
@@ -255,7 +255,7 @@
                             '                     <span  class="card-link look_num">'+json[i].views+'</span>\n' +
                             '                     <span class="iconfont like" onmousedown="func1(this,this.nextSibling.nextSibling)" onmouseup="func2(this)" onclick="addlikes(' + json[i].id + ')">&#xe8ad;</span>\n' +
                             '                     <span  class="card-link like_num">'+json[i].likes+'</span>\n' +
-                            '                      <a class="card-link check_article" href="./HuaXiaoQuan_CheckBlog.html"  onclick="checkblog(' + json[i].id + ')">查看全文</a>\n' +
+                            '                      <a class="card-link check_article" href="HuaXiaoQuan_ViewBlog.html"  onclick="checkblog(' + json[i].id + ')">查看全文</a>\n' +
                             '                 </div>\n' +
                             '             </div>\n' +
                             '         </li>';
@@ -302,7 +302,7 @@
                             '                         <button>关注</button>\n' +
                             '                     </li>\n' +
                             '                 </ul>\n' +
-                            '                 <img src="..\\img\\花\\玫瑰类\\1.卡罗拉图集\\卡罗拉1.jpg" class="card-img-top" alt="...">\n' +
+                            '                 <img src="'+ json[i].img +'" class="card-img-top" alt="...">\n' +
                             '                 <div class="card-body card_article">\n' +
                             '                       <p class="card-text">' + json[i].time + '</p>\n' +
                             '                     <h5 class="card-title">' + json[i].name + '</h5>\n' +
@@ -312,7 +312,7 @@
                             '                     <span  class="card-link look_num">'+json[i].views+'</span>\n' +
                             '                     <span class="iconfont like" onmousedown="func1(this,this.nextSibling.nextSibling)" onmouseup="func2(this)" onclick="addlikes(' + json[i].id + ')">&#xe8ad;</span>\n' +
                             '                     <span  class="card-link like_num">'+json[i].likes+'</span>\n' +
-                            '                      <a class="card-link check_article" href="./HuaXiaoQuan_CheckBlog.html"  onclick="checkblog(' + json[i].id + ')">查看全文</a>\n' +
+                            '                      <a class="card-link check_article" href="HuaXiaoQuan_ViewBlog.html"  onclick="checkblog(' + json[i].id + ')">查看全文</a>\n' +
                             '                 </div>\n' +
                             '             </div>\n' +
                             '         </li>';
@@ -369,7 +369,7 @@
                             '                     <span  class="card-link look_num">'+json[i].views+'</span>\n' +
                             '                     <span class="iconfont like" onmousedown="func1(this,this.nextSibling.nextSibling)" onmouseup="func2(this)" onclick="addlikes(' + json[i].id + ')">&#xe8ad;</span>\n' +
                             '                     <span  class="card-link like_num">'+json[i].likes+'</span>\n' +
-                            '                      <a class="card-link check_article" href="./HuaXiaoQuan_CheckBlog.html"  onclick="checkblog(' + json[i].id + ')">查看全文</a>\n' +
+                            '                      <a class="card-link check_article" href="HuaXiaoQuan_ViewBlog.html"  onclick="checkblog(' + json[i].id + ')">查看全文</a>\n' +
                             '                 </div>\n' +
                             '             </div>\n' +
                             '         </li>';

@@ -112,6 +112,7 @@ public class BlogsDAO implements iBlogsDAO
                     blogs.setOwner(rst.getString("blog_owner"));
                     blogs.setOwner_id(rst.getInt("blog_owner_id"));
                     blogs.setText(rst.getString("blog_text"));
+                    blogs.setImg(rst.getString("blog_image"));
                     blogs.setTime(rst.getString("blog_time"));
                     blogs.setViews(rst.getInt("blog_views"));
                     blogs.setLikes(rst.getInt("blog_likes"));
@@ -159,6 +160,7 @@ public class BlogsDAO implements iBlogsDAO
                     blogs.setOwner(rst.getString("blog_owner"));
                     blogs.setOwner_id(rst.getInt("blog_owner_id"));
                     blogs.setText(rst.getString("blog_text"));
+                    blogs.setImg(rst.getString("blog_image"));
                     blogs.setTime(rst.getString("blog_time"));
                     blogs.setViews(rst.getInt("blog_views"));
                     blogs.setLikes(rst.getInt("blog_likes"));
@@ -206,6 +208,7 @@ public class BlogsDAO implements iBlogsDAO
                     blogs.setOwner(rst.getString("blog_owner"));
                     blogs.setOwner_id(rst.getInt("blog_owner_id"));
                     blogs.setText(rst.getString("blog_text"));
+                    blogs.setImg(rst.getString("blog_image"));
                     blogs.setTime(rst.getString("blog_time"));
                     blogs.setViews(rst.getInt("blog_views"));
                     blogs.setLikes(rst.getInt("blog_likes"));

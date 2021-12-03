@@ -91,8 +91,9 @@
                 if(json.length > 0) {
                     for (i = 0; i < json.length; i++) {
                         document.getElementsByClassName("my_card")[0].innerHTML +=
-                        '<h1 class="font-weight-bolder mt-3">'+json[i].name+'</h1>\n' +
-                        '    <p class="owner_time px-3 text-secondary">作者：'+json[i].owner +'&nbsp;&nbsp;&nbsp;&nbsp;发布时间：'+json[i].time +'&nbsp;&nbsp;&nbsp;&nbsp;浏览量：'+json[i].views +'&nbsp;&nbsp;&nbsp;&nbsp;点赞量：'+json[i].likes +'</p>\n' +
+                            '' +
+                        '<h1 class="font-weight-bolder mt-3"><img src="'+ json[i].img +'" alt="" class="rounded" width="50" height="50">'+json[i].name+'</h1>\n' +
+                        '    <p class="owner_time px-3 text-secondary">作者：'+json[i].owner +'&nbsp;&nbsp;&nbsp;&nbsp;发布时间：'+json[i].time +'&nbsp;&nbsp;&nbsp;&nbsp;浏览：'+json[i].views +'&nbsp;&nbsp;&nbsp;&nbsp;点赞：'+json[i].likes +'</p>\n' +
                         ''+json[i].text+' ' +
                         '    <hr>';
                     console.log(json[i].name);
@@ -148,7 +149,7 @@
                             '                            <img src="'+json[i].comment_image+'" alt="">\n' +
                             '                        </div>\n' +
                             '                    </div>\n' +
-                            '                    <div class="body">\n' +
+                            '                    <div class="body col-6">\n' +
                             '                        <div class="user_name">'+json[i].comment_owner+'</div>\n' +
                             '                        <div class="text">'+json[i].comment_text+'</div>\n' +
                             '                    </div>\n' +
@@ -188,7 +189,7 @@
                                 <img src="'+ document.getElementById("user_img").value +'" alt="">\
                             </div>';
                 var body_node = document.createElement("div");
-                body_node.setAttribute("class", "body");
+                body_node.setAttribute("class", "body  col-6");
                 body_node.innerHTML = '<div class="user_name">'+ document.getElementById("user_name").value +'</div>\
                              <div class="text">' + text + '</div>';
                 li_node.appendChild(other_node);
@@ -330,7 +331,7 @@
                             '                            <img src="'+json[i].comment_image+'" alt="">\n' +
                             '                        </div>\n' +
                             '                    </div>\n' +
-                            '                    <div class="body">\n' +
+                            '                    <div class="body col-6">\n' +
                             '                        <div class="user_name">'+json[i].comment_owner+'</div>\n' +
                             '                        <div class="text">'+json[i].comment_text+'</div>\n' +
                             '                    </div>\n' +
@@ -389,7 +390,7 @@
                             '                            <img src="'+json[i].comment_image+'" alt="">\n' +
                             '                        </div>\n' +
                             '                    </div>\n' +
-                            '                    <div class="body">\n' +
+                            '                    <div class="body col-6">\n' +
                             '                        <div class="user_name">'+json[i].comment_owner+'</div>\n' +
                             '                        <div class="text">'+json[i].comment_text+'</div>\n' +
                             '                    </div>\n' +
@@ -528,36 +529,36 @@
 </nav>
 
 <!--博客全文区 -->
-<div class="my_card container my-3">
+<div class="my_card col-xl-10 col-md-12 col-sm-12 my-3">
 
 </div>
        <!--评论区 -->
-<div id="comment_area">
+<div id="comment_area" class="col-xl-8 mx-auto row">
     <input type="hidden" id="user_name" value="未登录用户" name="user_name">
     <input type="hidden" id="user_img" value="../img/用户.png" name="user_img">
-    <div id="header">
-        <span class="font">网友评论</span>
-        <span class="sort_quality" onclick="sortBylike()">质量排序</span>
-        <span class="sort_time" onclick="sortBytime()">时间排序</span>
+    <div id="header" class="col-xl-11 mx-auto">
+        <span class="font col-xl-4 col-md-4 col-sm-4">网友评论</span>
+        <span class="sort_quality float-right col-xl-2 col-md-2 col-sm-2" onclick="sortBylike()">质量排序</span>
+        <span class="sort_time float-right col-xl-2  col-md-2 col-sm-2" onclick="sortBytime()">时间排序</span>
     </div>
-    <div id="comment">
+    <div id="comment" class="col-xl-11 mx-auto">
         <div id="comment_ul">
             <ul id="comment_li_list">
 
             </ul>
         </div>
-        <div id="comment_input">
-            <div class="input_user">
+        <div id="comment_input" class="col-xl-12">
+            <div class="input_user col-xl-1">
                 <div class="input_user_img">
                     <img src="../img/用户.png" id="input_user_img" alt="">
                 </div>
             </div>
-            <div class="input_body">
+            <div class="input_body col-xl-11 col-md-11 col-sm-11">
                 <div class="input_title">我要评论</div>
-                <div class="input_text">
+                <div class="input_text col-xl-11 col-md-11 col-sm-11 mx-auto">
                     <form name="my_form" action="#" method="post" onsubmit="return add()">
-                        <textarea name="textarea" id="textarea"></textarea>
-                        <button class="submit">提交评论</button>
+                        <textarea name="textarea" id="textarea" class="col-12"></textarea>
+                        <button class="submit float-right my-3">提交评论</button>
                     </form>
                 </div>
             </div>

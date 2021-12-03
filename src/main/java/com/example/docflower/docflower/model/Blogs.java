@@ -7,6 +7,7 @@ public class Blogs {
     private String owner="";
     private int owner_id = 0;
     private String text="";
+    private String img="";
     private String time="" ;
     private int views=0;
     private int likes=0;
@@ -19,7 +20,6 @@ public class Blogs {
         this.name=name;
         this.owner = owner;
         this.owner_id = owner_id;
-
         this.text = text;
         this.time=time;
         this.views = views;
@@ -70,6 +70,14 @@ public class Blogs {
 
     public String getText(){
         return text;
+    }
+
+    public void setImg(String img){
+        this.img=img;
+    }
+
+    public String getImg(){
+        return img;
     }
 
     public void setTime(String img){

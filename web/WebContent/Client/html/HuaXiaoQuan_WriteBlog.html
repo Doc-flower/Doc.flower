@@ -20,7 +20,11 @@
 
     <script src="../../public/js/jquery-1.12.4.min.js"></script>
     <script src="../../public/css/bootstrap-4.6.0-dist/js/bootstrap.min.js"></script>
-
+    <style>
+        #checkModalLabel{
+            font-size: 30px;
+        }
+    </style>
     <script>
         var myEditor = null;
         window.onload = function(){
@@ -104,6 +108,35 @@
             var time = "";
             time = year + "-" + month + "-" + date+ " " + hour + ":" + minu + ":" + sec;
             return time;
+        }
+
+
+        function review(){
+            console.log(123)
+            $("#checkModalLabel").html($("#blog_title").val())
+            document.getElementById("check_blog").innerHTML = myEditor.getData();
+            $("#img_blog_name").val($("#blog_title").val())
+            $("#img_blog_owner").val($("#owner").val())
+            $("#img_blog_owner_id").val($("#user_name_id").val())
+            $("#img_blog_text").val(myEditor.getData())
+        }
+
+
+        function isPic()
+        {
+            var pic=document.getElementById("Blog_img_upload").blog_image.value;
+            $("#img_blog_time").val(getCurrentDate())
+            var ext=pic.substring(pic.lastIndexOf(".")+1);
+            //可以再添加允许类型
+            if(ext.toLowerCase()=="jpg" || ext.toLowerCase()=="png" || ext.toLowerCase()=="gif")
+            {
+                return true;
+            }
+            else
+            {
+                alert("上传jpg、png、gif格式图片!");
+                return false;
+            }
         }
 
 
@@ -230,7 +263,7 @@
         </div>
     </div>
 </nav>
-    <main class="container">
+    <main class="col-xl-9 col-md-12 col-sm-12 mx-auto">
 
         <!--发表成功-->
         <div class="modal fade" id="addSuccessModal" tabindex="-1" aria-labelledby="addSuccessModalLabel" aria-hidden="true">
@@ -253,6 +286,42 @@
 
 
 
+        <!-- 查看文章-->
+        <div class="modal fade" id="checkModal" tabindex="-1" aria-labelledby="checkModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title font-weight-bolder" id="checkModalLabel">确认发表</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div id="blog_content" class="modal-body">
+                        <span id="check_blog">
+
+                        </span>
+
+                        <form name="myform" id="Blog_img_upload" action="../../../BlogImgUploadServlet" method="post" enctype="multipart/form-data">
+                            <input type="file" hidden id="blog_image" name="blog_image"><br>
+                            <input type="button" id="btn_select" value="上传博客封面（推荐上传800x800像素图片，仅支持jpg,png,gif格式）" class="btn btn-danger col-12 my-1">
+                            <span id="img_name"></span>
+                            <input type="hidden" id="img_blog_name" name="img_blog_name" value="0" >
+                            <input type="hidden" id="img_blog_owner" name="img_blog_owner" value="0">
+                            <input type="hidden" id="img_blog_owner_id" name="img_blog_owner_id" value="0">
+                            <input type="hidden" id="img_blog_text" name="img_blog_text" value="0">
+                            <input type="hidden" id="img_blog_time" name="img_blog_time" value="0">
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                <input type="submit" value="确认发表" class="btn btn-primary"  onclick="return isPic()">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
         <div class="message my-3">
             <div id="write" class="centered py-1">
@@ -271,10 +340,19 @@
             </div>
         </div>
         <input type="hidden" id="user_name_id" value="未登录用户">
-        <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#addSuccessModal" onclick="check_blog()">发表博客</button>
+        <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#checkModal" onclick="review()">发表博客</button>
         <a href="HuaXiaoQuan_blog.html"><input type="button" class="btn btn-danger" value="返回个人博客"></a>
     </main>
 
 
+<script>
+
+    document.querySelector('#btn_select').addEventListener('click',function () {
+        document.querySelector('#blog_image').click();
+    });
+    document.querySelector('#blog_image').onchange = function (){
+        document.getElementById("img_name").innerText = document.querySelector('#blog_image').value;
+    }
+</script>
 </body>
 </html>
