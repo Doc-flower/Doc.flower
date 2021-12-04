@@ -87,7 +87,7 @@
                     theTable.innerHTML += '<tr>' +
                         '<td>'+ json[i].plantid +'</td>' +
                         '<td>'+ json[i].plantname +'</td>' +
-                        '<td><img src="../../Client/html/'+ json[i].plantimg1 +'"  class="rounded"  width="80" height="80" class="plant_img" data-toggle="modal" data-target="#PlantImgUploadModal" onclick="updateImg(\''+json[i].plantimg1+'\',\''+json[i].plantid+'\')"/></td>' +
+                        '<td><img src="../../Client/html/'+ json[i].plantimg1 +'"  class="rounded plant_img"  width="80" height="80" data-toggle="modal" data-target="#PlantImgUploadModal" onclick="updateImg(\''+json[i].plantimg1+'\',\''+json[i].plantid+'\')"/></td>' +
                         '<td class="">'+ json[i].plantintro +'</td>' +
                         '<td>' + json[i].price + '</td><td><input type="button" class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#exampleModal" value="修改" onclick="update(' + json[i].plantid + ')"></td><td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del('+ json[i].plantid +')"></td></tr>'
                 }

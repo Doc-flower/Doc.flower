@@ -86,18 +86,16 @@
                 for(i=0; i<json.length; i++) {
                     theTable.innerHTML +=
                         '<tr>' +
-                            '<td>'+ json[i].flower_id +'</td>' +
-                            '<td>'+ json[i].flower_name +'</td>' +
-                            '<td>' +json[i].flower_kind+'</td>' +
-                            '<td><img src="../../Client/html/'+ json[i].flower_image1 +'" class="rounded"  width="80" height="80" class="flower_img" data-toggle="modal" data-target="#FlowerImgUploadModal" onclick="updateImg(\''+json[i].flower_image1+'\',\''+json[i].flower_id+'\')"/></td> ' +
-                            '<td class="">'+ json[i].flower_introduction +'</td>' +
-                            '<td>' + json[i].flower_price+ '</td>' +
-                            '<td><input type="button" class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#exampleModal" value="修改" onclick="update(' + json[i].flower_id + ')"></td>' +
-                            '<td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del('+ json[i].flower_id +')"></td>' +
+                        '<td>' + json[i].flower_id + '</td>' +
+                        '<td>' + json[i].flower_name + '</td>' +
+                        '<td>' + json[i].flower_kind + '</td>' +
+                        '<td><img src="../../Client/html/' + json[i].flower_image1 + '" class="rounded flower_img"  width="80" height="80" data-toggle="modal" data-target="#FlowerImgUploadModal" onclick="updateImg(\'' + json[i].flower_image1 + '\',\'' + json[i].flower_id + '\')"/></td> ' +
+                        '<td class="">' + json[i].flower_introduction + '</td>' +
+                        '<td>' + json[i].flower_price + '</td>' +
+                        '<td><input type="button" class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#exampleModal" value="修改" onclick="update(' + json[i].flower_id + ')"></td>' +
+                        '<td><input type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delModal" value="删除" onclick="del(' + json[i].flower_id + ')"></td>' +
                         '</tr>'
                 }
-
-
             }
         }
 
