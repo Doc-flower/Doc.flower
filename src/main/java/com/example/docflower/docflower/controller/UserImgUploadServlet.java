@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 @MultipartConfig(maxFileSize = 1024 * 1024 * 5)
-@WebServlet("/UploadServlet")
+@WebServlet("/UserImgUploadServlet")
 public class UserImgUploadServlet extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
