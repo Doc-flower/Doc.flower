@@ -1157,13 +1157,13 @@ ul li {
 .top_qie a {
   display: inline-block;
   font-size: 14px;
-  color: #666;
+  color: #555;
   line-height: 35px;
   margin: auto 25px;
-  background: ;
 }
 .top_qie a:hover {
-  background: url(../images/a_active.png);
+  /*background: url(../images/a_active.png);*/
+  color: #000;
 }
 @media (max-width: 480px) {
   .top_qie a {
