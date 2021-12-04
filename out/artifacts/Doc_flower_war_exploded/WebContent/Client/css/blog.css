@@ -600,8 +600,12 @@ ul{
 .my_card{
     margin: 10px auto;
     width: 1064px;
+    position: relative;
+    top: -120px;
+    z-index: 1;
 }
 .owner_time{
+    font-size: 18px;
     border-bottom: 1px solid #a1a2a3;
 }
 .my_card-body{
@@ -617,6 +621,8 @@ ul{
     /*height: 330px;*/
     border: 1px solid #d8d8d8;
     background-color: #f8f8f8;
+    position: relative;
+    top: -120px;
 }
 #header{
     position: relative;
@@ -717,7 +723,7 @@ ul{
     position: absolute;
     top: 70px;
     left: 10px;
-    width: 650px;
+    /*width: 650px;*/
     height: 80px;
     font-size: 15px;
     color: #585858;
@@ -850,4 +856,17 @@ ul{
 
 .card-header a{
     cursor: pointer;
+}
+
+
+/*博客图片*/
+#blog_img{
+    width: 100%;
+    height: 210px;
+    opacity: .4;
+    object-fit: cover;
+}
+#blog_img_bg{
+    background-color: #000;
+
 }
