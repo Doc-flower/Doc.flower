@@ -15,13 +15,26 @@ CREATE TABLE `customer`  (
   `cus_img` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT '../img/用户.png',
   `cus_img_bg` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `cus_pwd` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '登陆密码',
-  `cus_paypwd` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '支付密码',
-  `cus_address` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `cus_orders` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-  `cus_friends` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `cus_address` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT '中国',
 
   PRIMARY KEY (`cus_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
+
+insert into customer(cus_name, cus_email, cus_telnum, cus_img, cus_pwd, cus_address) values
+('刘宇阳','2193560021@qq.com','13279505680','../img/user_img/lyy.jpg','bf351d0eba100d56e9768d2e408e462b','西安邮电大学安悦公寓1517-4');
+
+insert into customer(cus_name, cus_email, cus_telnum, cus_img, cus_pwd, cus_address) values
+('刘璇','3199432593@qq.com','15929068966','../img/user_img/lxx.jpg','0936fe398075040ba240cc4e9a2f9310','西安邮电大学安美公寓3518-3');
+
+insert into customer(cus_name, cus_email, cus_telnum, cus_img, cus_pwd, cus_address) values
+('苗欢','3030027737@qq.com','18709261628','../img/user_img/mhh.jpg','e10adc3949ba59abbe56e057f20f883e','西安市临潼区');
+
+insert into customer(cus_name, cus_email, cus_telnum, cus_img, cus_pwd, cus_address) values
+('范佳伟','2058298285@qq.com','15830599166','../img/user_img/fjw.jpg','26705314c440a2a797102d2b4b7c2f00','西安邮电大学安悦公寓1517-4');
+
+insert into customer(cus_name, cus_email, cus_telnum, cus_img, cus_pwd, cus_address) values
+('徐卓龙','1299605102@qq.com','17764753450','../img/user_img/xzl.jpg','ee7ee7d96d79d0fb40f9f5486f7bf6f6','西安邮电大学长安校区东区家属院');
+
 
 -- ----------------------------
 -- Table structure for managers
@@ -249,15 +262,15 @@ insert into blogs(blog_name, blog_owner,blog_owner_id,blog_text,blog_image, blog
 -- ----------------------------
 DROP TABLE IF EXISTS `story`;
 CREATE TABLE `story`  (
-                          `story_id` int(11) NOT NULL AUTO_INCREMENT,
-                          `story_owner` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-                          `story_title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-                          `story_introduction` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-                          `story_text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-                          `story_image` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-                          `story_time` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+      `story_id` int(11) NOT NULL AUTO_INCREMENT,
+      `story_owner` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+      `story_title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+      `story_introduction` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+      `story_text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+      `story_image` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+      `story_time` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
 
-                          PRIMARY KEY (`story_id`) USING BTREE
+      PRIMARY KEY (`story_id`) USING BTREE
 
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Compact;
 
@@ -275,27 +288,27 @@ INSERT INTO  story(story_owner,story_title,story_introduction,story_text,story_i
 -- ----------------------------
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment`  (
-                            `comment_id` INT(11) NOT NULL AUTO_INCREMENT,
-                            `blog_id`INT(10) DEFAULT NULL,
-                            `comment_owner` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-                            `comment_image` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-                            `comment_text` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-                            `comment_time` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
-                            `comment_likes` INT(10) DEFAULT NULL,
-                            PRIMARY KEY (`comment_id`) USING BTREE
+    `comment_id` INT(11) NOT NULL AUTO_INCREMENT,
+    `blog_id`INT(10) DEFAULT NULL,
+    `comment_owner` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+    `comment_image` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+    `comment_text` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+    `comment_time` VARCHAR(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+    `comment_likes` INT(10) DEFAULT NULL,
+    PRIMARY KEY (`comment_id`) USING BTREE
 
 ) ENGINE = INNODB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = COMPACT;
 
 INSERT INTO COMMENT(blog_id,comment_owner, comment_image,comment_text,comment_time, comment_likes) VALUES
-(1,'刘璇','../img/user_img.jpg','中秋节应该和家人一起过','2021年11月6日',100);
+(1,'刘璇','../img/user_img/lxx.jpg','中秋节应该和家人一起过','2021年11月6日',100);
 INSERT INTO COMMENT(blog_id,comment_owner, comment_image,comment_text,comment_time, comment_likes) VALUES
-(2,'刘宇阳','../img/user_img.jpg','学到了','2021年11月7日',100);
+(2,'刘宇阳','../img/user_img/lyy.jpg','学到了','2021年11月7日',100);
 INSERT INTO COMMENT(blog_id,comment_owner, comment_image,comment_text,comment_time, comment_likes) VALUES
-(3,'徐卓龙','../img/user_img.jpg','种植鲜花小技巧','2021年11月8日',100);
+(3,'徐卓龙','../img/user_img/xzl.jpg','种植鲜花小技巧','2021年11月8日',100);
 INSERT INTO COMMENT(blog_id,comment_owner, comment_image,comment_text,comment_time, comment_likes) VALUES
-(4,'范佳伟','../img/user_img.jpg','这没想到有这么多的鲜花品种','2021年11月6日',100);
+(4,'范佳伟','../img/user_img/fjw.jpg','这没想到有这么多的鲜花品种','2021年11月6日',100);
 INSERT INTO COMMENT(blog_id,comment_owner, comment_image,comment_text,comment_time, comment_likes) VALUES
-(5,'苗欢欢','../img/user_img.jpg','教师节可以送康乃馨','2021年11月1日',100);
+(5,'苗欢欢','../img/user_img/mhh.jpg','教师节可以送康乃馨','2021年11月1日',100);
 
 -- ----------------------------
 -- Table structure for order
@@ -366,13 +379,13 @@ INSERT INTO `order`(order_time, order_commodity_name, order_commodity_img, order
 ('2021-11-4 15:00','玫瑰','../img/花/玫瑰类/1.卡罗拉图集/卡罗拉1.jpg','刘宇阳','13279505680','西安邮电大学长安校区东区','19.9','运输中');
 
 
-INSERT INTO messages(message_name,message_title,message_email,message_time,message_text) VALUES
-('文文','这家花城里面花种类真多，赞赞赞！！！', '2193560021@qq.com','2021-10-24 14:12','这家花城里面花种类真多，赞赞赞！！！');
-INSERT INTO messages(message_name,message_title,message_email,message_time,message_text) VALUES
-('刘小阳','女朋友可喜欢了，赞赞赞！！！', '2193560021@qq.com','2021-9-24 14:12','这家花城里面花种类真多，赞赞赞！！！');
-INSERT INTO messages(message_name,message_title,message_email,message_time,message_text) VALUES
-('刘小璇','男朋友可喜欢了，赞赞赞！！！', '2193560021@qq.com','2021-8-24 14:12','这家花城里面花种类真多，赞赞赞！！！');
-INSERT INTO messages(message_name,message_title,message_email,message_time,message_text) VALUES
-('润迎','苗总可喜欢了，赞赞赞！！！', '2193560021@qq.com','2021-7-24 14:12','这家花城里面花种类真多，赞赞赞！！！');
-INSERT INTO messages(message_name,message_title,message_email,message_time,message_text) VALUES
-('徐卓龙','隔壁润迎可喜欢了，赞赞赞！！！', '2193560021@qq.com','2021-6-24 14:12','这家花城里面花种类真多，赞赞赞！！！');
+INSERT INTO messages(message_name,message_user_img,message_title,message_email,message_time,message_text) VALUES
+('苗欢欢','../img/user_img/mhh.jpg','这家花城里面花种类真多，赞赞赞！！！', '2193560021@qq.com','2021-10-24 14:12','这家花城里面花种类真多，赞赞赞！！！');
+INSERT INTO messages(message_name,message_user_img,message_title,message_email,message_time,message_text) VALUES
+('刘小阳','../img/user_img/lyy.jpg','女朋友可喜欢了，赞赞赞！！！', '2193560021@qq.com','2021-9-24 14:12','这家花城里面花种类真多，赞赞赞！！！');
+INSERT INTO messages(message_name,message_user_img,message_title,message_email,message_time,message_text) VALUES
+('刘小璇','../img/user_img/lxx.jpg','男朋友可喜欢了，赞赞赞！！！', '2193560021@qq.com','2021-8-24 14:12','这家花城里面花种类真多，赞赞赞！！！');
+INSERT INTO messages(message_name,message_user_img,message_title,message_email,message_time,message_text) VALUES
+('范佳伟','../img/user_img/fjw.jpg','苗总可喜欢了，赞赞赞！！！', '2193560021@qq.com','2021-7-24 14:12','这家花城里面花种类真多，赞赞赞！！！');
+INSERT INTO messages(message_name,message_user_img,message_title,message_email,message_time,message_text) VALUES
+('徐卓龙','../img/user_img/xzl.jpg','隔壁润迎可喜欢了，赞赞赞！！！', '2193560021@qq.com','2021-6-24 14:12','这家花城里面花种类真多，赞赞赞！！！');

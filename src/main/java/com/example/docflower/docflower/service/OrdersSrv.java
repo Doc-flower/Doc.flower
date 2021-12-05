@@ -7,7 +7,7 @@ import main.java.com.example.docflower.docflower.model.Orders;
 import java.util.List;
 
 public class OrdersSrv {
-    private iOrdersDAO ordersDAO= DAOFactory.creatEmployeeDAO();
+    private iOrdersDAO ordersDAO = DAOFactory.creatEmployeeDAO();
 
     public int add(Orders play){
         return ordersDAO.insert(play);
