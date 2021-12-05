@@ -22,6 +22,7 @@ Java、MySQL、JDBC、Java Servlet、MD5加密
 
 ## 项目主要功能
 ## 项目团队成员
+![avatar](http://139.9.140.236:8080/Doc.flower/WebContent/public/img/Mission.png)
 ### 1.刘宇阳（组长）
 [刘宇阳的Github首页](https://github.com/2193560021)
 ### 2.刘璇（组员）
