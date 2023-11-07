@@ -28,7 +28,7 @@ public class CommentsServlet extends HttpServlet{
     {
         String type=request.getParameter("type");
 
-        // 根据请求操作类型，执行相应的增、删、该、查
+        // 根据请求操作类型，执行相应的增、删、、查
         if(type.equalsIgnoreCase("add"))
             add(request, response);
         else if(type.equalsIgnoreCase("update"))

@@ -58,8 +58,10 @@ public class BlogsServlet extends HttpServlet
             int views=0;
             int likes=0;
             blogs =new Blogs(id, name, owner,owner_id,text,time,views,likes);
+            
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
+
             if(new BlogsSrv().add(blogs) == 1)
                 out.write("数据添加成功");
             else
